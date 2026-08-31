@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: source
 
       - name: Checkout markup
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: 3fxcf9/markup
           path: markup
@@ -24,30 +24,24 @@ jobs:
           ocaml-compiler: 5
           dune-cache: true
 
-      - name: Setup dependencies
-        run: |
-          eval $(opam env)
-
-          cd markup
-          opam install . --deps-only -y
+      - name: Install markup dependencies
+        run: opam install ./markup --deps-only -y
 
       - name: Build markup
+        run: opam exec -- dune build --root markup --profile release
+
+      - name: Generate site
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
         run: |
-          eval $(opam env)
-
-          cd markup
-          dune build --profile release
-
-      - name: Run SSG
-        run: |
-          eval $(opam env)
-
           mkdir output
-          REPO_NAME=${GITHUB_REPOSITORY#*/}
-          ./mde_ssg/_build/default/main/main.exe ./source ./output --http-root="$REPO_NAME"
+          ./markup/_build/default/main/main.exe ./source ./output --http-root="$REPO_NAME"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./output
 
