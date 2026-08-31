@@ -119,7 +119,7 @@ proof
 rem
 	Une fonction analytique est holomorphe. On verra plus tard que le sens réciproque est vrai.
 
-eg
+example
 	La fonction $z ⟼ z$ est analytique sur $\C$ et la fonction $z ⟼ \frac{1}{z}$ est analytique sur $\C^{*}$.
 
 prop
@@ -161,7 +161,7 @@ rem
 		\text{analytique} \nsubseteq \Cont^{∞} \nsubseteq \text{dérivable}
 	or dans le cas complexe, ces trois ensembles s’avèrerent identiques.
 
-eg
+example
 	- $\exp: z ⟼ ∑_{n ∈ \N}\frac{z^{n}}{n!} ∈ \H(\C)$
 	- $\cos: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n}}{(2n)!} \H(\C)$
 	- $\sin: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n+1}}{(2n+1)!} ∈ \H(\C)$
@@ -170,7 +170,7 @@ eg
 
 Dans cette partie, on considèrera l’_homéomorphisme_ (bijection continue de réciproque continue)
 math
-  ρ: \applic{\R^{2}}{\C}{(x,y)}{x+i y}
+	ρ: \applic{\R^{2}}{\C}{(x,y)}{x+i y}
 
 thm Théorème de Cauchy-Riemann
 	Soit $Ω$ un ouvert de $\C$. Une fonction $f: Ω ⟶ \C$ est holomorphe sur $Ω$ si et seulement si
