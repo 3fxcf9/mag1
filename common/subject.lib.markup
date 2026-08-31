@@ -1,0 +1,22 @@
+header.lib.markup
+
+css_file_link static/css/subject.css
+js_file_src static/js/subject_search.js
+
+parser teacher
+	metadata $arg
+
+back_link
+
+parser chapter
+	cue chap
+	build_html
+		<a class="chapter" href="$arg/course.html">
+			<span class="chapter-title">$external_metadata[$arg/course.markup][title]</span>
+			<span class="chapter-date">$external_metadata[$arg/course.markup][date]</span>
+		</a>
+	list_wrap
+		<div class="search">
+			<input type="text" name="search_query" placeholder="Search…" autofocus>
+		</div>
+		<div class="chapter-list">$elements</div>

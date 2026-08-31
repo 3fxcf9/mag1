@@ -1,0 +1,66 @@
+name: Generate and deploy github pages
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout markup
+        uses: actions/checkout@v4
+        with:
+          repository: 3fxcf9/markup
+          path: markup
+
+      - name: Use OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5
+          dune-cache: true
+
+      - name: Setup dependencies
+        run: |
+          eval $(opam env)
+
+          cd markup
+          opam install . --deps-only -y
+
+      - name: Build markup
+        run: |
+          eval $(opam env)
+
+          cd markup
+          dune build --profile release
+
+      - name: Run SSG
+        run: |
+          eval $(opam env)
+
+          mkdir output
+          REPO_NAME=${GITHUB_REPOSITORY#*/}
+          ./mde_ssg/_build/default/main/main.exe ./source ./output --http-root="$REPO_NAME"
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./output
+
+  deploy:
+    needs: build-and-deploy
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

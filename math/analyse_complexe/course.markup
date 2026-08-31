@@ -1,0 +1,180 @@
+../../common/course.lib.markup
+
+title Analyse complexe
+date 31/08/2026
+
+On s’intéresse ici à l’analyse des fonctions d’une (ou plusieurs) variable(s) complexe(s).
+
+## Historique
+
+- XVIè siècle: Cardano, étude des nombres complexes.
+- Début XIXé: Euler et Gauss remarquent l’intérêt de l’étude de fonctions complexes.
+- *Cadre du cours*: XIXè siècle: Cauchy fonde l’analyse complexe. Contributions de Poisson, Liouville, Jordan et Goursat.
+- Contributions ultérieures de Riemann, Weierstrass et Jacobi.
+- Sujet toujours actif aujourd’hui.
+
+L’analyse complexe est omniprésente: elle joue un rôle important en mathématiques (_théorie analytique des nombres_, _géométrie algébrique_, …) et en physique (_CFT2_((Théorie conformes à deux dimensions. Exemples: système 2d critique, théorie des cordes.)), théorie des potentiels en deux dimensions). Elle mène aussi au théorème des résidus, permettant de calculer des intégrales difficiles en ne calculant que des limites de l’intégrande ou de certaines de ses dérivées. On fera aussi référence à cette théorie dans le chapitre 3 pour calculer des transformées de Fourier.
+	link # chapitre 3
+
+## Introduction
+
+def Ensemble ouvert, fermé
+	- On dira d’un sous-ensemble $Ω ⊂ \C$ qu’il est un _ouvert_ si $Ω = \emptyset$ ou si pour tout élément $z$ de $Ω$, il existe $R > 0$ tel que
+		math
+			D(z, R) = \{z' ∈ \C \where \abs{z'-z} < R\} ⊂ Ω
+	- On dira qu’un ensemble $Ω ⊂ \C$ est _fermé_ si il existe un ensemble $Ω' ⊂ \C$ ouvert dont $Ω$ est le complément.
+	- On notera $\Cont^{0}(Ω)$ l’ensemble des fonctions continues sur $Ω$.
+
+## Fonctions holomorphes
+
+Le nom _holomorphe_ vient du grec où il signifie « fonction complexe ».
+
+def Fonction holomorphe
+	Soient $Ω$ un ouvert et $f: Ω ⟶ \C$ une fonction. On dira que $f$ est _holomorphe en un point $z_{0}$ de $Ω$_ s’il existe $λ ∈ \C$ tel que
+	math
+		\lim_{z \to z_{0}} \frac{f(z) - f(z_{0})}{z-z_{0}} = λ
+	On dira qu’une fonction est holomorphe sur un ouvert si elle est holomorphe en tout point de cet ouvert.
+	On notera $\H(Ω)$ l’ensemble des fonctions holomorphes sur $Ω$.
+	On qualifiera d’_entières_ les fonctions de l’ensemble $\H(\C)$.
+	Pour toute fonction $f$ holomorphe sur un ouvert $Ω$, on définit la fonction $f'$, appelée _dérivée de $f$_ par
+	math
+		∀ z ∈ \C, f'(z) = \lim_{z' \to z} \frac{f(z') - f(z)}{z' - z}
+
+rem
+	- La définition précédente est identique à celle de la dérivabilité en analyse réelle, moyennant les changements « réel » $→$ « complexe » et $\R → \C$.
+	- Les seules algèbres à division commutatives et associatives de dimension finie sur $\R$ sont $\R$ et $\C$ (théorème de Frobenius). Le premier cas est étudié dans l’analyse réel, le second l’étant par l’analyse complexe.
+
+example
+	Les fonctions $z ⟼ α$ et $z ⟼ z$ sont entières.
+
+prop
+	Soient $Ω$ un ouvert et $f: Ω ⟶ \C$ une fonction.
+	- Si $f$ est holomorphe en un point de $\C$, alors $f$ est continue en ce point.
+	- $\H (Ω) ⊂ \Cont^{0}(Ω)$
+
+proof
+	Preuve identique à celle du résultat correspondant en analyse réelle. Seules les propriétés découlant de la structure d’algèbre à division commutative et associative sont utilisées.
+
+prop Dérivée et opérations basiques
+	Soient $Ω$ un ouvert et $f$, $g$ deux fonctions holomorphes sur $Ω$.
+	- La fonction $f+g$ est holomorphe sur $Ω$ et $(f+g)' = f' + g'$.
+	- La fonction $fg$ est holomorphe sur $Ω$ et $(fg)' = f' g + fg'$.
+	- La fonction $1/f$ est holomorphe sur $Ω$ privé des points en lesquels $f$ s’annule ($Ω ∖ Z_{f}$) et $\left(\frac{1}{f}\right)' = -\frac{f'}{f^{2}}$.
+	- Soient $Ω_{1}$ et $Ω_{2}$ des ouverts. Soient $f$ et $g$ deux fonctions holomorphes, respectivement sur $Ω_{1}$ et $Ω_{2}$. Si $f(Ω_{1}) ⊂ Ω_{2}$, alors la fonction $g\circ f$ est holomorphe sur $Ω_{1}$, et $(g\circ f)' = f'(g' \circ f)$.
+
+proof
+	Identique au cas réel.
+
+cor
+	Toutes fonction polynomiale est entière, et toute fonction rationnelle est holomorphe en dehors des zéros de son dénominateur.
+
+## Fonctions analytiques
+
+recall
+	Une série entière est une expression formelle (ou bien une fonction lorsqu’elle converge dans une topologie) de la forme
+	math
+		z ⟼ ∑_{n ∈ \N} a_{n} (z-z_{0})^{n}
+	où $z_{0} ∈ \C$ et $(a_{n})_{n ∈ \N}$ une suite complexe.
+
+	defprop Théorème de Cauchy-Hadamard
+		À toute série entière $∑_{n ∈ \N} a_{n}(z-z_{0})^{n}$, on associe un unique nombre $R ∈ \bar{\R_{+}} = \R_{+} ∪ \{+∞\}$ tel que la série $∑_{n ∈ \N} a_{n}(z-z_{0})^{n}$
+		- converge absolument sur $\B(z_{0}, R)$
+		- diverge sur $\{z ∈ \C \where \abs{z - z_{0}} > R\}$
+		On appelle $\B(z_{0}, R)$ le _disque de convergence_ de la série, et $R$ son rayon de convergence. Celui-ci est donné par
+		math
+			R^{-1} = \limsup_{n \to +∞} \abs{a_{n}}^{\frac{1}{n}}
+		où pour une suite $(u_{n})_{n ∈ \N}$,
+		math
+			\limsup_{n \to +∞} u_{n} = \lim_{n \to +∞}\sup_{m ⩾ n} u_{m}
+		(« limite de l’enveloppe »).((Voir règle de Cauchy.))
+
+def Fonction analytique
+	Soit $Ω$ un ouvert de $\C$. Une fonction $f: Ω ⟶ \C$ est dite _analytique_ en $z_{0} ∈ Ω$ s’il existe $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que
+	math
+		∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
+	On dira qu’une fonction est analytique sur un ouvert si elle l’est en tout point de cet ouvert.
+
+prop
+	Soit $Ω$ un ouvert de $\C$. Si une fonction $f$ est analytique en $z_{0} ∈ Ω$, alors elle est holomorphe en $z_{0}$, et si $∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N}a_{n}(z-z_{0})^{n}$, alors $f'(z_{0}) = a_{1}$.
+
+proof
+	Soit $f: Ω ⟶ \C$ analytique en $z_{0} ∈ Ω$. Il existe alors $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que
+	math
+		∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N}a_{n}(z-z_{0})^{n}
+	Soit $r ∈ \oo{0,R}$. D’après la convergence absolue de $f$ sur $\B(z_{0}, R)$, on a
+	math
+		∑_{n ∈ \N}\abs{a_{n}}r^{n} < ∞
+	En particulier,
+	math
+		\abs{a_{0}} + \abs{a_{1}}r + r^{2} \underbrace{∑_{n=2}^{+∞}\abs{a_{n}}r^{n-2}}_{C} < ∞
+	Or, pour tout $z ∈ \B(z_{0}, r)$,
+	math
+		\begin{align*}
+			\abs{\frac{f(z) - f(z_{0})}{z-z_{0}} - a_{1}} &= \abs{\frac{1}{z-z_{0}} ∑_{n=2}^{+∞}a_{n}(z-z_{0})^{n}}\\
+			&= \abs{z-z_{0}} \abs{∑_{n=2}^{+∞}a_{n}(z-z_{0})^{n-2}} \\
+			&⩽ \abs{z-z_{0}} ∑_{n=2}^{+∞}\abs{a_{n}}{\underbrace{\abs{z-z_{0}}}_{⩽ r}}^{n-2} \\
+			&⩽ C \abs{z-z_{0}} \arrowlim{z \to z_{0}}0
+		\end{align*}
+
+rem
+	Une fonction analytique est holomorphe. On verra plus tard que le sens réciproque est vrai.
+
+eg
+	La fonction $z ⟼ z$ est analytique sur $\C$ et la fonction $z ⟼ \frac{1}{z}$ est analytique sur $\C^{*}$.
+
+prop
+	Toute série entière est analytique (et donc holomorphe) sur son disque de convergence. Si $f$ est de la forme $z ⟼ ∑_{n ∈ \N}a_{n}(z-z_{0})^{n}$, alors
+	math
+		f' = z ⟼ ∑_{n ∈ \N^{*}} na_{n}(z-z_{0})^{n-1}
+	avec le même disque de convergence.
+
+proof
+	Considérons, sans perte de généralité, la fonction $f: z ⟼  ∑_{n ∈ \N} a_{n}z^{n}$, absolument convergente sur $\B(0, \R)$ avec $R>0$. Soit $z_{0} ∈ \B(0,R)$. Alors,  pour tout $z ∈ \B(z_{0}, R - \abs{z_{0}})$,
+	math
+		\begin{align*}
+			f(z) &= ∑_{n ∈ \N}a_{n}z^{n} \\
+			&= ∑_{n ∈ \N}a_{n}(z_{0} + z - z_{0})^{n} \\
+			&= ∑_{n ∈ \N} ∑_{p ∈ \N} a_{n}\binom{n}{p} s_{0}^{n-p}(z-z_{0})^{p}
+		\end{align*}
+	recall
+		thm Théorème de Fubini
+			Si une suite complexe doublement indicée $(u_{m,n})_{(m,n) ∈ \N^{2}}$ est sommable, alors
+			math
+				∑_{m ∈ \N}∑_{n ∈ \N}u_{m,n} = ∑_{n ∈ \N}∑_{m ∈ \N}u_{m,n}
+	Or, dans $\B(0, R)$, d’après le théorème de convergence absolue appliqué à la série $∑_{n ∈ \N}a_{n}z^{n}$ :
+	math
+		∑_{n ∈ \N}∑_{p ∈ \N}\abs{a_{n}}\binom{n}{p}\abs{z_{0}}^{n-p}\abs{z-z_{0}}^{p} = ∑_{n ∈ \N}\abs{a_{n}}\big(\underbrace{\abs{z_{0}} + \abs{z-z_{0}}}_{< R}\big)^{n} < ∞
+	Ainsi, pour tout $z ∈ \B(z_{0}, R - \abs{z_{0}})$ on a d’après le théorème de Fubini
+	math
+		f(z) = ∑_{p ∈ \N} \underbrace{\left(∑_{n ∈ \N}a_{n} \binom{n}{p}z_{0}^{n-p}\right)}_{b_{p}}(z-z_{0})^{p} = ∑_{p ∈ \N}b_{p}(z-z_{0})^{p}
+	De plus, d’après la propriété précédente,
+	math
+		f'(z_{0}) = b_{1} = ∑_{n ∈ \N}a_{n} \binom{n}{1}z_{0}^{n-1} = ∑_{n ∈ \N}n a_{n} z_{0}^{n-1}
+	avec le même rayon de converegnce car $\limsup_{n\to+∞} n^{\frac{1}{n}} \abs{a_{n}}^{\frac{1}{n}} = \limsup_{n \to+∞} \abs{a_{n}}^{\frac{1}{n}} = \frac{1}{R}$.
+
+cor
+	Toute série entière (donc toute fonction analytique) est indéfiniment dérivable au sens complexe.
+
+rem
+	On vient d’établir la chaîne d’inclusion $\text{analytique} ⊂ \Cont^{∞}_{\C} ⊂ \text{entières}$. En analyse réelle, ces inclusions sont strictes:
+	math
+		\text{analytique} \nsubseteq \Cont^{∞} \nsubseteq \text{dérivable}
+	or dans le cas complexe, ces trois ensembles s’avèrerent identiques.
+
+eg
+	- $\exp: z ⟼ ∑_{n ∈ \N}\frac{z^{n}}{n!} ∈ \H(\C)$
+	- $\cos: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n}}{(2n)!} \H(\C)$
+	- $\sin: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n+1}}{(2n+1)!} ∈ \H(\C)$
+
+## Conditions de Cauchy-Riemann
+
+Dans cette partie, on considèrera l’_homéomorphisme_ (bijection continue de réciproque continue)
+math
+  ρ: \applic{\R^{2}}{\C}{(x,y)}{x+i y}
+
+thm Théorème de Cauchy-Riemann
+	Soit $Ω$ un ouvert de $\C$. Une fonction $f: Ω ⟶ \C$ est holomorphe sur $Ω$ si et seulement si
+	- $\tilde{f} = f\circ ρ$ est est différentiable (au sens de $\R^{2}$) sur $ρ^{-1}(Ω)$
+	- $(P, Q) = \Big(\Re(\tilde{f}), \Im(\tilde{f})\Big)$ satisfait sur $ρ^{-1}(Ω)$ les équations de Cauchy-Riemann, à savoir
+		math
+			\begin{cases}\displaystyle\pdv{P}{x} = \pdv{Q}{y} \\ \displaystyle\pdv{P}{y} = -\pdv{Q}{x}\end{cases}

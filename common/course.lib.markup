@@ -1,0 +1,40 @@
+header.lib.markup
+
+css_file_link static/css/course.css
+css_file_link static/css/table_of_contents.css
+
+// Katex math rendering
+
+head
+	<link href="/common/static/fonts/computer-modern/fonts/serif.css" rel="stylesheet">
+	<link href="/common/static/fonts/computer-modern/fonts/sans.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css" integrity="sha384-1vdNCNel6Tx/NQa8IR1mGOGKsbGreCkOPfbtPPnUURJ5Tu2PRVfQ/7KLZC+Pi1p1" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.js" integrity="sha384-ycJ6GAwiS15LoUPipwJOrWTvkUHl/YqELValBwI5I4awP1EeEQJYarj+w85ntcz7" crossorigin="anonymous"></script>
+
+
+// Menu
+html
+	<div class="menu-toggle">
+		<svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+		<svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+	</div>
+	<aside class="left">
+
+back_link
+
+html
+	<nav class="toc-wrapper">
+
+table_of_contents
+
+html
+	</nav>
+	</aside>
+	<main class="right">
+
+html_end
+	</main>
+
+js_file_src static/js/math_rendering.js
+js_file_src static/js/table_of_contents.js
+js_file_src static/js/course.js
