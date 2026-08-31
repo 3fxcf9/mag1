@@ -35,7 +35,7 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           mkdir output
-          ./markup/_build/default/main/main.exe ./source ./output --http-root="$REPO_NAME"
+          ./markup/_build/default/main/main.exe ./source ./output --http_root="$REPO_NAME"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
