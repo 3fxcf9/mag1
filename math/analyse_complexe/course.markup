@@ -25,7 +25,7 @@ def Ensemble ouvert, fermé
 	- On dira qu’un ensemble $Ω ⊂ \C$ est _fermé_ si il existe un ensemble $Ω' ⊂ \C$ ouvert dont $Ω$ est le complément.
 	- On notera $\Cont^{0}(Ω)$ l’ensemble des fonctions continues sur $Ω$.
 
-## Fonctions holomorphes
+### Fonctions holomorphes
 
 Le nom _holomorphe_ vient du grec où il signifie « fonction complexe ».
 
@@ -68,7 +68,7 @@ proof
 cor
 	Toutes fonction polynomiale est entière, et toute fonction rationnelle est holomorphe en dehors des zéros de son dénominateur.
 
-## Fonctions analytiques
+### Fonctions analytiques
 
 recall
 	Une série entière est une expression formelle (ou bien une fonction lorsqu’elle converge dans une topologie) de la forme
@@ -158,7 +158,7 @@ cor
 rem
 	On vient d’établir la chaîne d’inclusion $\text{analytique} ⊂ \Cont^{∞}_{\C} ⊂ \text{entières}$. En analyse réelle, ces inclusions sont strictes:
 	math
-		\text{analytique} \nsubseteq \Cont^{∞} \nsubseteq \text{dérivable}
+		\text{analytique} \subsetneq \Cont^{∞} \subsetneq \text{dérivable}
 	or dans le cas complexe, ces trois ensembles s’avèrerent identiques.
 
 example
@@ -166,7 +166,7 @@ example
 	- $\cos: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n}}{(2n)!} \H(\C)$
 	- $\sin: z ⟼  ∑_{n ∈ \N}(-1)^{n} \frac{z^{2n+1}}{(2n+1)!} ∈ \H(\C)$
 
-## Conditions de Cauchy-Riemann
+### Conditions de Cauchy-Riemann
 
 Dans cette partie, on considèrera l’_homéomorphisme_ (bijection continue de réciproque continue)
 math
@@ -178,3 +178,191 @@ thm Théorème de Cauchy-Riemann
 	- $(P, Q) = \Big(\Re(\tilde{f}), \Im(\tilde{f})\Big)$ satisfait sur $ρ^{-1}(Ω)$ les équations de Cauchy-Riemann, à savoir
 		math
 			\begin{cases}\displaystyle\pdv{P}{x} = \pdv{Q}{y} \\ \displaystyle\pdv{P}{y} = -\pdv{Q}{x}\end{cases}
+
+proof
+	Soit $Ω$ et $f$ de tels objets. Par définition, $f$ est holomorphe en $z_{0} ∈ Ω$ si et seulement si
+	math
+		∀ z ∈ Ω, f(z) = f(z_{0}) + (z-z_{0})f'(z_{0}) + \underbrace{(z-z_{0})ε(z)}_{o(1)}
+	avec $ε \arrowlim{z\to z_{0}}0$. En introduisant $z = x+iy$, $z_{0} = x_{0} + iy_{0}$ et $f'(z_{0}) = λ + i μ$ où $x, y, x_{0}, y_{0}, λ$ et $μ$ sont des réels, on obtient de manière équivalente
+	math
+		\tilde{f}(x,y) = \tilde{f}(x_{0}, y_{0}) + \big[(x-x_{0}) + i(y-y_{0})\big](λ + i μ) + o(1)
+	ou de façon équivalente, après prise des parties réelles et imaginaires :
+	math
+		\begin{cases}
+		P(x,y) = P(x_{0}, y_{0}) + (x-x_{0})λ - (y-y_{0})μ + o(1)\\
+		Q(z,y) = Q(x_{0}, y_{0}) + (x-x_{0})μ + (y-y_{0})λ + o(1)
+		\end{cases}
+
+## Intégrales de contour (ou chemin)
+
+### Chemins et contours dans $\C$
+
+def
+	Soit $Ω$ un ouvert de $\C$. On appelle _chemin dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ continue et $\Cont^{1}$ par morceaux. On dira que $γ$ est un _lacet_ si $γ(0) = γ(1)$, sinon on dira que $γ$ est un _arc_. Dans tous les cas, on notera $γ'$ la dérivée « par morceaux » de $γ$.
+	Étant donné un chemin $γ$, on appelle _contour_ de $γ$ l’ensemble $\Contour_{γ} = γ(\cc{0,1})$. Un tel contour hérite de l’orientation naturelle de $\cc{0,1}$ et on le considèrera toujours comme orienté.
+	Étant donné un lacet $γ$ de contour $\Contour_{γ}$ et $z ∈ Ω ∖ \Contour_{γ}$, on définit le _nombre d’enroulement de $\Cont_{γ}$ autour de $z$_ comme le nombre algébrique de fois que $\Contour_{γ}$ entoure $z$. On le note $w(\Contour_{γ}, z)$.
+	On dira qu’un chemin $γ: \cc{0,1} ⟶ Ω$ est une _courbe de Jordan_ si $γ$ est injective sur $\co{0,1}$.
+	fig
+		FIG 1
+	On dit que deux chemins $γ_{1}$ et $γ_{2}$ sur $Ω$ sont _équivalents_ (resp. _anti-équivalents_) si il existe une bijection $φ: \cc{0,1} ⟶ \cc{0,1}$ de classe $\Cont^{1}$ telle que $γ_{1} = γ_{2} \circ φ$ et $φ' > 0$ (resp. $γ' < 0$). Le contour de deux chemins équivalents est identique, et ceux de deux chemins $γ_{1}$ et $γ_{2}$ anti-équivalents ne différent que par leur orientation, ce que l’on notera $\Contour_{γ_{1}} = \bar{\Contour_{γ_{2}}}$.
+	On appellera  _chaîne dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ de classe $\Cont^{1}$ par morceaux (mais pas nécessairement continue).
+	On définit le _concaténé_ de deux chemins $γ_{1}$ et $γ_{2}$ dans $Ω$ comme l’application((Non commutative ainsi définie mais on pourra la considérer comme telle au vue de l’utilisation que nous en ferons.))
+	math
+		γ_{1} \concat γ_{2}: \applic{\cc{0,1}}{Ω}{t}{\begin{cases}γ_{1}(2t) \if t ∈ \cc{0, \frac{1}{2}} \\ γ_{2} \left(2 \left(t - \frac{1}{2}\right)\right) \if t ∈ \oc{\frac{1}{2}, 1}\end{cases}}
+	On a bien bien $\Contour_{γ_{1}\concat γ_{2}} = \Contour_{γ_{1}} ∪ \Contour_{γ_{2}}$.
+	- Si $γ_{1}(1) = γ_{2}(0)$, le concaténé de $γ_{1}$ et $γ_{2}$ est un chemin, noté $γ_{1} ∪ γ_{2}$. C’est seulement une chaîne sinon.
+	- Toute chaîne peut être obtenue comme concaténée d’un nombre fini de chemins. Si ces chemins sont tous des lacets, on dira que la chaîne est un cycle.
+	fig
+		FIG 2
+
+thm
+	Tout lacet est le concaténé d’un nombre fini de courbes de Jordan.
+
+proof
+	Admise
+
+fig
+	FIG 3
+
+### Connexité
+
+def
+	Un ouvert (resp. un fermé) $Ω$ de $\C$ est dit _déconnecté_ si il existe deux ouverts (resp. fermés) $Ω_{1}$ et $Ω_{2}$ disjoints et non vides tels que $Ω = Ω_{1} \uplus Ω_{2}$.
+	Dans le can contraire, $Ω$ est dit _connexe_. Si $Ω$ est déconnecté, il est l’union disjointe d’ensembles connexes appelés ses _composantes connexes_.
+	Enfin, $Ω$ est dit _connexe par arcs_ si deux points $z_{1}$ et $z_{2}$ quelconques de $Ω$, sont toujours reliés par un arc continu, i.e. si il existe $φ: \cc{0,1} ⟶ Ω$ continu tel que $φ(0) = z_{1}$ et $φ(2) = z_{2}$.
+
+thm
+	Tout ouvert $Ω$ de $\C$ est connexe par arcs si et seulement si il est connexe.
+
+proof
+	Admise
+
+rem
+	Ce résultat est faux en général.
+
+example
+	- Les ensembles $\C$ et $\C^{*}$ sont connexes par arc et donc convexes.
+	- $\C ∖ \R = \Im^{-1}(\oo{0,+∞}) \uplus \Im^{-1}(\oo{-∞, 0})$ est déconnecté et comporte deux composantes connexes.
+
+def
+	Un ouvert connexe $Ω$ de $\C$ est dit _simplement connexe_ si son complémentaire de $Ω$ dans $\C$ n’admet aucune composante connexe bornée. Dans le cas contraire, $Ω$ est dit _multiplement connexe_.
+	fig
+		FIG 4
+
+rem
+	La simple connexité peut s’interpréter comme l’absence de « trous ».
+
+example
+	- L’ensemble $\C$ est simplement connexe alors que $\C^{*}$ est multiplement connexe.
+	- $\C ∖ \R_{-}$ est simplement connexe alors que $\C ∖ \big(\R_{-} ∪ \{1\}\big)$ est multiplement connexe.
+
+### Longueur des contours
+
+defprop
+	Si $γ_{1}$ et $γ_{2}$ sont deux chemins équivalents dans $\C$, alors
+	math
+		\long(\Contour_{γ}) \defeq ∫_{0}^{1}\abs{γ_{1}'(t)}\dd t = ∫_{0}^{1}\dd t \abs{γ_{2}'(t)}
+	définit la longueur de $\Contour_{γ}$.
+
+proof
+	Les chemins $γ_{1}$ et $γ_{2}$ étant équivalents, on a $γ_{1} = γ_{2} \circ φ$ avec $φ: \cc{0,1} ⟶ \cc{0,1}$ une bijection de classe $\Cont^{1}$ de dérivée positive. Alors, $γ_{1}' = φ' (γ_{2}' \circ φ)$ donc par changement de variable,
+	math
+		∫_{0}^{1}\dd t \abs{γ_{1}'(t)} = ∫_{0}^{1}\dd t \abs{φ'(t)} \abs{γ_{2}' \circ φ(t)} = ∫_{0}^{1}\dd t \abs{φ_{2}'(t)}
+
+### Intégrales de contour
+
+defprop
+	Soient $Ω$ un ouvert de $\C$ et $f$ une fonction continue sur $Ω$. Si deux chemins $γ_{1}$ et $γ_{2}$ sont équivalents dans $Ω$ (et donc de contour commun $\Contour$), alors
+	math
+		\int_{\Contour}\dd zf(z) \defeq ∫_{0}^{1}\dd t γ_{1}'(t)\big(f\circ γ_{1}\big)(t) = ∫_{0}^{1}\dd t γ_{2}' (t) \big(f\circ γ_{2}\big)(t)
+	définit _l’intégrale de $f$ le long de $\Contour$_.
+
+proof
+	Changement de variable.
+
+prop
+	Soient $Ω$ un ouvert de $\C$ et $f$ une fonction continue sur $Ω$. Si $γ_{1}$ et $γ_{2}$ sont deux chemins anti-équivalents de contours respectifs $\Contour$ et $\bar{\Contour}$, alors
+	math
+		∫_{\Contour}\dd z f(z) = - \int_{\bar{\Contour}}\dd zf(z)
+
+proof
+	Identique au cas précédent.
+
+prop
+	Soient $Ω$ un ouvert de $\C$ et $f$ une fonction continue sur $Ω$. On a, pour deux chemins $γ_{1}$ et $\gamma_{2}$ de $Ω$, on a
+	math
+		\int_{\Contour_{γ_{1} \uplus γ_{2}}}\dd z f(z) = \int_{\Contour_{γ_{1}}}\dd z f(z) + \int_{\Contour_{γ_{2}}}\dd z f(z)
+
+proof
+	Exercice.
+
+prop
+	Soient $Ω$ un ouvert de $\C$ et $f$ une fonction continue sur $Ω$. Pour un chemin $γ$ dans $Ω$, on a
+	math
+		\abs{\int_{\Contour_{γ}} \dd z f(z)} ⩽ \long(\Contour_{γ})\sup_{z ∈ \Contour_{γ}} \abs{f(z)}
+
+proof
+	Par définition,
+	math
+		\begin{align*}
+			\abs{\int_{\Contour_{γ}}\dd z f(z)} &= \abs{∫_{0}^{1}\dd t γ'(t) \big(f\circ γ\big)(t)} \\
+			&⩽ ∫_{0}^{1}\dd t \abs{γ'(t)}\abs{\big(f\circ γ\big)(t)}\\
+			&⩽ \sup_{t ∈ \cc{0,1}} \abs{\big(f\circ γ\big)(t)} \underbrace{∫_{0}^{1}\dd t \abs{γ'(t)}}_{\long(\Contour_{γ})}
+		\end{align*}
+
+### Indice et homologie
+
+def
+	Pour tout lacet $γ$ dans $\C$ et tout point $z$ de $\C ∖ \Contour_{γ}$, on définit l’_indice_ de $γ$ en $z$ par
+	math
+		\ind(γ, z) = \frac{1}{2 π i} \oint_{\Contour_{γ}}\frac{\dd ζ}{ζ-z}
+
+prop
+	Pour tout lacet $γ$ de $\C$ et tout point $z ∈ \C ∖ \Contour_{γ}$, on a
+	math
+		\ind(γ, z) = w(\Contour_{γ}, z) ∈ \Z
+	fig
+		FIG 5
+
+proof
+	Soient $γ$ et $z$ de tels objets. On définit $θ: \cc{0,1} ⟶ \C$ par
+	math
+		\tag{1} ∀ t ∈ \cc{0,1}, i θ(t) = ∫_{0}^{t}\dd τ \frac{γ'(τ)}{γ(τ) - z}
+	Clairement, $θ(0) = 0$ et
+	math
+		θ(1) = \frac{1}{i}∫_{0}^{1}\dd τ \frac{γ'(τ)}{γ(τ) - z} = \frac{1}{i} \oint_{\Contour_{γ}} \frac{\dd ζ}{ζ - z} = 2 π \ind(γ_{i}, z)
+	D’autre part,
+	math
+		(1) ⟺ γ' - i θ'(γ - z) = 0 ⟺ \Big(γ' - i θ'(γ - z)\Big)e^{-i θ} = 0 ⟺ \Big((γ - z)e^{-i θ}\Big)' = 0
+	Il existe donc $z_{0} ∈ \C$ tel que $∀ t ∈ \cc{0,1}, (γ(t) - z)e^{-i θ(t)} = z_{0}$, ou de façon équivalente,
+	math
+		∀ t ∈ \cc{0,1}, \big(γ(t) - z\big) = z_{0}e^{i θ(t)}
+	Or, comme $γ$ est un lacet, $γ(0) = γ(1)$ d’où
+	math
+		z_{0} = γ(0) - z = γ(1) - z = z_{0} e^{2 π i \ind(γ, z)}
+	soit en divisant par $z_{0} \ne 0$ (absurde)
+	math
+		1 = e^{2 π i \ind(γ, z)}
+	i.e. $\ind(γ, z) ∈ \Z$. Finalement,
+	math
+		∀ t ∈ \cc{0,1}, γ(t) = z + z_{0}e^{i θ(t)}
+
+rem
+	Pour tout cycle $γ = γ_{1} ∪ γ_{2} ∪ ⋯ ∪ γ_{n}$ avec $γ_{1}, …, γ_{n}$ des lacets, on a
+	math
+		∀ z ∈ \C ∖ \Contour_{γ}, \ind(γ, z) = ∑_{i=1}^{n}\ind(γ_{i}, z)
+
+def
+	- Soit $Ω$ un ouvert de $\C$. Deux cycles $γ_{1}$ et $γ_{2}$ de $\C$ sont dits _homogues dans $Ω$_ si
+		math
+			∀ z ∈ \C ∖ Ω, \ind(γ_{1}, z) = \ind(γ_{2}, z)
+	- Un cycle $γ$ est dit _homologue à un point dans $Ω$_ si
+		math
+			∀ z ∈ \C ∖ Ω, \ind(γ, z) = 0
+
+rem
+	Deux cycles sont homologues si et seulement si ils entourent chaque « trou » de $Ω$ un même nombre de fois.
+
+example
+	fig
+		FIG 6

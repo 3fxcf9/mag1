@@ -41,7 +41,6 @@ const macros = {
   "\\Diff": "\\mathscr{D}",
   "\\Part": "\\mathcal{P}",
   "\\Prop": "\\mathscr{P}",
-  "\\H": "\\mathscr{H}",
   "\\bar": "\\overline",
   "\\ubar": "\\underline",
   "\\Re": "\\mathscr{R\\!e}",
@@ -172,6 +171,11 @@ const macros = {
     "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\uparrow$}}",
   "\\downbigcap":
     "\\bigcap\\mathclap{\\raisebox{-0.8ex}{\\mkern{-1.24ex}$\\boldsymbol\\downarrow$}}",
+
+  // Complex analysis
+  "\\H": "\\mathscr{H}",
+  "\\Contour": "\\mathscr{C}",
+  "\\ind": "\\operatorname{ind}",
 };
 
 function renderMath() {
