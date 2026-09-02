@@ -2,6 +2,7 @@ header.lib.markup
 
 css_file_link static/css/course.css
 css_file_link static/css/table_of_contents.css
+css_file_link static/css/figure_zoom.css
 
 // Katex math rendering
 
@@ -41,3 +42,4 @@ html_end
 js_file_src static/js/math_rendering.js
 js_file_src static/js/table_of_contents.js
 js_file_src static/js/course.js
+js_file_src static/js/figure_zoom.js
