@@ -1,0 +1,48 @@
+default: build
+
+build:
+    #!/usr/bin/env bash
+    set -e
+    tmp=$(mktemp -d)
+    trap 'rm -rf "$tmp"' EXIT
+
+    cd ~/DEV/git/markup
+    dune exec ./main/main.exe -- --debug ~/School/Mag1 "$tmp"
+    python3 -m http.server 8080 -d "$tmp"
+
+optimize-figures:
+    #!/usr/bin/env bash
+
+    echo "Optimizing svg figures..."
+
+    set -e
+
+    find . -type f -path '*/figures/*.svg' -print0 |
+    while IFS= read -r -d '' file; do
+        echo "Processing $file"
+
+        inkscape \
+          --export-plain-svg \
+          --export-area-drawing \
+          --actions="select-all;object-to-path" \
+          "$file" -o "$file"
+
+        tmp=$(mktemp)
+
+        if scour --quiet \
+          --strip-xml-prolog \
+          --enable-id-stripping \
+          --enable-comment-stripping \
+          --shorten-ids-prefix=PREFIX \
+          -i "$file" -o "$tmp"; then
+            mv "$tmp" "$file"
+        else
+            rm -f "$tmp"
+            exit 1
+        fi
+    done
+
+
+# Setup git commit hooks
+hook:
+  cp ./git_hooks/* .git/hooks
