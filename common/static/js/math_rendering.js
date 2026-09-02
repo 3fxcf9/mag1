@@ -1,6 +1,8 @@
 const macros = {
   "\\leq": "\\leqslant",
   "\\geq": "\\geqslant",
+  "\\subsetneq": "\\varsubsetneq",
+  "\\supsetneq": "\\varsupsetneq",
   "\\Sol": "\\mathcal{S}",
   "\\1": "\\mathbf{1}",
   "\\N": "\\mathbf{N}",
@@ -175,6 +177,7 @@ const macros = {
   // Complex analysis
   "\\H": "\\mathscr{H}",
   "\\Contour": "\\mathscr{C}",
+  "\\concat": "\\imageof",
   "\\ind": "\\operatorname{ind}",
 };
 
