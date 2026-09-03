@@ -173,13 +173,11 @@ const macros = {
     "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\uparrow$}}",
   "\\downbigcap":
     "\\bigcap\\mathclap{\\raisebox{-0.8ex}{\\mkern{-1.24ex}$\\boldsymbol\\downarrow$}}",
-
-  // Complex analysis
-  "\\H": "\\mathscr{H}",
-  "\\Contour": "\\mathscr{C}",
-  "\\concat": "\\imageof",
-  "\\ind": "\\operatorname{ind}",
 };
+
+if (local_macros) {
+  Object.assign(macros, local_macros);
+}
 
 function renderMath() {
   document

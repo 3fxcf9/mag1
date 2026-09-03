@@ -1,14 +1,20 @@
-default: build
+default: serve
 
-build:
+build out:
+    #!/usr/bin/env bash
+    set -e
+    cd ~/DEV/git/markup
+    dune exec ./main/main.exe -- --debug ~/School/Mag1 {{out}}
+    python3 -m http.server 8080 -d {{out}}
+
+serve:
     #!/usr/bin/env bash
     set -e
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT
 
-    cd ~/DEV/git/markup
-    dune exec ./main/main.exe -- --debug ~/School/Mag1 "$tmp"
-    python3 -m http.server 8080 -d "$tmp"
+    just build "$tmp"
+
 
 optimize-figures:
     #!/usr/bin/env bash

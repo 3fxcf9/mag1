@@ -39,6 +39,20 @@ html
 html_end
 	</main>
 
+parser load_custom_snippets
+	end_of_body
+	build_html
+		lua
+		print(path_relative_to_toplevel("snippets.js"))
+		local js = read_file(path_relative_to_toplevel("snippets.js"))
+		if js ~= nil then
+			return '<script>' .. js .. '</script>'
+		else
+			return ''
+		end
+
+load_custom_snippets
+
 js_file_src static/js/math_rendering.js
 js_file_src static/js/table_of_contents.js
 js_file_src static/js/course.js
