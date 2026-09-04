@@ -1106,16 +1106,16 @@ body {
     text-align: left !important;
     line-height: initial;
     overflow: visible;
-    /* filter: invert(); */
+    filter: invert();
 
     @media print {
-      /* filter: none; */
+      filter: none;
     }
 
-    /* Keep text normal */
-    foreignObject > div {
-      /* filter: invert(); */
-    }
+    /* /* Keep text normal */ */
+    /* foreignObject > div { */
+    /*   filter: invert(); */
+    /* } */
   }
 
   svg * {

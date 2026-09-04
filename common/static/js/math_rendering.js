@@ -205,13 +205,9 @@ function renderMath() {
   const SVG_NS = "http://www.w3.org/2000/svg";
 
   const COLOR_MAP = {
-    "#000": getComputedStyle(document.body).getPropertyValue("--text-color"),
-    "#000000": getComputedStyle(document.body).getPropertyValue("--text-color"),
-    black: getComputedStyle(document.body).getPropertyValue("--text-color"),
-    "#fff": "#f00",
-    "#f9a30d": "#fcdb20",
-    "#9d7cd8": "#A78BFA",
-    "#7aa2f7": "#22D3EE",
+    "#f9a30d": "#0324DF", // Inverse of #fcdb20
+    "#9d7cd8": "#587405", // Inverse of #A78BFA
+    "#7aa2f7": "#DD2C11", // Inverse of #22D3EE
   };
 
   document.querySelectorAll("figure svg").forEach((svg) => {
@@ -219,7 +215,7 @@ function renderMath() {
     svg.querySelectorAll("*").forEach((element) => {
       for (const [from, to] of Object.entries(COLOR_MAP)) {
         for (const attribute of element.attributes) {
-          attribute.value = attribute.value.replace(new RegExp(from, "gi"), to);
+          attribute.value = attribute.value.replaceAll(from, to);
         }
       }
     });

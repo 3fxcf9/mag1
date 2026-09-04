@@ -415,11 +415,11 @@ proof
 	On va d’abord prouver ce résultat pour les lacets triangulaires, avant de montrer par récurrence le cas des polygones, puis celui des courbes de Jordan.
 		italic
 	- On suppose pour commencer que $\Cont_{γ}$ est un triangle direct dans $Ω$, noté $T_{0} = [z_{1}, z_{2}, z_{3}]$, avec $z_{1}, z_{2}, z_{3} ∈ Ω$.
-		fig
-			right
-			./figures/TIC_cas_des_triangles.svg
-		On notera $Δ_{0}$ le compact formé par le bord de $T_{0}$. Comme $Ω$ est simplement connexe, on a nécessairement $Δ_{0} ⊂ Ω$.
+		On notera $Δ_{0}$ le compact délimité par le bord de $T_{0}$. Comme $Ω$ est simplement connexe, on a nécessairement $Δ_{0} ⊂ Ω$.
 		- Supposons d’abord que $p \notin Δ_{0}$.
+			fig Premier cas, <code class="katex-inline">p</code> n’est pas dans le triangle.
+				right
+				./figures/TIC_cas_des_triangles.svg
 			Soient:
 			- $z_{1,2}$ le milieu du segment $[z_{1}, z_{2}]$,
 			- $z_{2,3}$ le milieu du segment $[z_{2}, z_{3}]$,
@@ -438,7 +438,7 @@ proof
 			math
 				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ 4 \abs{\int_{T_{1}} \dd zf(z)}
 			D’autre part, on a évidemment $\long(T_{1}) = \frac{1}{2} \long(T_{0})$.
-			En répétant les étapes ci-dessus, on constru une suite $(T_{n})_{n ∈ \N}$ de triangles directs « imbriqués » et vérifiant
+			En répétant les étapes ci-dessus, on construit une suite $(T_{n})_{n ∈ \N}$ de triangles directs « imbriqués » et vérifiant
 			math
 				\tag{1} ∀ n ∈ \N, \abs{\int_{T_{0}} \dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}}\dd zf(z)}
 			et
@@ -466,14 +466,14 @@ proof
 				\oint_{T_{0}} \dd zf(z) = 0
 			Ce qui prouve le théorème pour un lacet triangulaire direct et $p \notin \Delta_{0}$.
 		- Supposons à présent que $p$ soit un sommet de $T_{0}$, par exemple $p = z_{1}$. Considérons
+			fig Second cas, <code class="katex-inline">p</code> est un des sommets du triangle.
+				right
+				./figures/TIC_cas_des_triangles_2.svg.svg
 			- $z_{1,2}$ un point *quelconque* de $[z_{1}, z_{2}]$,
 			- $z_{1,3}$ un point *quelconque* de $[z_{1}, z_{3}]$,
 			- $T_{1}$ le triangle $[z_{1}, z_{1,2}, z_{1,3}]$,
 			- $T_{2}$ le triangle $[z_{1,2}, z_{3}, z_{1,3}]$,
 			- $T_{3}$ le triangle $[z_{1,2}, z_{2}, z_{3}]$.
-			fig
-				right
-				./figures/TIC_cas_des_triangles_2.svg.svg
 			Par les propositions montrées en deuxième partie et le premier cas prouvé ci-dessus,
 			math
 				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{3}\oint_{T_{p}}\dd z f(z) = \oint_{T_{1}}\dd zf(z)
@@ -481,32 +481,31 @@ proof
 			math
 				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ \abs{\oint_{T_{1}}\dd zf(z)} ⩽ \long(T_{1})\sup_{z ∈ T_{1}}\abs{f(z)} \arrowlim{z_{1,2}, z_{1,3} \to 0} 0
 		- Supposons à présent que $p$ soit un point quelconque dans $\Delta_{0}$. Considérons les triangles
+			fig Dernier cas, <code class="katex-inline">p</code> est dans le triangle.
+				right
+				./figures/TIC_cas_des_triangles_3.svg
 			- $T_{1} = [p, z_{2}, z_{3}]$
 			- $T_{2} = [p, z_{3}, z_{1}]$
 			- $T_{3} = [p, z_{1}, z_{2}]$
-			fig
-				right
-				./figures/TIC_cas_des_triangles_3.svg
 			Par les propriétés établies en seconde partie, et le cas précédent,
 			math
 				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{z}\oint_{T_{p}}\dd zf(z) = 0
 
 		On a donc montré le théorème pour tous les lacets triangulaires de $Ω$.
-	- On montre ensuite que le théorème  s’applique à tous les lacets polygonaux orientés. Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}ζ_{1}, z_{2}] ⊂ Ω$.
-		fig
+	- On montre ensuite que le théorème  s’applique à tous les lacets polygonaux orientés. Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}, z_{1}, z_{2}] ⊂ Ω$.
+		fig Le polygone est localement convexe en <code class="katex-inline">z_1</code>, on peut le découper selon une ligne reliant les deux voisins de <code class="katex-inline">z_1</code>.
 			right
 			./figures/TIC_cas_des_polygones.svg
-		Si bien que, en notant $P_{n} = […, z_{0}, z_{2}, …]$ lo polygone obtenu en retirant le sommet $z_{1}$ de $P_{n+1}$,
+		Si bien que, en notant $P_{n} = […, z_{0}, z_{2}, …]$ le polygone obtenu en retirant le sommet $z_{1}$ de $P_{n+1}$,
 		math
 			\oint_{P_{n+1}}\dd zf(z) = \oint_{\P_{n}}\dd zf(z) + \oint_{T}\dd zf(z) = 0
 	- On va enfin établir le théorème pour les courbes de Jordan.
 			italic
 		Soit $γ$ une courbe de Jordan sur $Ω$ et $R > 0$ la distance entre $\Contour_{γ}$ et $\C ∖ Ω$. Soit $(z_{0}, z_{1}, …, z_{n})$ un $n$-uplet de points consécutifs sur $\Cont_{γ}$ tel que la distance le long de l’arc entre deux points consécutifs soit strictement inférieure à $R$.
 		fig
-			right
 			./figures/TIC_points_sur_courbe_jordan.svg
 		Alors en tout $z_{p}$ pour $p ∈ \icc{0,n}$, on a $z_{p-1}, z_{p+1} ∈ \B(z_{p}, R)$.
-		On affirme que $f$ admet pour primiive sur $\B(z_{p}, R)$ la fonction
+		On affirme que $f$ admet pour primitive sur $\B(z_{p}, R)$ la fonction
 		math
 			F_{p}: z ⟼ \int_{\cc{z_{p}, z}}\dd ζ f(ζ)
 		En effet, on a, pour $z,z' ∈ \B(z_{p}, R)$ :
@@ -536,6 +535,7 @@ proof
 
 cor
 	fig
+		right
 		./figures/corrolaire_1_TIC.svg
 	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Pour tous chemins $γ_{1}$ et $γ_{2}$ tracés sur $Ω$ tels que $γ_{1}(0) = γ_{2}(0)$ et $γ_{1}(1) = γ_{2}(2)$, on a
 	math

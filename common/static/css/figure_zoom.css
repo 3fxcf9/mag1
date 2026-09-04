@@ -75,16 +75,16 @@ figure {
 .zoom_image_view svg {
   text-align: left !important;
   line-height: initial;
-  /* filter: invert(); */
+  filter: invert();
 
   @media print {
-    /* filter: none; */
+    filter: none;
   }
 
   /* Keep text normal */
-  foreignObject > div {
-    /* filter: invert(); */
-  }
+  /* foreignObject > div { */
+  /*   filter: invert(); */
+  /* } */
 }
 
 .zoom_legend {
