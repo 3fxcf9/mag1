@@ -30,7 +30,6 @@ optimize-figures:
         inkscape \
           --export-plain-svg \
           --export-area-drawing \
-          --actions="select-all;object-to-path" \
           "$file" -o "$file"
 
         tmp=$(mktemp)
@@ -40,6 +39,7 @@ optimize-figures:
           --enable-id-stripping \
           --enable-comment-stripping \
           --shorten-ids-prefix=PREFIX \
+          --remove-metadata \
           -i "$file" -o "$tmp"; then
             mv "$tmp" "$file"
         else

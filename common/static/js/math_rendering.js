@@ -201,47 +201,115 @@ function renderMath() {
       }
     });
 
-  // Render math in svg figures
-  const svgs = document.querySelectorAll("svg");
+  // Render math in figures
+  const SVG_NS = "http://www.w3.org/2000/svg";
 
-  svgs.forEach((svg) => {
-    const texts = svg.querySelectorAll("text");
+  const COLOR_MAP = {
+    "#000": getComputedStyle(document.body).getPropertyValue("--text-color"),
+    "#000000": getComputedStyle(document.body).getPropertyValue("--text-color"),
+    black: getComputedStyle(document.body).getPropertyValue("--text-color"),
+    "#fff": "#f00",
+    "#f9a30d": "#fcdb20",
+    "#9d7cd8": "#A78BFA",
+    "#7aa2f7": "#22D3EE",
+  };
 
-    texts.forEach((text) => {
-      const raw = text.textContent.trim();
-
-      // Check if it looks like math (you can tweak this logic)
-      if (raw.startsWith("$") && raw.endsWith("$")) {
-        const expr = raw.slice(1, -1); // remove $...$
-        const span = document.createElement("span");
-
-        try {
-          katex.render(expr, span, {
-            throwOnError: false,
-            macros: macros,
-          });
-
-          // Replace SVG <text> with foreignObject to embed HTML inside SVG
-          const bbox = text.getBBox();
-
-          const foreign = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "foreignObject",
-          );
-          foreign.setAttribute("x", bbox.x);
-          foreign.setAttribute("y", bbox.y);
-          foreign.setAttribute("width", bbox.width); // TODO: Clean latex size in svg
-          foreign.setAttribute("height", bbox.height * 1.2);
-          foreign.setAttribute("font-size", text.getAttribute("font-size"));
-          foreign.appendChild(span);
-
-          text.replaceWith(foreign);
-        } catch (e) {
-          console.warn("KaTeX failed on", raw, e);
+  document.querySelectorAll("figure svg").forEach((svg) => {
+    // Replace colors
+    svg.querySelectorAll("*").forEach((element) => {
+      for (const [from, to] of Object.entries(COLOR_MAP)) {
+        for (const attribute of element.attributes) {
+          attribute.value = attribute.value.replace(new RegExp(from, "gi"), to);
         }
       }
     });
+
+    const viewBox = svg.viewBox.baseVal;
+    const svgRect = svg.getBoundingClientRect();
+
+    if (
+      !viewBox.width ||
+      !viewBox.height ||
+      !svgRect.width ||
+      !svgRect.height
+    ) {
+      return;
+    }
+
+    const sizeReferenceElement = svg.closest("p") ?? document.body;
+
+    const documentFontSizePx = parseFloat(
+      getComputedStyle(sizeReferenceElement).fontSize,
+    );
+
+    if (!documentFontSizePx) {
+      return;
+    }
+
+    const cssToSvgX = viewBox.width / svgRect.width;
+    const cssToSvgY = viewBox.height / svgRect.height;
+
+    svg.querySelectorAll("text").forEach((text) => {
+      const raw = text.textContent?.trim();
+
+      // Only process $…$
+      if (!raw || !raw.startsWith("$") || !raw.endsWith("$")) {
+        return;
+      }
+      const expr = raw.slice(1, -1);
+
+      try {
+        const x = parseFloat(text.getAttribute("x") || "0");
+        const y = parseFloat(text.getAttribute("y") || "0");
+
+        const container = document.createElement("div");
+        container.style.display = "inline-block";
+        container.style.whiteSpace = "nowrap";
+        container.style.overflow = "visible";
+        container.style.fontSize = `${documentFontSizePx}px`;
+        container.style.lineHeight = "1";
+
+        if (text.getAttribute("fill")) {
+          container.style.color = text.getAttribute("fill");
+        }
+        if (text.getAttribute("fill-opacity")) {
+          container.style.opacity = text.getAttribute("fill-opacity");
+        }
+
+        const span = document.createElement("span");
+
+        katex.render(expr, span, {
+          throwOnError: false,
+          macros,
+        });
+
+        container.appendChild(span);
+
+        const foreign = document.createElementNS(SVG_NS, "foreignObject");
+
+        // arbitrary size, overflow is allowed
+        foreign.setAttribute("width", "10");
+        foreign.setAttribute("height", "10");
+
+        foreign.style.overflow = "visible";
+
+        // Move the katex box up by approximately one line height so that origin matches
+        foreign.setAttribute("x", x);
+        foreign.setAttribute("y", y - documentFontSizePx * cssToSvgY);
+
+        container.style.transformOrigin = "top left";
+        container.style.transform = `scale(${cssToSvgX})`;
+        foreign.appendChild(container);
+
+        foreign.setAttribute("aria-label", raw);
+
+        text.replaceWith(foreign);
+      } catch (e) {
+        console.warn("KaTeX failed on", raw, e);
+      }
+    });
   });
+
   console.log("OK");
   const event = new CustomEvent("katexFinished");
   document.dispatchEvent(event);

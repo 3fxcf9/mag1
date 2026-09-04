@@ -71,8 +71,20 @@ figure {
   width: 100%;
 }
 
+/* Math rendering */
 .zoom_image_view svg {
-  filter: invert();
+  text-align: left !important;
+  line-height: initial;
+  /* filter: invert(); */
+
+  @media print {
+    /* filter: none; */
+  }
+
+  /* Keep text normal */
+  foreignObject > div {
+    /* filter: invert(); */
+  }
 }
 
 .zoom_legend {

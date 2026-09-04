@@ -203,7 +203,7 @@ def
 	Étant donné un lacet $γ$ de contour $\Contour_{γ}$ et $z ∈ Ω ∖ \Contour_{γ}$, on définit le _nombre d’enroulement de $\Cont_{γ}$ autour de $z$_ comme le nombre algébrique de fois que $\Contour_{γ}$ entoure $z$. On le note $w(\Contour_{γ}, z)$.
 	On dira qu’un chemin $γ: \cc{0,1} ⟶ Ω$ est une _courbe de Jordan_ si $γ$ est injective sur $\co{0,1}$.
 	fig
-		FIG 1
+		./figures/nb_enroulements.svg
 	On dit que deux chemins $γ_{1}$ et $γ_{2}$ sur $Ω$ sont _équivalents_ (resp. _anti-équivalents_) si il existe une bijection $φ: \cc{0,1} ⟶ \cc{0,1}$ de classe $\Cont^{1}$ telle que $γ_{1} = γ_{2} \circ φ$ et $φ' > 0$ (resp. $γ' < 0$). Le contour de deux chemins équivalents est identique, et ceux de deux chemins $γ_{1}$ et $γ_{2}$ anti-équivalents ne différent que par leur orientation, ce que l’on notera $\Contour_{γ_{1}} = \bar{\Contour_{γ_{2}}}$.
 	On appellera  _chaîne dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ de classe $\Cont^{1}$ par morceaux (mais pas nécessairement continue).
 	On définit le _concaténé_ de deux chemins $γ_{1}$ et $γ_{2}$ dans $Ω$ comme l’application((Non commutative ainsi définie mais on pourra la considérer comme telle au vue de l’utilisation que nous en ferons.))
@@ -222,7 +222,7 @@ proof
 	Admise
 
 fig
-	FIG 3
+	./figures/lacet_comme_courbes_de_jordan.svg
 
 ### Connexité
 
@@ -246,8 +246,8 @@ example
 
 def
 	Un ouvert connexe $Ω$ de $\C$ est dit _simplement connexe_ si son complémentaire de $Ω$ dans $\C$ n’admet aucune composante connexe bornée. Dans le cas contraire, $Ω$ est dit _multiplement connexe_.
-	fig
-		FIG 4
+	fig Exemple d’ouvert multiplement connexe
+		./figures/ouvert_multiplement_connexe.svg
 
 rem
 	La simple connexité peut s’interpréter comme l’absence de « trous ».
@@ -367,3 +367,200 @@ rem
 example
 	fig
 		FIG 6
+
+## Théorie de Cauchy
+
+### Théorème intégral de Cauchy
+
+def
+	Soit $f$ une fonction sur un ouvert $Ω$ de $\C$. On dit que $f$ _admet une primitive sur $Ω$_ si il existe une fonction entière $F$ telle que $F' = f$. On qualifie alors $F$ de _primitive de $f$ sur $Ω$_.
+
+example
+	- La fonction $z ⟼ z^{n}$ ($n ∈ \N$) admet $z ⟼  \frac{z^{n+1}}{n+1}$ comme primitive sur $\C$.
+	- Si $n ⩾ 2$, la fonction $z ⟼  z^{-n}$ admet $z ⟼ \frac{z^{-n+1}}{-n+1}$ comme primitive sur $\C^{*}$.
+
+lemma
+	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. Si $f$ admet une primtive $F$ sur $Ω$, alors pour tout chemin $γ$ tracé sur $Ω$, on a
+	math
+		\int_{\Contour_{γ}}\dd z f(z) = F(γ(1)) - F(γ(0))
+	En particulier, pour tout lacet $γ$	dans $Ω$,
+	math
+		\oint_{\Contour_{γ}} \dd zf(z) = 0
+
+proof premier point
+	Par définition,
+	math
+		\begin{align*}
+			\int_{\Contour_{γ}} \dd zf(z) &= \int_{\Contour_{γ}}\dd z F'(z)\\
+			&= ∫_{0}^{1}\dd t γ'(t) \big(F'\circ γ\big)(t)\\
+			&=∫_{0}^{1}\dd t \big(F\circ γ\big)'(t) = \big[F \circ γ(t)\big]_{t=0}^{t=1}\\
+			&= F \big(γ(1)\big) - F \big(γ(0)\big)
+		\end{align*}
+
+cor
+	1. Pour tout entier naturel $n$, pour tout lacet $γ$ dans $\C$, on a
+		math
+			\oint_{\Contour_{γ}}\dd z z^{n} = 0
+	2. Pour tout $n ⩾ 2$, pour tout lacet $γ$ dans $\C^{*}$, on a
+		math
+			\oint_{\Contour_{γ}} \frac{\dd z}{z^{n}} = 0
+
+thm Théorème de Cauchy-Goursat
+	Soit $Ω$ un ouvert de $\C$ ++simplement connexe++, et $p$ un point de cet ouvert. Soit $f$ continue sur $Ω$ et holomorphe sur $Ω ∖ \{p\}$. Alors, pour tout cycle $γ$ dans $Ω$, on a
+	math
+		\oint_{\Contour_{γ}}\dd z f(z) = 0
+
+
+proof
+	On va d’abord prouver ce résultat pour les lacets triangulaires, avant de montrer par récurrence le cas des polygones, puis celui des courbes de Jordan.
+		italic
+	- On suppose pour commencer que $\Cont_{γ}$ est un triangle direct dans $Ω$, noté $T_{0} = [z_{1}, z_{2}, z_{3}]$, avec $z_{1}, z_{2}, z_{3} ∈ Ω$.
+		fig
+			right
+			./figures/TIC_cas_des_triangles.svg
+		On notera $Δ_{0}$ le compact formé par le bord de $T_{0}$. Comme $Ω$ est simplement connexe, on a nécessairement $Δ_{0} ⊂ Ω$.
+		- Supposons d’abord que $p \notin Δ_{0}$.
+			Soient:
+			- $z_{1,2}$ le milieu du segment $[z_{1}, z_{2}]$,
+			- $z_{2,3}$ le milieu du segment $[z_{2}, z_{3}]$,
+			- $z_{3,1}$ le milieu du segment $[z_{3}, z_{1}]$,
+			- $T_{0}^{(1)}$ le triangle $[z_{1}, z_{1,2}, z_{1,3}]$
+			- $T_{0}^{(2)}$ le triangle $[z_{2}, z_{2,3}, z_{1,2}]$
+			- $T_{0}^{(2)}$ le triangle $[z_{3}, z_{1,3}, z_{2,3}]$
+			- $T_{0}^{(3)}$ le triangle $[z_{1,2}, z_{2,3}, z_{2,3}]$
+			D’après les résultats de la deuxième partie, on a
+			math
+				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{4}\oint_{T_{0}^{p}}\dd zf(z)
+			Il existe au moins un triangle dans $\{T_{0}^{p} \where p ∈ \icc{1,4}\}$, appelons-le $T_{1}$ tel que
+			math
+				\abs{\int_{T_{1}}\dd zf(z)} = \max_{p ∈ \icc{1,4}}\abs{\int_{T_{0}^{(p)}}\dd zf(z)}
+			Alors, clairement
+			math
+				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ 4 \abs{\int_{T_{1}} \dd zf(z)}
+			D’autre part, on a évidemment $\long(T_{1}) = \frac{1}{2} \long(T_{0})$.
+			En répétant les étapes ci-dessus, on constru une suite $(T_{n})_{n ∈ \N}$ de triangles directs « imbriqués » et vérifiant
+			math
+				\tag{1} ∀ n ∈ \N, \abs{\int_{T_{0}} \dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}}\dd zf(z)}
+			et
+			math
+				\tag{2} \long(T_{n}) = \frac{1}{2^{n}}\long(T_{0})
+			Pour tout $n ∈ \N$, soit $z_{n}$ le barycentre de $T_{n}$. La suite $(z_{n})_{n ∈ \N} ∈ \Delta_{0}^{\N}$ est une suite de Cauchy. Comme $\C$ est complet, cette suite admet une limite $z_{∞}$ quand $n\to +∞$. Or, $Δ_{0}$ contient ses points limites comme compact de $\C$ et donc $z_{∞} ∈ \Delta_{0}$. En particulier, sous nos hypothèses, $z_{∞} ∈ Ω ∖ \{p\}$, donc $f$ est holomorphe en $z_{∞}$, i.e.
+			math
+				\tag{3} ∀ ε > 0, ∃ r>0: ∀ z ∈ Ω ∩ \B(z_{∞}, r), \abs{f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})} ⩽ ε \abs{z - z_{∞}}
+			En particulier, il existe $N ∈ \N$ tel que $∀ n ⩾ N, T_{n} ⊂ \B(z_{∞}, r)$. D’après le corollaire du lemme précédent, on a, pour $n ⩾ N$,
+			math
+				\oint_{T_{n}}\dd zf(z) = \int_{T_{n}} \dd z \Big[f(z) - \underbrace{f(z_{∞}) - (z-z_{∞})f'(z_{∞})}_{\text{constantes}}\Big]
+			et donc, d’après $(1)$, pour $n ⩾ N$,
+			math
+				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}} \dd z \Big[f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})\Big]}
+			La majoration établie plus haut permet alors d’affirmer
+			math
+				\begin{align*}
+					\abs{\oint_{T_{0}}\dd zf(z)} &⩽ 4^{n} \long(et_{n})\sup_{z ∈ T_{n}} \abs{f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})}\\
+					&\oleq{(3)} 4^{n} \long(T_{n})ε \sup_{z ∈ T_{n}}\abs{z-z_{∞}}\\
+					&⩽ 4^{n} ε\long(T_{n})^{2} \oeq{(2)} 4^{n} ε \frac{\long(T_{0})^{2}}{4^{n}}\\
+					&⩽ ε\long(T_{0})^{2}
+				\end{align*}
+			Finalement,
+			math
+				\oint_{T_{0}} \dd zf(z) = 0
+			Ce qui prouve le théorème pour un lacet triangulaire direct et $p \notin \Delta_{0}$.
+		- Supposons à présent que $p$ soit un sommet de $T_{0}$, par exemple $p = z_{1}$. Considérons
+			- $z_{1,2}$ un point *quelconque* de $[z_{1}, z_{2}]$,
+			- $z_{1,3}$ un point *quelconque* de $[z_{1}, z_{3}]$,
+			- $T_{1}$ le triangle $[z_{1}, z_{1,2}, z_{1,3}]$,
+			- $T_{2}$ le triangle $[z_{1,2}, z_{3}, z_{1,3}]$,
+			- $T_{3}$ le triangle $[z_{1,2}, z_{2}, z_{3}]$.
+			fig
+				right
+				./figures/TIC_cas_des_triangles_2.svg.svg
+			Par les propositions montrées en deuxième partie et le premier cas prouvé ci-dessus,
+			math
+				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{3}\oint_{T_{p}}\dd z f(z) = \oint_{T_{1}}\dd zf(z)
+			On a donc, par continuité de $f$,
+			math
+				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ \abs{\oint_{T_{1}}\dd zf(z)} ⩽ \long(T_{1})\sup_{z ∈ T_{1}}\abs{f(z)} \arrowlim{z_{1,2}, z_{1,3} \to 0} 0
+		- Supposons à présent que $p$ soit un point quelconque dans $\Delta_{0}$. Considérons les triangles
+			- $T_{1} = [p, z_{2}, z_{3}]$
+			- $T_{2} = [p, z_{3}, z_{1}]$
+			- $T_{3} = [p, z_{1}, z_{2}]$
+			fig
+				right
+				./figures/TIC_cas_des_triangles_3.svg
+			Par les propriétés établies en seconde partie, et le cas précédent,
+			math
+				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{z}\oint_{T_{p}}\dd zf(z) = 0
+
+		On a donc montré le théorème pour tous les lacets triangulaires de $Ω$.
+	- On montre ensuite que le théorème  s’applique à tous les lacets polygonaux orientés. Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}ζ_{1}, z_{2}] ⊂ Ω$.
+		fig
+			right
+			./figures/TIC_cas_des_polygones.svg
+		Si bien que, en notant $P_{n} = […, z_{0}, z_{2}, …]$ lo polygone obtenu en retirant le sommet $z_{1}$ de $P_{n+1}$,
+		math
+			\oint_{P_{n+1}}\dd zf(z) = \oint_{\P_{n}}\dd zf(z) + \oint_{T}\dd zf(z) = 0
+	- On va enfin établir le théorème pour les courbes de Jordan.
+			italic
+		Soit $γ$ une courbe de Jordan sur $Ω$ et $R > 0$ la distance entre $\Contour_{γ}$ et $\C ∖ Ω$. Soit $(z_{0}, z_{1}, …, z_{n})$ un $n$-uplet de points consécutifs sur $\Cont_{γ}$ tel que la distance le long de l’arc entre deux points consécutifs soit strictement inférieure à $R$.
+		fig
+			right
+			./figures/TIC_points_sur_courbe_jordan.svg
+		Alors en tout $z_{p}$ pour $p ∈ \icc{0,n}$, on a $z_{p-1}, z_{p+1} ∈ \B(z_{p}, R)$.
+		On affirme que $f$ admet pour primiive sur $\B(z_{p}, R)$ la fonction
+		math
+			F_{p}: z ⟼ \int_{\cc{z_{p}, z}}\dd ζ f(ζ)
+		En effet, on a, pour $z,z' ∈ \B(z_{p}, R)$ :
+		math
+			\begin{align*}
+				F_{p}(z') - F.p(z) &= \int_{\cc{z_{p}, z'}}\dd  ζ f(ζ) - \int_{\cc{z_{p}, z}}\dd  ζf(ζ)\\
+				&= \int_{\cc{z, z_{p}} ∪ \cc{z_{p}, z'}} \dd ζf(ζ)\\
+				&= \oint_{\cc{z_{p}, z', z}} \dd  ζf(ζ) + \int_{\cc{z, z'}}\dd  ζ f(ζ)\\
+				&\ueq{TIC} \int_{\cc{z, z'}}d ζf(ζ)
+			\end{align*}
+		D’après le lemme précédent,
+		math
+			\int_{z, z'} dz f(z) = (z'-z)f(z)
+		Finalement,
+		math
+			\begin{align*}
+				\abs{\frac{F.p(z') - F.p(z)}{z'-z} - f(z)} &= \abs{\frac{1}{z'-z}\int_{\cc{z, z'}}\dd ζ \big[f(ζ) - f(z)\big]}\\
+				&⩽ \frac{1}{\abs{z'-z}} \long(\cc{z, z'}) \sup_{z ∈ \cc{z, z'}} \abs{f(z) - f(z)} \arrowlim{z' \to z} 0
+			\end{align*}
+		car $f$ est continue sur $Ω$. Ainsi, en tout $z_{p}$, $F_{p}$ est une primiive de $f$ sur $\B(z_{p}, r)$. Cependant, d’après le lemme précédent, on a
+		math
+			0 = \int_{\overgroup{z_{p}, z_{p+1}} \uplus \cc{z_{p+1}, z_{p}}} \dd zf(z) = \int_{\overgroup{z_{p}, z_{p+1}}}\dd zf(z) - \int_{\cc{z_{p}, z_{p+1}}}\dd zf(z)
+		Ceci étant vrai en tout $z_{p}$ pour $p ∈ \icc{0,n}$, on a
+		math
+			\oint_{\Contour_{γ}}\dd zf(z) = \int_{\cc{z_{1}, …, p_{n}}}\dd zf(z) = 0
+		Le théorème est donc vrai pour toute coube de Jordan, donc pour tous les cycles.
+
+cor
+	fig
+		./figures/corrolaire_1_TIC.svg
+	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Pour tous chemins $γ_{1}$ et $γ_{2}$ tracés sur $Ω$ tels que $γ_{1}(0) = γ_{2}(0)$ et $γ_{1}(1) = γ_{2}(2)$, on a
+	math
+		\int_{\Contour_{γ}}\dd zf(z) = \int_{\Contour_{γ_{2}}}\dd zf(z)
+
+proof
+	Soit de tels objets. D’après le TIC, on a
+	math
+		0 = \oint_{\Contour_{γ_{1}} ∪ \bar{\Contour_{\gamma_{2}}}}\dd zf(z) = \int_{\Contour_{γ_{1}}}\dd zf(z) - \int_{\Contour_{γ_{2}}}\dd zf(z)
+
+rem
+	Cf. changement de variable complexe.
+
+### Primitives
+
+thm
+	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors, $f$ admet une pmiritive sur $Ω$, et cette primitive est unique si on impose sa valeur en un point de $Ω$.
+
+proof
+	D’après le corrolaire précédent, on peut définir la fonction
+	math
+		F: \applic{Ω}{\C}{z}{\int_{\Contour_{γ_{z}}}\dd ζf(ζ)}
+	oû $γ_{z}$ est un chemin quelconque dans $Ω$ tel que $γ_{z}(0) = z_{0}$ et $γ_{z}(1) = z$.
+	La preuve du fait que $F$ est bien une primitive de $f$ sur $Ω$ s’effectue avC les mêmes arguments que ceux employés dans la preuve du TIC.
+
+example
+	Cherchons une primtive de la fonction $f:z ⟼ \frac{1}{z}$, holomorphe sur $\C^{*}$ *multiplement connexe*. Cette fonction est aussi holomorphe sur $\C ∖ \R_{-}$ et cet ensemble est simplement connexe, donc d’après le théorème pécédent, $f$ admet une unique primitive sur $\C ∖ \R_{-}$, notée $\log$, telle que $\log(1) = 0$. On appelle cette primitive la _détermination principale du logarithme complexe_.
+	On aurait pu « relier l’origine à l’infini » d’une autre manière, qui aurait donné lieu à une autre primitive, elle aussi unique pour cette situation, mais ne coïncidant pas avec $\log$.

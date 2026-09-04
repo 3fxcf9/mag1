@@ -1105,18 +1105,20 @@ body {
   figure svg {
     text-align: left !important;
     line-height: initial;
-    filter: invert();
+    overflow: visible;
+    /* filter: invert(); */
 
     @media print {
-      filter: none;
+      /* filter: none; */
+    }
+
+    /* Keep text normal */
+    foreignObject > div {
+      /* filter: invert(); */
     }
   }
 
   svg * {
     text-align: left !important;
-  }
-
-  svg .katex {
-    color: black !important;
   }
 }
