@@ -146,3 +146,26 @@ h1 {
 .footnote-ref {
   text-decoration: none;
 }
+
+/* Edit on github */
+.edit-on-github {
+  margin-top: auto;
+  font-family: "Inter Variable", sans-serif;
+  font-size: initial;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--subtext-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  & svg {
+    filter: initial;
+    width: 1em;
+    vertical-align: text-top;
+    margin-right: 0.8ch;
+  }
+}

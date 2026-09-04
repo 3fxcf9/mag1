@@ -196,6 +196,7 @@ proof
 ## Intégrales de contour (ou chemin)
 
 ### Chemins et contours dans $\C$
+	inline_math
 
 def
 	Soit $Ω$ un ouvert de $\C$. On appelle _chemin dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ continue et $\Cont^{1}$ par morceaux. On dira que $γ$ est un _lacet_ si $γ(0) = γ(1)$, sinon on dira que $γ$ est un _arc_. Dans tous les cas, on notera $γ'$ la dérivée « par morceaux » de $γ$.
