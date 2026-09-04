@@ -45,6 +45,7 @@ parser load_custom_snippets
 		lua
 		print(path_relative_to_toplevel("snippets.js"))
 		local js = read_file(path_relative_to_toplevel("snippets.js"))
+		print(string.format("Reading: %s. Content: %s", path_relative_to_toplevel("snippets.js"), js))
 		if js ~= nil then
 			return '<script>' .. js .. '</script>'
 		else

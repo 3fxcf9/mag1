@@ -175,7 +175,7 @@ const macros = {
     "\\bigcap\\mathclap{\\raisebox{-0.8ex}{\\mkern{-1.24ex}$\\boldsymbol\\downarrow$}}",
 };
 
-if (local_macros) {
+if (typeof local_macros != "undefined") {
   Object.assign(macros, local_macros);
 }
 
