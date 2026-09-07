@@ -4,6 +4,9 @@ css_file_link static/css/course.css
 css_file_link static/css/table_of_contents.css
 css_file_link static/css/figure_zoom.css
 
+parser description
+	metadata $arg
+
 // Katex math rendering
 
 parser setup_fonts_head

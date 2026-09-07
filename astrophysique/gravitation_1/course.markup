@@ -1,0 +1,88 @@
+../../common/course.lib.markup
+
+title Gravitation I
+date 07/09/2026
+description Équation de Poisson, instabilité de Jeans, théorème de Gauss, courbe de rotation des galaxies
+
+## Introduction
+
+L’*astrophysique* est un domaine visant à comprendre la nature, la formation, la composition et l’évolution des objets et phénomènes célestes. L’*astronomie* consiste à observer et à décrire la trajectoire des astres. Enfin, la *cosmologie* est une branche de l’astrophysique, dont l’objet d’étude est l’univers dans son ensemble (son origine, son expansion, sa structure…). Ces domaines sont très proches en pratique.
+L’astrophysique fait intervenir de nombreux domaines de la physique :
+- mécanique classique ou relativiste (dynamique des corps célestes, espace-temps…)
+- électromagnétisme et optique (instruments observation, turbulences atmosphériques…)
+- physique des plasmas
+- mécanique des fluides, thermodynamique et physique statistique (transfert d’énergie dans les étoiles, …)
+- chimie et astrochimie (astéroïdes, milieu interstellaire, …)
+- physique quantique (astroparticules: neutrinos, rayo gamma et rayons cosmiques chargés, …)
+- physique fondamentale et nouvelles théories physiques (origine de l’univers, énergie et matière noires, grande unification, …)
+
+## Champ et potentiel gravitationnel
+
+On notera $\g$ le champ gravitationnel, et $ϕ$ son potentiel. Le champ gravitationnel est _irrotationnel_, c’est-à-dire
+math
+	\rot\g = \0
+En appliquant le théorème de Stokes, on obtient
+math
+	\oint_{δ S}\g · \dd \vec{r} = \iint_{S} \big(\rot \g\big) · \dd \vec{S} = 0
+ce qui montre que la force $\vec{F} = m\g$ subie par une masse $m$ est conservative (son travail est indépendant du chemin suivi).
+Dire que le champ $\g$ est irrotationnel est équivalent à dire que celui-ci dérive d’un potentiel, i.e.
+math
+	\rot\g = \0 ⟺ \g = -\grad ϕ
+Le champ gravitationnel est défini par
+math
+	\div \g = -4 πG ρ
+avec $G$ la constante gravitationnelle et $ρ$ la masse volumique au point considéré. On déduit de cette définition le théoreme de Gauss, qui étant donné un volume $V$ délimité par une surface $δV$, permet d’affirmer :
+math
+	\oiint_{δV}\g · \dd \vec{S} = \iiint_{V}\big(\div \g\big)\dd V
+Il se démontre grace au théorème de Green-Ostrogradski. Si cette distribution de masse est à symétrie sphérique, il s’écrit
+math
+	4 πr^{2}g(r) = \iiint_{V}\big(\div \g\big)\dd V = -4 πG\iiint_{V}ρ\dd V = -4 πG M(r)
+oû $M(r)$ est la masse contenue dans une sphère de rayon $r$. On en déduit
+math
+	g(r) = - \frac{GM(r)}{r^{2}}
+En particulier, si $r$ est plus grand que le rayon de la distribution, ce champ décroît en $1/r^{2}$.
+On déduit aussi l’équation de Poisson :
+math
+	\lapl ϕ = 4 πG ρ
+
+example Calcul du champ gravitationnel en symétrie sphérique
+	On a
+	math
+		∫_{0}^{r}\grad ϕ \dd \vec{r} = -\int \g · \dd \vec{r}
+	avec $\vec{g}(r) = -G \frac{M(r)}{r^{2}}\ur$, donc
+	math
+		ϕ(r) - ϕ(0) = G ∫_{0}^{r}\frac{M(r)}{r^{2}}\dd r \upt{r \large r_{0}} - G \frac{m}{r}
+	Le champ $ϕ$ est défini à une constante près, rendant celui-ci nul en l’infini.
+
+## Formation stellaire : critère de Jeans
+
+Soit un gaz d’extension infini et de densité $ρ$, homogène et constante. L’équation de Poisson $\lapl ϕ = 4 πG ρ$ montre que $ρ$ est constant par symétrie du systeme, et donc que $\lapl ϕ = 0$, soit que $ρ = 0$.
+
+### Énergie totale d’un nuage de gaz en rotation
+
+L’énergie totale s’écrit
+math
+	E_{\text{tot}} = E_{p} + U + E_{\text{rot}}
+avec $E_{p}$ l’énergie potentielle, $U$ l’énergie cinétique interne et $E_{\text{rot}}$ l’énergie de rotation.
+- exercise
+		Pour une sphère homogène de masse $r_{0}$ et de rayon $r_{0}$, démontrer
+		math
+			E_{p} = -\frac{3Gm_{0}^{2}}{5r_{0}}
+		oû pour une masse test $m$, $E_{p} = m ϕ$.
+		answer
+			math
+				E_{p} = ∫_{0}^{r_{0}}\big(4 πr^{2} \dd r × ρ\big)ϕ = -∫_{0}^{r_{0}}\dd r 4 πr^{2}\frac{3m_{0}}{4 πr_{0}^{3}} \frac{G}{r}m_{0}\left(\frac{r}{r_{0}}\right)^{3}= -3G\frac{m_{0}^{2}}{r_{0}^{6}} ∫_{0}^{r_{0}} r^{4} = -\frac{3}{5}\frac{Gm_{0}^{2}}{r_{0}}
+- L’énergie interne s’écrit
+	math
+		U = \frac{3}{2}Nk_{B}
+	où $N = m_{0} / m$ avec $m$ la masse d’une particule de gaz. Par exemple, pour un gaz d’hydrogène moléculaire, $m = 2 m_{p}$ et $T = 10\u{K}$, soit une densité de $n \simeq 10^{5}\u{cm^{-3}}$((Ce milieu, considéré comme suffisament dense pour donner lieu à la formation d’étoiles est moins dense que ceux qu’on est capable de créer sur terre d’un ordre de grandeur.)).
+- L’énergie de rotation s’écrit
+	math
+		E_{\text{rot}} = \frac{1}{2}J ω^{2}
+	avec $J$ le moment d’inertie, valant $J = \frac{2}{5}m_{0}r_{0}^{2}$ pour une sphère.
+
+### Critère de Jeans
+
+### Barrière rotationnelle
+
+## Exercice d’ouverture : la matière noire tracée par les étoiles

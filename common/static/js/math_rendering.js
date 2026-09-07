@@ -128,6 +128,8 @@ const macros = {
   "\\usim": "\\underset{#1}{\\sim}",
   "\\ueq": "\\underset{#1}{=}",
   "\\oeq": "\\overset{\\text{#1}}{=}",
+  "\\upt": "\\underset{#1}{\\propto}",
+  "\\opt": "\\overset{\\text{#1}}{\\propto}",
   "\\defeq": "\\overset{\\text{def}}{=}",
   "\\defiff": "\\overset{\\text{def}}{\\iff}",
   "\\ugeq": "\\underset{#1}{\\geq}",
