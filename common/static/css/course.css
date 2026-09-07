@@ -1112,7 +1112,7 @@ body {
       filter: none;
     }
 
-    /* /* Keep text normal */ */
+    /* Keep text normal */
     /* foreignObject > div { */
     /*   filter: invert(); */
     /* } */
@@ -1120,5 +1120,30 @@ body {
 
   svg * {
     text-align: left !important;
+  }
+}
+
+/* Flashcards */
+.flashcard {
+  display: none;
+  font-size: smaller;
+  background-color: var(--bg-greyed);
+  border: 2px solid var(--subtext-color);
+  border-radius: 0.5rem;
+  * {
+    font-size: medium !important;
+  }
+  .flashcard-front,
+  .flashcard-back {
+    padding: 0.5rem;
+    & :first-child {
+      margin-top: 0;
+    }
+    & :last-child {
+      margin-bottom: 0;
+    }
+  }
+  .flashcard-front {
+    border-bottom: 2px solid var(--subtext-color);
   }
 }

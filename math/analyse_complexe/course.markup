@@ -40,6 +40,16 @@ def Fonction holomorphe
 	math
 		∀ z ∈ \C, f'(z) = \lim_{z' \to z} \frac{f(z') - f(z)}{z' - z}
 
+Q: Fonction holomorphe en un point $z_{0}$
+	A:
+		Fonction $f: Ω ⟶ \C$ définie sur un ouvert de $\C$ telle que la limite ci-dessous existe :
+		math
+			\lim_{z \to z_{0}} \frac{f(z) - f(z_{0})}{z-z_{0}}
+		Dans ce cas, on appelle cette limite _dérivée de $f$ en $z_{0}$.
+Q: Fonction entière A: Fonction holomorphe sur tout $\C$
+	fc_ref last holomorphe
+
+
 rem
 	- La définition précédente est identique à celle de la dérivabilité en analyse réelle, moyennant les changements « réel » $→$ « complexe » et $\R → \C$.
 	- Les seules algèbres à division commutatives et associatives de dimension finie sur $\R$ sont $\R$ et $\C$ (théorème de Frobenius). Le premier cas est étudié dans l’analyse réel, le second l’étant par l’analyse complexe.
@@ -51,6 +61,7 @@ prop
 	Soient $Ω$ un ouvert et $f: Ω ⟶ \C$ une fonction.
 	- Si $f$ est holomorphe en un point de $\C$, alors $f$ est continue en ce point.
 	- $\H (Ω) ⊂ \Cont^{0}(Ω)$
+	as_flashcard Conséquence du caractère holomorphe d’une fonction sur sa régularité
 
 proof
 	Preuve identique à celle du résultat correspondant en analyse réelle. Seules les propriétés découlant de la structure d’algèbre à division commutative et associative sont utilisées.
@@ -61,6 +72,7 @@ prop Dérivée et opérations basiques
 	- La fonction $fg$ est holomorphe sur $Ω$ et $(fg)' = f' g + fg'$.
 	- La fonction $1/f$ est holomorphe sur $Ω$ privé des points en lesquels $f$ s’annule ($Ω ∖ Z_{f}$) et $\left(\frac{1}{f}\right)' = -\frac{f'}{f^{2}}$.
 	- Soient $Ω_{1}$ et $Ω_{2}$ des ouverts. Soient $f$ et $g$ deux fonctions holomorphes, respectivement sur $Ω_{1}$ et $Ω_{2}$. Si $f(Ω_{1}) ⊂ Ω_{2}$, alors la fonction $g\circ f$ est holomorphe sur $Ω_{1}$, et $(g\circ f)' = f'(g' \circ f)$.
+	as_flashcard Fonctions holomorphes et opérations usuelles
 
 proof
 	Identique au cas réel.
@@ -88,14 +100,28 @@ recall
 			\limsup_{n \to +∞} u_{n} = \lim_{n \to +∞}\sup_{m ⩾ n} u_{m}
 		(« limite de l’enveloppe »).((Voir règle de Cauchy.))
 
+	Q: Théorème de Cauchy-Hadamard
+		A: Le rayon de convergence $R$ d’une série entière à coefficients complexes $∑_{n ⩾ 0}a_{n}z^{n}$ est donné par
+			math
+				\frac{1}{R} = \limsup_{n\to +∞} \abs{a_{n}}^{1/n}
+			où pour une suite $(u_{n})_{n ∈ \N}$,
+			math
+				\limsup_{n \to +∞} u_{n} = \lim_{n \to +∞}\sup_{m ⩾ n} u_{m}
+
 def Fonction analytique
 	Soit $Ω$ un ouvert de $\C$. Une fonction $f: Ω ⟶ \C$ est dite _analytique_ en $z_{0} ∈ Ω$ s’il existe $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que
 	math
 		∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
 	On dira qu’une fonction est analytique sur un ouvert si elle l’est en tout point de cet ouvert.
 
+Q: Fonction analytique en $z_{0}$
+	A: Fonction $f: Ω ⟶ \C$ définie sur un ouvert de $\C$ développable en série entière sur un disque centré en $z_{0}$, i.e telle qu’il existe $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ vérifiant
+		math
+			∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
+
 prop
 	Soit $Ω$ un ouvert de $\C$. Si une fonction $f$ est analytique en $z_{0} ∈ Ω$, alors elle est holomorphe en $z_{0}$, et si $∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N}a_{n}(z-z_{0})^{n}$, alors $f'(z_{0}) = a_{1}$.
+	as_flashcard Conséquence du caractère analytique d’une fonction sur sa régularité
 
 proof
 	Soit $f: Ω ⟶ \C$ analytique en $z_{0} ∈ Ω$. Il existe alors $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que
@@ -127,6 +153,8 @@ prop
 	math
 		f' = z ⟼ ∑_{n ∈ \N^{*}} na_{n}(z-z_{0})^{n-1}
 	avec le même disque de convergence.
+
+Q: Une série entière est-elle analytique ? Si oui, où ? A: Oui, en tout point de son disque de convergence.
 
 proof
 	Considérons, sans perte de généralité, la fonction $f: z ⟼  ∑_{n ∈ \N} a_{n}z^{n}$, absolument convergente sur $\B(0, \R)$ avec $R>0$. Soit $z_{0} ∈ \B(0,R)$. Alors,  pour tout $z ∈ \B(z_{0}, R - \abs{z_{0}})$,
@@ -178,6 +206,7 @@ thm Théorème de Cauchy-Riemann
 	- $(P, Q) = \Big(\Re(\tilde{f}), \Im(\tilde{f})\Big)$ satisfait sur $ρ^{-1}(Ω)$ les équations de Cauchy-Riemann, à savoir
 		math
 			\begin{cases}\displaystyle\pdv{P}{x} = \pdv{Q}{y} \\ \displaystyle\pdv{P}{y} = -\pdv{Q}{x}\end{cases}
+	as_flashcard
 
 proof
 	Soit $Ω$ et $f$ de tels objets. Par définition, $f$ est holomorphe en $z_{0} ∈ Ω$ si et seulement si
@@ -200,13 +229,21 @@ proof
 
 def
 	Soit $Ω$ un ouvert de $\C$. On appelle _chemin dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ continue et $\Cont^{1}$ par morceaux. On dira que $γ$ est un _lacet_ si $γ(0) = γ(1)$, sinon on dira que $γ$ est un _arc_. Dans tous les cas, on notera $γ'$ la dérivée « par morceaux » de $γ$.
+	Q: Chemin dans un ouvert $Ω$ A: Application $γ: \cc{0,1} ⟶ Ω$ continue et $\Cont^{1}$ par morceaux.
+	Q: Lacet sur un ouvert $Ω$ A: Chemin $γ$ sur $Ω$ tel que $γ(0) = γ(1)$.
+		fc_ref last Lacet
+	Q: Arc sur un ouvert $Ω$ A: Chemin $γ$ sur $Ω$ tel que $γ(0) \ne γ(1)$.
 	Étant donné un chemin $γ$, on appelle _contour_ de $γ$ l’ensemble $\Contour_{γ} = γ(\cc{0,1})$. Un tel contour hérite de l’orientation naturelle de $\cc{0,1}$ et on le considèrera toujours comme orienté.
+	Q: Contour d’un chemin $γ$ tracé sur $Ω$ A: Ensemble $\Contour_{γ} = γ(\cc{0,1})$ héritant de l’orientation naturelle de $\cc{0,1}$.
 	Étant donné un lacet $γ$ de contour $\Contour_{γ}$ et $z ∈ Ω ∖ \Contour_{γ}$, on définit le _nombre d’enroulement de $\Cont_{γ}$ autour de $z$_ comme le nombre algébrique de fois que $\Contour_{γ}$ entoure $z$. On le note $w(\Contour_{γ}, z)$.
 	On dira qu’un chemin $γ: \cc{0,1} ⟶ Ω$ est une _courbe de Jordan_ si $γ$ est injective sur $\co{0,1}$.
+	Q: Courbe de Jordan sur un ouvert $Ω$ A: Chemin tracé sur $Ω$ injectif sur $\cc{0,1}$.
 	fig
 		./figures/nb_enroulements.svg
 	On dit que deux chemins $γ_{1}$ et $γ_{2}$ sur $Ω$ sont _équivalents_ (resp. _anti-équivalents_) si il existe une bijection $φ: \cc{0,1} ⟶ \cc{0,1}$ de classe $\Cont^{1}$ telle que $γ_{1} = γ_{2} \circ φ$ et $φ' > 0$ (resp. $γ' < 0$). Le contour de deux chemins équivalents est identique, et ceux de deux chemins $γ_{1}$ et $γ_{2}$ anti-équivalents ne différent que par leur orientation, ce que l’on notera $\Contour_{γ_{1}} = \bar{\Contour_{γ_{2}}}$.
+	Q: Chemins équivalents (resp. anti-équivalents) sur un ouvert $Ω$ A: Chemins $γ_{1}$ et $γ_{2}$ tels que $γ_{1} = γ_{2} \circ φ$ avec $φ$ une bijection de classe $\Cont^{1}$ de $\cc{0,1}$ telle que $φ' > 0$ (resp. $φ' < 0$). Leur contour est identique (resp. ne différent que par leur orientation).
 	On appellera  _chaîne dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ de classe $\Cont^{1}$ par morceaux (mais pas nécessairement continue).
+	Q: Chaîne dans $Ω$ A: Application $γ: \cc{0,1}$ de classe $\Cont^{1}$ par morceaux (mais pas nécessairement continue).
 	On définit le _concaténé_ de deux chemins $γ_{1}$ et $γ_{2}$ dans $Ω$ comme l’application((Non commutative ainsi définie mais on pourra la considérer comme telle au vue de l’utilisation que nous en ferons.))
 	math
 		γ_{1} \concat γ_{2}: \applic{\cc{0,1}}{Ω}{t}{\begin{cases}γ_{1}(2t) \if t ∈ \cc{0, \frac{1}{2}} \\ γ_{2} \left(2 \left(t - \frac{1}{2}\right)\right) \if t ∈ \oc{\frac{1}{2}, 1}\end{cases}}
@@ -218,6 +255,7 @@ def
 
 thm
 	Tout lacet est le concaténé d’un nombre fini de courbes de Jordan.
+	as_flashcard Lien lacet / courbe de Jordan
 
 proof
 	Admise
@@ -231,9 +269,11 @@ def
 	Un ouvert (resp. un fermé) $Ω$ de $\C$ est dit _déconnecté_ si il existe deux ouverts (resp. fermés) $Ω_{1}$ et $Ω_{2}$ disjoints et non vides tels que $Ω = Ω_{1} \uplus Ω_{2}$.
 	Dans le can contraire, $Ω$ est dit _connexe_. Si $Ω$ est déconnecté, il est l’union disjointe d’ensembles connexes appelés ses _composantes connexes_.
 	Enfin, $Ω$ est dit _connexe par arcs_ si deux points $z_{1}$ et $z_{2}$ quelconques de $Ω$, sont toujours reliés par un arc continu, i.e. si il existe $φ: \cc{0,1} ⟶ Ω$ continu tel que $φ(0) = z_{1}$ et $φ(2) = z_{2}$.
+	Q: Ensemble ouvert (resp. fermé) connexe A: Ensemble ne s’écrivant pas comme union disjointe de deux ouverts (resp. fermés)
 
 thm
 	Un ouvert $Ω$ de $\C$ est connexe par arcs si et seulement si il est connexe.
+	as_flashcard Lien connexité / connexité par arcs *pour un ouvert de $\C$*
 
 proof
 	Admise
@@ -247,6 +287,7 @@ example
 
 def
 	Un ouvert connexe $Ω$ de $\C$ est dit _simplement connexe_ si son complémentaire de $Ω$ dans $\C$ n’admet aucune composante connexe bornée. Dans le cas contraire, $Ω$ est dit _multiplement connexe_.
+	Q: Ouvert simplement connexe de $\C$ A: Ouvert connexe dont le complémentaire n’admet aucune composante connexe bornée, i.e. si il n’a pas de « trou ».
 	fig Exemple d’ouvert multiplement connexe
 		./figures/ouvert_multiplement_connexe.svg
 
@@ -264,6 +305,10 @@ defprop
 	math
 		\long(\Contour_{γ}) \defeq ∫_{0}^{1}\abs{γ_{1}'(t)}\dd t = ∫_{0}^{1}\dd t \abs{γ_{2}'(t)}
 	définit la longueur de $\Contour_{γ}$.
+	Q: Longueur d’un contour $\Contour_{γ_{0}}$
+		A: Réel ne dépendant pas du chemin $γ$ équivalent à $γ_{0}$ défini par
+			math
+				\long(\Contour_{γ}) \defeq ∫_{0}^{1}\abs{γ_{1}'(t)}\dd t = ∫_{0}^{1}\dd t \abs{γ_{2}'(t)}
 
 proof
 	Les chemins $γ_{1}$ et $γ_{2}$ étant équivalents, on a $γ_{1} = γ_{2} \circ φ$ avec $φ: \cc{0,1} ⟶ \cc{0,1}$ une bijection de classe $\Cont^{1}$ de dérivée positive. Alors, $γ_{1}' = φ' (γ_{2}' \circ φ)$ donc par changement de variable,
@@ -277,6 +322,9 @@ defprop
 	math
 		\int_{\Contour}\dd zf(z) \defeq ∫_{0}^{1}\dd t γ_{1}'(t)\big(f\circ γ_{1}\big)(t) = ∫_{0}^{1}\dd t γ_{2}' (t) \big(f\circ γ_{2}\big)(t)
 	définit _l’intégrale de $f$ le long de $\Contour$_.
+	Q: Intégrale de $f$ continue le long de $\Contour$ A: Réel ne dépendant pas du chemin si son contour est (orientation comprise) $\Contour$, défini par
+		math
+			\int_{\Contour}\dd zf(z) \defeq ∫_{0}^{1}\dd t γ_{1}'(t)\big(f\circ γ_{1}\big)(t) = ∫_{0}^{1}\dd t γ_{2}' (t) \big(f\circ γ_{2}\big)(t)
 
 proof
 	Changement de variable.
@@ -285,6 +333,7 @@ prop
 	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. Si $γ_{1}$ et $γ_{2}$ sont deux chemins anti-équivalents de contours respectifs $\Contour$ et $\bar{\Contour}$, alors
 	math
 		∫_{\Contour}\dd z f(z) = - \int_{\bar{\Contour}}\dd zf(z)
+	as_flashcard Intégrale le long de deux chemins anti-équivalents
 
 proof
 	Identique au cas précédent.
@@ -293,6 +342,7 @@ prop
 	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. On a, pour deux chemins $γ_{1}$ et $\gamma_{2}$ de $Ω$ :
 	math
 		\int_{\Contour_{γ_{1} \uplus γ_{2}}}\dd z f(z) = \int_{\Contour_{γ_{1}}}\dd z f(z) + \int_{\Contour_{γ_{2}}}\dd z f(z)
+	as_flashcard Intégrale d’une fonction sur $γ_{1} \concat γ_{2}$
 
 proof
 	Exercice.
@@ -301,6 +351,7 @@ prop
 	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. Pour un chemin $γ$ dans $Ω$, on a
 	math
 		\abs{\int_{\Contour_{γ}} \dd z f(z)} ⩽ \long(\Contour_{γ})\sup_{z ∈ \Contour_{γ}} \abs{f(z)}
+	as_flashcard Majoration de l’intégrale d’une fonction le long d’un chemin
 
 proof
 	Par définition,
@@ -313,10 +364,11 @@ proof
 
 ### Indice et homologie
 
-def
+def Indice d’un lacet
 	Pour tout lacet $γ$ dans $\C$ et tout point $z$ de $\C ∖ \Contour_{γ}$, on définit l’_indice_ de $γ$ en $z$ par
 	math
 		\ind(γ, z) = \frac{1}{2 π i} \oint_{\Contour_{γ}}\frac{\dd ζ}{ζ-z}
+	as_flashcard
 
 prop
 	Pour tout lacet $γ$ de $\C$ et tout point $z ∈ \C ∖ \Contour_{γ}$, on a
@@ -324,6 +376,7 @@ prop
 		\ind(γ, z) = w(\Contour_{γ}, z) ∈ \Z
 	fig
 		FIG 5
+	Q: Interprétation de l’indice d’un lacet A: L’indice d’un chemin en un point est le nombre de fois que ce lacet entoure le point.
 
 proof
 	Soient $γ$ et $z$ de tels objets. On définit $θ: \cc{0,1} ⟶ \C$ par
@@ -350,17 +403,26 @@ proof
   donc $w(\Contour_{γ}, z) = \frac{1}{2 π}θ(1) = \ind(γ, z)$.
 
 rem
-	Pour tout cycle $γ = γ_{1} ∪ γ_{2} ∪ ⋯ ∪ γ_{n}$ avec $γ_{1}, …, γ_{n}$ des lacets, on a
+	Pour tout cycle $γ = γ_{1} \concat γ_{2} \concat ⋯ \concat γ_{n}$ avec $γ_{1}, …, γ_{n}$ des lacets, on a
 	math
 		∀ z ∈ \C ∖ \Contour_{γ}, \ind(γ, z) = ∑_{i=1}^{n}\ind(γ_{i}, z)
+	Q: Indice d’un cycle A: Somme des indices des lacets le composant
 
 def
 	- Soit $Ω$ un ouvert de $\C$. Deux cycles $γ_{1}$ et $γ_{2}$ de $\C$ sont dits _homologues dans $Ω$_ si
 		math
 			∀ z ∈ \C ∖ Ω, \ind(γ_{1}, z) = \ind(γ_{2}, z)
+		Q: Cycles homologues
+			A: Cycles entourant un même nombre de fois chaque « trou » de $Ω$. Formellement, $γ_{1}$ et $γ_{2}$ sont holomogues si
+				math
+					∀ z ∈ \C ∖ Ω, \ind(γ_{1}, z) = \ind(γ_{2}, z)
 	- Un cycle $γ$ est dit _homologue à un point dans $Ω$_ si
 		math
 			∀ z ∈ \C ∖ Ω, \ind(γ, z) = 0
+		Q: Cycle homologue à un point
+			A: Cycle $γ$ tel que
+				math
+					∀ z ∈ \C ∖ Ω, \ind(γ, z) = 0
 
 rem
 	Deux cycles sont homologues si et seulement si ils entourent chaque « trou » de $Ω$ un même nombre de fois.
@@ -381,12 +443,13 @@ example
 	- Si $n ⩾ 2$, la fonction $z ⟼  z^{-n}$ admet $z ⟼ \frac{z^{-n+1}}{-n+1}$ comme primitive sur $\C^{*}$.
 
 lemma
-	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. Si $f$ admet une primtive $F$ sur $Ω$, alors pour tout chemin $γ$ tracé sur $Ω$, on a
+	Soit $f$ une fonction continue sur un ouvert $Ω$ de $\C$. Si $f$ admet une primitive $F$ sur $Ω$, alors pour tout chemin $γ$ tracé sur $Ω$, on a
 	math
 		\int_{\Contour_{γ}}\dd z f(z) = F(γ(1)) - F(γ(0))
 	En particulier, pour tout lacet $γ$	dans $Ω$,
 	math
 		\oint_{\Contour_{γ}} \dd zf(z) = 0
+	as_flashcard Holomogue du théorème fondamental de l’analyse pour les fonction complexes
 
 proof premier point
 	Par définition,
@@ -410,6 +473,7 @@ thm Théorème de Cauchy-Goursat
 	Soit $Ω$ un ouvert de $\C$ ++simplement connexe++, et $p$ un point de cet ouvert. Soit $f$ continue sur $Ω$ et holomorphe sur $Ω ∖ \{p\}$. Alors, pour tout cycle $γ$ dans $Ω$, on a
 	math
 		\oint_{\Contour_{γ}}\dd z f(z) = 0
+	as_flashcard
 
 
 proof
@@ -541,6 +605,8 @@ cor
 	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Pour tous chemins $γ_{1}$ et $γ_{2}$ tracés sur $Ω$ tels que $γ_{1}(0) = γ_{2}(0)$ et $γ_{1}(1) = γ_{2}(2)$, on a
 	math
 		\int_{\Contour_{γ}}\dd zf(z) = \int_{\Contour_{γ_{2}}}\dd zf(z)
+	Q: Conséquence du théorème de Cauchy-Goursat sur l’intégration le long de chemins A: L’intégrale d’une fonction holomorphe sur un ouvert ++simplement connexe++ est indépendante du chemin emprunté.
+		inline_underline
 
 proof
 	Soit de tels objets. D’après le TIC, on a
@@ -553,7 +619,9 @@ rem
 ### Primitives
 
 thm
-	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors, $f$ admet une pmiritive sur $Ω$, et cette primitive est unique si on impose sa valeur en un point de $Ω$.
+	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors, $f$ admet une primitive sur $Ω$, et cette primitive est unique si on impose sa valeur en un point de $Ω$.
+	Q: Existence de primitive pour une fonction complexe. A: Une fonction holomorphe sur un ouvert ++simplement connexe++ admet une primitive sur cet ouvert, unique si on impose sa valeur en un point.
+		inline_underline
 
 proof
 	D’après le corrolaire précédent, on peut définir la fonction
@@ -565,3 +633,5 @@ proof
 example
 	Cherchons une primtive de la fonction $f:z ⟼ \frac{1}{z}$, holomorphe sur $\C^{*}$ *multiplement connexe*. Cette fonction est aussi holomorphe sur $\C ∖ \R_{-}$ et cet ensemble est simplement connexe, donc d’après le théorème pécédent, $f$ admet une unique primitive sur $\C ∖ \R_{-}$, notée $\log$, telle que $\log(1) = 0$. On appelle cette primitive la _détermination principale du logarithme complexe_.
 	On aurait pu « relier l’origine à l’infini » d’une autre manière, qui aurait donné lieu à une autre primitive, elle aussi unique pour cette situation, mais ne coïncidant pas avec $\log$.
+
+generate_flashcards_tsv
