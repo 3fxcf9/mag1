@@ -374,8 +374,6 @@ prop
 	Pour tout lacet $γ$ de $\C$ et tout point $z ∈ \C ∖ \Contour_{γ}$, on a
 	math
 		\ind(γ, z) = w(\Contour_{γ}, z) ∈ \Z
-	fig
-		FIG 5
 	Q: Interprétation de l’indice d’un lacet A: L’indice d’un chemin en un point est le nombre de fois que ce lacet entoure le point.
 
 proof
@@ -398,9 +396,12 @@ proof
 	math
 		1 = e^{2 π i \ind(γ, z)}
 	i.e. $\ind(γ, z) ∈ \Z$. Finalement,
+	fig
+		right
+		./figures/repr_polaire_lacet.svg
 	math
 		∀ t ∈ \cc{0,1}, γ(t) = z + z_{0}e^{i θ(t)}
-  donc $w(\Contour_{γ}, z) = \frac{1}{2 π}θ(1) = \ind(γ, z)$.
+  donc $w(\Contour_{γ}, z) = \frac{1}{2 π}\big(θ(1)-θ(0)\big) = \ind(γ, z)$.
 
 rem
 	Pour tout cycle $γ = γ_{1} \concat γ_{2} \concat ⋯ \concat γ_{n}$ avec $γ_{1}, …, γ_{n}$ des lacets, on a
@@ -428,8 +429,8 @@ rem
 	Deux cycles sont homologues si et seulement si ils entourent chaque « trou » de $Ω$ un même nombre de fois.
 
 example
-	fig
-		FIG 6
+	fig À gauche, les cycles $\gamma_1$ et $\gamma_2$ sont homologues, et à droite, le cycle $\gamma$ est holomogue à un point.
+		./figures/cycles_homologues.svg
 
 ## Théorie de Cauchy
 
@@ -633,5 +634,180 @@ proof
 example
 	Cherchons une primtive de la fonction $f:z ⟼ \frac{1}{z}$, holomorphe sur $\C^{*}$ *multiplement connexe*. Cette fonction est aussi holomorphe sur $\C ∖ \R_{-}$ et cet ensemble est simplement connexe, donc d’après le théorème pécédent, $f$ admet une unique primitive sur $\C ∖ \R_{-}$, notée $\log$, telle que $\log(1) = 0$. On appelle cette primitive la _détermination principale du logarithme complexe_.
 	On aurait pu « relier l’origine à l’infini » d’une autre manière, qui aurait donné lieu à une autre primitive, elle aussi unique pour cette situation, mais ne coïncidant pas avec $\log$.
+
+### Première formule intégrale de Cauchy
+
+thm Première formule intégrale de Cauchy
+	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors pour tout cycle $γ$ dans $Ω$ et tout $z ∈ Ω ∖ \Contour_{γ}$, on a
+	math
+		\ind(γ, z) f(z) = \frac{1}{2 πi} \oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{ζ - z}
+
+proof
+	Soit de tels objets. Considérons la fonction
+	math
+		g: \applic{Ω}{\C}{z}{\begin{cases}\dfrac{f(ζ) - f(z)}{ζ - z} \if ζ ∈ Ω ∖ \{z\} \\ f'(z) \if ζ = z\end{cases}}
+	Cette fonction est clairement holomorphe sur $Ω ∖ \{z\}$, et comme $f$ est holomorphe en $z ∈ Ω$, $g$ est continue sur $Ω$. D’après le TIC, on a
+	math
+		\begin{align*}
+			0 &= \oint_{\Contour_{γ}}\dd z g(ζ) = \oint_{\Contour_{γ}} \dd ζ \frac{f(ζ) - f(z)}{ζ - z}\\
+			&= \oint_{\Contour_{γ}} \dd ζ \frac{f(ζ)}{ζ - z} - f(z) \underbrace{\oint_{\Contour_{γ}}\frac{\dd ζ}{ζ - z}}_{=2 π i \ind(γ, z)}
+			&= \oint_{\Contour_{γ}}\dd ζ \frac{f(z)}{ζ-z} - 2 π i \ind(γ, z)f(z)
+		\end{align*}
+
+rem
+	fig
+		right
+		./figures/fic_rem.svg
+	- La première formule intégrale de Cauchy est une généralisation de la définition de l’indice (prendre $f: ζ ⟶ 1$).
+	- Sur une courbe de Jordan fermée, on a donc pour tout point $z$ tel que $\ind(γ, z) = 1$,
+	  math
+			f(z) = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{ζ - z}
+
+### Théorème intégral de Cauchy généralisé
+
+thm
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ (pas forcément simplement connexe) de $\C$. Pour tout cycle $γ$ homologue à un point dans $Ω$, on a
+	math
+		\oint_{\Contour_{γ}} \dd z f(z) = 0
+
+proof
+	Soit $Ω$, $f$ et $γ$ de tels objets. On peut supposer, sans perte de généralité, que $Ω$ est borné. En effet, si $Ω$ n’est pas borné, on introduit
+	math
+		R = 2\max_{t ∈ \cc{0,1}} \abs{γ(t)}
+	et on définit $Ω' = Ω ∩ \B(0,R)$. Alors $Ω'$ est borné et contient $\Contour_{γ}$. De plus, tout point de $\C ∖ Ω'$ est soit hors de $Ω$ soit hors de $\B(0,R)$, et dans les deux cas, $\ind(γ, z) = 0$ donc $γ$ est holomogue à un point dans $Ω'$. On remplace alors $Ω$ par $Ω'$ dans la preuve suivante.
+	---
+	Couvrons $Ω$ (supposé borné) par une grille carrée de pas $ε > 0$. Comme $Ω$ est borné, il ne contient qu’un nombre fini d’ouverts carrés (mailles ouvertes de la grille), notés $\square_{1}, …, \square_{N}$. Il suffit de choisir $ε > 0$ suffisament petit (typiquement tel que $\sqrt{2}ε < \dist(\Contour_{γ}, \C ∖ Ω)$) pour que $\Contour_{γ}$ soit entièrement contenu dans $\bigcup_{p=1}^{N}\bar{\square_{p}}$ où $\bar{\square_{p}}$ est la fermeture de $\square_{p}$.
+	fig À gauche, un grillage trop grossier, et à droite un grillage pouvant convenir.
+		./figures/grille_carree.svg
+	D’après la première formule intégrale de Cauchy, on a, pour tout $z ∈ \bigcup_{p=1}^{N}\square_{p}$ et en choisissant $p ∈ \icc{1,N}$ :
+	math
+		\frac{1}{2 π i} \oint_{∂\square_{p}}\dd ζ \frac{f(ζ)}{ζ - z} = \begin{cases}f(z) \if z ∈ \square_{p} \\ 0 \else\end{cases}
+	où $∂\square_{p} = \bar{\square_{p}} - \square_{p}$ désigne le carré direct bordant $\square_{p}$. En sommant sur $p ∈ \icc{1,n}$, on obtient, pour $z ∈ \bigcup_{p=1}^{N}\square_{p}$ :
+	math
+		\begin{align*}
+			f(z) &= ∑_{p=1}^{N} \frac{1}{2 π i}\oint_{∂\square_{p}}\dd ζ \frac{f(z)}{ζ - z}\\
+			&= \frac{1}{2 π i}\oint_{Γ}\dd ζ \frac{f(ζ)}{ζ - z}
+		\end{align*}
+	où $Γ$ désigne le bord orienté de $\bigcup_{p=1}^{N}\bar{\square_{p}}$. L’égalité ci-dessus est valide sur $\Contour_{γ}$. En effet, $f$ est holomorphe donc continue sur $Ω$, et $z ⟼ \frac{1}{2 π i}\oint_{\Contour_{γ}} \dd ζ \frac{f(ζ)}{ζ - z}$ est continue sur $\bigcup_{p=1}^{N}\bar{\square_{p}}$ (voir chapitre 4). On peut donc écrire
+	math
+		\begin{align*}
+			\oint_{\Contour_{γ}}\dd zf(z) &= \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd z \oint_{Γ}\dd ζ \frac{f(ζ)}{ζ - z}\\
+			&\ueq{(\star)} \frac{1}{2 π i}\oint_{Γ}\dd ζf(ζ)\oint_{\Contour_{γ}}\frac{\dd z}{ζ - z}\\
+			&= -\oint_{Γ}\dd ζf(ζ)\underbrace{\ind(γ, z)}_{=0}\\
+			&= 0
+		\end{align*}
+	où $(\star)$ découle de l’application du théorème de Fubini – cf. chapitre 2 – à la fonction $(ζ, z) ⟼ \frac{f(ζ)}{ζ - z}$ continue donc intégrable sur $Γ × \Contour_{γ}$.
+
+cor
+	Soit $f$ une fonction holomorphe sur un ouvert quelconque $Ω$ de $\C$. Pour tout cycles $γ_{1}$ et $γ_{2}$ holomogues dans $Ω$, on a
+	math
+		\oint_{\Contour_{γ_{1}}}\dd zf(z) = \oint_{\Contour_{γ_{2}}}\dd zf(z)
+
+proof
+	Soit $γ_{1}$ et $γ_{2}$ deux cycles holomogues sur $Ω$. Alors, $γ_{1} \concat \bar{γ_{2}}$ est un cycle homologue à un point, si bien que pour une fonction $f$ holomorphe sur $Ω$,
+	math
+		0 = \oint_{\Contour_{γ_{1} \concat \bar{γ_{2}}}}\dd z f(z) = \oint_{\Contour_{γ_{1}}}\dd zf(z) - \oint_{\Contour_{γ_{2}}}\dd zf(z)
+
+example
+	Si $f$ est une fonction holomorphe sur $Ω$, un ouvert tel que décrit sur la figure ci-dessous,
+	math
+		\oint_{\Contour_{γ_{1}}}\dd zf(z) = \oint_{\Contour_{γ_{2}}}\dd zf(z)
+	fig
+		./figures/cor_integrale_cycles_homologues.svg
+
+### Théorème fondamental de l’analyse complexe et seconde formule intégrale de Cauchy
+
+thm Théorème fondamental((qui arrive un peu tard quand-même…)) de l’analyse complexe
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$. Alors, $f$ est analytique sur $Ω$, c’est-à-dire qu’il existe en tout point $z_{0} ∈ Ω$, un réel $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que $\B(z_{0}, R) ⊂ Ω$ et
+	math
+		∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
+	En outre, pour tout $n ∈ \N$,
+	math
+		a_{n} = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd z \frac{f(z)}{(z-z_{0})^{n+1}}
+	où $γ$ est un chemin quelconque dans un ouvert simplement connexe $Ω' ⊂ Ω$ tel que $z_{0} ∈ Ω'$ et $\ind(γ, z_{0}) = 1$.
+
+proof
+	Soit $Ω$ et $f$ de tels objets. Soit $z_{0} ∈ Ω$. Comme $Ω$ est ouvert, il existe $R > 0$ tel que $\B(z_{0}, R) ⊂ Ω$. Soit $z ∈ \B(z_{0}, R)$ et soit $r ∈ \oo{\abs{z-z_{0}}, R}$. Alors, le cercle direct $\Cercle(z_{0}, r)$ est contenu dans $\B(z_{0}, R) ⊂ Ω$.
+	fig Le disque en couleur contient $z$ et est contenu dans le disque en noir.
+		./figures/preuve_thm_fondamental_analyse_complexe.svg
+	On peut donc lui appliquer la première formule intégrale de Cauchy, qui donne
+	math
+		\tag{1}f(z) = \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{ζ - z}
+	D’autre part, si $z ∈ \Cercle(z_{0}, r)$, on a $r = \abs{ζ - z_{0}} > \abs{z - z_{0}}$, d’où $\abs{\frac{z - z_{0}}{ζ-z_{0}}} = \frac{\abs{z-z_{0}}}{r} < 1$, donc pour tout $z ∈ \Cercle(z_{0}, r)$ :
+	math
+		\tag{2}\frac{1}{ζ - z} = \frac{1}{ζ - z_{0} + z_{0} - z} = \frac{1}{ζ - z_{0}}\frac{1}{1- \frac{z - z_{0}}{ζ - z_{0}}} = ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}
+	Or, pour tout $z ∈ \Cercle(z_{0}, r)$,
+	math
+		\begin{align*}
+			\abs{∑_{n=0}^{N-1}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}} - \frac{1}{ζ-z}} &= \abs{∑_{n=N}^{+∞}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}}\\
+			&⩽ ∑_{n=N}^{+∞}\frac{\abs{z-z_{0}}^{n}}{r^{n+1}}\\
+			&=r^{-1} {\underbrace{\left(\frac{\abs{z-z_{0}}}{r}\right)}_{< 1}}^{N} \frac{1}{1-\frac{\abs{z-z_{0}}}{r}} \arrowlim{N\to+∞}0
+		\end{align*}
+	et on a donc convergence uniforme en $ζ ∈ \Cercle(ζ_{0}, r)$. Finalement, en substituant $(2)$ dans $(1)$ et en utilisant la convergence uniforme de la série, on obtient
+	math
+		\begin{align*}
+			f(z) &= \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ f(ζ) ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}} \\
+			&= ∑_{n ∈ \N}(z-z_{0})^{n} \underbrace{\frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{(ζ - z_{0})^{n+1}}}_{=a_{n}}
+		\end{align*}
+	D’après le corollaire deu théoreme d’intégration de Cauchy généralisé, on peut remplacer $\Cercle(z_{0}, r)$ par n’importe quel cycle lui étant homologue dans $Ω ∖ \{z_{0}\}$, par exemple un lacet dans un ouvert simplement connexe $Ω' ⊂ Ω$ tel que $z_{0} ∈ Ω'$ et $\ind(γ, z_{0}) = 1$.
+
+rem
+	- Holomorphe $⟹$ Analytique $⟹ \Cont^{∞}$ si bien qu’en analyse complexe,
+	  math
+			\{\text{dérivable}\} = \Cont^{∞} = \{\text{analytique}\}
+	- La deuxième formuln intégrale de Cauchy généralise la premiere. En effet,
+		math
+			f(z_{0}) = a_{0} = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{(ζ - z_{0})^{0+1}}
+		et pour tout $n ∈ \N$,
+		math
+			\frac{f^{(n)(z_{0})}}{n!} = a_{n} = \frac{1}{2 π i} \oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{(ζ - z_{0})^{n+1}}
+	- On est assuré que le rayon de convergence de la série entière obtenue est au moins égal à la distance $\dist(z_{0}, \C ∖ Ω)$. Si $R > \dist(z_{0}, \C ∖ Ω)$, alors $f$ admet un prolongement analytique en dehors de $Ω$ (cf. section dédiée aux prolongements analytiques). Si $R = \dist{z_{0}, \C ∖ Ω}$, alors $f$ présente (vraisemblablement) une singularité sur le bord commun de $\B(z_{0}, R)$ et $Ω$.
+
+## Conséquences de la théorie de Cauchy
+
+### Théorème de Liouville
+
+thm Théorème de Liouville
+	Toute fonction entière bornée est constante.
+
+proof
+	fig
+		right
+		./figures/preuve_liouville.svg
+	Soit $f$ une fonction entière et soient $z_{1}$ et $z_{2}$ deux complexes. Posons $R = \max(\abs{z_{1}}, \abs{z_{2}})$. D’après la première formule intégrale de Cauchy, on a, pour $r > R$ et $p ∈ \{1,2\}$,
+	math
+		f(z_{p}) = \frac{1}{2 π i}\oint_{\Cercle(0, r)}\dd z \frac{f(z)}{z - z_{p}}
+	Alors, d’après cette relation,
+	math
+		\begin{align*}
+			\abs{f(z_{1}) - f(z_{2})} &= \abs{\frac{1}{2 π i}\oint_{\Cercle(0, r)} \dd z \frac{f(z)}{z-z_{1}} - \frac{1}{2 π i}\oint_{\Cercle(0,r)}\dd z \frac{f(z)}{z-z_{2}}} \\
+			&= \frac{1}{2 π} \abs{\oint_{\Cercle(0,r)}\dd zf(z) \left[\frac{1}{z-z_{1}} - \frac{1}{z-z_{2}}\right]}\\
+			&= \frac{1}{2 π} \abs{\oint_{\Cercle(0,r)}\dd zf(z) \frac{\x{z} - z_{2} - \x{z} + z_{1}}{(z-z_{1})(z-z_{2})}}\\
+			&= \frac{\abs{z_{1} - z_{2}}}{2 π} \abs{\oint_{\Cercle(0,r)} \dd z \frac{f(z)}{(z-z_{1})(z-z_{2})}} \\
+			&⩽ \frac{\abs{z_{1} - z_{2}}}{2 π}2 π r \frac{\sup_{z ∈ \Cercle(0,r)}\abs{f(z)}}{(r-\abs{z_{1}})(r-\abs{z_{2}})} \arrowlim{r \to+∞}0
+		\end{align*}
+	car, comme $f$ est bornée,
+	math
+		\sup_{z ∈ \Cercle(0,r)}\abs{f(z)} ⩽ \sup_{z ∈ \C}\abs{f(z)} < ∞
+	Ainsi, $f(z_{1}) = f(z_{2})$, i.e. $f$ est constante.
+
+rem
+	Le théorème de Liouville admet pour corollaire le théorème suivant :
+	thm Théorème fondamental de l’algèbre ou théorème de d’Alembert
+		Le corps des nombres complexes est algébriquement clos, i.e tout élément de $\C[X]$ est scindé sur $\C$.
+	proof
+		Voir TD.
+
+### Théorème des zéros isolés et théorème d’unicité
+
+On note, pour $z_{0} ∈ \C$ et $r > 0$,
+math
+	\PD (z_{0}, r) = \{z ∈ \C \where 0 < \abs{z - z_{0}} < r\}
+le _disque épointé_ de centre $z_{0}$ et de rayon $r$. On dira qu’un complexe $z$ est un _point limite_ d’un ensemble $S ⊂ \C$ si
+math
+	∀ r > 0, \PD (z, r) ∩ S \ne \emptyset
+En pratique, il existe une suite $(z_{n})_{n ∈ \N}$ d’éléments de $S$ telle que $z_{n} \arrowlim{n\to+∞}z$. L’ensemble $\lim S$ des points limites de $S$ est un fermé. Un point de $S$ qui n’est pas un point limite est un _point isolé_.
+
+
 
 generate_flashcards_tsv

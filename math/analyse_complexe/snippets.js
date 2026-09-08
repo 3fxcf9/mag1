@@ -3,4 +3,8 @@ const local_macros = {
   "\\Contour": "\\mathscr{C}",
   "\\concat": "\\imageof",
   "\\ind": "\\operatorname{ind}",
+  "\\dist": "\\operatorname{dist}",
+  "\\Cercle": "\\mathscr{C}",
+  "\\x": "\\cancel",
+  "\\PD": "\\dot{\\mathscr{D}}",
 };
