@@ -1101,6 +1101,13 @@ body {
     max-width: 80%;
   }
 
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   /* Math rendering */
   figure svg {
     text-align: left !important;
