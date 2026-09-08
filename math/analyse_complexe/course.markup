@@ -578,7 +578,7 @@ proof
 		En effet, on a, pour $z,z' ∈ \B(z_{p}, R)$ :
 		math
 			\begin{align*}
-				F_{p}(z') - F.p(z) &= \int_{\cc{z_{p}, z'}}\dd  ζ f(ζ) - \int_{\cc{z_{p}, z}}\dd  ζf(ζ)\\
+				F_{p}(z') - F_{p}(z) &= \int_{\cc{z_{p}, z'}}\dd  ζ f(ζ) - \int_{\cc{z_{p}, z}}\dd  ζf(ζ)\\
 				&= \int_{\cc{z, z_{p}} ∪ \cc{z_{p}, z'}} \dd ζf(ζ)\\
 				&= \oint_{\cc{z_{p}, z', z}} \dd  ζf(ζ) + \int_{\cc{z, z'}}\dd  ζ f(ζ)\\
 				&\ueq{TIC} \int_{\cc{z, z'}}d ζf(ζ)
@@ -589,8 +589,8 @@ proof
 		Finalement,
 		math
 			\begin{align*}
-				\abs{\frac{F.p(z') - F.p(z)}{z'-z} - f(z)} &= \abs{\frac{1}{z'-z}\int_{\cc{z, z'}}\dd ζ \big[f(ζ) - f(z)\big]}\\
-				&⩽ \frac{1}{\abs{z'-z}} \long(\cc{z, z'}) \sup_{z ∈ \cc{z, z'}} \abs{f(z) - f(z)} \arrowlim{z' \to z} 0
+				\abs{\frac{F_{p}(z') - F_{p}(z)}{z'-z} - f(z)} &= \abs{\frac{1}{z'-z}\int_{\cc{z, z'}}\dd ζ \big[f(ζ) - f(z)\big]}\\
+				&⩽ \frac{1}{\abs{z'-z}} \long(\cc{z, z'}) \sup_{ζ ∈ \cc{z, z'}} \abs{f(ζ) - f(z)} \arrowlim{z' \to z} 0
 			\end{align*}
 		car $f$ est continue sur $Ω$. Ainsi, en tout $z_{p}$, $F_{p}$ est une primiive de $f$ sur $\B(z_{p}, r)$. Cependant, d’après le lemme précédent, on a
 		math
