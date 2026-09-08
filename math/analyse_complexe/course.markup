@@ -225,7 +225,6 @@ proof
 ## Intégrales de contour (ou chemin)
 
 ### Chemins et contours dans $\C$
-	inline_math
 
 def
 	Soit $Ω$ un ouvert de $\C$. On appelle _chemin dans $Ω$_ toute application $γ: \cc{0,1} ⟶ Ω$ continue et $\Cont^{1}$ par morceaux. On dira que $γ$ est un _lacet_ si $γ(0) = γ(1)$, sinon on dira que $γ$ est un _arc_. Dans tous les cas, on notera $γ'$ la dérivée « par morceaux » de $γ$.
@@ -430,7 +429,9 @@ rem
 
 example
 	fig À gauche, les cycles $\gamma_1$ et $\gamma_2$ sont homologues, et à droite, le cycle $\gamma$ est holomogue à un point.
-		./figures/cycles_homologues.svg
+		row
+			./figures/cycles_homologues_1.svg
+			./figures/cycles_homologues_2.svg
 
 ## Théorie de Cauchy
 
@@ -483,7 +484,7 @@ proof
 	- On suppose pour commencer que $\Cont_{γ}$ est un triangle direct dans $Ω$, noté $T_{0} = [z_{1}, z_{2}, z_{3}]$, avec $z_{1}, z_{2}, z_{3} ∈ Ω$.
 		On notera $Δ_{0}$ le compact délimité par le bord de $T_{0}$. Comme $Ω$ est simplement connexe, on a nécessairement $Δ_{0} ⊂ Ω$.
 		- Supposons d’abord que $p \notin Δ_{0}$.
-			fig Premier cas, <code class="katex-inline">p</code> n’est pas dans le triangle.
+			fig Premier cas, $p$ n’est pas dans le triangle.
 				right
 				./figures/TIC_cas_des_triangles.svg
 			Soient:
@@ -532,7 +533,7 @@ proof
 				\oint_{T_{0}} \dd zf(z) = 0
 			Ce qui prouve le théorème pour un lacet triangulaire direct et $p \notin \Delta_{0}$.
 		- Supposons à présent que $p$ soit un sommet de $T_{0}$, par exemple $p = z_{1}$. Considérons
-			fig Second cas, <code class="katex-inline">p</code> est un des sommets du triangle.
+			fig Second cas, $p$ est un des sommets du triangle.
 				right
 				./figures/TIC_cas_des_triangles_2.svg.svg
 			- $z_{1,2}$ un point *quelconque* de $[z_{1}, z_{2}]$,
@@ -547,7 +548,7 @@ proof
 			math
 				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ \abs{\oint_{T_{1}}\dd zf(z)} ⩽ \long(T_{1})\sup_{z ∈ T_{1}}\abs{f(z)} \arrowlim{z_{1,2}, z_{1,3} \to 0} 0
 		- Supposons à présent que $p$ soit un point quelconque dans $\Delta_{0}$. Considérons les triangles
-			fig Dernier cas, <code class="katex-inline">p</code> est dans le triangle.
+			fig Dernier cas, $p$ est dans le triangle.
 				right
 				./figures/TIC_cas_des_triangles_3.svg
 			- $T_{1} = [p, z_{2}, z_{3}]$
@@ -559,7 +560,7 @@ proof
 
 		On a donc montré le théorème pour tous les lacets triangulaires de $Ω$.
 	- On montre ensuite que le théorème  s’applique à tous les lacets polygonaux orientés. Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}, z_{1}, z_{2}] ⊂ Ω$.
-		fig Le polygone est localement convexe en <code class="katex-inline">z_1</code>, on peut le découper selon une ligne reliant les deux voisins de <code class="katex-inline">z_1</code>.
+		fig Le polygone est localement convexe en $z_1$, on peut le découper selon une ligne reliant les deux voisins de $z_1$.
 			right
 			./figures/TIC_cas_des_polygones.svg
 		Si bien que, en notant $P_{n} = […, z_{0}, z_{2}, …]$ le polygone obtenu en retirant le sommet $z_{1}$ de $P_{n+1}$,
@@ -607,7 +608,6 @@ cor
 	math
 		\int_{\Contour_{γ}}\dd zf(z) = \int_{\Contour_{γ_{2}}}\dd zf(z)
 	Q: Conséquence du théorème de Cauchy-Goursat sur l’intégration le long de chemins A: L’intégrale d’une fonction holomorphe sur un ouvert ++simplement connexe++ est indépendante du chemin emprunté.
-		inline_underline
 
 proof
 	Soit de tels objets. D’après le TIC, on a
@@ -622,7 +622,6 @@ rem
 thm
 	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors, $f$ admet une primitive sur $Ω$, et cette primitive est unique si on impose sa valeur en un point de $Ω$.
 	Q: Existence de primitive pour une fonction complexe. A: Une fonction holomorphe sur un ouvert ++simplement connexe++ admet une primitive sur cet ouvert, unique si on impose sa valeur en un point.
-		inline_underline
 
 proof
 	D’après le corrolaire précédent, on peut définir la fonction
@@ -655,12 +654,12 @@ proof
 		\end{align*}
 
 rem
-	fig
-		right
-		./figures/fic_rem.svg
 	- La première formule intégrale de Cauchy est une généralisation de la définition de l’indice (prendre $f: ζ ⟶ 1$).
 	- Sur une courbe de Jordan fermée, on a donc pour tout point $z$ tel que $\ind(γ, z) = 1$,
-	  math
+		fig
+			right
+			./figures/fic_rem.svg
+		math
 			f(z) = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{ζ - z}
 
 ### Théorème intégral de Cauchy généralisé
@@ -678,7 +677,9 @@ proof
 	---
 	Couvrons $Ω$ (supposé borné) par une grille carrée de pas $ε > 0$. Comme $Ω$ est borné, il ne contient qu’un nombre fini d’ouverts carrés (mailles ouvertes de la grille), notés $\square_{1}, …, \square_{N}$. Il suffit de choisir $ε > 0$ suffisament petit (typiquement tel que $\sqrt{2}ε < \dist(\Contour_{γ}, \C ∖ Ω)$) pour que $\Contour_{γ}$ soit entièrement contenu dans $\bigcup_{p=1}^{N}\bar{\square_{p}}$ où $\bar{\square_{p}}$ est la fermeture de $\square_{p}$.
 	fig À gauche, un grillage trop grossier, et à droite un grillage pouvant convenir.
-		./figures/grille_carree.svg
+		row
+			./figures/grille_carree_1.svg
+			./figures/grille_carree_2.svg
 	D’après la première formule intégrale de Cauchy, on a, pour tout $z ∈ \bigcup_{p=1}^{N}\square_{p}$ et en choisissant $p ∈ \icc{1,N}$ :
 	math
 		\frac{1}{2 π i} \oint_{∂\square_{p}}\dd ζ \frac{f(ζ)}{ζ - z} = \begin{cases}f(z) \if z ∈ \square_{p} \\ 0 \else\end{cases}
