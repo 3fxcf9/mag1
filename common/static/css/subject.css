@@ -1,3 +1,7 @@
+body {
+  line-height: 1.5;
+}
+
 .chapter-list {
   display: flex;
   flex-direction: column;
@@ -44,6 +48,21 @@
 .chapter-date {
   color: var(--subtext-color);
 }
+
+h2 {
+  margin: 2.5rem 0 1.5rem;
+}
+
+ul > li,
+ol > li {
+  margin-left: 1.2rem;
+}
+
+a {
+  color: var(--links-color);
+}
+
+/* Search */
 
 .search {
   margin-bottom: 2rem;

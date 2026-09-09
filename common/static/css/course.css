@@ -586,6 +586,19 @@ body {
     }
   }
 
+  ul.compact > li,
+  ol.compact > li {
+    margin-top: initial;
+
+    :first-child {
+      margin-block-start: 0;
+    }
+
+    :last-child {
+      margin-block-end: 0;
+    }
+  }
+
   /* Compact lists */
   @counter-style compact-roman {
     system: additive;
@@ -1132,7 +1145,7 @@ body {
 
 /* Flashcards */
 .flashcard {
-  display: none;
+  /* display: none; */
   font-size: smaller;
   background-color: var(--bg-greyed);
   border: 2px solid var(--subtext-color);

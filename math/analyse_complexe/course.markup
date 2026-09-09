@@ -471,7 +471,7 @@ cor
 		math
 			\oint_{\Contour_{γ}} \frac{\dd z}{z^{n}} = 0
 
-thm Théorème de Cauchy-Goursat
+thm Théorème de Cauchy-Goursat (TIC)
 	Soit $Ω$ un ouvert de $\C$ ++simplement connexe++, et $p$ un point de cet ouvert. Soit $f$ continue sur $Ω$ et holomorphe sur $Ω ∖ \{p\}$. Alors, pour tout cycle $γ$ dans $Ω$, on a
 	math
 		\oint_{\Contour_{γ}}\dd z f(z) = 0
@@ -559,7 +559,7 @@ proof
 				\oint_{T_{0}}\dd zf(z) = ∑_{p=1}^{z}\oint_{T_{p}}\dd zf(z) = 0
 
 		On a donc montré le théorème pour tous les lacets triangulaires de $Ω$.
-	- On montre ensuite que le théorème  s’applique à tous les lacets polygonaux orientés. Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}, z_{1}, z_{2}] ⊂ Ω$.
+	- _On montre ensuite que le théorème s’applique à tous les lacets polygonaux orientés._ Pour cela, on procède par récurrence sur le nombre de sommets, le cas des 3-gones étant démontré ci-dessus. Supposons le théorème vrai pour touus les $n$-gones directs, avec $n ∈ \N$ et soit $P_{n+1}$ un $(n+1)$-gone direct. Notons $P_{n+1} = [z_{0}, …, z_{n}]$, avec $z_{0}, …, z_{n}$ les sommets de $P_{n+1}$, listés en respectant son orientation. Il existe nécessairement un sommet $z_{1}$ de voisins $z_{0}$ et $z_{2}$, tel que $T = [z_{0}, z_{1}, z_{2}] ⊂ Ω$.
 		fig Le polygone est localement convexe en $z_1$, on peut le découper selon une ligne reliant les deux voisins de $z_1$.
 			right
 			./figures/TIC_cas_des_polygones.svg
@@ -583,16 +583,16 @@ proof
 				&= \oint_{\cc{z_{p}, z', z}} \dd  ζf(ζ) + \int_{\cc{z, z'}}\dd  ζ f(ζ)\\
 				&\ueq{TIC} \int_{\cc{z, z'}}d ζf(ζ)
 			\end{align*}
-		D’après le lemme précédent,
+		et d’après le lemme précédent,
 		math
-			\int_{z, z'} dz f(z) = (z'-z)f(z)
-		Finalement,
+			\int_{\cc{z, z'}} d ζ f(z) = (z'-z)f(z)
+		ce qui nous permet d’écrire,
 		math
 			\begin{align*}
 				\abs{\frac{F_{p}(z') - F_{p}(z)}{z'-z} - f(z)} &= \abs{\frac{1}{z'-z}\int_{\cc{z, z'}}\dd ζ \big[f(ζ) - f(z)\big]}\\
 				&⩽ \frac{1}{\abs{z'-z}} \long(\cc{z, z'}) \sup_{ζ ∈ \cc{z, z'}} \abs{f(ζ) - f(z)} \arrowlim{z' \to z} 0
 			\end{align*}
-		car $f$ est continue sur $Ω$. Ainsi, en tout $z_{p}$, $F_{p}$ est une primiive de $f$ sur $\B(z_{p}, r)$. Cependant, d’après le lemme précédent, on a
+		car $f$ est continue sur $Ω$. Ainsi, à $z_{p}$ fixé, $F_{p}$ est une primitive de $f$ sur $\B(z_{p}, r)$. Cependant, d’après le lemme précédent, on a
 		math
 			0 = \int_{\overgroup{z_{p}, z_{p+1}} \uplus \cc{z_{p+1}, z_{p}}} \dd zf(z) = \int_{\overgroup{z_{p}, z_{p+1}}}\dd zf(z) - \int_{\cc{z_{p}, z_{p+1}}}\dd zf(z)
 		Ceci étant vrai en tout $z_{p}$ pour $p ∈ \icc{0,n}$, on a
@@ -627,11 +627,13 @@ proof
 	D’après le corrolaire précédent, on peut définir la fonction
 	math
 		F: \applic{Ω}{\C}{z}{\int_{\Contour_{γ_{z}}}\dd ζf(ζ)}
-	oû $γ_{z}$ est un chemin quelconque dans $Ω$ tel que $γ_{z}(0) = z_{0}$ et $γ_{z}(1) = z$.
-	La preuve du fait que $F$ est bien une primitive de $f$ sur $Ω$ s’effectue avC les mêmes arguments que ceux employés dans la preuve du TIC.
+	où $γ_{z}$ est un chemin quelconque dans $Ω$ tel que $γ_{z}(0) = z_{0}$ et $γ_{z}(1) = z$.
+	La preuve du fait que $F$ est bien une primitive de $f$ sur $Ω$ s’effectue avec les mêmes arguments que ceux employés dans la preuve du TIC.
 
 example
 	Cherchons une primtive de la fonction $f:z ⟼ \frac{1}{z}$, holomorphe sur $\C^{*}$ *multiplement connexe*. Cette fonction est aussi holomorphe sur $\C ∖ \R_{-}$ et cet ensemble est simplement connexe, donc d’après le théorème pécédent, $f$ admet une unique primitive sur $\C ∖ \R_{-}$, notée $\log$, telle que $\log(1) = 0$. On appelle cette primitive la _détermination principale du logarithme complexe_.
+	Q: Détermination principale du logarithme complexe
+		A: Unique primitive de la fonction $z ⟼ 1/z$ sur $\C ∖ \R_{-}$ valant 0 en 1.
 	On aurait pu « relier l’origine à l’infini » d’une autre manière, qui aurait donné lieu à une autre primitive, elle aussi unique pour cette situation, mais ne coïncidant pas avec $\log$.
 
 ### Première formule intégrale de Cauchy
@@ -640,6 +642,7 @@ thm Première formule intégrale de Cauchy
 	Soit $f$ une fonction holomorphe sur un ouvert ++simplement connexe++ $Ω$ de $\C$. Alors pour tout cycle $γ$ dans $Ω$ et tout $z ∈ Ω ∖ \Contour_{γ}$, on a
 	math
 		\ind(γ, z) f(z) = \frac{1}{2 πi} \oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{ζ - z}
+	as_flashcard
 
 proof
 	Soit de tels objets. Considérons la fonction
@@ -648,7 +651,7 @@ proof
 	Cette fonction est clairement holomorphe sur $Ω ∖ \{z\}$, et comme $f$ est holomorphe en $z ∈ Ω$, $g$ est continue sur $Ω$. D’après le TIC, on a
 	math
 		\begin{align*}
-			0 &= \oint_{\Contour_{γ}}\dd z g(ζ) = \oint_{\Contour_{γ}} \dd ζ \frac{f(ζ) - f(z)}{ζ - z}\\
+			0 &= \oint_{\Contour_{γ}}\dd ζ g(ζ) = \oint_{\Contour_{γ}} \dd ζ \frac{f(ζ) - f(z)}{ζ - z}\\
 			&= \oint_{\Contour_{γ}} \dd ζ \frac{f(ζ)}{ζ - z} - f(z) \underbrace{\oint_{\Contour_{γ}}\frac{\dd ζ}{ζ - z}}_{=2 π i \ind(γ, z)}
 			&= \oint_{\Contour_{γ}}\dd ζ \frac{f(z)}{ζ-z} - 2 π i \ind(γ, z)f(z)
 		\end{align*}
@@ -664,10 +667,11 @@ rem
 
 ### Théorème intégral de Cauchy généralisé
 
-thm
+thm Théorème intégral de Cauchy généralisé
 	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ (pas forcément simplement connexe) de $\C$. Pour tout cycle $γ$ homologue à un point dans $Ω$, on a
 	math
 		\oint_{\Contour_{γ}} \dd z f(z) = 0
+	as_flashcard
 
 proof
 	Soit $Ω$, $f$ et $γ$ de tels objets. On peut supposer, sans perte de généralité, que $Ω$ est borné. En effet, si $Ω$ n’est pas borné, on introduit
@@ -700,9 +704,10 @@ proof
 	où $(\star)$ découle de l’application du théorème de Fubini – cf. chapitre 2 – à la fonction $(ζ, z) ⟼ \frac{f(ζ)}{ζ - z}$ continue donc intégrable sur $Γ × \Contour_{γ}$.
 
 cor
-	Soit $f$ une fonction holomorphe sur un ouvert quelconque $Ω$ de $\C$. Pour tout cycles $γ_{1}$ et $γ_{2}$ holomogues dans $Ω$, on a
+	Soit $f$ une fonction holomorphe sur un ouvert quelconque $Ω$ de $\C$. Pour tous cycles $γ_{1}$ et $γ_{2}$ holomogues dans $Ω$, on a
 	math
 		\oint_{\Contour_{γ_{1}}}\dd zf(z) = \oint_{\Contour_{γ_{2}}}\dd zf(z)
+	as_flashcard Conséquence du théorème intégral de Cauchy généralisé sur l’intégration le long d’un arc
 
 proof
 	Soit $γ_{1}$ et $γ_{2}$ deux cycles holomogues sur $Ω$. Alors, $γ_{1} \concat \bar{γ_{2}}$ est un cycle homologue à un point, si bien que pour une fonction $f$ holomorphe sur $Ω$,
@@ -710,15 +715,16 @@ proof
 		0 = \oint_{\Contour_{γ_{1} \concat \bar{γ_{2}}}}\dd z f(z) = \oint_{\Contour_{γ_{1}}}\dd zf(z) - \oint_{\Contour_{γ_{2}}}\dd zf(z)
 
 example
+	fig
+		right
+		./figures/cor_integrale_cycles_homologues.svg
 	Si $f$ est une fonction holomorphe sur $Ω$, un ouvert tel que décrit sur la figure ci-dessous,
 	math
 		\oint_{\Contour_{γ_{1}}}\dd zf(z) = \oint_{\Contour_{γ_{2}}}\dd zf(z)
-	fig
-		./figures/cor_integrale_cycles_homologues.svg
 
 ### Théorème fondamental de l’analyse complexe et seconde formule intégrale de Cauchy
 
-thm Théorème fondamental((qui arrive un peu tard quand-même…)) de l’analyse complexe
+thm Théorème fondamental^fonda de l’analyse complexe
 	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$. Alors, $f$ est analytique sur $Ω$, c’est-à-dire qu’il existe en tout point $z_{0} ∈ Ω$, un réel $R > 0$ et une suite complexe $(a_{n})_{n ∈ \N}$ tels que $\B(z_{0}, R) ⊂ Ω$ et
 	math
 		∀ z ∈ \B(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
@@ -726,6 +732,9 @@ thm Théorème fondamental((qui arrive un peu tard quand-même…)) de l’analy
 	math
 		a_{n} = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd z \frac{f(z)}{(z-z_{0})^{n+1}}
 	où $γ$ est un chemin quelconque dans un ouvert simplement connexe $Ω' ⊂ Ω$ tel que $z_{0} ∈ Ω'$ et $\ind(γ, z_{0}) = 1$.
+	as_flashcard Théorème fondamental de l’analyse complexe
+
+^fonda qui arrive un peu tard quand-même…
 
 proof
 	Soit $Ω$ et $f$ de tels objets. Soit $z_{0} ∈ Ω$. Comme $Ω$ est ouvert, il existe $R > 0$ tel que $\B(z_{0}, R) ⊂ Ω$. Soit $z ∈ \B(z_{0}, R)$ et soit $r ∈ \oo{\abs{z-z_{0}}, R}$. Alors, le cercle direct $\Cercle(z_{0}, r)$ est contenu dans $\B(z_{0}, R) ⊂ Ω$.
@@ -734,17 +743,17 @@ proof
 	On peut donc lui appliquer la première formule intégrale de Cauchy, qui donne
 	math
 		\tag{1}f(z) = \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{ζ - z}
-	D’autre part, si $z ∈ \Cercle(z_{0}, r)$, on a $r = \abs{ζ - z_{0}} > \abs{z - z_{0}}$, d’où $\abs{\frac{z - z_{0}}{ζ-z_{0}}} = \frac{\abs{z-z_{0}}}{r} < 1$, donc pour tout $z ∈ \Cercle(z_{0}, r)$ :
+	D’autre part, si $ζ ∈ \Cercle(z_{0}, r)$, on a $r = \abs{ζ - z_{0}} > \abs{z - z_{0}}$, d’où $\abs{\frac{z - z_{0}}{ζ-z_{0}}} = \frac{\abs{z-z_{0}}}{r} < 1$, donc pour tout $ζ ∈ \Cercle(z_{0}, r)$ :
 	math
 		\tag{2}\frac{1}{ζ - z} = \frac{1}{ζ - z_{0} + z_{0} - z} = \frac{1}{ζ - z_{0}}\frac{1}{1- \frac{z - z_{0}}{ζ - z_{0}}} = ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}
-	Or, pour tout $z ∈ \Cercle(z_{0}, r)$,
+	Or, pour tout $ζ ∈ \Cercle(z_{0}, r)$,
 	math
 		\begin{align*}
 			\abs{∑_{n=0}^{N-1}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}} - \frac{1}{ζ-z}} &= \abs{∑_{n=N}^{+∞}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}}\\
 			&⩽ ∑_{n=N}^{+∞}\frac{\abs{z-z_{0}}^{n}}{r^{n+1}}\\
 			&=r^{-1} {\underbrace{\left(\frac{\abs{z-z_{0}}}{r}\right)}_{< 1}}^{N} \frac{1}{1-\frac{\abs{z-z_{0}}}{r}} \arrowlim{N\to+∞}0
 		\end{align*}
-	et on a donc convergence uniforme en $ζ ∈ \Cercle(ζ_{0}, r)$. Finalement, en substituant $(2)$ dans $(1)$ et en utilisant la convergence uniforme de la série, on obtient
+	et on a donc convergence uniforme en $ζ ∈ \Cercle(z_{0}, r)$. Finalement, en substituant $(2)$ dans $(1)$ et en utilisant la convergence uniforme de la série, on obtient
 	math
 		\begin{align*}
 			f(z) &= \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ f(ζ) ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}} \\
@@ -754,9 +763,9 @@ proof
 
 rem
 	- Holomorphe $⟹$ Analytique $⟹ \Cont^{∞}$ si bien qu’en analyse complexe,
-	  math
+		math
 			\{\text{dérivable}\} = \Cont^{∞} = \{\text{analytique}\}
-	- La deuxième formuln intégrale de Cauchy généralise la premiere. En effet,
+	- La deuxième formule intégrale de Cauchy généralise la premiere. En effet,
 		math
 			f(z_{0}) = a_{0} = \frac{1}{2 π i}\oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{(ζ - z_{0})^{0+1}}
 		et pour tout $n ∈ \N$,
@@ -770,6 +779,7 @@ rem
 
 thm Théorème de Liouville
 	Toute fonction entière bornée est constante.
+	as_flashcard
 
 proof
 	fig
@@ -796,6 +806,7 @@ rem
 	Le théorème de Liouville admet pour corollaire le théorème suivant :
 	thm Théorème fondamental de l’algèbre ou théorème de d’Alembert
 		Le corps des nombres complexes est algébriquement clos, i.e tout élément de $\C[X]$ est scindé sur $\C$.
+		as_flashcard
 	proof
 		Voir TD.
 
@@ -808,7 +819,5 @@ le _disque épointé_ de centre $z_{0}$ et de rayon $r$. On dira qu’un complex
 math
 	∀ r > 0, \PD (z, r) ∩ S \ne \emptyset
 En pratique, il existe une suite $(z_{n})_{n ∈ \N}$ d’éléments de $S$ telle que $z_{n} \arrowlim{n\to+∞}z$. L’ensemble $\lim S$ des points limites de $S$ est un fermé. Un point de $S$ qui n’est pas un point limite est un _point isolé_.
-
-
 
 generate_flashcards_tsv

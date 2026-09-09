@@ -1,0 +1,19 @@
+../common/subject.lib.markup
+
+title Mécanique analytique
+teacher Guillaume ROUX (LPTMS)
+
+Deux reformulations de la mécanique:
+- la reformulation Lagrangienne, utile pour
+	- la théorie des champs
+	- l’étude des systèmes contraints
+	- des études relativistes
+- la reformulation Hamiltonienne, utile en
+	- mécanique quantique
+	- physique statistique
+	- théorie des systèmes dynamique et du chaos
+	- théorie des perturbations
+
+## Reformulation Lagrangienne
+
+chap equations_euler_lagrange

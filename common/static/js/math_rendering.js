@@ -3,7 +3,7 @@ const macros = {
   "\\geq": "\\geqslant",
   "\\subsetneq": "\\varsubsetneq",
   "\\supsetneq": "\\varsupsetneq",
-  "\\Sol": "\\mathcal{S}",
+  "\\emptyset": "\\varnothing",
   "\\1": "\\mathbf{1}",
   "\\N": "\\mathbf{N}",
   "\\Z": "\\mathbf{Z}",
@@ -17,16 +17,10 @@ const macros = {
   "\\K": "\\mathbf{K}",
   "\\L": "\\mathscr{L}",
   "\\O": "\\mathcal{O}",
-  "\\B": "\\mathscr{B}", // Proba=Bernoulli, algèbre=base
-  "\\Bon": "\\mathfrak{B}", // Adjoints
+  "\\B": "\\mathscr{B}",
   "\\D": "\\mathbf{D}",
   "\\M": "\\mathcal{M}",
   "\\E": "\\mathscr{E}",
-  "\\G": "\\mathscr{G}", // Proba seulement, rendre local
-  "\\T": "\\mathscr{T}", // Topologie (remplacer \mathscr{T}) et proba seulement, rendre local
-  "\\Tribu": "\\mathscr{F}",
-  "\\Unif": "\\mathscr{U}",
-  "\\Poisson": "\\mathscr{P}",
   "\\Ball": "\\mathscr{B}",
   "\\Disk": "\\mathscr{D}",
   "\\Vois": "\\mathscr{V}",
@@ -105,7 +99,7 @@ const macros = {
   "\\tilde": "\\widetilde",
   "\\ang": "\\widehat",
   "\\applic":
-    "\\begin{array}{rcl}#1 & \\longrightarrow & #2 \\\\ #3 & \\longmapsto & #4\\end{array}",
+    "\\begin{array}{rcl}\\displaystyle#1 & \\longrightarrow & \\displaystyle#2 \\\\ \\displaystyle#3 & \\longmapsto & \\displaystyle#4\\end{array}",
   // "\\scalar": "\\left\\langle #1 \\middle\\vert #2 \\right\\rangle",
   "\\scalar": "\\left\\langle #1 , #2 \\right\\rangle",
   "\\oplusortho": "\\overset{\\perp}{\\oplus}",
@@ -130,6 +124,7 @@ const macros = {
   "\\oeq": "\\overset{\\text{#1}}{=}",
   "\\upt": "\\underset{#1}{\\propto}",
   "\\opt": "\\overset{\\text{#1}}{\\propto}",
+  "\\aussieq": "\\overset{\\text{aussi}}{=}",
   "\\defeq": "\\overset{\\text{def}}{=}",
   "\\defiff": "\\overset{\\text{def}}{\\iff}",
   "\\ugeq": "\\underset{#1}{\\geq}",
@@ -143,7 +138,6 @@ const macros = {
   "\\pdv": "\\frac{\\partial #1}{\\partial #2}",
   "\\pdvN": "\\frac{\\partial^{#3} #1}{\\partial {#2}^{#3}}",
   "\\ortho": "^{\\perp}",
-  "\\emptyset": "\\varnothing",
   "\\mdot": "\\boldsymbol{\\cdot}",
   "\\hat": "\\widehat",
   "\\sp": "\\operatorname{Sp}",

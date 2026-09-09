@@ -1,0 +1,139 @@
+../../common/course.lib.markup
+
+title Équations d’Euler-Lagrange
+date 09/09/2026
+
+Les objectifs de ce cours sont :
+- présenter une reformulation de la mécanique newtonienne, motivée par le traitement des contraintes,
+- la construction des coordonnées généralisées,
+- l’établissement des équations d’Euler-Lagrange.
+
+## Contraintes et principe de d’Alembert
+
+Soit une particule de masse $m$ et de position $\r = \lxyz{x}{y}{z}$ astrainte à se déplacer sur une surface.
+fig
+	right
+	./figures/particule_sur_surface.svg
+Pour le principe fondamental de la dynamique, on introduit une réaction du support, notée $\vec{R}$, qui assure que la particule ne passe pas à travers la surface. On a alors l’équation
+math
+	m \ddot\r = \vec{F} + \vec{R}
+où $\vec{F}$ est parallèle au mouvement (forces de frottement par exemple) et $\vec{R}$ y est orthogonal.
+Notons $f(\r) = 0$ la contrainte d’appartenance à une surface dans un espace à trois dimension.
+
+def Déplacement virtuel
+	Déplacement infinitésimal $δ\r$ qui satisfait la contrainte (ici appartenir à la surface). Il ne correspond pas forcément à la trajectoire physique.
+
+Si on prend $\r$ et $\r + δ\r$ deux points appartenant à la surface, on a
+math
+	δf = \underbrace{f(\r + δ\r) - f(\r)}_{= \grad_{\r} f(\r) · δ\r} = 0
+donc localement, $\grad f$ est orthogonal à la surface. En particulier, cela nous permet d’exprimer $\vec{R}(t)$ :
+math
+	\vec{R}(t) = λ(t)\grad f(\r(t))
+d’où, en formulation newtonienne, on peut écrire
+math
+	\begin{cases}m \ddot\r = \vec{F} + λ(t)\grad f(\r(t))\\f(\r(t)) = 0\end{cases}
+On a 4 inconnues ($\r$ et $λ$) donc une résolution de ce système est possible.
+On utilise la projection des équations sur les déplacements virtuels pour éliminer la réaction du support. Comme $\vec{R} · δ\r = 0 \eforall δ\r$, ce système peut s’écrire
+math
+	\begin{cases}(\vec{F} - m \ddot\r)· δ\r = 0 & ∀ δ\r \perp \grad f(\r) \\ f(\r) = 0\end{cases}
+Il faut déterminer les $\r(t)$ et $δ\r$ possibles, ce qui n’est pas toujours facile…
+
+example
+	fig
+		right
+		./figures/eg_plan_incline.svg
+	Considérons une bille en chute libre sur un plan incliné d’équation $f(\r) = x+y+z = 0$. On a $\grad f = \lxyz{1}{1}{1}$. Principe de d’Alembert: Soit $δ\r = \lxyz{δx}{δy}{δz}$ tel que $\grad f · δ\r = 0$, i.e. $δx + δy + δz = 0$. Écrivons la seconde équation :
+	math
+		(\vec{F} - m \ddot\r)· δ\r = 0 ⟺ (-m \ddot x δx - m \ddot y δy + (-mg - m \ddot z) δz) = 0
+	On utilise ensuite $δz = -δx - δy$ :
+	math
+		(\ddot x - \ddot z - g)δx + (\ddot y - \ddot z - g)δy = 0 \eforall δx, δy
+	et on peut traiter $δx$ et $δy$ comme deux variables indépendantes, d’où
+	math
+		\begin{cases}\ddot x - \ddot z = g \\ \ddot y - \ddot z = g\end{cases}
+	On a aussi $f(\r(t)) = 0 ⟹ \ddot x + \ddot y + \ddot z = 0$, d’où
+	math
+		\begin{cases}\ddot x = g/3 \\ \ddot y = g/3 \\ \ddot z = -2g/3\end{cases}
+
+## Généralisation à $N$ particules
+
+On étudie un système à $N$ particules à trois dimensions. On a donc $N$ vecteurs positions $\r_{i}$ décrits par $3N$ variables, et $N$ vecteurs vitesses $\v_{i} = \dv{\r_{i}}{t}$ eux aussi décrits par $3N$ variables.
+Il existe plusieurs types de contraintes; voici quelques contraintes courantes :
++ Liaison rigide: distance fixe entre deux points.
+	fig Ici, $\norm{\r_1, - \r_2}^2 - d^2 = 0$
+		./figures/liaison_rigide.svg
+	Elle est utilisée entre autres dans les systèmes suivants :
+	fig
+		./figures/liaison_rigide_exemples.svg
++ Roulement sans glissement
+
+On en distingue deux familles :
+- Les _contraintes holonomes_, de la forme $f(\r_{1}, …, \r_{N}, t) = 0$. Les contraintes $f_{1}(\r) = z = 0$ et $f_{2}(\r) = x^{2} + y^{2} - \ell^{2} = 0$ correspondant à un pendule simple en sont des exemples.
+- Les _contraintes non-holonomes_ : tous les autres cas, par exemple $f(\r_{1}, …, \r_{N}, t) ⩾ 0$ ou $f(\r_{1}, …, \r_{N}, \v_{1}, …, \v_{N}, t) = 0$.
+
+_Principe de d’Alembert_ : On considère $N$ particules soumises à $K$ contraintes holonomes indicées par $β$: $f_{β}(\r_{1}, …, \r_{N}, t) = 0$. Les déplacements virtuels $δ\r_{i}$ satisfont
+math
+	∑_{i=1}^{N}\grad_{\r_{i}}f_{β}(\r_{1}, …, \r_{n}, t) · δ\r_{i} = 0 \eforall β
+De plus, le PFD s’écrit pour chacune des particules
+math
+	m \ddot{\r_{i}} = \vec{F_{i}} + ∑_{β=1}^{N}λ_{β}(t)\grad_{\r_{i}}f_{β}
+d’où le principe
+math
+	\boxed{∑_{i=1}^{N}(\vec{F_{i}} - m_{i}\ddot{\r_{i}}) · δ\r_{i} = 0 \eforall δ\r_{i} \text{ compatible avec les contraintes}}
+
+Mais les $δ\r_{i}$ ne sont pas toutes indépendantes. On verra plus tard une autre façon de traiter les contraintes avec des multiplicateurs de Lagrange.
+
+## Coordonnées généralisées
+
+On étudie à présent un système de $N$ particules soumises à $K$ contraintes. On a donc en principe $n = 3N-K$ variables indépendantes. On appelle ce nombre $n$ le nombre de _degrés de liberté_ du système.
+
+def Coordonnées généralisées
+	Jeu de $n$ variables *indépendantes* qui permet de satisfaire automatiquement les $K$ contraintes. On les appelle _coordonnées généralisées_ et on les note souvent $q_{1}, …, q_{α} …, q_{n}$. Elles sont telles que
+	math
+		\r_{i} = \r_{i} (q_{1}, q_{2}, …, q_{n}, t) \eforall i = 1, …, N
+	Au lieu de repérer l’état du système par les $\r_{i}$, on peut le faire via les $q_{α}(t)$ qui vivent dans un espace appelé _variété des configurations_. On suppose que l’on peut inverser les relations pour obtenir
+	math
+		q_{α} = q_{α}(\r_{1}, …, \r_{N}, t) \eforall α = 1, …, n
+
+rem
+	- S’il n’y a pas de contraintes, ce reparamétrage est un changement de coordonnées,
+	- les $q_{α}$ n’ont pas nécessairement la dimension d’une longueur (distance, angle, …),
+	- il n’y a pas unicité du jeu de variables choisi.
+
+example
+	+ ++Pendule simple++ : décrit par la seule variable $q_{1} = θ$. La variété des configurations est une portion de cercle.
+	+ ++Pendule double++ (v. TD) : deux degrés de liberté, $q_{1} \equiv θ_{1} ∈ \cc{0, 2 π}$ et $q_{2} \equiv θ_{2} ∈ \cc{0, 2 π}$. La variété des configurations est un tore, le cercle principal correspondant à l’angle du premier pendule et le secondaire correspondant à l’angle du second pendule.
+		fig Variété des configurations d’un pendule double.
+			./figures/variete_tore.svg
+	+ ++Anneau sur un arc de cercle++ : décrit par la variable $q_{1} = θ$ en coordonnées sphériques.
+		fig
+			right
+			./figures/anneau_sur_arc_cercle.svg
+		math
+			\begin{cases}x = \ell\cos φ(t)\sin θ\\ y = \ell\sin φ(t) \sin θ \\ z = \ell\cos θ\end{cases}
+
+## Réécriture des déplacements virtuels.
+
+On veut écrire les équations du mouvement en fonction des $q_{α}$. Première étape: réexprimer les déplacements virtuels en fonction des $q_{α}$.
+- Déplacements « naturels » et virtuels
+	On considère deux trajectoires physiques, correspondant à des déplacements « naturels », infiniment proches, notées $\r(t)$ et $\r(t) + δ\r(t)$.
+	fig
+		./figures/trajectoires.svg
+	Vectoriellement, on peut écrire
+	math
+		\begin{cases}
+			\dd\r(t) = \r(t+ \dd t) - \r(t)\\
+			\dd(\r + δ\r) = \dd\r + \dd(δ\r) \aussieq (\r + δ\r)(t+ \dd t) - (\r + δ\r)(t)\\
+			δ\r(t) = (\r + δ\r)(t) - \r(t)\\
+			δ\r(t+\dd t) = (\r + δ\r)(t+ \dd t) - \r(t + \dd t)
+		\end{cases}
+	d’où
+	math
+		δ\r(t) + \dd(\r + δ\r)(t) = \dd\r(t) + δ\r(t+ \dd t)
+	soit
+	math
+		\dd δ\r = δ \dd\r
+
+
+
+

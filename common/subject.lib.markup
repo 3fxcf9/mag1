@@ -1,7 +1,7 @@
 header.lib.markup
 
 css_file_link static/css/subject.css
-js_file_src static/js/subject_search.js
+// js_file_src static/js/subject_search.js
 
 parser teacher
 	metadata $arg
@@ -16,6 +16,8 @@ parser chapter
 			<span class="chapter-date">$external_metadata[$arg/course.markup][date]</span>
 		</a>
 	list_wrap
+		<div class="chapter-list">$elements</div>
+	list_wrap_old
 		<div class="search">
 			<input type="text" name="search_query" placeholder="Search…" autofocus>
 		</div>
