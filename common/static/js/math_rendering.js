@@ -201,6 +201,8 @@ function renderMath() {
   const SVG_NS = "http://www.w3.org/2000/svg";
 
   const COLOR_MAP = {
+    "#000000": "#31280a", // Inverse of --text-color
+    "#000": "#31280a",
     "#f9a30d": "#0324DF", // Inverse of #fcdb20
     "#9d7cd8": "#587405", // Inverse of #A78BFA
     "#7aa2f7": "#DD2C11", // Inverse of #22D3EE
