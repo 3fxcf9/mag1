@@ -1,0 +1,83 @@
+../../common/course.lib.markup
+
+title Brève introduction
+date 09/09/2026
+
+## Survol du contexte historique
+
+Nous allons dans cette partie tenter de répondre à la question: « Pourquoi la mécanique quantique est-elle inévitable ? ».
+La physique quantique émerge vers 1899 et atteint en 1930 la forme qu’on lui connaît aujourd’hui. À sa création, au XIXe siècle, la physique repose sur trois piliers: la mécanique, l’électromagnétisme et la physique statistique. Comparer les deux premiers révèle des incompatibilités, lesquelles ont été résolues par la création de plusieurs « nouvelles physiques ».
+D’une part, la _mécanique analytique_ tente de décrire le mouvement et la dynamique de points matériels, d’objets discrets, localisés. Elle introduit pour cela les notions de position, de vitesse / quantité de mouvement et de force, desquelles on dérive celle de trajectoire (évolution du couple position/vitesse au cours du temps, solution des équations du mouvements). Elle étudie des formulation telles que celle de Newton, à savoir
+math
+	\pdv{\p}{t} = \sum \vec{F}
+ou les équations d’Euler-Lagrange, à savoir
+math
+	\pdv{}{t}\big(\grad_{v}\Lagr\big) = \grad_{r}\Lagr
+Il s’agit de postulats d’évolution tentant de rendre compte d’expériences.
+D’autre part, l’électromagnétisme étudie la dynamique des champs $\E$ et $\B$, objets continus et délocalisés. Les notions de position et de vitesse y sont peu pertinentes, contrairement à celle d’énergie. Cette théorie est fondée sur les équations de Maxwell, qui explique entre autres l’évolution de perturbations :
+math
+	\lapl \vec{E_{1}} - \frac{1}{c^{2}} \pdvN{\vec{E_{1}}}{t}{2} = \0
+Les équations différentielles étudiées sont d’ordre 2, contrairement à celles de la mécanique analytique qui sont d’ordre 1. De plus, là où la mécanique Newtonienne est invariante par transformations Galiléennes (i.e. par changement de référentiels inertiels), les équations d’ondes ne présentent pas ces invariances. Ce conflit a été résolu par la théorie de la relativité restreinte. Cependant, certains faits expérimentaux (appelés _problèmes_ dans la suite) ne sont pas explicables par une combination simple de ces deux théories.
+- Le premier problème concerne la *stabilité des atomes*. Ceux-ci, contenant des corpuscules de charge électrique négative (électrons) et d’autres de charge électrique positives (protons), sont électriquement neutres, et ce, quelque-soit le modèle choisi (Thomson ou planétaire). Cependant, le modèle planétaire (électrons orbitant autour d’un noyau concentrant les protons) ne peut exister d’après la physique de l’époque, car l’électron accéléré rayonne, perd de l’énergie et s’effondre sur le noyau en un temps très court (de l’ordre de $10^{-10}\u{s}$).
+- Le second concerne le *rayonnement du corps noir*. Un corps noir est un objet dont le spectre d’émission (densité spectrale d’énergie du rayonnement émis) ne dépend _que de sa température_. Cette condition est satisfaite par un objet atteignant l’équilibre parfait entre absorption et émission. Appelons $u(ν, T)$ la distribution spectrale d’énergie de rayonnement d’un comps noir à température $T$. Sa densité d’énergie totale du rayonnement est
+	math
+		u(T) = ∫_{0}^{∞}u(ν, T)\dd ν
+	Expérimentalement, on obtient les courbes ci-dessous. On remarque un déplacement du pic (loi de déplacement de Wien).
+	fig Déplacement du sommet de la courbe de rayonnement du corps noir à mesure que la température change. Les prédictions du modèle de Rayleigh-Jeans sont mises en avant, divergeant pour de faibles longueur d’ondes.
+		./figures/corps_noir.svg
+	Le corportement ++à haute fréquence++ est décrit par la loi de Wien (1896) $u_{w}(ν, T) = ν^{3}f(ν/T)$, qui permet de retrouver la loi de Stefan-Boltzmann $u(T) = \cte T^{4}$. Une question subsiste: quelle fonction $f$ choisir ? On sait que le pic des courbes suit la loi
+	math
+		λ_{\text{max}} T = \cte \;(\simeq 0.288\u{cm · K})
+	L’intuition suggère
+	math
+		f \left(\frac{ν}{T}\right) ∝ ν^{3} \exp\left(-a \frac{ν}{T}\right)
+	avec $a$ une constante, ce qui donne
+	math
+		u_{w}(ν, T) ∝ ν^{3} \exp \left(-a \frac{ν}{T}\right)
+	++À basse fréquence++, on entre dans le régime de Rayleigh-Jeans (1900-1905). L’origine du rayonnement est l’oscillation des charges autour de leur position d’équilibre. Une charge peut être vue comme un oscillateur harmonique, éventuellement amorti et comportant un terme source. La puissance instantannée émise par une charge $q_{e}$ non-relativiste est connue :
+	math
+		\Puiss(t) = \frac{q_{e}^{2}}{6 πε_{0} c^{3}}a^{2}(t)
+	où $a(t) = -ω^{2} x_{0}\cos (ω t)$. Elle vaut en moyenne
+	math
+		\moy{\Puiss(t)} = \frac{q_{e}^{2} ω^{4} x_{0}^{2}}{12 π ε_{0} c^{3}}
+	Or l’énergie moyenne de l’oscillateur vaut $\bar{E} = \frac{1}{2}m_{e} ω^{2}x_{0}^{2}$ donc
+	math
+		\moy{\Puiss} = δE = \frac{2e^{2} ω^{2}}{3m_{e}c^{3}}\bar{E}
+	avec $e^{2} = \frac{q_{e}^{2}}{4 πε_{0}}$. Le travail effectué par unité de temps par le rayonnement sur l’oscillateur vaut
+	math
+		δW = \frac{π e^{2}}{3 m_{e}}u(ν, T)
+	où l’on a pris $ν = \frac{ω}{2 π}$. À l’équilibre, $δE = δW$ soit
+	math
+		u(ν, T) = \frac{8 π}{c^{3}}ν^{2} \bar{E}
+	Quid de l’énergie moyenne $\bar{E}$ pour une très grande collection d’oscillateurs ? La loi probabilité d’énergie $E$ est donnée par le « poids statistique » de Boltzmann; elle est proportionnelle à $e^{- \frac{E}{k_{B}T}}$. On normalise cette loi de probabilité :
+	math
+		β∫_{0}^{+∞}e^{- \frac{E}{k_{B}T}}\dd E = 1 ⟹ β = \frac{1}{k_{B} T}
+	La loi de $E$ est donc
+	math
+		\Proba(E, T) = \frac{1}{k_{B}T}e^{-\frac{E}{k_{B}T}}
+	La moyenne de $E$ est
+	math
+		\bar{E} = \moy{E(T)} = ∫_{0}^{∞}E\Proba(E,T)\dd E = ⋯ = k_{B}T
+	On aboutit enfin à la formule de Rayleigh-Jeans :
+	math
+		u_{rj} (ν, T) = \frac{8 π}{c^{3}} ν^{2} k_{B}T
+	Ce résultat convient pour de *grandes longueurs d’ondes seulement*, divergeant pour de petites (cf. catastrophe ultra-violette).
+	? Que faire ?
+	Max Planck propose en 1900 une modification de la loi de Wien pour qu’elle fonctionne partout :
+	math
+		u(ν, T) ∝ \frac{ν^{3}}{e^{a \frac{ν}{T}}-1}
+	Cette loi modifiée permet une interpolation entre le régime de Wien et celui de Rayleigh-Jeans, mais elle est impossible à obtenir… sauf si nous supposons que l’énergie d’un oscillateur harmonique dans la matière ne soit plus continue mais _discrète_, multiple d’une énergie fondamentale $E_{0}$, ayant un lien avec $ν$. Calculons $\bar{E}$ avec ce postulat :
+	math
+		\Proba(E,T) = \Proba(nE_{0}, T) = \frac{e^{-n E_{0} β}}{∑_{n=0}^{+∞}e^{-n E_{0} β}}
+	d’où
+	math
+		\bar{E} = \sum E\Proba(E,T) = \frac{∑_{n=0}^{+∞}n E_{0} e^{-n β E_{0}}}{∑_{n=0}^{+∞}e^{-n β E_{0}}} = \frac{E_{0}}{e^{β E_{0}}-1}
+	C’est un succès total, car il suffit de prendre $E_{0} = h ν$ pour obtenir la _loi de Planck_
+	math
+		u(ν,T) = \frac{8 π ν^{2}}{c^{3}}\frac{h ν}{e^{- \frac{h ν}{k_{B} T}}-1}
+	Quelques remarques :
+	- L’idée de Planck paraît folle pour l’époque.
+	- La notation $h$ pour la constante de Planck vient du mot allemand _Hilfsgröße_ (grandeur auxiliaire).
+	- On utilise souvert $\hbar = \frac{h}{2 π}$.
+	- Le domaine de Rayleigh-Jeans (basse fréquence donc basse énergie) s’appelle la _limite classique_. Il correspond à la limite $\frac{h ν}{k_{B}T} \small 1$ ou formellement à $\hbar \to 0$.
+	- Le domaine de Wien correspond à la limite $\frac{h ν}{k_{B}T} \large 1$ (haute énergie, basse température).
