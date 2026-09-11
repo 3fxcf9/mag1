@@ -68,7 +68,7 @@ avec $E_{p}$ l’énergie potentielle, $U$ l’énergie cinétique interne et $E
 		Pour une sphère homogène de masse $r_{0}$ et de rayon $r_{0}$, démontrer
 		math
 			E_{p} = -\frac{3Gm_{0}^{2}}{5r_{0}}
-		oû pour une masse test $m$, $E_{p} = m ϕ$.
+		où pour une masse test $m$, $E_{p} = m ϕ$.
 		answer
 			math
 				E_{p} = ∫_{0}^{r_{0}}\big(4 πr^{2} \dd r × ρ\big)ϕ = -∫_{0}^{r_{0}}\dd r 4 πr^{2}\frac{3m_{0}}{4 πr_{0}^{3}} \frac{G}{r}m_{0}\left(\frac{r}{r_{0}}\right)^{3}= -3G\frac{m_{0}^{2}}{r_{0}^{6}} ∫_{0}^{r_{0}} r^{4} = -\frac{3}{5}\frac{Gm_{0}^{2}}{r_{0}}

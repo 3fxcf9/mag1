@@ -6,5 +6,5 @@ const local_macros = {
   "\\dist": "\\operatorname{dist}",
   "\\Cercle": "\\mathscr{C}",
   "\\x": "\\cancel",
-  "\\PD": "\\dot{\\mathscr{D}}",
+  "\\PD": "\\mathring{\\mathscr{D}}",
 };

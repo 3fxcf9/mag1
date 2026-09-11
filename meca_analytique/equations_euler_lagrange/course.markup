@@ -21,7 +21,8 @@ où $\vec{F}$ est parallèle au mouvement (forces de frottement par exemple) et 
 Notons $f(\r) = 0$ la contrainte d’appartenance à une surface dans un espace à trois dimension.
 
 def Déplacement virtuel
-	Déplacement infinitésimal $δ\r$ qui satisfait la contrainte (ici appartenir à la surface). Il ne correspond pas forcément à la trajectoire physique.
+	Déplacement infinitésimal $δ\r$ qui satisfait les contraintes du système. Il ne correspond pas forcément à une trajectoire physique.
+	as_flashcard
 
 Si on prend $\r$ et $\r + δ\r$ deux points appartenant à la surface, on a
 math
@@ -70,6 +71,7 @@ Il existe plusieurs types de contraintes; voici quelques contraintes courantes�
 On en distingue deux familles :
 - Les _contraintes holonomes_, de la forme $f(\r_{1}, …, \r_{N}, t) = 0$. Les contraintes $f_{1}(\r) = z = 0$ et $f_{2}(\r) = x^{2} + y^{2} - \ell^{2} = 0$ correspondant à un pendule simple en sont des exemples.
 - Les _contraintes non-holonomes_ : tous les autres cas, par exemple $f(\r_{1}, …, \r_{N}, t) ⩾ 0$ ou $f(\r_{1}, …, \r_{N}, \v_{1}, …, \v_{N}, t) = 0$.
+Q: Contrainte holonome A: Contrainte de la forme $f(\r_{1}, …, \r_{N}, t) = 0$. Elle est sinon non-holonome, comme par exemple $f(\r_{1}, …, \r_{N}, t) ⩾ 0$ ou $f(\r_{1}, …, \r_{N}, \v_{1}, …, \v_{N}, t) = 0$.
 
 _Principe de d’Alembert_ : On considère $N$ particules soumises à $K$ contraintes holonomes indicées par $β$: $f_{β}(\r_{1}, …, \r_{N}, t) = 0$. Les déplacements virtuels $δ\r_{i}$ satisfont
 math
@@ -94,6 +96,9 @@ def Coordonnées généralisées
 	Au lieu de repérer l’état du système par les $\r_{i}$, on peut le faire via les $q_{α}(t)$ qui vivent dans un espace appelé _variété des configurations_. On suppose que l’on peut inverser les relations pour obtenir
 	math
 		q_{α} = q_{α}(\r_{1}, …, \r_{N}, t) \eforall α = 1, …, n
+	Q: Coordonnées généralisés A: Jeu de variables indépendantes en nombre égal au nombre degrés de liberté du système, qui permette de paramétrer celui-ci en vérifiant automatiquement ses contraintes.
+		reversed
+	Q: Variété des configuration A: Espace contenant l'ensemble de toutes les positions possibles d'un système, en respectant ses contraintes géométriques. Il est paramétré par un système de coordonnéès généralisées.
 
 rem
 	- S’il n’y a pas de contraintes, ce reparamétrage est un changement de coordonnées,
@@ -133,7 +138,3 @@ On veut écrire les équations du mouvement en fonction des $q_{α}$. Première 
 	soit
 	math
 		\dd δ\r = δ \dd\r
-
-
-
-

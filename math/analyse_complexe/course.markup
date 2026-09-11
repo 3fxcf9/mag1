@@ -818,6 +818,179 @@ math
 le _disque épointé_ de centre $z_{0}$ et de rayon $r$. On dira qu’un complexe $z$ est un _point limite_ d’un ensemble $S ⊂ \C$ si
 math
 	∀ r > 0, \PD (z, r) ∩ S \ne \emptyset
-En pratique, il existe une suite $(z_{n})_{n ∈ \N}$ d’éléments de $S$ telle que $z_{n} \arrowlim{n\to+∞}z$. L’ensemble $\lim S$ des points limites de $S$ est un fermé. Un point de $S$ qui n’est pas un point limite est un _point isolé_.
+En pratique, il existe une suite $(z_{n})_{n ∈ \N}$ d’éléments de $S$ telle que $z_{n} \arrowlim{n\to+∞}z$. L’ensemble $\lim S$ des _points limites_ (ou _points d’accumulation_) de $S$ est un fermé. Un point de $S$ qui n’est pas un point limite est un _point isolé_.
+
+thm Théorème des zéros isolés
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ connexe, et soit $Z_{f} = \set{z ∈ Ω \where f(z) = 0}$ l’ensemble des zéros de $f$. Alors,
+	- ou bien $Z_{f} = Ω$, i.e. $f = 0$ sur $Ω$,
+	- ou bien $Z_{f}$ n’admet pas de point limite et les zéros de $f$ sont donc isolés.
+	Dans ce dernier cas, pour tout $z_{0} ∈ Z_{f}$, il existe $r > 0$ tel que
+	math
+		∀ z ∈ \Disk(z_{0}, r), f(z) = (z-z_{0})^{k}g(z)
+	où $k ∈ \N$ est appelé _degré du zéro $z_{0}$ de $f$_ et où $g$ est une fonction holomorphe sur $Ω$ ne s’annulant pas sur $\Disk(z_{0}, r)$.
+
+proof
+	Soit de tels objets. Supposons $Z_{f}$ non vide et prenons $z ∈ Z_{f}$. Comme $f$ est holomorphe sur $Ω$, elle est analytique en $z_{0}$, i.e. il existe $R > 0$ tel que
+	math
+		∀ z ∈ \Disk(z_{0}, R), f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
+	pour une suite $(a_{n})$ complexe. Or, $z_{0} ∈ Z_{f}$ donc $a_{0} = f(z_{0}) = 0$. Il existe alors deux possibilités :
+	- soit la suite $(a_{n})$ est nulle, auquel cas $f=0$ sur $\Disk(z_{0}, R)$,
+	- soit $k = \min\set{n ∈ \N \where a_{n} \ne 0}$ existe, et alors, pour tout $z ∈ \Disk(z_{0}, R)$,
+		math
+			\tag{1}\begin{align*}
+				f(z) &= ∑_{n=k}^{+∞}a_{n}(z-z_{0})^{n} \\
+				&= ∑_{n ∈ \N}a_{n+k}(z-z_{0})^{n+k} \\
+				&= (z-z_{0})^{k}∑_{n ∈ \N}a_{n+k}(z- z_{0})^{n}
+			\end{align*}
+		On définit alors la fonction
+		math
+			g: \applic{Ω}{\C}{z}{\begin{cases}\frac{f(z)}{(z-z_{0})^{k}} \if z ∈ Ω ∖ \set{z_{0}} \\ a_{k} \if z = z_{0}\end{cases}}
+		Cette fonction est clairement holomorphe sur $Ω ∖ \set{z_{0}}$ et au vu de $(1)$, on a
+		math
+			∀ z ∈ \Disk(z_{0}, R), g(z) = ∑_{n ∈ \N}a_{n+k}(z - z_{0})^{n}
+		Ainsi, $g$ est analytique et donc holomorphe en $z_{0}$. Finalement, $g(z_{0}) = a_{k} \ne 0$ et la continuité de $g$ en $z_{0}$, assure sa non-nullité sur un voisinage de $z_{0}$, contenant $\Disk(z_{0}, r)$ pour un certain $r$.
+	D’autre part, $\lim(Z_{f}) ⊂ Z_{f}$. En effet, pour $z ∈ \lim Z_{f}$, il existe une suite convergente $(z_{n})_{n ∈ \N}$ d’éléments de $Z_{f}$ telle que $z_{n} \arrowlim{n\to+∞}z$. Ainsi, $∀ n ∈ \N, f(z_{n})= 0$. Or $f$ est continue car holomorphe, et donc
+	math
+		f(z) = \lim_{n\to+∞}f(z_{n}) = 0
+	D’après la discussion précédente,
+	- soit il existe $R > 0$ tel que $f$ soit nulle sur $\Disk(z_{0}, R)$, auquel cas $\Disk(z_{0}) ⊂ \lim Z_{f}$,
+	- soit $z$ est un zéro isolé et donc pas un point limite de $\lim(Z_{f})$. On en déduit que $\lim Z_{f}$ est ouvert. On a donc deux ouverts disjoints, $\lim Z_{f}$ et $(\lim Z_{f})^{\complement}$ tels que
+		math
+			Ω = \lim (Z_{f}) \uplus \lim(Z_{f})^{\complement}
+		Comme $Ω$ est connexe, on a
+		- ou bien $\lim Z_{f} = Ω = Z_{f}$ et $\lim Z_{f} = \emptyset$,
+		- ou bien $\lim Z_{f} = \emptyset$ et $\lim(Z_{f})^{\complement} = Ω$.
+
+thm Théorème d’unicité
+	Soit $Ω$ un ouvert de $\C$. Soit $Σ ⊂ Ω$ un sous-ensemble présentant un point d’accumulation, par exemple l’ensemble des valeurs d’une suite convergente injective dans $Ω$. Si $f$ et $g$ sont deux fonctions holomorphes sur $Ω$ coïncidant sur $Σ$ (par exemple $∀ n ∈ \N, f(z_{1}) = f(z_{2})$), alors $f = g$ sur $Ω$.
+
+proof
+	Considérons la fonction holomorphe $f-g$. Alors, $Σ ⊂ Z_{f-g}$ et d’après le théorème des zéros isolés, on doit avoir $f-g = 0$ sur $Ω$ puisque $Σ$ admet un point limite.
+
+### Théorèmes du maximum
+
+thm Théorème du maximum, version locale
+	Soit $f$ une fonction holomorphe sur un ouvert connexe $Ω$ de $\C$. Alors $\abs{f}$ ne présente pas de maximum local dans $Ω$ à moins que $f$ ne soit constante sur $Ω$.
+
+proof
+	Supposons que $z_{0} ∈ Ω$ soit un maximum local de $\abs{f}$. Alors, il existe $R > 0$ tel que
+	math
+		\tag{1} ∀ z ∈ \D(z_{0}, R), \abs{f(z_{0})} ⩾ \abs{f(z)}
+	D’autre part, pour $r ∈ \oo{0,R}$, on a d’après la formule intégrale de Cauchy
+	math
+		f(z) = \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{ζ - z_{0}}
+	si bien que
+	math
+		\begin{align*}
+			\abs{f(z_{0})} &= \abs{\frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)} \dd ζ \frac{f(ζ)}{ζ - z_{0}}} \\
+			&= \abs{\frac{1}{2 πi}∫_{0}^{2 π}\dd θ i r e^{i θ} \frac{f(z_{0} + r e^{i θ})}{z_{0} + r e^{i θ} - z_{0}}} \\
+			&= \abs{\frac{1}{2 π} ∫_{0}^{2 π} \dd θ f(z_{0} + r e^{i θ})}\\
+			&⩽ \frac{1}{2 π}∫_{0}^{2 π}\dd θ \abs{f(z_{0} + r e^{i θ})} \\
+			&\oleq{(1)} \abs{f(z_{0})}
+		\end{align*}
+	Finalement, pour $r ∈ \oo{0, R}$, on a
+	math
+		\frac{1}{2 π} ∫_{0}^{2 π} \dd θ \abs{f(z_{0})} = \abs{f(z_{0})} = \frac{1}{2 π} ∫_{0}^{2 π}\dd θ \abs{f(z_{0} + r e^{i θ})}
+	Mais alors, pour $r ∈ \oo{0, R}$,
+	math
+		∫_{0}^{2 π} \dd θ \Big[\abs{f(z_{0})} - \abs{f(z_{0} + r e^{i θ})}\Big] = 0
+	Or, d’après $(1)$, le crochet ci-dessus est positif ou nul, et donc
+	math
+		∀ θ ∈ \cc{0, 2 π}, ∀ r ∈ \oo{0,R}, \abs{f(z_{0})} = \abs{f(z_{0} + r e^{i θ})}
+	Ainsi, $\abs{f}$ st constante sur $\Disk(z_{0}, R)$. D’après l’exercice ==!REF==, $\abs{f}$ étant constante sur l’ouvert connexe $\Disk(z_{0}, R)$, la fonction $f$ est constante sur $\Disk(z_{0}, R)$. Finalement, d’après le théorème d’unicité, $f$ est constante sur $Ω$.
+
+thm Théorème du maximum, version globale
+	Soit $f$ une fonction holomorphe sur un ouvert connexe borné $Ω$ et continue sur $\bar{Ω}$, fermeture de $Ω$. Alors le maximum de $\abs{f}$ est atteint sur le bord $∂Ω = \bar{Ω} ∖ Ω$.
+
+proof
+	- Si $f$ est constante sur $\bar{Ω}$, le maximum de $\abs{f}$ est atteint en tout point donc en particulier sur $∂Ω = \bar{Ω}∖ Ω$.
+	- Supposons donc que $f$ n’est pas constante sur $\bar{Ω}$. Comme $\abs{f}$ est continue sur l’ensemble fermé et borné (donc compact) $\bar{Ω}$, on sait que le maximum de $\abs{f}$ est atteint sur $\bar{Ω}$, disons en $z_{0}$. Supposons que $z_{0} ∈ Ω$. Alors, d’après la version locale du théorème ci-dessus, $f$ est constante sur $Ω$. Finalement, comme $f$ est continue sur $Ω$, $f$ est constante sur $\bar{Ω}$ — contradiction.
+
+rem
+	Ces théorèmes sont parfois connus sous le nom de « Principe » du maximum.
+
+### Prolongement analytique
+
+defprop
+	Soient $f$ et $\tilde{f}$ deux fonction, respectivement holomorphes sur $Ω$ et $\tilde{Ω}$, deux ouverts de $\C$ tels que $Ω \subsetneq \tilde{Ω}$. On dit que $(\tilde{f}, \tilde{Ω})$ est _++le++ prolongement analytique de $f$ de $Ω$ à $\tilde{Ω}$_ si
+	math
+		f = \tilde{f} \sur Ω
+
+proof
+	Prouvons l’unicité du prolongement analytique de $f$ de $Ω$ à $\tilde{Ω}$. Soient donc $f_{1}$ et $f_{2}$ holomorphes sur $\tilde{Ω}$ et telles que $(\tilde{f_{1}}, \tilde{Ω})$ et $(\tilde{f_{2}}, \tilde{Ω})$ sont deux prolongements analytiques de $f$ à $\tilde{Ω}$. Alors par définition, on a
+	math
+		\tilde{f_{1}} = f = \tilde{f_{2}} \sur Ω
+	En conséquence, $\tilde{f_{1}} = \tilde{f_{2}} \sur Ω$ d’où, d’après le théorème d’unicité :
+	math
+		\tilde{f_{1}} = \tilde{f_{2}} \sur \tilde{Ω}
+
+rem
+	- L’unicité du prolongement analytique est associée à un choix d’ouvert, d’où la notation $(\tilde{f}, \tilde{Ω})$.
+	- Une même fonction $f$ holomorphe sur $Ω$ peut admettre plusieurs prolongements analytiques, par exemples $(\tilde{f_{1}}, \tilde{Ω_{1}})$ et $(\tilde{f_{2}}, \tilde{Ω_{2}})$ avec $Ω \subsetneq \tilde{Ω_{1}}, \tilde{Ω_{2}}$ et $\tilde{Ω_{1}} \ne \tilde{Ω_{2}}$. Dans ce cas, $\tilde{f_{1}}$ et $\tilde{f_{2}}$ peuvent différer en dehors de la composante connexe de $\tilde{Ω_{1}} ∩ \tilde{Ω_{2}}$ contenant $Ω$.
+		fig
+			./figures/prolongement_unicite_composante_connexe.svg
+
+def Prolongement analytique maximal
+	Soient $f$ et $\tilde{f}$ deux fonctions respectivement holomorphes sur $Ω$ et $\tilde{Ω}$, deux ouverts de $\C$ vérifiant $Ω \subsetneq \tilde{Ω}$. On dira que $(\tilde{f}, \tilde{Ω})$ est un _prolongement analytique maximal_ dans $\C$ de $f$ si $(\tilde{f}, \tilde{Ω})$ est _un_ prolongement analytique de $f$ ed $Ω$ à $\tilde{Ω}$ et que $(\tilde{f}, \tilde{Ω})$ n’admet pas de prolongement analytique.
+
+rem
+	Une même fonction $f$ holomorphe sur un ouvert $Ω$ peut admettre plusieurs prolongements analytiques maximaux dans $\C$ correspondant à différents domaines d’analyticité maximaux, par exemple $(\tilde{f_{1}}, \tilde{Ω_{1}})$ et $(\tilde{f_{2}}, \tilde{Ω_{2}})$. Dans ces cas, $\tilde{f_{1}}$ et $\tilde{f_{2}}$ peuvent différer en dehors de la composante connexe de $\tilde{Ω_{1}} ∩ \tilde{Ω_{2}}$ contenant $Ω$.
+
+
+example
+	Par exemple, $\left(z ⟼ ∑_{n ∈ \N}z^{n}, \Disk(0,1)\right)$ admet $\left(z ⟼ \frac{1}{1-z}, \C ∖ \set{1}\right)$ pour prolongement analytique à $\C ∖ \set{1}$. Il est maximal et unique.
+
+example
+	$\left(z ⟼  - ∑_{n ∈ \N} \frac{(1-z)^{n}}{n}, \Disk(1,1)\right)$ admet $(\log, \C ∖ \R_{-})$ comme prolongement analytique maximal sur $\C$.
+	fig La fonction admet deux prolongements analytiques maximaux sur $\C$, coïncidant sur la composante connexe de $\C \setminus \R_{-} \setminus \set{\text{diag } \alpha}$. Il se trouvent qu’elles diffèrent sur l’autre composante connexe de ce domaine.
+		./figures/log_comme_prolongement.svg
+
+rem
+	Voir TD pour un recollement de plusieurs prolongements maximaux sur $\C$ en un prolongement maximal sur la surface de Riemann de la fonction.
+
+## Théorie des singularités isolées
+
+### Théorème de Laurent
+
+Pour tout $z_{0} ∈ \C$ et tous réels $0 ⩽ r_{1} < r_{2} ⩽ +∞$, on définit l’_anneau ouvert_ de centre $z_{0}$ et de rayons $r_{1}$, $r_{2}$ comme l’ensemble
+math
+	A(z_{0}, r_{1}, r_{2}) = \set{z ∈ \C \where r_{1} < \abs{z - z_{0}} < r_{2}}
+
+rem
+	$\PD{z_{0}, r_{2}} = A(z_{0}, 0, r_{2})$ et $\C^{*} = A(0, 0, +∞)$.
+
+thm Théorème de Laurent
+	Soient $z_{0} ∈ \C$ et $0 ⩽ r_{1} < r_{2} ⩽ +∞$. Soit $f$ une fonction holomorphe sur l’anneau $A(z_{0}, r_{1}, r_{2})$. Alors pour tout élément $z$ de cet anneau, on a
+	math
+		f(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
+	où $(a_{n})_{n ∈ \Z}$ est donnée par
+	math
+		∀ n ∈ \Z, a_{n} = \frac{1}{2 π i} \oint_{\Contour_{γ}}\dd ζ \frac{f(ζ)}{(ζ - z_{0})^{n+1}}
+	avec $γ$ un lacet quelconque dans $A(z_{0}, r_{1}, r_{2})$ tel que $\ind(γ, z_{0}) = 1$.
+
+proof
+	Soient $z_{0}$, $r_{1}$, $r_{2}$ et $f$ comme ci-dessus. Soit $z ∈ A(z_{0}, r_{1}, r_{2})$. Soit $R_{2} ∈ \oo{\abs{z-z_{0}}, r_{2}}$, $R_{1} ∈ \oo{r_{1}, \abs{z-z_{0}}}$ et $R < \min \big(R_{2} - \abs{z-z_{0}}, \abs{z-z_{0}} - R_{1}\big)$.
+	fig
+		./figures/preuve_thm_laurent.svg
+	Il est clair que $\Cercle(z_{0}, R_{2})$ et $\Cercle(z_{0}, R_{1})\uplus \Cercle(z, R)$ sont holomogues dans $A(z_{0}, r_{1}, r_{2}) ∖ \set{z}$. D’après le théorème intégral de Cauchy généralisé, on a
+	math
+		\frac{1}{2 π i}\oint_{\ecercle(z_{0}, R_{2})} \dd ζ \frac{f(ζ)}{ζ - z} = \frac{1}{2 π i} \oint_{\Cercle(z_{0}, R_{1})}\dd ζ \frac{f(ζ)}{ζ - z} + \frac{1}{2 π i}\oint_{\Cercle(z, R)}\dd ζ \frac{f(ζ)}{ζ - z}
+	D’après la première formule intégrale de Cauchy,
+	math
+		\begin{align*}
+			2 π i f(z) &= \oint_{\Cercle(z_{0}, R_{2})}\dd ζ \frac{f(ζ)}{ζ - z} - \oint_{\Cercle(z, R_{1})}\dd ζ \frac{f(ζ)}{ζ - z} \\
+			&= \oint_{\Cercle(z_{0}, R_{2})} \dd ζ \frac{f(ζ)}{ζ - z_{0} + z_{0} - z} - \oint_{\Cercle(z_{0}, R_{1})}\dd ζ \frac{f(ζ)}{ζ - z_{0} + z_{0} - z} \\
+			&= \oint_{\Cercle(z_{0}, R_{2})}\dd ζ \frac{1}{ζ - z_{0}} \frac{f(ζ)}{1 - \frac{z - z_{0}}{ζ - z_{0}}} + \oint_{\Cercle(z_{0}, R_{1})}\dd ζ \frac{1}{ζ - z_{0}} \frac{f(ζ)}{1 - \frac{z - z_{0}}{ζ - z_{0}}} \\
+			&= \oint_{\Cercle(z_{0}, R_{2})}\dd ζ f(ζ) ∑_{n ∈ \N} \frac{(z - z_{0})^{n}}{(ζ - z_{0})^{n+1}} + \oint_{\Cercle(z_{0}, R_{2})}\dd ζ f(ζ)∑_{n ∈ \N}\frac{(ζ - z_{0})^{n}}{(z - z_{0})^{n+1}} \\
+			&= ∑_{n ∈ \N}(z - z_{0})^{n} \oint_{\Cercle(z_{0}, R_{2})}\dd,z \frac{f(ζ)}{(z-z_{0})^{n+1}} + ∑_{n ∈ \N}(z- z_{0})^{-n+1} \oint_{\Cercle(z_{0}, R_{1})}\dd ζ f(ζ)(ζ - z_{0})^{n}
+		\end{align*}
+	Par le théorème intégral de Cauchy généralisé, on peut remplacer $\Cercle(z_{0}, R_{2})$ et $\Cercle(z_{0}, R_{1})$ par n’importe quel chemin homologue dans $A(z_{0}, r_{1}, r_{2})$, par exemple un lacet $γ$ vérifiant $\ind(γ, z_{0}) = 1$.
+
+rem
+	On appelle _série de Laurent_ toute expression de la forme
+	math
+		∑_{n ∈ \Z}a_{n}(z - z_{0})^{n}
+	On appelle _partie principale_ de la série de Laurent la sous-série $∑_{n ∈ \N^{*}}a_{-n}(z-z_{0})^{-n}$.
+
 
 generate_flashcards_tsv
