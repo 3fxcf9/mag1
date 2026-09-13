@@ -1,0 +1,45 @@
+../../common/course.lib.markup
+
+title Gravitation I
+date 07/09/2026
+description Équation de Poisson, instabilité de Jeans, théorème de Gauss, courbe de rotation des galaxies
+
+Q: Définition du champ gravitationnel
+	A: math
+			\div \g = -4\pi G\rho
+		avec $G \simeq 6.67 · 10^{-11} \u{m^{3} kg^{-1} s^{-2}}$.
+
+Q: Champ gravitationnel créé par une distribution de masse à symétrie sphérique
+	A: Il est radial de norme
+		math
+			g(r) = - \frac{GM(r)}{r^{2}}
+
+Q: Équation de Poisson gravitationnelle
+	A: math
+			\lapl\phi = 4\pi G\rho
+
+Q: Allure du potentiel créé par une distribution de masse à symétrie sphérique de rayon $r_{0}$
+	A: fig
+			./figures/potentiel_sphere.svg
+
+Q: Un gaz homogène d’extension infinie est-il possible ?
+	A: Non, car il créerait un champ uniforme, ce qu, d’après l’équation de Poisson, n’est possible que pour $ρ = 0$.
+
+Q: Énergie potentielle gravitationnelle d’une masse ponctuelle $m$ dans un champ $ϕ(\r)$
+	A: math
+			E_p = m \phi(\r)
+
+Q: Énergie potentielle d’une boule homogène de rayon $R$ et de masse $M$
+	A: math
+		E_p = -\frac35\frac{GM^2}{R}
+
+Q: Moment d’inertie d’une boule homogène de rayon $R$ et de masse $M$
+	A: math
+			J = \frac25MR^2
+
+Q: Critère de Jeans
+	A: Il impose que l’énergie gravitationnelle l’emporte sur l’énergie cinétique interne, i.e. $\abs{E_{p}} > U$. Il impose ainsi une masse minimale, une densité minimale, ou une taille minimale au système en fonction du choix du paramètre fixé.
+
+Q: Barrière rotationnelle
+	A: Limite du critère $\abs{E_{p}} > E_{\text{rot}}$ imposant une vitesse de rotation maximale. Cette vitesse maximale augmente moins vite que la vitesse angulaire d’un nuage protostellaire lorsque celui-ci se contracte: un nuage moléculaire géant n’atteignant pas la barrière rotationnelle initialement peut y être confronté à un stade ultérieur de l’effondrement. Pour continuer à se contracter, il doit évacuer du moment cinétique, par exemple à l’aide de jets magnétisés.
+
