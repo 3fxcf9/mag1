@@ -991,6 +991,3 @@ rem
 	math
 		∑_{n ∈ \Z}a_{n}(z - z_{0})^{n}
 	On appelle _partie principale_ de la série de Laurent la sous-série $∑_{n ∈ \N^{*}}a_{-n}(z-z_{0})^{-n}$.
-
-
-generate_flashcards_tsv

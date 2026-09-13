@@ -74,8 +74,8 @@ avec $E_{p}$ l’énergie potentielle, $U$ l’énergie cinétique interne et $E
 				E_{p} = ∫_{0}^{r_{0}}\big(4 πr^{2} \dd r × ρ\big)ϕ = -∫_{0}^{r_{0}}\dd r 4 πr^{2}\frac{3m_{0}}{4 πr_{0}^{3}} \frac{G}{r}m_{0}\left(\frac{r}{r_{0}}\right)^{3}= -3G\frac{m_{0}^{2}}{r_{0}^{6}} ∫_{0}^{r_{0}} r^{4} = -\frac{3}{5}\frac{Gm_{0}^{2}}{r_{0}}
 - L’énergie interne s’écrit
 	math
-		U = \frac{3}{2}Nk_{B}
-	où $N = m_{0} / m$ avec $m$ la masse d’une particule de gaz. Par exemple, pour un gaz d’hydrogène moléculaire, $m = 2 m_{p}$ et $T = 10\u{K}$, soit une densité de $n \simeq 10^{5}\u{cm^{-3}}$((Ce milieu, considéré comme suffisament dense pour donner lieu à la formation d’étoiles est moins dense que ceux qu’on est capable de créer sur terre d’un ordre de grandeur.)).
+		U = \frac{3}{2}Nk_{B}T
+	où $N = m_{0} / m$ avec $m$ la masse d’une particule de gaz. Les degrés de liberté vibrationnels et rotationnels ne sont pas pris en compte car en l’absence d’étoiles, et donc de rayonnement lumineux, et à une telle température, ces degrés de liberté ne sont pas excités. Par exemple, pour un gaz d’hydrogène moléculaire, $m = 2 m_{p}$ et $T = 10\u{K}$, soit une densité de $n \simeq 10^{5}\u{cm^{-3}}$((Ce milieu, considéré comme suffisament dense pour donner lieu à la formation d’étoiles est moins dense que ceux qu’on est capable de créer sur terre d’un ordre de grandeur.)).
 - L’énergie de rotation s’écrit
 	math
 		E_{\text{rot}} = \frac{1}{2}J ω^{2}
@@ -83,6 +83,45 @@ avec $E_{p}$ l’énergie potentielle, $U$ l’énergie cinétique interne et $E
 
 ### Critère de Jeans
 
+Pour s’effondrer, le système doit être lié, i.e. $E < 0$. Le critère de Jeans est la condition $\abs{E_{p}} > U$, qui s’écrit ici
+math
+	\frac{3}{5}\frac{Gm_{0}^{2}}{n_{0}} > \frac{3}{2}\frac{m_{0}}{m}k_{B}T
+Or $\frac{4}{3}πr_{0}^{3}ρ = n_{0}$ donc $r_{0} = \left(\frac{3m_{0}}{4 πρ}\right)^{\frac{1}{3}}$, d’où
+math
+	\frac{6m_{0}}{(3m_{0}/4 πρ)^{1/3}} > \frac{5}{2}\frac{k_{B}T}{m}
+soit
+math
+	n_{0}\frac{2}{3} > \frac{5}{2}\frac{k_{B}T}{Gm} \left(\frac{4 πρ}{3}\right)^{\frac{-1}{3}}
+soit enfin
+math
+	m_{0} > m_{J} \quad\text{avec}\quad m_{J} = \left(\frac{5}{2}\frac{k_{B}T}{Gm}\right)^{\frac{3}{2}}\left(\frac{4 πρ}{3}\right)^{-\frac{1}{2}}
+La masse de Jeans augmente avec la température, diminue avec la densité, et vaut dans notre cas
+math
+	m_{J} = 0.8 \msol \left(\frac{T}{10\u{K}}\right)\left(\frac{m}{10^{5}\u{cm^{-3}}}\right)^{-\frac{1}{2}}
+On peut l’écrire aussi $ρ > ρ_{J}$ à $m_{0}$ fixé, ou $r_{0} > r_{J}$ à $ρ$ fixé. Numériquement, on a
+math
+	r_{J} = \left(\frac{15}{8 π}\frac{k_{B}T}{ρ Gm}\right)^{\frac{1}{2}} \simeq 11 \u{a.u} \left(\frac{T}{10K}\right)^{\frac{1}{2}} \left(\frac{n}{10^{5}\u{cm^{-3}}}\right)^{- \frac{1}{2}}
+
+Si le critère de Jeans et rempli et en l’absence d’énergie rotationnelle, alors le système est lié: l’effondrement est possible.
+
 ### Barrière rotationnelle
 
-## Exercice d’ouverture : la matière noire tracée par les étoiles
+La condition $\abs{E_{p}} > E_{\text{rot}}$ s’écrit
+math
+	\frac{3}{5}	\frac{Gm_{0}^{2}}{r_{0}} > \frac{1}{2}× \frac{2}{5}m_{0}r_{0}^{2} × Ω^{2}
+soit
+math
+	Ω^{2} < \frac{3Gm_{0}}{r_{0}^{3}}
+soit finalement
+math
+	Ω < Ω_{\text{max}} \quad\text{avec}\quad Ω_{\text{max}} = \sqrt{4 π ρ G} \simeq 5 · 10^{-13}\u{rad · s^{-1}} \left(\frac{n}{10^{5}\u{cm^{-3}}}\right)^{-\frac{1}{2}}
+ce qui correspond à une période de
+math
+	T_{\min} = \frac{2 π}{5 × 10^{-13}}\u{s}
+soit, avec $1 \yr = π · 10^{7}\u{s}$,
+math
+	T_{\min} = \frac{4 π · 10^{12}}{π · 10^{7}}\yr = 4 · 10^{5}\yr = 0.4\u{Myr}
+fig
+	right
+	./figures/omega_vs_omega_max.svg
+Dans la voie lactée, $T \simeq 100\u{Myr}$. On remarque que $Ω_{\max} ∝ \sqrt{ρ}$ et $Ω ∝ \frac{1}{r^{2}}$ par conservation du moment cinétique, car $L = J Ω = m_{0}r_{0}^{2}Ω$.
