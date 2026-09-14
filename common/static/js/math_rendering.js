@@ -184,6 +184,7 @@ function renderMath() {
       const renderElement = document.createElement(
         element.classList.contains("katex-display") ? "div" : "span",
       );
+      renderElement.classList.add("equation-katex");
       // Replace the code element with the new element
       element.parentNode.replaceChild(renderElement, element);
       try {
@@ -191,6 +192,7 @@ function renderMath() {
           displayMode: element.classList.contains("katex-display"),
           throwOnError: false,
           macros: macros,
+          trust: (context) => context.command === "\\href",
         });
       } catch (e) {
         console.error("KaTeX rendering error:", e);

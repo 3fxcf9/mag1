@@ -1,0 +1,76 @@
+../../common/course.lib.markup
+
+title La fonction d’onde et l’équation de Schrödinger
+date 14/09/2026
+
+Nous allons réutiliser
+math
+	E = h ν = \hbar ω \quad \text{et} \quad \p = \hbar\k
+
+env Premier concept fondamental
+	L’état d’un système quantique (toutes les informations qui le caractérisent) est décrit par une fonction d’onde
+	math
+		ψ(\r, t) = A e^{i (\k · \r - ωt)}
+	ou à une dimension
+	math
+		ψ(x, t) = A e^{i (kx-ωt)}
+	avec $A$ *complexe*. Le principe de superposition s’applique : si $ψ_{1}(\r, t)$ et $ψ_{2}(\r, t)$ sont deux fonctions d’onde, alors à priori, $ϕ(\r, t) = αψ_{1}(\r, t) + β ψ_{2}(\r, t)$ en est une également ($α, β ∈ \C$). L’ensemble des fonctions d’onde forme un espace vectoriel sur $\C$, que l’on munit d’un produit interne défini positif, appelé _produit scalaire hermitien_. À une dimension, le produit scalaire de $ψ$ et $ϕ$, noté $\scalar{ψ}{ϕ}$, est défini par
+	math
+		\begin{align*}
+			\scalar{ψ}{ϕ} &= \int \dd x ψ^{*}(x,t) ϕ(x,t)\\
+			&= \left(\int \dd x ψ(x,t) ϕ^{*}(x,t)\right)^{*} \\
+			&= \scalar{ϕ}{ψ}^{*}
+		\end{align*}
+	L’espace vectoriel ainsi défini est un _espace de Hilbert_, noté $\H$.
+
+example Conséquence immédiate : quantification des niveaux d’énergie d’un système lié
+	fig
+		right
+		./figures/puis_potentiel_infini.svg
+	Soit un corpuscule de masse $m$, à une dimension, dans le puits de potentiel suivant :
+	math
+		V(x) = \begin{cases}0 \if x ∈ \cc{0,a} \\ +∞ \else\end{cases}
+	- Classiquement, la bille est confinée entre $x=0$ et $x=a$, et son énergie est $E = E_{\text{cin}} = \frac{1}{2}mv^{2} = \frac{\p^{2}}{2m} = \cte$ soit $p = \pm \sqrt{2mE}$ (rebonds) avec $E ⩾ 0$.
+	- Quantiquement, hors de $\cc{0, a}$, point de système.
+		math
+			E = \cte = E_{\text{cin}} + \underbrace{E_{\text{pot}}}_{=0} = \frac{\p^{2}}{2m} \oeq{de Broglie} \frac{\hbar^{2}k^{2}}{2m} \oeq{Planck-Einstein} \hbar ω
+		Par le principe de superposition,
+		math
+			ψ(x,t) = A e^{i(kx - ω t)} + B e^{-ikx - i ωt} = \underbrace{\left(A e^{ikx} + B e^{i kx}\right)}_{φ(x)} e^{-i ω t}
+		Ajoutons que $ψ(x ⩽ 0) = 0 = ψ(x ⩾ a)$. Par continuité de $φ$,
+		- en $x=0$ : $A + B = 0$ soit $B=-A$,
+		- en $x=a$ : $A \left(e^{i k a} - e^{-i ka}\right) = 0$ or $A\ne 0$ donc $e^{i ka} - e^{-ika} = 0$, soit $\sin(ka) = 0$ (_équation de quantification_).
+		Seules certaines valeurs de $k$ conviennent ! Précisément, seules les fonctions d’onde avec $a k_{n} = n π$ et $\p_{n} = \hbar k_{n} = n π \frac{\hbar}{a}$ ($n ∈ \N$) conviennent, et l’énergie totale (ici cinétique) est
+		math
+			E_{n} = \frac{p_{n}^{2}}{2m} = n^{2} \frac{π^{2} \hbar^{2}}{2m a^{2}}
+		rem
+			L’ensemble
+			math
+				\set{E_{n} = n^{2} \frac{π^{2} k^{2}}{2m a^{2}} \where n ∈ \N^{*}}
+			est appelé _spectre d’énergie_. Il est discret pour un système lié, et continu pour un système libre (ou diffusif).
+		De retour à l’exemple, on a
+		math
+			φ(x) = \begin{cases}α \sin \left(n π \frac{x}{a}\right) \if x ∈ \cc{0,a} \\ 0 \else\end{cases}
+		avec $α ∈ \C$. Nous verorns qu’il est important de normaliser les fonctions d’onde, i.e. $\scalar{ψ}{ψ} = 1$. Ici,
+		math
+			\scalar{ψ}{ψ} = ∫_{-∞}^{+∞}\dd x \abs{ψ(x,t)}^{2} = ∫_{-∞}^{+∞} \dd x \abs{φ(x)}^{2}
+		donc
+		math
+			\scalar{ψ}{ψ} = 1 ⟹ ∫_{0}^{a} \dd x \abs{α}^{2} \sin^{2} \left(n π \frac{x}{a}\right) = 1 ⟹  \abs{α} = \sqrt{\frac{2}{a}}
+		On a donc le module.
+		? Quid de la phase ?
+		Une phase globale n’a aucune importance, on peut la prendre nulle.
+? Quel sens donner à $ψ$ ?
+Discutons d’abord le sens de $\abs{ψ}^{2}$.
+
+env Deuxième concept fondamental
+	- $\abs{ψ(x,t)}^{2}$ est une _densité de probabilité_. Il faut penser $x$ comme une variable aléatoire, et $\abs{ψ(x,t)}^{2}$ comme sa loi, i.e. la distribution de probabilité que le corpuscule se trouve en $x$ à l’instant $t$. En fait, $\dd\Proba(x,t) = \abs{ψ(x,t)}^{2}$ est la probabilité élémentaire que le corpuscule soit dans $\cc{x, x+\dd x}$ à l’instant $t$. Il suit que
+	math
+		∫_{-∞}^{+∞} \dd x \abs{ψ(x,t)}^{2} = 1
+	Une phase globale n’a aucune importance.
+	- $ψ(x,t)$ est l’amplitude de probabilité.
+	NB: seules les fonctions de carré sommable conviennent (comme fonctions d’onde physiques).
+
+
+
+

@@ -377,14 +377,14 @@ prop
 
 proof
 	Soient $γ$ et $z$ de tels objets. On définit $θ: \cc{0,1} ⟶ \C$ par
-	math
-		\tag{1} ∀ t ∈ \cc{0,1}, i θ(t) = ∫_{0}^{t}\dd τ \frac{γ'(τ)}{γ(τ) - z}
+	math ind_wind_1
+		∀ t ∈ \cc{0,1}, i θ(t) = ∫_{0}^{t}\dd τ \frac{γ'(τ)}{γ(τ) - z}
 	Clairement, $θ(0) = 0$ et
 	math
 		θ(1) = \frac{1}{i}∫_{0}^{1}\dd τ \frac{γ'(τ)}{γ(τ) - z} = \frac{1}{i} \oint_{\Contour_{γ}} \frac{\dd ζ}{ζ - z} = 2 π \ind(γ_{i}, z)
 	D’autre part,
 	math
-		(1) ⟺ γ' - i θ'(γ - z) = 0 ⟺ \Big(γ' - i θ'(γ - z)\Big)e^{-i θ} = 0 ⟺ \Big((γ - z)e^{-i θ}\Big)' = 0
+		\eqref{ind_wind_1} ⟺ γ' - i θ'(γ - z) = 0 ⟺ \Big(γ' - i θ'(γ - z)\Big)e^{-i θ} = 0 ⟺ \Big((γ - z)e^{-i θ}\Big)' = 0
 	Il existe donc $z_{0} ∈ \C$ tel que $∀ t ∈ \cc{0,1}, (γ(t) - z)e^{-i θ(t)} = z_{0}$, ou de façon équivalente,
 	math
 		∀ t ∈ \cc{0,1}, \big(γ(t) - z\big) = z_{0}e^{i θ(t)}
@@ -506,26 +506,26 @@ proof
 				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ 4 \abs{\int_{T_{1}} \dd zf(z)}
 			D’autre part, on a évidemment $\long(T_{1}) = \frac{1}{2} \long(T_{0})$.
 			En répétant les étapes ci-dessus, on construit une suite $(T_{n})_{n ∈ \N}$ de triangles directs « imbriqués » et vérifiant
-			math
-				\tag{1} ∀ n ∈ \N, \abs{\int_{T_{0}} \dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}}\dd zf(z)}
+			math tic_1
+				∀ n ∈ \N, \abs{\int_{T_{0}} \dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}}\dd zf(z)}
 			et
-			math
-				\tag{2} \long(T_{n}) = \frac{1}{2^{n}}\long(T_{0})
+			math tic_2
+				\long(T_{n}) = \frac{1}{2^{n}}\long(T_{0})
 			Pour tout $n ∈ \N$, soit $z_{n}$ le barycentre de $T_{n}$. La suite $(z_{n})_{n ∈ \N} ∈ \Delta_{0}^{\N}$ est une suite de Cauchy. Comme $\C$ est complet, cette suite admet une limite $z_{∞}$ quand $n\to +∞$. Or, $Δ_{0}$ contient ses points limites comme compact de $\C$ et donc $z_{∞} ∈ \Delta_{0}$. En particulier, sous nos hypothèses, $z_{∞} ∈ Ω ∖ \{p\}$, donc $f$ est holomorphe en $z_{∞}$, i.e.
-			math
-				\tag{3} ∀ ε > 0, ∃ r>0: ∀ z ∈ Ω ∩ \B(z_{∞}, r), \abs{f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})} ⩽ ε \abs{z - z_{∞}}
+			math tic_3
+				∀ ε > 0, ∃ r>0: ∀ z ∈ Ω ∩ \B(z_{∞}, r), \abs{f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})} ⩽ ε \abs{z - z_{∞}}
 			En particulier, il existe $N ∈ \N$ tel que $∀ n ⩾ N, T_{n} ⊂ \B(z_{∞}, r)$. D’après le corollaire du lemme précédent, on a, pour $n ⩾ N$,
 			math
 				\oint_{T_{n}}\dd zf(z) = \int_{T_{n}} \dd z \Big[f(z) - \underbrace{f(z_{∞}) - (z-z_{∞})f'(z_{∞})}_{\text{constantes}}\Big]
-			et donc, d’après $(1)$, pour $n ⩾ N$,
+			et donc, d’après [tic_1], pour $n ⩾ N$,
 			math
 				\abs{\oint_{T_{0}}\dd zf(z)} ⩽ 4^{n} \abs{\oint_{T_{n}} \dd z \Big[f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})\Big]}
 			La majoration établie plus haut permet alors d’affirmer
 			math
 				\begin{align*}
 					\abs{\oint_{T_{0}}\dd zf(z)} &⩽ 4^{n} \long(et_{n})\sup_{z ∈ T_{n}} \abs{f(z) - f(z_{∞}) - (z-z_{∞})f'(z_{∞})}\\
-					&\oleq{(3)} 4^{n} \long(T_{n})ε \sup_{z ∈ T_{n}}\abs{z-z_{∞}}\\
-					&⩽ 4^{n} ε\long(T_{n})^{2} \oeq{(2)} 4^{n} ε \frac{\long(T_{0})^{2}}{4^{n}}\\
+					&\oleq{\eqref{tic_3}} 4^{n} \long(T_{n})ε \sup_{z ∈ T_{n}}\abs{z-z_{∞}}\\
+					&⩽ 4^{n} ε\long(T_{n})^{2} \oeq{\eqref{tic_2}} 4^{n} ε \frac{\long(T_{0})^{2}}{4^{n}}\\
 					&⩽ ε\long(T_{0})^{2}
 				\end{align*}
 			Finalement,
@@ -741,11 +741,11 @@ proof
 	fig Le disque en couleur contient $z$ et est contenu dans le disque en noir.
 		./figures/preuve_thm_fondamental_analyse_complexe.svg
 	On peut donc lui appliquer la première formule intégrale de Cauchy, qui donne
-	math
-		\tag{1}f(z) = \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{ζ - z}
+	math thm_fonda:1
+		f(z) = \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ \frac{f(ζ)}{ζ - z}
 	D’autre part, si $ζ ∈ \Cercle(z_{0}, r)$, on a $r = \abs{ζ - z_{0}} > \abs{z - z_{0}}$, d’où $\abs{\frac{z - z_{0}}{ζ-z_{0}}} = \frac{\abs{z-z_{0}}}{r} < 1$, donc pour tout $ζ ∈ \Cercle(z_{0}, r)$ :
-	math
-		\tag{2}\frac{1}{ζ - z} = \frac{1}{ζ - z_{0} + z_{0} - z} = \frac{1}{ζ - z_{0}}\frac{1}{1- \frac{z - z_{0}}{ζ - z_{0}}} = ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}
+	math thm_fonda:2
+		\frac{1}{ζ - z} = \frac{1}{ζ - z_{0} + z_{0} - z} = \frac{1}{ζ - z_{0}}\frac{1}{1- \frac{z - z_{0}}{ζ - z_{0}}} = ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}}
 	Or, pour tout $ζ ∈ \Cercle(z_{0}, r)$,
 	math
 		\begin{align*}
@@ -753,7 +753,7 @@ proof
 			&⩽ ∑_{n=N}^{+∞}\frac{\abs{z-z_{0}}^{n}}{r^{n+1}}\\
 			&=r^{-1} {\underbrace{\left(\frac{\abs{z-z_{0}}}{r}\right)}_{< 1}}^{N} \frac{1}{1-\frac{\abs{z-z_{0}}}{r}} \arrowlim{N\to+∞}0
 		\end{align*}
-	d’où la convergence uniforme en $ζ ∈ \Cercle(z_{0}, r)$. Finalement, en substituant $(2)$ dans $(1)$ et en utilisant la convergence uniforme de la série, on obtient
+	d’où la convergence uniforme en $ζ ∈ \Cercle(z_{0}, r)$. Finalement, en substituant [thm_fonda:2] dans [thm_fonda:1] et en utilisant la convergence uniforme de la série, on obtient
 	math
 		\begin{align*}
 			f(z) &= \frac{1}{2 π i}\oint_{\Cercle(z_{0}, r)}\dd ζ f(ζ) ∑_{n ∈ \N}\frac{(z-z_{0})^{n}}{(ζ - z_{0})^{n+1}} \\

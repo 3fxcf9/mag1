@@ -1,0 +1,484 @@
+title Gravitation - I
+author jonathan.biteau
+
+## Introduction
+
+L'astrophysique est une discipline scientifique qui exploite les principes de la physique et de la chimie pour comprendre la nature, la composition et l'évolution des objets (planètes, étoiles, trous noirs, galaxies, etc.) et phénomènes célestes (supernovae, sursauts gamma, etc.) à travers le cosmos. Là où l'astronomie se concentre sur l'observation et la description de données brutes, telles que les positions, les vitesses et les spectres des corps célestes, l'astrophysique recourt à l'analyse observationnelle, à la modélisation théorique et aux simulations numériques pour expliquer pourquoi et comment ces objets se comportent. La cosmologie intègre les découvertes astrophysiques dans des modèles plus larges visant à expliquer l’origine, l’expansion et la structure à grande échelle de l’univers dans son ensemble. Dans la pratique, cependant, la frontière entre ces trois disciplines est souvent ténue : les astrophysiciens et astrophysiciennes sont fréquemment amenés à mener des observations astronomiques et à les analyser, ou à explorer l’impact de la découverte de nouveaux processus physiques sur l’étude du cosmos dans son ensemble.
+
+Historiquement, l’astronomie et l’astrophysique étaient étroitement liées à l’astrologie de l’Antiquité jusqu’au Moyen Âge, époque où les mouvements célestes et leur hypothétique impact étaient considérés comme faisant partie d’une discipline unique, enseignée aux côtés des mathématiques et de la logique. Au cours de la Renaissance et au début de l’ère moderne, des figures pionnières telles que Copernic, Tycho Brahe, Kepler, Galilée et Newton ont posé les fondements mathématiques et observationnels de l'astrophysique moderne tout en conservant des liens avec les traditions astrologiques. Une rupture progressive s’est opérée aux XVIIe et XVIIIe siècles sous l’effet de la critique scientifique des Lumières et de la création d’académies scientifiques officielles, en 1666 en France. Une ordonnance de 1682 chasse ainsi du royaume les devins et les astrologues.
+
+L'astrophysique contemporaine s'appuie sur plusieurs piliers de la physique et de la chimie pour exploiter les données des grands observatoires terrestres et spatiaux. La mécanique, classique ou relativiste, et la relativité générale expliquent la dynamique des corps célestes, les perturbations et la courbure de l'espace-temps (ondes gravitationnelles via LIGO-Virgo, trous noirs via l'EHT), et les trajectoires stellaires autour de trous noirs (e.g. GRAVITY). L’électromagnétisme et l’optique permettent de construire les observatoires et leurs instruments, de corriger les turbulences atmosphériques et d'analyser par spectroscopie les atmosphères stellaires et exoplanètaires (JWST, TESS). La physique des plasmas permet de comprendre la dynamique des gaz ionisés, le comportement du Soleil (Solar Orbiter) et la formation des jets relativistes, entre autres. La mécanique des fluides, la thermodynamique et la physique statistique permettent de modéliser le transfert d'énergie dans les étoiles, en intégrant les processus de fusion nucléaire. La chimie et l’astrochimie permettent d’identifier la présence de molécules complexes et d'acides aminés dans les astéroïdes et le milieu interstellaire (mission Hayabusa2, ALMA). La physique quantique permet l’étude des astroparticules, qu’il s’agisse de neutrinos (IceCube, KM3Net), rayons gamma (Fermi, CTAO) ou des rayons cosmiques accélérés aux plus hautes énergies connues de l’humanité (observatoire Pierre Auger). Enfin la physique fondamentale et les nouvelles théories physiques tentent d’expliquer l’origine de l’univers et l’inflation cosmique, contraintes par les observations du fond diffus microonde (Planck), ou encore la quantité d’énergie noire et matière noire mesurée par les satellites Euclid et Roman ou l’observatoire Vera C. Rubin. Ces théories à la frontière des connaissances physiques permettent aussi de chercher des observables liées à l’unification de la relativité générale et de la théorie quantique des champs.
+
+Ce cours d'introduction aux processus fondamentaux de l'astrophysique est axé sur l'application des théories de la gravité, du rayonnement, de la mécanique des fluides et de la thermodynamique à l'étude des étoiles. Il aborde également d'autres thèmes d'actualité en astrophysique en s'appuyant sur ces théories.
+
+## Champ et potentiel gravitationnel
+
+Le champ gravitationnel, $\vec{g}$, a la propriété d'être irrotationnel :
+math
+	\vec{\nabla} \wedge \vec{g} = \vec{0}
+où $\vec{\nabla}$ représente l'opérateur différentiel nabla.
+	https://fr.wikipedia.org/wiki/Nabla nabla
+
+Cette propriété correspond à une force de gravité ($m\vec{g}$) conservative, c'est à dire à un travail effectué indépendant du chemin suivi. On peut s'en convaincre à l'aide du théorème de Stokes appliqué à un contour fermé $\partial \mathcal{S}$ d'une surface orientée $\mathcal{S}$ :
+
+math
+	\begin{align}
+	\oint_{\partial \mathcal{S}} \vec{g}\cdot\dd\vec{r} &= \iint_\mathcal{S} \left(\vec{\nabla} \wedge \vec{g}\right)
+	\cdot \dd\vec{S}
+	\nonumber\\
+							&= 0.
+	\end{align}
+
+Tout comme le champ électrique, $\vec{E}$ (aussi irrotationnel), dérive d'un potentiel scalaire $V$ en électromagnétisme,
+le champ gravitationnel dérive d'un potentiel scalaire noté $\phi$, dit potentiel gravitationnel, soit
+
+math phi_def
+	\vec{g} = - \vec{\nabla} \phi.
+
+L'équation qui régit le comportement de $\phi$ en fonction de la distribution la masse volumique de matière dans
+l'univers ou dans une étoile, $\rho$ (en kg$\,$m$^{-3}$), dépend de celle qui régit $\vec{g}$ :
+
+```{math}
+:label: g_def
+\vec{\nabla}\cdot\vec{g} = - 4\pi G \rho,
+```
+
+où $G \approx 6.67 \times 10^{-11}\,\mathrm{m}^3\,\mathrm{kg}^{-1}\,\mathrm{s}^{-2}$ est la constante
+gravitationnelle. On notera l'analogie avec l'équation de Maxwell-Gauss dans le vide $ \vec{\nabla}\cdot\vec{E} =
+\rho_e/\epsilon_0, $ où $\rho_e$ est la densité de charges et $\epsilon_0$ la permittivité du vide.
+
+On peut utiliser l'équation [](#g_def) pour démontrer deux propriétés intéressantes de la gravitation lorsqu'on met
+une masse M, supposée être à symétrie sphérique, dans le vide :
+
+- a) le volume total englobé dans une sphère produit un champ équivalent à celui d'une source ponctuelle de masse $M =
+\int \rho \dd V$ en dehors de ce volume, c'est le **théorème de Gauss gravitationnel** ;
+- b) au delà de ce volume, le champ gravitationnel (et donc la force associée) va comme le carré inverse de la
+  distance,
+  nous permettant de retrouver l'expression de la force de gravitation.
+
+:::{tip} Démonstration
+:class: dropdown
+
+En utilisant le théorème de Green-Ostrogradski appliqué à une surface sphérique $\partial \mathcal{V}$ d'un volume
+$\mathcal{V}$ ainsi que l'équation [](#g_def), on obtient le théorème de Gauss gravitationnel :
+
+$$
+\begin{align}
+\oiint_{\partial \mathcal{V}} \vec{g}\cdot\dd\vec{S} &= \iiint_\mathcal{V} \vec{\nabla}\cdot\vec{g}\, \dd V
+\nonumber\\
+							&= -4\pi G \iiint_\mathcal{V} \rho\, \dd V
+\nonumber\\
+							&= -4\pi G M(r),\\
+\end{align}
+$$
+
+où $r$ est le rayon de la sphère et $M(r) = \int_0^{r} \dd r'\  4\pi r'^2 \rho(r')$ en géométrie sphérique. Si la
+sphère est plus grande que le volume concerné, $M(r)$ représente toute la masse de l'objet. Le champs
+gravitationnel qu'il produit est donc équivalent à celui d'une masse ponctuelle placé au centre.
+
+Étant donné la dépendance purement radiale de $\vec{g}$ impliquée par la symétrie sphérique, on
+peut écrire $\vec{g}\cdot\dd \vec{S} = g(r)\dd S$. Par ailleurs, $g(r)$ étant constant sur la sphère,
+
+$$
+\oiint_{\partial \mathcal{V}}\vec{g}\cdot\dd\vec{S}  = 4\pi r^2 g(r),
+$$
+
+d'où l'on tire $4\pi r^2 g(r) = -4\pi G M(r)$, soit
+
+$$
+g(r) = - \frac{G M(r)}{r^2}.
+$$
+
+Pour une masse test $m$, on retrouve bien l'expression mathématique de la force gravitationnelle selon Newton: $\vec
+{F} = m\vec{g} = m g(r) \vec{u}_r = - \frac{G M(r)m}{r^2}\vec{u}_r$.
+:::
+
+On déduit de la version différentielle du théorème de Gauss en équation [](#g_def) et de la définition du potentiel
+gravitationnel en équation [phi_def], l'équation permettant de déterminer le potentiel gravitationnel :
+
+```{math}
+:label: poisson
+\boxed{\Delta \phi = 4\pi G \rho.}
+```
+
+Cette égalité est appelée **équation de Poisson**, avec $\Delta \equiv \vec{\nabla}^2 = \vec{\nabla}\cdot\vec{\nabla}$
+l'opérateur laplacien.
+
+On notera que dans le cas particulier d'une distribution de masse volumique à symétrie sphérique (voir démonstration
+ci dessus), on peut obtenir l'expression du champ gravitationnel en intégrant l'équation [phi_def], soit
+
+```{math}
+:label: solution
+\begin{align}
+\int_{0}^{r}  \vec{\nabla}\phi \cdot \dd \vec{r'} &= - \int_{0}^{r} g(r')\,  \dd r'
+\nonumber\\
+\int_{0}^{r}  \frac{\dd\phi}{\dd r}(r')\, \dd r' &= \int_0^r \frac{GM(r')}{r'^2}\, \dd r'
+\nonumber\\
+\phi(r)-\phi(0) &= \int_0^r \frac{GM(r')}{r'^2}\, \dd r'.
+\end{align}
+```
+
+On constate que le champ gravitationnel est une fonction croissante du rayon $r$ (l'intégrande est positif), qui
+converge vers une valeur constante à grande distance (lorsque $M(r)$ atteint la valeur de masse maximale $M(r_0)
+\equiv M_0$, l'intégrale va comme $-GM_0/r$). Le potentiel est toujours défini à une constante près. Par convention
+cette constante est fixée
+de sorte que le potentiel converge vers une valeur nulle, ainsi le potentiel gravitationel est défini comme étant
+négatif, comme illustré en [](#fig:grav_pot) pour une sphère remplie de façon homogène.
+:::{figure} ../../images/grav_pot_homogene_sphere.png
+:name: fig:grav_pot
+:align: center
+:width: 70%
+
+Potentiel gravitationnel d'une étoile en fonction de la distance au coeur de
+l'étoile. L'étoile est supposée sphérique et homogène jusqu'à un rayon $r = r_0$. Le potentiel et le
+rayon sont normalisés aux grandeurs dimensionnées pertinentes, respectivement $GM_0/r_0$ et $r_0$. Le champ
+gravitationnel $g$ correspond à la valeur absolue de la pente de cette courbe.
+
+:::
+
+Cependant, on notera que la seule grandeur pertinente pour déterminer le mouvement d'une
+source ponctuelle où l'évolution d'un système interaction gravitationnelle est, comme en électrostatique, la
+seule différence de potentiel.
+
+:::{note}
+En coordonnées sphériques et pour une fonction indépendante des angles ($\theta,\varphi$), le laplacien se réduit
+$\Delta \phi = \frac{1}{r^2} \frac{\dd}{\dd r}\left(r^2 \frac{\dd \phi}{\dd r}\right)$. On pourra vérifier que
+le potentiel en équation [](#solution) est bien solution de l'équation de Poisson [](#poisson).
+:::
+
+# Formation stellaire : critère de Jeans
+
+La formation d'une étoile au sein d'un nuage de gaz interstellaire est un processus complexe, dont les principaux
+ingrédients peuvent malgré tout être compris avec des arguments physiques simples. Considérons un nuage de gaz
+homogène d'extension infinie. L'homogénéité initiale ne correspond pas
+à un état d'équilibre. En effet, par symétrie, le champs gravitationnel est constant et donc, d'après l'équation de
+Poisson [](#poisson), $\phi = \text{cte} \iff \rho = 0$, soit une quantité de matière nulle.
+
+En combinant l'équation de Poisson aux [équations d'Euler](<wiki:Euler_equations_(fluid_dynamics)>) (conservation de la masse et bilan de quantité de
+mouvement), on peut déterminer par développement perturbatif la longueur d'onde
+minimale au delà de laquelle un mode s'effondre de façon exponentielle, qu'on appelle longueur d'onde de Jeans.
+
+## Énergie totale d'un nuage de gaz en rotation
+
+On peut tout aussi bien établir les conditions d'effondrement d'un mode perturbatif en partant de l'énergie totale d'un nuage sphérique de gaz en rotation, $E_\text{tot} =  E_\text
+{p} + U +
+E_\text
+{rot}$, soit la
+somme de l'énergie potentielle ($E_\mathrm{p}$), l'énergie cinétique interne ($U$) et l'énergie de rotation
+($E_\mathrm{rot}$). Le terme d'énergie cinétique de translation est nul pour un référentiel attaché au centre du nuage.
+
+L'énergie potentielle gravitationnelle d'une masse ponctuelle $m$ dans un champ $\phi(\vec{r})$ est définie par
+$$E_\mathrm{p} = m \phi(\vec{r}),$$
+dont on déduit (voir exercice ci dessous) l'énergie potentielle gravitationnelle d'un volume sphérique homogène de
+rayon $r_0$ et de masse $M_0$ :
+$$\boxed{E_\mathrm{p} = -\frac{3}{5}\frac{GM_0^2}{r_0}.}$$
+
+:::{exercise} Énergie potentielle d'une sphère homogène
+:label: exo:sphere_mass
+
+Démontrer que l'énergie potentielle gravitationnelle d'un volume sphérique de rayon $r_0$ et de masse $M_0$ rempli de
+façon homogène est égale à
+$$E_\mathrm{p} = -\frac{3}{5}\frac{GM_0^2}{r_0}.$$
+
+Astuce : raisonner sur des coquilles sphériques successives.
+
+:::
+:::{solution} exo:sphere_mass
+:class: dropdown
+
+On se place en coordonnées sphériques et on intègre sur les deux coordonnées non radiales étant donné la symétrie
+de révolution. Le volume d'une coquille sphérique d'épaisseur $\dd r$ et de rayon $r$ est $\dd V = 4\pi r^2 \dd r$.
+D'après le théorème de Gauss, le champ $\phi(r)$ ressenti par la coquille est équivalent à celui d'une masse
+ponctuelle centrale soit, pour une densité $\rho$ constante, $M(r) = \frac{4\pi}{3} r^3 \rho$ et $\phi(r) = -\frac
+{GM(r)}{r}$. (On note la dépendance quadratique du potentiel en le rayon aux distances inférieures au rayon de la
+sphère.)
+
+Ainsi, l'énergie potentielle du volume sphérique, sommée sur les coquilles successive de masse $\dd m = \rho \dd V$, est
+
+\begin{align}
+E_\mathrm{p} &= \int_\mathcal{V} \rho\, \phi(\vec{r'})\dd V'\\
+&= - \int_0^{r_0} \rho \frac{G \frac{4\pi}{3} r'^3 \rho}{r'} 4\pi r'^2 \dd r'\\
+&= - 3 \frac{G\left(\frac{4\pi}{3} r_0^3 \rho\right)^2}{r_0} \int_0^{r_0} \left(\frac{r'}{r_0}
+\right)^4 \frac{\dd r'}{r_0}\\
+&= - \frac{3}{5} \frac{GM_0^2}{r_0}
+
+\end{align}
+
+:::
+
+L'énergie cinétique interne est donnée par la théorie cinétique des gaz :
+$$\boxed{U = \frac{3}{2}NkT,}$$
+où $T$ est la température du gaz, $k$ la constante de Boltzmann, et $N = M_0/m$ est le nombre de particules de gaz de
+masse $m$.
+
+On considérera pour cette application un nuage d'hydrogène moléculaire géant (composé de dihydrogène H$_2$),
+soit des particules de masse égale à deux fois celle du proton, $m = 2m_p$, une température de gaz $T = 10\,\text{K}
+$ et une densité de particules $\bar n \equiv \frac{\rho}{m} = 10^5\,\text{cm}^{-3}$ (environ dix fois plus faible
+que la densité du vide des tubes à faisceau du grand collisionneur de hadrons, le LHC, au CERN).
+
+L'énergie rotationnelle du nuage dépend de son moment d'inertie, $I$, et de sa vitesse de rotation $\Omega$:
+$$\boxed{E_\mathrm{rot} = \frac{1}{2}I \Omega^2.}$$
+
+Pour un nuage sphérique, un calcul classique de mécanique du solide donne $I = \frac{2}{5} M_0 r_0^2$.
+
+```{admonition} Rappel : moment d'inertie d'une sphère pleine
+:class: dropdown
+Considérons un axe de rotation suivant $z$ en coordonnées sphériques $(r', \theta, \varphi)$. Le moment d'inertie est
+défini par:
+$$I = \int \dd V\, \rho (r' \sin \theta)^2,$$
+où $r' \sin \theta$ est la distance d'un point à l'axe $z$ et $\dd V = r'^2 \sin \theta \dd r' \dd \theta \dd \varphi$ est
+l'élément de volume.
+
+L'intégrale sur l'angle azimuthal conduit à un facteur $2\pi$, celle sur la distance radiale donne un
+facteur $r^5/5$, celle sur l'angle zénithal peut être évaluée grâce au changemement de variable $\mu =
+\cos \theta$ et est égale à $4/3$, soit $I = \frac{8\pi}{15} \rho r_0^5$. En notant que $\rho = M_0/\left(\frac{4\pi}{3}
+r_0^3\right)$, on obtient $I = \frac{2}{5} M_0 r_0^2$.
+```
+
+Pour qu'il collapse, le système doit être lié, i.e. avoir une énergie totale négative. L'énergie gravitationnelle
+doit donc être supérieure à la somme de l'énergie cinétique interne et de l'énergie de rotation. Cette condition
+nécessaire est le plus souvent décomposé en deux critères.
+
+## Critère de Jeans
+
+La première condition, dite **critère de Jeans**, impose que l'énergie gravitationnelle l'emporte sur l'énergie
+cinétique interne, soit $|E_\mathrm{p}| > U$. Le critère de Jeans impose ainsi une masse minimale au nuage
+de gaz :
+
+```{admonition} démonstration
+:class: dropdown
+:::{math}
+:label: jeans
+\begin{align}
+\frac{3}{5} \frac{GM_0^2}{r_0} &> \frac{3}{2}\frac{M_0}{m}kT\\
+\frac{GM_0}{\left(\frac{3M_0}{4\pi\rho}\right)^{1/3}} &> \frac{5}{2}\frac{kT}{m}\\
+M_0^{2/3} &>  \frac{5}{2}\frac{kT}{Gm}\left(\frac{3}{4\pi\rho}\right)^{1/3},
+\end{align}
+:::
+soit
+```
+
+```{math}
+:label: jeans_fin
+\boxed{M_0 > M_J,}
+```
+
+avec
+
+```{math}
+:label: jeans_an
+\begin{align}
+M_J &= \left(\frac{5}{2}\frac{kT}{Gm}\right)^{3/2}\left(\frac{4\pi}{3}\rho\right)^{-1/2}\\
+ &\approx 0.82 M_\odot\ \left(\frac{T}{10\,K}\right)^{3/2}\left(\frac{\bar n}{10^5\,\text{cm}^{-3}}\right)^
+ {-1/2},
+\end{align}
+```
+
+où $M_\odot = (1.99848 \pm 0.00009) \times 10^{30}\,\text{kg} $ est la masse du soleil (valeur CODATA 2014).
+
+Bien que les préfacteurs numériques dépendent légèrement de la géométrie adoptée (sphérique ici), la masse de Jeans
+($M_J$) est une fonction croissante de la température du gaz et décroissante de la densité. A masse de nuage $M_0$
+fixée, l'énergie gravitationnelle
+l'emporte donc si le gaz est suffisamment froid et suffisamment dense, comme le suggère l'intuition physique.
+
+Tout autre paramètre fixé par ailleurs, le critère de Jeans peut aussi être exprimé sous la forme d'une densité
+minimale, soit $\rho>\rho_J$ (voir Eq. [](#jeans)), ou d'une taille minimale $r_0 > r_J$ (en remplaçant $M_0$ par
+$\frac{4\pi}{3}r_0^3\rho$ en Eq. [](#jeans_fin)). En reprenant les température et densité de référence adoptés ci
+dessus, on trouve pour le rayon de Jeans
+
+```{math}
+:label: jeans_rad_an
+\begin{align}
+r_J &= \left(\frac{15}{8\pi}\frac{kT}{\rho Gm}\right)^{1/2}\\
+ &= 11\,\text{au}\ \left(\frac{T}{10\,K}\right)^{1/2}\left(\frac{\bar n}{10^5\,\text{cm}^{-3}}\right)^{-1/2},
+\end{align}
+```
+
+où le symbole [au](wiki:Astronomical_unit) désigne l'**unité astronomique** (1 au = 149 597 870 700 m),
+proche de la distance entre la Terre et le Soleil.
+
+Un nuage moléculaire géant satisfaisant le critère de Jeans s'effondre donc en surdensités de
+taille, $r_J$, et de masse, $M_J$, comparables à celle du système solaire.
+
+## Barrière rotationnelle
+
+Outre le critère de Jeans portant sur l'énergie cinétique interne, on peut imposer comme condition que l'énergie
+gravitationnelle l'emporte sur l'énergie rotationnelle, soit $|E_\mathrm{p}| > E_\mathrm{rot}$. Ce critère impose
+donc une **barrière rotationnelle**, i.e. une vitesse de rotation maximale $\Omega_\text{max}$, au nuage
+de gaz :
+
+```{admonition} démonstration
+:class: dropdown
+
+:::{math}
+:label: rot
+\begin{align}
+\frac{1}{2}\left(\frac{2}{5}M_0r_0^2\right)\Omega^2 &< \frac{3}{5} \frac{GM_0^2}{r_0} \\
+\Omega^2 &< \frac{3GM_0}{r_0^3} \\
+\Omega^2 &< 4\pi \rho G,
+\end{align}
+:::
+soit
+```
+
+```{math}
+:label: rot_fin
+\boxed{\Omega < \Omega_\text{max},}
+```
+
+avec
+
+```{math}
+:label: rot_an
+\begin{align}
+\Omega_\text{max} &= (4\pi \rho G)^{1/2}\\
+ &\approx 5.3\times 10^{-13}\,\text{rad}\,\text{s}^{-1}\ \left(\frac{\bar n}{10^5\,\text{cm}^{-3}}\right)^{1/2}.
+\end{align}
+```
+
+La barrière rotationnelle impose que la période de rotation soit plus longue que $T_\text{min}=2\pi/\Omega_\text
+{max}
+\approx 4 \times 10^5\,\text{yr}$, de l'ordre du million d'années. Pour comparaison, les
+nuages moléculaires géants ont généralement une période de rotation comparable à celle de leur galaxie hôte, de
+l'ordre de la centaine de millions d'années pour la Voie Lactée (voir exercice d'ouverture).
+
+Ainsi le nuage moléculaire géant étudié, **suffisamment massif, froid et de longue période de rotation**, se fragmente
+en surdensités qui s'effondrent. La conservation du moment cinétique appliquée à une surdensité lors de l'effondrement
+conduit à
+une augmentation de sa vitesse de rotation à mesure que le rayon diminue : le nuage protostellaire s'applatit et
+forme le **disque proto-planétaire** qui entourera l'étoile. La conservation du moment cinétique indique que la
+fréquence de rotation augmente comme le carré inverse du rayon du système lors de la contraction, alors que la
+barrière rotationnelle ne va que comme la puissance $-3/2$ du rayon (voir Eq.~[](#rot_an)). Un nuage moléculaire géant
+n'atteignant pas la barrière rotationnelle initialement peut ainsi y être confronté à un stade ultérieur de
+l'effondrement. Pour continuer à se contracter, le système doit évacuer du moment cinétique, par exemple en émettant
+des **jets magnétisés** de part et d'autre du disque.
+
+L'effondrement s'arrête lorsque la gravitation est
+compensée par la pression interne du système, en particulier la **pression de radiation** dûe à l'allumage des
+réactions
+thermonucléaires dans l'étoile, qui fera l'objet d'une séance ultérieure.
+
+# Exercice d'ouverture : la matière noire tracée par les étoiles
+
+Les étoiles formées dans les nuages moléculaires géants sont l'objet principal de ce cours d'introduction aux
+processus fondamentaux en astrophysique. Il s'agira de comprendre non seulement comment elles se forment mais aussi
+comment elles transforment leur énergie gravitationnelle en radiation, comment elles évoluent, voire comment elles
+peuvent terminer leurs vies en **objets compacts**, tels des trous noirs, étoiles à neutrons ou naines blanches.
+
+Vues à plus grande échelle, les étoiles peuvent aussi être envisagées comme sources de lumière
+ponctuelles dont la position et le mouvement permettent de sonder le champ gravitationnelle dans lequel elles évoluent.
+Ces études d'astrométrie ont des applications multiples, comme la mesure de la
+masse du trou noir central de la Voie Lactée, dénommé Sagittarius A$^*$, ou encore la mesure de la
+**quantité de matière noire** (i.e. n'émettant pas de lumière) au sein de galaxies.
+
+:::{exercise} Courbe de rotation des galaxies
+:label: exo:v(r)
+
+Dans cet exercice, on s'attache à décrire les courbes de rotation d'étoiles au sein de la Voie Lactée
+reconstruites à l'aide des données du satellite Gaïa (2013-2025) de l'Agence Spatiale Européenne (ESA). Dans son lot
+de données DR3, la collaboration Gaïa fournit les coordonnées 6D (positions et vitesses) de plus de 30 millions
+d'étoiles. Nous utilisons ici les courbes de rotation issues de {cite}`2023ApJ...945....3S`.
+
+Pour comparaison avec les résultats obtenus en fin d'exercice, on notera que la masse totale contenue dans les
+étoiles de la Voie Lactée, dite **masse stellaire**, est estimée à $(0.6 \pm 0.1) \times 10^{11}\,M_\odot$
+{cite:p}`2015ApJ...806...96L`. La masse du gaz restant et celle des poussières interstellaires sont respectivement
+estimée à
+${\sim}\,10\%$ and ${\sim}\,1\%$ de la masse stellaire.
+
+Pour rappel, l'équation du mouvement d'une masse ponctuelle est donnée par l'accélération
+
+$$ \vec{a} = -\vec{\nabla}\phi$$
+
+On rappelle qu'en coordonnées sphériques, la composante radiale de l'accélération est
+$$ a_r = \ddot r - r{\dot \theta}^2 - r{\dot \varphi}^2 \sin^2 \theta,$$
+où $(r,\theta,\varphi)$ sont les coordonnées sphériques usuelles et où $\dot x = \frac{\dd x}{\dd t}$.
+
+1. En plaçant la masse test dans une configuration initiale appropriée,
+   montrer que :
+   $$ \ddot r - r{\dot \varphi}^2  = -\frac{GM(r)}{r^2}$$
+
+2. En déduire que, le long d'une orbite circulaire, la vitesse de rotation de la masse test est donnée par :
+   $$ v(r) = \left(\frac{GM(r)}{r} \right)^{1/2}$$
+
+3. Déterminez l'expression de la vitesse de rotation en fonction du rayon, soit la **courbe de rotation**, pour une
+   densité
+   homogène de matière $\rho_0$ jusqu'à une distance maximale $r_0$.
+
+4. Le graphique suivant montre l'évolution de la quantité $rv^2/G$, exprimée en masse solaire, $M_\odot$, en fonction
+   du rayon en kpc (le **parsec** $-$de symbole pc$-$ est l'unité de référence en astronomie au delà du Système
+   solaire ; pour référence, la distance entre le Soleil et
+   l'étoile Proxima du Centaure est d'environ $1\,$pc). Discuter l'allure de la courbe et les valeurs numériques lues
+   graphiquement au regard de la masse stellaire de la Voie Lactée.
+
+![](#rot-curve-plot)
+:::
+
+:::{solution} exo:v(r)
+:class: dropdown
+
+1. On oriente la sphère de sorte à ce que la masse test soit initialement dans le plan défini par $\theta=0$, avec
+   une vitesse initiale dans ce même plan. Par symmétrie du système, la particule reste dans le plan ($\dot \theta
+   = 0$). Ainsi, la composante radiale de l'équation du mouvement se réduit à
+
+\begin{align}
+\ddot r -r{\dot \varphi}^2 &= -\frac{\dd}{\dd r}\left( \int_0^r \frac{GM(r')}{r'^2} \dd r'\right) \\
+&= -\frac{GM(r)}{r^2}
+\end{align}
+
+2. Sur une orbite circulaire, le rayon ne varie pas ($\dot r = 0$ et $\ddot r = 0$). La vitesse de rotation de la masse
+   test est alors donnée par $v(r) = r\dot \varphi$. Alors, d'après la question précédente, $(r\dot \varphi)^2 = GM(r)
+   /r$ donc
+   $$ v(r) = \left(\frac{GM(r)}{r} \right)^{1/2}.$$
+
+3. Pour $\rho(r) = \rho_0 H(r_0 -r)$, où $H$ est la fonction de Heaviside, la masse contenue dans une
+   sphère de rayon r est
+   \begin{align}
+   M(r) &= \int_0^{r} \rho_0 H(r_0 -r') \dd V'\\
+   &= 4\pi \rho_0 \int_0^{\text{min}(r,r_0)} r'^2 \dd r'\\
+   &= \frac{4\pi}{3} \rho_0 (\text{min}(r,r_0))^3\\
+   &= \begin{cases}
+   M_0 \left(\frac{r}{r_0}\right)^3 & \mathrm{pour }\ r<r_0\\
+   M_0 & \mathrm{pour }\ r\geq r_0.
+   \end{cases}
+   \end{align}
+
+On en déduit donc une vitesse de rotation
+
+$$
+v(r) = \begin{cases}
+    \left(\frac{GM_0}{r_0}\right)^{1/2} \times \frac{r}{r_0} & \mathrm{pour }\ r<r_0\\
+     \left(\frac{GM_0}{r}\right)^{1/2} & \mathrm{pour }\ r\geq r_0.
+    \end{cases}
+$$
+
+Soit une vitesse radiale proportionnelle au rayon jusqu'à $r_0$. La dépendance en $1/\sqrt{r}$ au delà est appelée
+la décroissance Képlérienne de la courbe de rotation.
+
+4. La courbe représentant $rv^2/G$ en fonction du rayon ($r$) croit puis atteint un plateau à environ
+   $2 \times 10^{11}\,M_\odot$, qu'on identifie à la masse gravitationnelle de la Voie Lactée. C'est près de quatre
+   fois plus que la masse des étoiles, poussières et du gaz au sein de notre galaxie : les trois quarts de la masse
+   sont manquant ! Cette masse manquante qui n'émet pas de lumière mais dont on trouve la signature gravitationnelle
+   dans les courbes de rotation de galaxies, dans les amas de galaxie et dans la distribution des surdensité du fond
+   diffus micro-onde est appelée **matière noire**. On notera dans le graphique que la masse contenue dans un rayon
+   $r$ ne croit pas
+   comme le cube du rayon à faible distances : notre hypothèse de sphère remplie de homogène est à revoir ! Pour
+   aller plus loin, voir par exemple [ce communiqué de presse](https://observatoiredeparis.psl.eu/revue-fortement-a-la-baisse.html?lang=fr)
+   et la publication scientifique associée.
+
+:::
+
+:::{tip}
+**Notions de ce chapitre**
+
+_Champ et potentiel gravitationnel_
+
+- Quelle est l'équation reliant le champ et le potentiel gravitationnel ?
+- Rappeler l'équation de Poisson permettant de déterminer le potentiel gravitationnel.
+- Suis-je capable de calculer l'énergie potentielle gravitationnelle d'une sphère ?
+
+_Critère de Jeans, matière noire_
+
+- A quelles condition un nuage de gaz moléculaire peut-il se fragmenter ?
+- Comment se manifeste la matière noire dans les courbes de rotation des galaxies ?
+
+:::

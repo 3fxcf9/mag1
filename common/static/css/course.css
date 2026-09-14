@@ -656,9 +656,24 @@ body {
     print-color-adjust: exact;
   }
 
-  .katex-display {
-    overflow-x: auto;
-    overflow-y: hidden;
+  .equation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1em 0;
+
+    .equation-katex {
+      flex-grow: 1;
+      overflow-x: auto;
+    }
+    .katex-display {
+      overflow-y: hidden;
+      margin: 0;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   /*************** Environments ***************/
@@ -696,6 +711,7 @@ body {
   .environment-notation,
   .environment-corollary,
   .environment-lemma,
+  .environment-generic,
   .environment-property,
   .environment-definition,
   .environment-definition-proposition,
@@ -712,6 +728,7 @@ body {
     .environment-notation,
     .environment-corollary,
     .environment-lemma,
+    .environment-generic,
     .environment-property,
     .environment-definition,
     .environment-definition-proposition,
@@ -793,6 +810,7 @@ body {
   .environment-proposition > .environment-title,
   .environment-corollary > .environment-title,
   .environment-lemma > .environment-title,
+  .environment-generic > .environment-title,
   .environment-property > .environment-title,
   .environment-definition > .environment-title,
   .environment-definition-proposition > .environment-title,
@@ -813,6 +831,7 @@ body {
     .environment-theorem > .environment-title,
     .environment-corollary > .environment-title,
     .environment-lemma > .environment-title,
+    .environment-generic > .environment-title,
     .environment-property > .environment-title,
     .environment-definition > .environment-title,
     .environment-definition-proposition > .environment-title {

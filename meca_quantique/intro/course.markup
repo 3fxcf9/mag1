@@ -74,10 +74,70 @@ Les équations différentielles étudiées sont d’ordre 2, contrairement à ce
 		\bar{E} = \sum E\Proba(E,T) = \frac{∑_{n=0}^{+∞}n E_{0} e^{-n β E_{0}}}{∑_{n=0}^{+∞}e^{-n β E_{0}}} = \frac{E_{0}}{e^{β E_{0}}-1}
 	C’est un succès total, car il suffit de prendre $E_{0} = h ν$ pour obtenir la _loi de Planck_
 	math
-		u(ν,T) = \frac{8 π ν^{2}}{c^{3}}\frac{h ν}{e^{- \frac{h ν}{k_{B} T}}-1}
+		u(ν,T) = \frac{8 π ν^{2}}{c^{3}}\frac{h ν}{e^{\frac{h ν}{k_{B} T}}-1}
 	Quelques remarques :
 	- L’idée de Planck paraît folle pour l’époque.
 	- La notation $h$ pour la constante de Planck vient du mot allemand _Hilfsgröße_ (grandeur auxiliaire).
 	- On utilise souvert $\hbar = \frac{h}{2 π}$.
 	- Le domaine de Rayleigh-Jeans (basse fréquence donc basse énergie) s’appelle la _limite classique_. Il correspond à la limite $\frac{h ν}{k_{B}T} \small 1$ ou formellement à $\hbar \to 0$.
 	- Le domaine de Wien correspond à la limite $\frac{h ν}{k_{B}T} \large 1$ (haute énergie, basse température).
+	? Quel sens donner à la relation de Planck-Einstein ?
+	math
+		\boxed{E_{0} = h ν = \hbar ω}
+	Enstein va l’expliquer en 1905: dans le régime de Wien,
+	math
+		u_{W}(ν, T) = \frac{8 πh}{c^{3}}ν^{3} \exp{-\frac{h ν}{k_{B}T}}
+	donc à $ν$ fixé :
+	math
+		\frac{1}{T} = \frac{k_{B}}{h ν}\ln \left(\frac{8 π h ν^{3}}{u c^{3}}\right)
+	or en thermodynamique, comme $\dd U = T \dd S - P \dd V$,
+	math
+		\frac{1}{T} = \eval{\pdv{S}{U}}{V}
+	où $U = U(ν, T) = u(ν, T) V$. Par intégration,
+	math
+		ts = \frac{k_{B} U}{h ν} \left[1 + \ln \left(\frac{8 π V}{Uc^{3}}h ν^{3}\right)\right]
+	Comparons $S(V)$ et $S(V_{0})$ à énergie $U$ fixée :
+	math
+		S(V) - S(V_{0}) = k_{B} \frac{U}{h ν}\ln \left(\frac{V}{V_{0}}\right) = k_{B} \ln \left[ \left(\frac{V}{V_{0}}\right)^{\frac{U}{h ν}}\right]
+	Or la théorie cinétique des gaz donne, pour un gaz parfait composé de $N$ particules,
+	math
+		\eval{S(V) - S(V_{0})}{U} = k_{B}\ln \left[\left(\frac{V}{V_{0}}\right)^{N}\right]
+	Ainsi, le rayonnement se comporte comme un gaz de corpuscules, chacun ayant une énergie $E = h ν$. Einstein utilise le nom de _quantas_ de lumière.
+- D’autres problèmes de la physique classique sont l’effet photoélectrique, les raies spectrales et les effets Zeeman. En bref, il faut en conclure que la lumière selon les circonstances, exhibe des comportements ondulatoires ou corpusculaires.
+
+callout Qu’est-ce que $h$ ?
+	Sa dimension est $ML^{2}T^{-1}$, soit la même que l’action $S = ∫_{t_{i}}^{t_{f}}\Lagr \dd t$ où $\Lagr = E_{\text{cin}} - E_{\text{pot}}$. Typiquement, si $S$ est du même ordre de grandeur que $\hbar$, on a affaire à un système quantique, et sinon, $S \large ⋯ \large \bar{h}$. Le moment cinétique a lui aussi la même dimension que $h$.
+
+recall Retour sur le modèle de Bohr de l’atome d’hydrogène
+	Lors d’une transition d’un niveau d’énergie $E_{2}$ à un niveau d’énergie $E_{1} < E_{2}$, un paquet de lumière de fréquence $ν$ est émis, avec
+	math
+		h ν = ΔE = E_{2} - E_{1}
+	Les idées de base sont: des orbites circulaires et discrètes, ce qui mène à un moment cinétique disscret $L = n \hbar$ avec $n ∈ \N^{*}$. Dans le référentiel de l’électron, la force de coulomb compense la force centrifuge, d’où
+	math
+		\boxed{r_{n} = n^{2} \frac{h^{2}}{m_{e} e^{2}} = n^{2} r_{0}}
+	avec $r_{0} \simeq 0.53\u{\Ang}$ le rayon de Bohr. Dans le cas d’orbites stables, on trouve
+	math
+		E_{\text{tot}} = E_{n} = - \frac{E_{I}}{n^{2}}
+	où $E_{I} = \frac{me^{4}}{2 h^{2}} \simeq 13.6 \u{eV}$ et $e^{2} = \frac{q_{e}^{2}}{4 π ε_{0}}$. Alors,
+	math
+		ΔE = te_{n} - E_{m} = -E_{I} \left[\frac{1}{n^{2}} - \frac{1}{m^{2}}\right]
+	? Pourquoi donc $L$ serait-il quantifié ?
+	Louis de Broglie fait une proposition fondamentale dans sa thèse de doctorat qu’il soutient en 1924. Il y fait la synthèse des dernières avancées en électromagnétisme, relativité restreinte, physique statistique et en physique des quantas. L’idée est la suivante: si la lumière exhibe parfois un compotement corpusculaire, pourquoi les corpusqules (de matière) n’auraient-ils pas parfois un comportement ondulatoire ? Il propose de voir la lumière comme des photons d’énergie $E = h ν = \hbar ω$ et d’impulsion $\boxed{\p = \hbar \vec{k}}$ (_relation de Einstein-de-Broglie_). On peut imaginer que les électrons soient aussi discriptibles par des ondes de longueur d’onde $λ = \frac{2 π}{k}$ où $k = \norm{\vec{k}}$ avec $\vec{k} = \frac{\vec{p}}{\hbar}$. Or en régime stationnaire, $2 π r = n λ$ d’où
+	math
+		L = \norm{\vec{L}} = \norm{\r ∧ \p} = rp = \frac{n λ}{2 π} \hbar k = n \hbar
+
+callout En résumé…
+	math
+		E = h ν = \hbar ω \quad \text{et} \quad \p = \hbar\k
+	et il existe un lien entre $k$ et $ω$: la relation de dispersion.
+
+example Corpuscule non-relativiste libre :
+	math
+		E = E_{\text{sin}} = \frac{\p^{2}}{2m} = \frac{\hbar^{2}k^{2}}{2m} = \hbar ω
+	d’où
+	math
+		ω(k) = \frac{\hbar k^{2}}{2m}
+
+env Synthèse de Bohr (1927-1929)
+	Principe de complémentarité: selon les circonstances (mesures, expériences…) les constituants élémentaires se comportent soit comme des ondes, soit comme des corpuscules, soit comme un subtil (inégal) mélange des deux — dualité onde-corpuscule.
+

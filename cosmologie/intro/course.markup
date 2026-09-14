@@ -1,0 +1,43 @@
+../../common/course.lib.markup
+
+title Introduction à la cosmologie
+date 14/09/2026
+
+## Quelques définitions
+
+- ++Cosmologie++: Étude de l’Univers dans son ensemble, de son évolution dans le temps, de ses propriétés.
+- ++Univers++: Nom donné au système physique le plus grand que l’on puisse envisager. Il contient tout ce qui existe et on ne sait pas si il est fini, contrairement à l’univers observable. La position de l’observateur est particulière : il appartient à l’objet d’étude et ne peut pas bouger.
+- ++Âge de l’univers++: Environ $13.8$ milliards d’années.
+Q: Âge de l’univers A: Environ $13.8$ milliards d’années.
+- ++Univers observable++: Portion de l’univers qu’il nous est possible d’observer (depuis laquelle un photon émis peut physiquement arriver sur terre). C’est une sphère de rayon $R$, différent de $13.8 × 10^{9}\ly$ à cause de l’expansion.
+Q: Univers observable A: Portion de l’univers qu’il nous est possible d’observer (depuis laquelle un photon émis peut physiquement arriver sur terre). C’est une sphère de rayon $R$, différent de $13.8 × 10^{9}\ly$ à cause de l’expansion.
+- ++Modèle standard de la cosmologie++: Modèle du _Big Bang_.
+	! Il faut abandonner l’idée d’une explosion localisée dans le temps que dans l’espace.
+
+## Modèle du Big Bang
+
+fig
+	./figures/modele_big_bang.svg
+
+## Histoire d’une molécule d’eau
+
+- Les protons et neutrons se forment lors de la Baryogénèse,
+- les atomes d’hydogène sont ensuite formés lors de la recombinaison,
+- les atomes d’oxygène sont formés dans les étoiles,
+- des réactions d’ionisation surviennent, et forment $\ce{H+}$, $\ce{H30+}$, $\ce{OH-}$,… et de l’eau (typiquement dans les ondes de choc).
+- En parallèle, $\ce{H}$ et $\ce{O}$ peuvent se rencontrer sur des grains et former de l’eau.
+
+L’eau ainsi formée peut se dissocier dans les disques protoplanétaires.
+
+## Le paradoxe d’Olbers (1823)
+
+D’une étoile de diamètre $D$ située à une distance $r$ nous provient un flux $F = \frac{L}{4 πr^{2}}$ où $L$ est la luminosité de l’étoile. Cette étoile couvre un angle $θ \simeq \tan θ = \frac{D}{r}$ du ciel, soit une surface angulaire $S ∝ \left(\frac{ed}{r}\right)^{2}$ (en $\u{deg^{2}}$ ou $\u{sr}$). La brillance de surface (flux par stéradian) d’une telle étoile est alors
+math
+	B ∝ \frac{L/r^{2}}{T^{2}/r^{2}} ∝ \frac{L}{D^{2}} = \cte
+Or, dans un univers infini, chaque ligne de visée aboutit sur une étoile dont la brillance de surface ne dépend pas de notre distance à elle, et qui brille donc comme le Soleil : le ciel entier devrait briller comme le Soleil.
+
+Contre-arguments
+- _Edgar Allan Poe (1858)_ : Les étoiles présentes dans les zones sombres du ciel sont si lointaines que les photons qu’elles émettent n’ont pas eu le temps d’arriver jusqu’à nous. L’univers peut alors être infini si il a un age fini.
+- Les étoiles ont une durée de vie finie.
+- L’Univers est en expansion.
+
