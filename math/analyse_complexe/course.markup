@@ -1018,9 +1018,11 @@ rem
 ### Singularités isolées
 
 def
-	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $f$. On dira que $z_{0} ∈ \C ∖ Ω$ est une _singularité isolée_ de $f$ si il existe $r > 0$ tel que $\PD(z_{0}, r) ⊂ Ω$. D’après le théorème de Laurent, il existe alors une double suite de nombres complexes $(a_{n})_{n ∈ \N}$ telle que
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $f$. On dira que $z_{0} ∈ \C ∖ Ω$ est une _singularité isolée_ de $f$ si il existe $r > 0$ tel que $\PD(z_{0}, r) ⊂ Ω$. D’après le théorème de Laurent, il existe alors une double suite de nombres complexes $(a_{n})_{n ∈ \Z}$ telle que
 	math
 		∀ z ∈ \PD(z_{0}, r), f(z) = ∑_{n ∈ \Z}a_{n}(z-z_{0})^{n}
+	Q: Singularité isolée d’une fonction $f$ holomorphe sur un ouvert $Ω$.
+		A: Point $z_{0} ∈ \C ∖ Ω$ tel que pour un certain $r > 0$, $\PD(z_{0}, r) ⊂ Ω$.
 	On distingue alors trois cas : on dira que $z_{0}$ est
 	~ une singularité _apparente_ ou _effacable_ de $f$ si
 		math
@@ -1034,17 +1036,35 @@ def
 	Dans les deux derniers cas, on définit le _résidu de $f$ en $z_{0}$_ par
 	math
 		\res(f, z_{0}) = a_{-1}
+	Q: Types de *singularités isolées* d’une fonction $f$ holomorphe sur un ouvert $Ω$, et définition du *résidu* de $f$
+		A: Si $z_{0} ∈ \C ∖ Ω$ est une singularité isolée de $f$, alors $f$ est holomorphe sur $\PD(z_{0}, r)$ ($r > 0$) donc d’après le théorème de Laurent, il existe une suite $(a_{n})_{n ∈ \Z}$ telle que
+			math
+				∀ z ∈ \PD(z_{0}, r), f(z) = ∑_{n ∈ \Z}a_{n}(z-z_{0})^{n}
+			On distingue alors trois cas : on dira que $z_{0}$ est
+			~ une singularité _apparente_ ou _effacable_ de $f$ si
+				math
+					∀ n ∈ \N^{*}, a_{-n} = 0
+			~ un _pôle d’ordre $N ∈ \N^{*}$_ de $f$ si
+				math
+					a_{-N} \ne 0 \quad\text{et}\quad ∀ n > N, a_{-n} = 0
+			~ une singularité _essentielle_ si
+				math
+					∀ N ∈ \N^{*}, ∃ n > N: a_{-n} \ne 0
+			Dans les deux derniers cas, on définit le _résidu de $f$ en $z_{0}$_ par
+			math
+				\res(f, z_{0}) = a_{-1}
 
 rem
 	- 0 est une singularité isolée de la fonction $(z ⟼ \frac{1}{z}) ∈ \H(\C^{*})$.
 	- Les points de $\R_{-}$ ne sont *pas* des singularités isolées de $\log$. $\R_{-}$ est une _coupure_ et $0$ est un point de branchement.
 	- On qualifiera de _simples_ les pôles d’ordre 1, et de _doubles_ ceux d’ordre 2.
 
-prop
-	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$. Soit $z_{0}$ une singularité isolée de $f$. Alors $z_{0}$ est une singularité apparente de $f$ si et seulement si $f$ admet une limite en $z_{0}$. Dans ce cas, en posant
+prop Caractérisation des singularités apparentes
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$. Une singularité isolée $z_{0}$ de $f$ est apparente si et seulement si $f$ admet une limite en $z_{0}$. Dans ce cas, en posant
 	math
 		\tilde{f}: \applic{Ω}{\C}{z}{\begin{cases}f(z) \if z ∈ Ω \\ \lim_{z\to z_{0}}f(z) \if z=z_{0}\end{cases}}
 	on obtient un prolongement analytique $(\tilde{f}, Ω ∪ \set{z_{0}})$ de $f$ à $Ω ∪ \set{z_{0}}$.
+	as_flashcard
 
 proof
 	La fonction $\tilde{f}$ est clairement holomorphe sur $Ω$. Par hypothèse, on a pour un certain $r > 0$
@@ -1055,10 +1075,11 @@ proof
 		∀ z ∈ \Disk(z_{0}, r), \tilde{f}(z) = ∑_{n ∈ \N} a_{n}(z-z_{0})^{n}
 	Ainsi, $\tilde{f}$ est analytique, donc holomorphe en $z_{0}$.
 
-prop
-	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$ et soit $z_{0} ∈ \C ∖ Ω$ une singularité isolée de $f$. Alors $z_{0}$ est un pôle d’ordre $N ∈ \N^{*}$ de $f$ si et seulement si $z_{0}$ est une singularité apparente de $z ⟼ (z-z_{0})^{N}f(z)$ avec $\lim_{z\to z_{0}}(z-z_{0})^{N} \ne 0$. Dans ce cas, on a
+prop Caractérisation des pôles
+	Soit $f$ une fonction holomorphe sur un ouvert $Ω$ de $\C$. Une singularité isolée $z_{0} ∈ \C ∖ Ω$ de $f$ est un pôle de $f$ d’ordre $N ∈ \N^{*}$ si et seulement si c’est une singularité apparente de $z ⟼ (z-z_{0})^{N}f(z)$ et que $\lim_{z\to z_{0}}(z-z_{0})^{N}f(z) \ne 0$. Dans ce cas, on a
 	math
 		\res(f, z_{0}) = \lim_{z\to z_{0}} \frac{1}{(N-1)!} \dvN{}{z}{N-1} \Big[(z-z_{0})^{N}f(z)\Big]
+	as_flashcard
 
 proof
 	$z_{0}$ est un pôle d’ordre $N$ si et seulement si pour un certain $r > 0$,
@@ -1066,19 +1087,29 @@ proof
 		∀ z ∈ \PD(z_{0}, r), f(z) = ∑_{n=-N}^{+∞}a_{n}(z-z_{0})^{n} = \frac{a_{-N}}{(z-z_{0})^{N}} + \frac{a_{-N+1}}{(z-z_{0})^{N-1}} + ⋯
 	donc si et seulement si
 	math
-		∀ z ∈ \PD(z_{0}, r), (z-z_{0})^{N}f(z) = ∑_{n ∈ 0}^{+∞} a_{-N+n}(z-z_{0})^{n}
-	Le résidu est donc obtenu comme indiqué (exo).
+		∀ z ∈ \PD(z_{0}, r), (z-z_{0})^{N}f(z) = ∑_{n = 0}^{+∞} a_{-N+n}(z-z_{0})^{n}
+	Le résidu est le coefficient devant le monome de puissance $N-1$ ci-dessus; on dérive donc $N-1$ fois :
+	math
+		\begin{align*}
+			∀ z ∈ \PD(z_{0}, r), \dvN{}{z}{N-1} \Big[(z-z_{0})^{N}f(z)\Big] &= ∑_{n=N-1}^{+∞} a_{-N+n}\frac{n!}{(n-N+1)!}(z-z_{0})^{n-N+1}\\
+			&= ∑_{n=0}^{+∞}a_{n-1}\frac{(n+N-1)!}{n!}(z-z_{0})^{n}
+		\end{align*}
+	si bien qu’en passant à la limite $z \to z_{0}$,
+	math
+		\lim_{z\to z_{0}} \dvN{}{z}{N-1} \Big[(z-z_{0})^{N}f(z)\Big] = a_{-1}(N-1)!
+	d’où le résultat.
 
 prop
 	Soient $P$ et $Q$ deux fonctions holomorphes sur un ouvert $Ω$ de $\C$ et soit $z_{0} ∈ Ω$ un zéro isolé de $Q$ de degré $1$ tel que $P(z_{0}) \ne 0$. Alors $z_{0}$ est un pôle simple de $P/Q$ et
 	math
 		\res \left(\frac{P}{Q}, z_{0}\right) = \frac{P(z_{0})}{Q'(z_{0})}
+	as_flashcard Proposition $P/Q$
 
 proof
 	Il existe $r > 0$ tel que
 	math
 		∀ z ∈ \Disk(z_{0}, r), Q(z) = \underbrace{Q(z_{0})}_{=0} + (z-z_{0}) \big[Q'(z_{0}) - ε(z)\big]
-	où $ε(z) \arrowlim{z\to z_{0}} 0$. Alors $Q'(z_{0})\ne 0$ (car $z_{0}$ est un zéro de degré 1 de $Q$). Alors
+	où $ε(z) \arrowlim{z\to z_{0}} 0$. Or $Q'(z_{0})\ne 0$ (car $z_{0}$ est un zéro de degré 1 de $Q$), donc
 	math
 		\lim_{z\to z_{0}} (z-z_{0}) \frac{P(z)}{Q(z)} = \frac{P(z_{0})}{Q'(z_{0})} \ne 0
 	Donc $z_{0}$ est un pôle simple de $P/Q$ d’après la propriété précédente. Mais alors,
@@ -1094,17 +1125,19 @@ thm Théorème des résidus
 	Soit $Ω$ un ouvert ++simplement connexe++ de $\C$. Soit $Σ = \set{z_{1}, …, z_{N}} ⊂ Ω$ un ensemble fini de points de $Ω$. Soit $f$ une fonction holomorphe sur $Ω ∖ Σ$. Alors, pour tout cycle $γ$ dans $Ω ∖ Σ$, on a
 	math
 		\oint_{\Contour_{γ}} \dd z f(z) = 2 π i ∑_{n=1}^{N}\ind(γ, z_{n})\res(f, z_{n})
+	as_flashcard
 
 proof
+	fig Le cycle en tirets est homologue à celui en couleur.
+		right
+		./figures/preuve_thm_residus.svg
 	Soit de tels objets. Il existe $r > 0$ tel que
 	- $r < \abs{z_{n} - z_{m}}$ pour tous $n\ne m ∈ \icc{1,N}$,
 	- $r < \dist(\Contour_{γ}, Σ)$.
 	On considère alors le cycle
 	math
-		Γ = \biguplus_{n = 1}^{N}\Cercle(z_{n}, r)^{\concat \ind(γ, z_{0})}
-	fig
-		./figures/preuve_thm_residus.svg
-	Par construction, $Γ$ est homologue à $γ$ dans $Ω ∖ Σ$. Or $f$ est holomorphe sur $Ω ∖ Σ$, on a d’après le corollaire du théorème intégral de Cauchy généralisé, l’additivité de l’intégrale, puis le théorème de Laurent,
+		Γ = \biguplus_{n = 1}^{N}\underbrace{\Cercle(z_{n}, r)\concat ⋯\concat \Cercle(z_{n}, r)}_{\ind(γ, z_{0}) \text{ fois}}
+	Par construction, $Γ$ est homologue à $γ$ dans $Ω ∖ Σ$. Comme $f$ est holomorphe sur $Ω ∖ Σ$, on a d’après le corollaire du théorème intégral de Cauchy généralisé, l’additivité de l’intégrale, et le théorème de Laurent :
 	math
 		\begin{align*}
 			\oint_{\Contour_{γ}}\dd zf(z) &= \oint_{Γ}\dd zf(z) \\
@@ -1117,11 +1150,12 @@ rem
 
 ### Lemmes de Jordan
 
+fig
+	right
+	./figures/arc_cercle_jordan.svg
 Soient $z_{0} ∈ \C$, $θ_{1}, θ_{2} ∈ \cc{0, 2 π}$ et $R > 0$. On pose
 math
 	γ_{R}: \applic{\oo{θ_{1}, θ_{2}}}{\C}{θ}{z_{0} + R e^{i θ}}
-fig
-	./figures/arc_cercle_jordan.svg
 
 lemma Lemme de Jordan du grand arc de cercle
 	Soit $Ω$ un ouvert de $\C$ tel que pour un certain $r > 0$,
@@ -1132,14 +1166,14 @@ lemma Lemme de Jordan du grand arc de cercle
 		\lim_{R \to +∞} \sup_{θ ∈ \cc{θ_{1}, θ_{2}}}\abs{\underbrace{\big(γ_{R}(θ) - z_{0}\big)}_{=R} f \big(γ_{R}(θ)\big)} = 0
 	Alors,
 	math
-		\lim_{\R \to +∞} \int_{\Contour_{γ_{R}}}\dd zf(z) = 0
+		\lim_{R \to +∞} \int_{\Contour_{γ_{R}}}\dd zf(z) = 0
 
 proof
-	Par définition, on a pour $R > 1$
+	Par définition, on a pour $R > r$
 	math
 		\begin{align*}
-			\abs{\int_{\Contour_{γ_{R}}}\dd zf(z)} &= \abs{∫_{θ_{1}}^{θ_{2}}\dd θ iR e^{i θ} f(z_{0} + R e^{i θ})} \\
-			&⩽ \abs{∫_{θ_{1}}^{θ_{2}}\dd  θ R \abs{f(z_{0} + R e^{i θ})}} \\
+			\abs{\int_{\Contour_{γ_{R}}}\dd zf(z)} &= \abs{∫_{θ_{1}}^{θ_{2}}\dd θ iR e^{i θ} f\big(z_{0} + R e^{i θ}\big)} \\
+			&⩽ \abs{∫_{θ_{1}}^{θ_{2}}\dd  θ R \abs{f\big(z_{0} + R e^{i θ}\big)}} \\
 			&⩽ \abs{θ_{2} - θ_{1}} R\sup_{θ ∈ \cc{θ_{1}, θ_{2}}} \abs{f(γ_{R}(θ))} \arrowlim{R\to +∞} 0
 		\end{align*}
 
@@ -1174,12 +1208,13 @@ lemma Lemme de Jordan du petit arc de cercle autour d’un pôle simple
 	Soit $f$ une fonction holomorphe sur $Ω ∖ \set{z_{0}}$ dont $z_{0}$ est un pôle simple. Alors,
 	math
 		\lim_{ε\to 0^{+}}\int_{\Contour_{γ_{ε}}}\dd zf(z) = i(θ_{2} - θ_{1}) \res(f, z_{0})
+	as_flashcard
 
 proof
-	Comme $z_{0}$ est un pôle simple de $f$, il existe $r > 0$ tel que
+	Comme $z_{0}$ est un pôle simple de $f$, il existe, par définition, $r > 0$ tel que $\PD(z_{0}, r) ⊂ Ω$ et
 	math
-		∀ z ∈ \PD(z_{0}, r) ⊂ Ω, f(z) = \frac{\res(f, z_{0})}{z-z_{0}} + g(z)
-	avec $g$ holomorphe nur $\Disk(z_{0}, r)$. Alors, pour tout $ε ∈ \oo{0, ε_{0}}$,
+		∀ z ∈ \PD(z_{0}, r), f(z) = \frac{\res(f, z_{0})}{z-z_{0}} + g(z)
+	avec $g$ holomorphe sur $\Disk(z_{0}, r)$. Alors, pour tout $ε ∈ \oo{0, ε_{0}} ∩ \oo{0, r}$,
 	math
 		\begin{align*}
 			\abs{\int_{\Contour_{γ_{ε}}} \left[f(z) - \frac{\res(f, z_{0})}{z-z_{0}}\right]} &= \abs{\int_{\Contour_{γ_{ε}}}\dd zg(z)} \\
