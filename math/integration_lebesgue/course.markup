@@ -1,0 +1,34 @@
+../../common/course.lib.markup
+
+title Théorie de la mesure et intégration de Lebesgue
+date 15/09/2026
+
+++Préhistoire++: mesure de surface de champs, en Grèce antique et en Chine médiévale.
+++Hiatoire++:
+- Vers le 17-18e siècle, Newton démontre le théorème fondamental de l’analyse.
+- Leibniz formalise à la même période le calcul infinitésimal. On lui doit le symbole intégral.
+- Riemann cnostruit en 1843 l’intégrale, mais son travail ne sera publié qu’en 1868, à titre posthume.
+- Borel retravaille la théorè de Riemann et aboutit à un nouveau cadre théorique: la théorie de la mesure.
+- Lebesgue crée en 1904 la théorie intégrale du même nom.
+- En 1930, Kolmogorov reformule la théorie des probabilités dans le cadre de la théorie de la mesure.
+- En 1950, Kurzweil-Henstock établissent en parallèle une autre théorie d’intégration, fondée sur celle de Lebesgue.
+
+La théorie de Lebesgue permet d’intégrer sur des espaces plus généraux que $\R^{n}$, par exemple sur un espace de fonctions. Une telle intégration fonctionnelle est utile, par exemple en mécanique quantique (quantification par intégrales de chemin).
+
+notation
+	Soit $X$ un ensemble. Pour tout sous-ensemble $A$ de $X$, on définit la _fonction indicatrice de $A$_ par
+	math
+		\1_{A} : \applic{X}{\set{0,1}}{x}{\begin{cases}1 \if x ∈ A \\ 0\else\end{cases}}
+
+## De Riemann à Lebesgue
+
+### Résumé de l’intégration de Riemann
+
+L’intégration de Riemann propre concerne les fonctions bornées sur un intervalle borné.
+	italic
+On appelle _fonction en escalier_ sur un intervalle $I = \cc{a,b}$ avec $a < b$ toute fonction réelle $f$ constante par morceaux sur $I$, i.e. pour lesquelles il existe une subdivision $a = x_{0} ⩽ x_{1} ⩽ ⋯ ⩽ x_{N} = b$ telle que
+math
+	f = ∑_{p=0}^{N-1}f_{p}\1_{\cc{x_{p}, x_{p+1}}}
+avec $f_{0}, …, f_{N-1}$ des réels. On pose alors
+math
+	∫_{a}^{b}\dd xf(x) = ∑_{p=0}^{N-1} f_{p}\long \big(\cc{x_{p}, x_{p+1}}\big) = ∑_{p=0}^{N-1}f_{p} \abs{x_{p+1} - x_{p}}

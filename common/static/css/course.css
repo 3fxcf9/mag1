@@ -570,6 +570,14 @@ body {
     margin-top: 1rem;
   }
 
+  ol.paren-roman-list {
+    counter-reset: item;
+    li::marker {
+      counter-increment: item;
+      content: "(" counter(item, lower-roman) ") ";
+    }
+  }
+
   @media screen and (max-width: 1000px) {
     ul > li,
     ol > li {
