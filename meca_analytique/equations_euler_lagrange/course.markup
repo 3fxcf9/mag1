@@ -138,3 +138,145 @@ On veut écrire les équations du mouvement en fonction des $q_{α}$. Première 
 	soit
 	math
 		\dd δ\r = δ \dd\r
+- On part de l’expression $\vec{r}_{i}(q_{1}, …, q_{n}, t)$ des coordonnées généralisées et on écrit les déplacements élémentaires :
+	math
+		\dd \vec{r}_{i} = ∑_{α=1}^{n}\pdv{\vec{r}_{i}}{q_{α}}\dd q_{α} + \pdv{\r_{i}}{t}\dd t
+	En divisant par $\dd t$, on obtient après introduction des vitesses généralisées $\dq_{α} = \dv{q_{α}}{t}$
+	math
+		\v_{i} = \dv{\r_{i}}{t} = \pdv{\r_{i}}{t} + ∑_{α=1}^{n}\pdv{\r_{i}}{q_{α}} \underbrace{\dv{q_{α}}{t}}_{\dq_{α}}
+	example
+		Reprenons l’exemple de l’anneau glissant sur un cerceau :
+		math
+			\begin{cases}x = \ell\cos φ(t)\sin θ \\ y = \ell\sin φ(t)\sin θ\\ z = \ell\cos θ\end{cases} ⟹ \begin{cases}\dot x = \ell \Big(\sin θ(-\sin φ(t))\dot{φ}(t) + \cos φ(t)\cos(θ)\dot θ\Big)\\ \dot y = \ell \Big(\sin θ\cos(φ(t))\dot φ(t) + \sin φ(t)\cos (θ)\dot θ\Big)\\ \dot z = -\ell\sin (θ)\dot θ\end{cases}
+- On avait introduit les déplacements virtuels
+	math
+		δ\r_{i} = ∑_{α=1}^{n}\pdv{\r_{i}}{q_{α}}δq_{α}
+- Sur l’indépendance des variables $q_{α}$ et $\dot{q}_{α}$ : En dynamique du point, on va traiter les $q_{α}$ et les $\dot{q}_{α}$ comme des variables indépendantes. On a bien une relation entre $q_{α}$ et $\dot{q}_{α}$ mais elle les relie entre $t$ et $t+\dd t$ et pas au temps $t$. De même, quand on a $(\r, \v)$ pour décrire une particule par une équation du second ordre en temps qui peut se mettre sous forme d’une équation du premier ordre
+	math
+		m \dv{}{t}\dxy{\r}{\v} = \dxy{m\v}{F(\r, \v, t)}
+	alors  $\r$ et $\v$ *au temps $t$* sont indépendantes, et les conditions initiales $\r(0)$ et $\v(0)$ aussi. On a ainsi
+	math
+		\r_{i} = \r_{i}(q_{1}, …, q_{n}, \dot{q}_{1}, …, \dot{q}_{n}, t)
+	et
+	math
+		\v_{i} = \dot{\r}_{i} = \v_{i}(q_{1}, …, q_{n}, \dot{q}_{1}, …, \dot{q}_{n}, t)
+	On est passé des variables $\set{\r_{i}, \v_{i}}$ aux variables $\set{q_{α}, \dot{q}_{α}}$.
+
+## Équations d’Euler-Lagrange
+
+proof
+	On veut les équations du mouvement en fonction des $q_{α}$ et $\dq_{α}$. On part de d’Alembert :
+	math
+		∑_{i} \Big(\vec{F}_{i} - m_{i}\ddot{\r}_{i}\Big) · δ\r_{i} = 0 \eforall t, ∀ δ\r_{i}(t)
+	Or $δ\r_{i} = ∑_{α}\pdv{\r_{i}}{q_{α}}δq_{α}$ (déplacement élémentaire, différentielle d’espace seulement) donc
+	math euler:proof:0
+		∑_{α}^{n}\left(\underbrace{∑_{i}^{N}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}}}_{\defeq Q_{α}}-∑_{i}^{N} m_{i}\ddot{\r}_{i} · \pdv{\r_{i}}{q_{α}}\right)δq_{α} = 0
+	On introduit la force généralisée $\boxed{Q_{α} \defeq ∑_{i=1}^{N}\vec{F}_{i}· \pdv{\r_{i}}{q_{α}}}$. On en déduit $n$ équations (pour $n$ degrés de liberté) :
+	math euler:proof:1
+		∀ α, ∑_{i=1}^{N}m_{i}\ddot{\r}_{i}· \pdv{\r_{i}}{q_{α}} = Q_{α}
+	On exprime la deuxième somme dans les parenthèses de [euler:proof:0] comme un terme d’une dérivée temporelle :
+	math euler:proof:2
+		∑_{i}m_{i}\ddot{\r}_{i} · \pdv{\r_{i}}{q_{α}} = \dv{}{t} \left(∑_{i}m_{i}\dot{\r}_{i} ·  \pdv{\r_{i}}{q_{α}}\right) - ∑_{i}m_{i}\dot{\r}_{i} · \dv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right)
+	Pour le premier terme de [euler:proof:2], on part de
+	math
+		\dot{\r}_{i} = \pdv{\r_{i}}{t}(q_{1}, …, q_{n}, t) + ∑_{α}\pdv{\r_{i}}{q_{α}}(q_{1}, …, q_{n}, t) \dot{q}_{α}
+	On remarque alors que $\displaystyle\pdv{\dot{\r}_{i}}{\dq_{α}} = \pdv{\r_{i}}{q_{α}}$, d’où
+	math
+		\dr_{i} · \pdv{\r_{i}}{q_{α}} = \dr_{i} ·  \pdv{\dr_{i}}{\dq_{α}} = \pdv{}{\dq_{α}} \left(\frac{1}{2}\dr_{i}^{2}\right)
+	Le terme de gauche de [euler:proof:2] est alors
+	math
+		\dv{}{t} \left(∑_{i}m_{i}\dot{\r}_{i} ·  \pdv{\r_{i}}{q_{α}}\right) = \dv{}{t} \left(\pdv{}{\dq_{α}} \left(∑_{i}\frac{1}{2}m_{i} \dr_{i}^{2}\right)\right) = \dv{}{t} \pdv{}{\dq_{α}}T
+	en introduisant l’énergie cinétique $\boxed{T = ∑_{i=1}^{N}\frac{1}{2}m_{i}\dr_{i}^{2}(q_{α}, \dq_{α}, t)}$. Pour le second terme de [euler:proof:2], on dérive $\dr_{i}$ :
+	math
+		\begin{align*}
+			\pdv{\dr_{i}}{q_{α}} &= \frac{∂^{2}\r_{i}}{∂q_{α} ∂t} + ∑_{β} \frac{∂ \r_{i}}{∂q_{α} ∂q_{β}}\dq_{β} \\
+		&= \pdv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right) + ∑_{β}\pdv{}{q_{β}} \left(\pdv{\r_{i}}{q_{α}}\right)\dq_{β} \\
+		&= \dv{}{t}\left(\pdv{\r_{i}}{q_{α}}\right)
+		\end{align*}
+	donc le second terme de [euler:proof:2] s’écrit
+	math
+		∑_{i}m_{i}\dr_{i} · \dv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right) = ∑_{i}m_{i}\dr_{i} ·  \pdv{\dr_{i}}{q_{α}} = \pdv{}{q_{α}} \underbrace{\left(∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}\right)}_{T}
+	d’où l’_équation d’Euler-Lagrange_ :
+	math
+		\boxed{\dv{}{t} \left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}} \eforall α = 1, …, n
+	Les fonctions $Q_{α}$ et $T$ sont définies avec les $\r_{i}$, $\dr_{i}$ et $t$ à réexprimer en fonction des $(q_{α}, \dq_{α}, t)$. On a
+	Q: Équation d’Euler-Lagrange sans Lagrangien
+		A: En coordonnées généralisées $(q_{α})$,
+			math
+				\dv{}{t} \left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}
+			avec
+			math
+				T = ∑_{i=1}^{N}\frac{1}{2}m_{i}\dr_{i}^{2}(q_{α}, \dq_{α}, t)
+			l’énergie cinétique et
+			math
+				Q_{α} \defeq ∑_{i=1}^{N}\vec{F}_{i}· \pdv{\r_{i}}{q_{α}}
+			la force généralisée.
+	math
+		\begin{align*}
+			T &= ∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}\\
+			&= ∑_{i}\frac{1}{2}m_{i} \left(∑_{α}\pdv{\r_{i}}{q_{α}}\dq_{α} + \underbrace{\x{\pdv{}{t}}}_{\text{on supp. pas de dépendance explicite en temps}}\right)^{2} \\
+			&= ∑_{α, β}\frac{1}{2}M_{α, β}\dq_{α} \dq_{β}
+		\end{align*}
+	avec
+	math
+		M_{α, β} = ∑_{i}m_{i} \pdv{\r_{i}}{q_{α}}· \pdv{\r_{i}}{q_{β}}
+	fonction des coordonnées généralisées.
+
+example
+	Reprenons l’exemple de l’anneau glissant sur un cerceau. On a
+	math
+		T = \frac{1}{2}m \big(\dx^{2} + \dy^{2} + \dz^{2}\big) = ⋯ = \frac{m\ell^{2}}{2}\big(\dot{θ}^{2} + \dot{φ}^{2}(t)\sin^{2} θ\big)
+	donc
+	math
+		\dv{}{t} \left(\pdv{T}{\dot{θ}}\right) - \pdv{T}{θ} = \underbrace{\dv{}{t} \left(m\ell^{2} \dot{θ}\right)}_{=m\ell^{2}\ddot θ} - \frac{m\ell^{2}}{2}\dot{φ}(t)2\cos θ\sin θ
+	On trouve la forme généralisée de la force de gravité $m \g$ :
+	math
+		\vec{F}· δ\r = -mg δz = -mg(-\ell\sin θ δθ) \equiv Q_{θ}δ θ ⟹ Q_{θ} = mg\ell\sin θ
+	On écrit Euler-Lagrange :
+	math
+		\ell^{2} \ddot θ - \ell^{2} \dot{φ}^{2}\cos θ\sin θ= g\ell\sin θ
+	donc
+	math
+		\ddot θ - \left(\frac{g}{\ell} + \dot{φ}^{2}(t)\cos θ\right) \sin θ = 0
+
+### Forces dérivant d’un potentiel-Lagrangien
+
+Lorsque les $\vec{F}_{i}$ dérivent d’un potentiel, i.e.
+math
+	\vec{F}_{i} = -\grad_{\r_{i}} U(\r_{1}, …, \r_{N}, t) = -\dxyz{∂_{x_{i}}U}{∂_{y_{i}}U}{∂_{z_{i}}U}
+On sait en mécanique du point que l’énergie mécanique est conservée: $E_{m} = \underbrace{T}_{\text{e. cinétique}} + \underbrace{U}_{\text{e. potentielle}} = \cte$. On part de
+math
+	Q_{α} = ∑_{i}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}} = -∑_{i}\grad_{\r_{i}}U · \pdv{\r_{i}}{q_{α}} = -∑_{j=1}^{3N}\pdv{U}{x_{j}}\pdv{x_{j}}{q_{α}} = - \pdv{}{q_{α}}U(q_{α}, t)
+car
+math
+	\pdv{}{q_{α}}\big(x_{j}(q_{α}, t)\big) = ∑_{j}\pdv{U}{x_{j}}\pdv{x_{j}}{q_{α}}
+Dans l’équation d’Euler-Lagrange, comme $\pdv{U}{\dq_{α}} = 0$, on peut mettre ce terme à gauche :
+math
+	\dv{}{t}\left(\pdv{}{\dq_{α}}(T-U)\right) - \pdv{}{q_{α}}(T-U) = 0
+On introduit alors le _Lagrangien_ :
+math
+	\boxed{\Lagr (q_{α}, \dq_{α}, t) = T(q_{α}, \dq_{α}, t) - U(q_{α}, t)}
+Euler-Lagrange devient alors
+math
+	\boxed{\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0}
+Q: Équation d’Euler-Lagrange avec le Lagrangien
+	A: math
+			\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0
+		avec le Lagrangien
+		math
+			\Lagr (q_{α}, \dq_{α}, t) = T(q_{α}, \dq_{α}, t) - U(q_{α}, t)
+
+example
+	Reprenons l’anneau sur le cerceau. On a $U(θ) = mgz = mg\ell\cos θ$ donc
+	math
+		\Lagr(θ,\dot{θ}, t) = T-U	 = \frac{m\ell^{2}}{2} \Big(\dot{θ}^{2} + \dot{φ}^{2}(t)\sin^{2} θ\Big) - mg\ell\cos θ
+	On en déduit l’équation du mouvement :
+	math
+		\dv{}{t} \left(\pdv{\Lagr}{\dot{θ}}\right) - \pdv{\Lagr}{θ} = 0 ⟹  ⋯ + mg\ell(-\sin θ) = 0
+
+### Potentiel généralisé et force de Lorentz
+
+Si
+math
+	Q_{α} = \dv{}{t} \left(\pdv{U}{\dq_{α}}\right) - \pdv{U}{q_{α}}
+on retombe sur Euler-Lagrange avec $\Lagr = T - U(q_{α}, \underline{\dot{q}_{α}}, t)$

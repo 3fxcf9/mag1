@@ -1,4 +1,12 @@
 const local_macros = {
+  "\\cte": "\\mathrm{c^{te}}",
+  "\\Lagr": "\\mathscr{L}",
+  "\\x": "\\cancel{#1}",
+  "\\dx": "\\dot{x}",
+  "\\dy": "\\dot{y}",
+  "\\dz": "\\dot{z}",
+  "\\dr": "\\dot{\\r}",
+  "\\dq": "\\dot{q}",
   "\\r": "\\vec{r}",
   "\\v": "\\vec{v}",
   "\\g": "\\vec{g}",
@@ -13,5 +21,7 @@ const local_macros = {
   "\\u": "\\;\\mathrm{#1}",
   "\\lxyz": "\\left(#1,#2,#3\\right)",
   "\\dxyz": "\\mtx{#1 \\\\ #2 \\\\ #3}",
+  "\\lxy": "\\left(#1,#2\\right)",
+  "\\dxy": "\\mtx{#1 \\\\ #2}",
   "\\eforall": "\\enspace\\forall",
 };
