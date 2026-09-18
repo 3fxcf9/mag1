@@ -28,7 +28,238 @@ L’intégration de Riemann propre concerne les fonctions bornées sur un interv
 	italic
 On appelle _fonction en escalier_ sur un intervalle $I = \cc{a,b}$ avec $a < b$ toute fonction réelle $f$ constante par morceaux sur $I$, i.e. pour lesquelles il existe une subdivision $a = x_{0} ⩽ x_{1} ⩽ ⋯ ⩽ x_{N} = b$ telle que
 math
-	f = ∑_{p=0}^{N-1}f_{p}\1_{\cc{x_{p}, x_{p+1}}}
+	f = ∑_{p=0}^{N-1}f_{p}\1_{\co{x_{p}, x_{p+1}}}
 avec $f_{0}, …, f_{N-1}$ des réels. On pose alors
 math
-	∫_{a}^{b}\dd xf(x) = ∑_{p=0}^{N-1} f_{p}\long \big(\cc{x_{p}, x_{p+1}}\big) = ∑_{p=0}^{N-1}f_{p} \abs{x_{p+1} - x_{p}}
+	∫_{a}^{b}\dd xf(x) = ∑_{p=0}^{N-1} f_{p}\long \big(\co{x_{p}, x_{p+1}}\big) = ∑_{p=0}^{N-1}f_{p} \abs{x_{p+1} - x_{p}}
+On note $\Func_{\text{escalier}}(I)$ l’ensemble des fonctions en escalier sur $I$.
+Soit $f: I ⟶ \R$ une fonction bornée. On définit alors
+math
+	\Func_{\text{escalier}}^{⩽}(I) = \set{F ∈ \Func_{\text{escalier}}(I)\where F ⩽ f}
+et
+math
+	\Func_{\text{escalier}}^{⩾}(I) = \set{F ∈ \Func_{\text{escalier}}(I)\where F ⩾ f}
+On a alors
+math riemann:ineq
+	\sup_{F ∈ \Func_{\text{escalier}}^{⩽}}(I) ∫_{I}\dd xF(x) ⩽ \inf_{G ∈ \Func_{\text{escalier}}^{⩾}(I)} ∫_{I}\dd x G(x)
+On dira que $f$ est _Riemann-intégrable_ sur $I$ si [riemann:ineq] est une égalité, et on notera dans ce cas
+math
+	∫_{I} \dd xf(x) = \sup_{F ∈ \Func_{\text{escalier}}^{⩽}}(I) ∫_{I}\dd xF(x) = \inf_{G ∈ \Func_{\text{escalier}}^{⩾}(I)} ∫_{I}\dd x G(x)
+
+thm
+	Soit $(f_{n})_{n ∈ \N}$ une suite de fonctions Riemann-intégrables sur $I = \cc{a,b}$ convergeant uniformément sur $f$ sur $I$. Alors,
+	~ $f$ est Riemann-intégrable sur $I$
+	~ math
+			\lim_{n\to +∞} ∫_{I}\dd xf(x) = ∫_{I}\dd xf(x)
+
+rem
+	La convergence uniforme assure deux résultats à la fois :
+	- L’égalité des intégrales
+	- L’intégrabilité de la limite (d’où l’hypothèse d’intégrabilité de la limite dans le théorème de convergence dominée, où la convergence uniforme n’est pas requise)
+
+example
+	Soit $I = \cc{0,1}$. Soit $(q_{n})_{n ∈ \N}$ la suite des rationnels de $\cc{0,1}$ (existe car $Q$ est dénombrable). Considérons la suite de fonctions
+	math
+		∀ n ∈ \N, f_{n} = \1_{\set{q_{0}, …, q_{n}}}
+	Chaque fonction est Riemann-intégrable sur $I$. En effet, pour tout $n ∈ \N$,
+	math
+		0 ⩽ f_{n}(x) ⩽ ∑_{p=0}^{n}\1_{\cc{q_{p} - \frac{ε}{2}, q_{p} + \frac{ε}{2}}}
+	pour $ε > 0$. Il s’ensuit que
+	math
+		0 ⩽ ∫_{I}\dd xf_{n}(x) ⩽ ε(n+1) \arrowlim{ε \to 0^{+}} 0
+	Or, $f = \lim_{n\to +∞}f_{n} = \1_{\Q ∩ I}$ n’est pas Riemann-intégrable sur $I$ car
+	math
+		∀ F ∈ \Func_{\text{escalier}}^{⩽}(I), F ⩽ 0 \quad\text{et}\quad ∀ G ∈ \Func_{\text{escalier}}^{⩾}(I), G ⩾ 1
+	L’espace des fonctions Riemann-intégrable sur $I$, muni de sa semi-norme $\norm{\cdot} = ∫_{I}\abs{·}$ est incomplet en tant qu’espace vectoriel semi-normé, car $(f_{n})_{n ∈ \N}$ est une suite de Cauchy ($∀ n ∈ \N, \norm{f_{n}} = 0$) ne convergeant pas. D’où la volonté de redéfinir l’intégrale pour compléter l’espace des fonctions intégrables.
+
+### Les limites de l’intégration de Riemann
+
+- Cette théorie ne concerne que les fonctions bornées sur des intervalles bornés de $\R$. Pour des fonctions et/ou des intervalles non-bornés, on utilise les intégrales de Riemann impropres.
+- La convergence uniforme est requise pour conserver la Riemann-intégrabilité par passage à la limite.
+- L’espace des fonctions Riemann-intégrables est incomplet en tant qu’espace vectoriel semi-normé.
+- Ne concerne que des fonctions sur des ensembles qui ressemblent à $\R$ ou à $\R^{n}$.
+
+### Vers la théorie de la mesure
+
+On pourrait généraliser la définition de l’intégrale de Riemann pour une *partition quelconque de l’ensemble d’intégration* en sous-ensembles auxquels on puisse attribuer une *longueur*.
+
+example
+	On pourrait par exemple avoir, si une longueur existait pour $\Q ∩ \cc{0,1}$,
+	math
+		∫_{\cc{0,1}}\dd x\1_{\Q ∩ \cc{0,1}} = \long \big(\Q ∩ \cc{0,1}\big)
+
+callout
+	La théorie de la mesure vise à
+	- définir les sous-ensembles mesurables d’un ensemble,
+	- définir une mesure sur ces ensembles mesurables.
+
+## Théorie de la mesure
+
+### Espaces topologiques et fonctions continues
+
+def Espace topologique
+	On appelle _espace topologique_ toute paire $(X, τ)$ où $X$ est un ensemble et $τ$ un ensemble de sous-ensembles de $X$, appelés _ouverts_ de la _topologie_ $τ$, telle que
+	~ $τ$ contienne $\emptyset$ et $τ$
+	~ $τ$ est stable par intersections finies
+	~ $τ$ est stable par unions quelconques
+	Un sous-ensemble fermé dans la topologie $τ$ est le complément d’un ouvert.
+
+example
+	Soit $X$ un ensemble.
+	- On appelle $\big(X, \set{\emptyset, X}\big)$ l’espace topologique tivial sur $X$.
+	- On appelle(($2^{X}$ est l’ensemble des parties de $X$.)) $\big(X, 2^{X}\big)$ l’espace topologique discret sur $X$.
+	- $\R$ avec sa topologie usuelle (métrique) est un espace topologique.
+
+def Fonction continue
+	Soient $(X, τ_{X})$ et $(Y, τ_{Y})$ deux espaces topologiques. On dit que $f: X ⟶ Y$ est _continue_ si l’image réciproque de tout ouvert est un ouvert, i.e.
+	math
+		∀ Ω ∈ τ_{Y}, f^{-1}(Ω) = \set{x ∈ X \where f(x) ∈ Ω} ∈ τ
+
+example
+	Soit $X = \oo{0,1}$. Reprenons les fonctions $f_{n} = \1_{\set{q_{0}, …, q_{n}}}$. Pour tout $n ∈ \N$,
+	math
+		f_{n}^{-1}(\set{0}) = X ∖ \bigcup_{p=0}^{n}\set{q_{p}} = \bigcap_{p=0}^{n}\big(X ∖ \set{q_{p}}\big)
+	est un ouvert, or
+	math
+		f_{n}^{-1}(\set{1}) = \bigcup_{p=0}^{n} \set{q_{p}}
+	est un fermé.
+
+def $\sigma$-algèbre
+	Soit $X$ un ensemble. On appelle _$σ$-algèbre sur $X$_ tout ensemble $T$ de sous-ensembles de $X$ tel que
+	~ $T$ est non vide
+	~ $T$ est stable par complémentation
+	~ $T$ est stable par intersection dénombrable
+	On appellera les éléments de $T$ les (sous-ensembles) mesurables de $X$.
+
+prop
+	Soit $T$ une $σ$-algèbre sur un ensemble $X$. Alors
+	- $T$ contient $\emptyset$ et $X$,
+	- $T$ est stable par union dénombrable
+
+proof
+	- Par définition, il existe $A ∈ T$, donc $A^{\complement} ∈ T$, d’où $\emptyset = A ∩ A^{\complement} ∈ T$.
+	- Soit $(A_{n})_{n ∈ \N}$ une suite d’ensembles mesurables. Alors $(A_{n}^{\complement})_{n ∈ \N}$ est aussi une suite d’ensembles mesurables donc $\bigcap_{n ∈ \N}A_{n}^{\complement} ∈ T$ d’où $\bigcup_{n ∈ \N}A_{n} = \left(\bigcap_{n ∈ \N}A_{n}^{\complement}\right)^{\complement} ∈ T$.
+	- Finalement, $X = A ∪ A^{\complement} ∈ T$.
+
+rem
+	On aurait pu remplacer le troisième axiome de la définition par « $T$ est stable par union dénombrable ».
+
+example
+	Soit $X$ un ensemble.
+	- $\set{\emptyset, X}$ est la $σ$-algèbre triviale
+	- $2^{X}$ est la $σ$-algèbre discrète
+
+defprop
+	Soit $X$ un ensemble et soit $Σ$ un ensemble non-vide de sous-ensembles de $X$. Il existe une unique plus petite $σ$-algébre sur $X$ contenant $Σ$, qu’on appellera $σ$-algèbre _engendrée_ sur $X$ par $Σ$ et qu’on notera $σ(Σ)$.
+
+proof
+	La $σ$-algèbre $2^{X}$ sur $X$ contient $Σ$; on peut donc poser
+	math
+		σ(Σ) = \bigcap_{\substack{T σ-\text{algèbre sur } X \\ T \text{ contient } Σ}}
+	Alors $Σ ⊂ σ(Σ)$ et toute $σ$-algèbre de l’intersection contient $σ(Σ)$, qui est donc la plus petite.
+	Il reste à vérifier que $σ(Σ)$ est bien une $σ$-algèbre :
+	- $σ(Σ) \ne\emptyset$ car $Σ ⊂ σ(Σ)$ avec $Σ \ne\emptyset$
+	- Pour toute suite $(A_{n})_{n ∈ \N}$ d’éléments de $σ(Σ)$, $\bigcap_{n ∈ \N} A_{n} ∈ σ(Σ)$. En effet, les $A_{n}$ sont des éléments de toute $σ$-algèbre sur $X$ contenant $Σ$ et donc leur intersection en est un aussi.
+	- On montre de même la stabilité par complémentation.
+
+def
+	id boreliens
+	Soit $(X,τ)$ un espace topologique. On appelle _$σ$-algèbre de Borel de $(X, τ)$_ la $σ$-algèbre engendrée sur $X$ par $τ$ et on la note $B_{X} = B_{(X, τ)} = σ(τ)$. Les mesurables de $B_{X}$ sont appelés les _boléliens de $X$_.
+
+rem
+	On peut montrer qu’il est impossible d’obtenir un borélien de $\R$ quelconque par intersections, complémentations et unions dénombrables d’ouverts de $\R$. Il s’agit donc d’objets très compliqués.
+
+prop
+	Les boréliens de $\R$ sont engendrés sur $\R$ par $\set{\oo{a, +∞} \where a ∈ \R}$
+
+proof
+	Il suffit de montrer qu’on obtient tout ouvert de $\R$ à partir d’éléments de $\set{\oo{a, +∞}\where a ∈ \R}$ par complémentations, unions et intersections dénombrables.
+
+### Espaces et fonctions mesurables
+
+def
+	On appelle _espace mesurable_ tout couple $(X,T)$ où $X$ est un ensemble et $T$ une $σ$-algèbre sur $X$.
+	Si $(X,T_{X})$ et $(Y,T_{Y})$ sont deux espaces mesurables, on dira que $f: X ⟶ Y$ est _mesurable_ si
+	math
+		∀ A ∈ T_{Y}, f^{-1}(A) ∈ T_{X}
+
+prop
+	Soient $(X,T_{X})$, $(Y, T_{Y})$ et $(Z, T_{Z})$ trois espaces mesurables. Soient $f: Y ⟶ Z$ et $g: X ⟶ Y$ deux fonctions mesurables. Alors, $f\circ g: X ⟶ Z$ est mesurable.
+
+proof
+	math
+		∀ A ∈ T_{Z}, (f\circ g)^{-1}(A) = g^{-1}\big(\underbrace{f^{-1}(A)}_{∈ T_{Y}}\big) ∈ T_{X}
+
+prop
+	Soient $(X,T_{X})$ et $(Y, T_{Y})$ deux espaces mesurables tels que $T_{Y} = σ(Σ)$ avec $Σ$ un ensemble non vide de sous-ensembles de $Y$. Alors, $f: X ⟶ Y$ est mesurable si et seulement si
+	math
+		∀ A ∈ Σ, f^{-1}(A) ∈ T_{X}
+
+proof
+	_Montrons le sens direct, le sens réciproque étant trivial:_ supposons que $∀ A ∈ Σ, f^{-1}(A) ∈ T_{X}$. Considérons l’ensemble
+	math
+		T = \set{A ⊂ Y \where f^{-1}(A) ∈ T_{X}}
+	Il s’agit bien d’une $σ$-algèbre, et sous nos hypothèses $Σ ⊂ T$. On a donc par définition $T_{Y} = σ(Σ) ⊂ T$.
+
+rem
+	- Si $(X, T_{X})$ est un espace mesurable et $(X, τ)$ un espace topologique, on munit $Y$ de sa $σ$-algèbre de Borel $B_{Y}$ et alors, $f: X ⟶ Y$ est mesurable si et seulement si
+		math
+			∀ Ω ∈ τ, f^{-1}(Ω) ∈ T_{X}
+	- Si $(X, τ_{X})$ et $(Y, τ_{Y})$ sont deux espaces topologiques, on munit $X$ et $Y$ de leurs $σ$-algèbres de Borel respectives $B_{X}$ et $B_{Y}$, et alors, $f: X ⟶ Y$ est mesurable si et seulement si
+		math
+			∀ Ω ∈ τ_{Y}, f^{-1}(Ω) ∈ B_{X}
+		En particulier, si $f$ est continue sur $X$, alors $f$ est mesurable.
+
+cor
+	Soit $(X,T)$ un espace mesurable. La fonction $f: X ⟶ \R$ est mesurable (pour les boréliens de $\R$) si
+	math
+		∀ a ∈ \R, f^{-1}\big(\oo{a, +∞}\big) ∈ T_{X}
+
+prop
+	Soit $(X,T)$ un espace mesurable et soient $f$ et $g$ deux fonctions de $X$ dans $\R$ mesurables. Alors
+	- $f+g$ est mesurable
+	- $fg$ est mesurable
+	- $\max(f, g)$ est mesurable
+	- $\abs{f}$ est mesurable
+
+proof
+	Soit $a ∈ \R$.
+	~ math
+			\begin{align*}
+				(f+g)^{-1} \big(\oo{a, +∞}\big) &= \set{x ∈ X \where f(x) + g(x) > a} \\
+				&= \set{x ∈ X \where f(x) > a-g(x)} \\
+				&= \bigcup_{r ∈ Q} \set{x ∈ X \where f(x) > r > a-g(x)}\\
+				&= \bigcup_{r ∈ Q} \Big(\set{x ∈ X \where f(x) > r} ∩ \set{x ∈ X \where g(x) > a-r}\Big) \\
+				&= \bigcup_{r ∈ Q} \Big(f^{-1} \big(\oo{r, +∞}\big) ∩ g^{-1} \big(\oo{a-r, +∞}\big)\Big)
+			\end{align*}
+	~ math
+			\begin{align*}
+				\max(f, g)^{-1}\big(\oo{a, +∞}\big) &= \set{x ∈ X \where \max(f, g) > a}\\
+				&= \set{x ∈ X \where f(x) > a \text{ ou } g(x) > a}\\
+				&= \set{x ∈ X \where f(x) > a} ∪ \set{x ∈ tx, g(x) > a}\\
+				&= \underbrace{f^{-1} \big(\oo{a, +∞}\big)}_{∈ T_{X}} ∪ \underbrace{g^{-1} \big(\oo{a,+∞}\big)}_{∈ T_{X}} ∈ T_{X}
+			\end{align*}
+	~ Les fonctions $f_{\pm} = \max(\pm f, 0)$ sont mesurables (troisième point) donc $\abs{f} = f_{+} + f_{-}$ l’est également.
+	~ math
+			\begin{align*}
+				(f^{2})^{-1} \big(\oo{a, +∞}\big) &= \set{x ∈ X \where f^{2}(x) > a} \\
+				&= \begin{cases}\set{x ∈ X \where f > \sqrt{a}} \if a ⩾ 0 \\ X ∈ T_{X} \if a < 0\end{cases} \\
+				&= \begin{cases}f^{-1} \big(\oo{\sqrt{a}, +∞}\big) \if a ⩾ 0 \\ X \if a < 0\end{cases} ∈ T_{X}
+			\end{align*}
+	~ $(f+g)^{2} - (f-g)^{2} = 4fg$ est mesurable.
+
+prop
+	Soit $(X, T)$ un espace mesurable et soit $(f_{n}: X ⟶ \R)$ une suite de fonctions mesurables. Alors
+	- $\sup_{n ∈ \N} f_{n}$ est mesurable,
+	- $\inf{n ∈ \N} f_{n}$ est mesurable,
+	- $\limsup{n \to +∞} f_{n}$ est mesurable,
+	- $\liminf{n \to +∞} f_{n}$ est mesurable,
+	- si elle existe, $\lim_{n\to+∞} f_{n}$ est mesurable.
+
+proof
+	Il suffit de montrer que $\sup_{n ∈ \N} f_{n}$ est mesurable.
+		italic
+	- Pour tout $a ∈ \R$, on montre que
+		math
+			\left(\sup_{n ∈ \N}f_{n}\right)^{-1} \big(\oo{a,+∞}\big) = \bigcup_{n ∈ \N}\underbrace{f_{n}^{-1} \big(\oo{a,+∞}\big)}_{∈ T_{X}} ∈ T_{X}
+	- On en déduit que $\inf_{n ∈ \N}f_{n} = -\sup_{n ∈ \N}(-f_{n})$ est mesurable.
