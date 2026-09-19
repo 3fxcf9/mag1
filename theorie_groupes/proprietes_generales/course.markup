@@ -1,0 +1,294 @@
+../../common/course.lib.markup
+title Propriétés générales
+
+## Structure de groupe
+
+Q: Relation binaire sur un ensemble $E$
+	A: Sous-ensemble $G_{\rel}$ de $E × E$. $x$ est en relation avec $y$ si et seulement si $(x,y) ∈ G_{\rel}$
+
+Q: Relation d’équivalence
+	A: Relation binaire
+		- Réflexive
+		- Symétrique
+		- Transitive
+
+Q: Classes d’équivalence pour une relation d’équivalence $\rel$
+	A: Ensembles $\hat x = \set{y ∈ E \where x\rel y}$ pour $x ∈ E$. Elles forment une partition (union disjointe recouvrante) de $E$. On note leur ensemble $E/\rel$.
+
+Q: Compatibilité d’une relation binaire avec une loi de composition interne
+	A: La relation $\rel$ est compatible avec une la loi interne $·$ si et seulement si
+		math
+			x\rel y \text{ et } x'\rel y' ⟹ (x · x') \rel (y · y')
+
+Q: Groupe
+	A: Ensemble $G$ muni d’une loi de composition interne $\circ$ satisfaisant trois axiomes :
+		- $\circ$ est associative,
+		- $\circ$ admet un élément neutre,
+		- tout élément de $G$ est inversible
+		Il est dit _abélien_ si $\circ$ est commutative.
+
+Q: Ordre d’un groupe $G$
+	A: Cardinal de $G$ si celui-ci est fini.
+
+Q: Groupe topologique
+	A: Groupe $(G, · )$ sur un ensemble $G$ muni d’une topologie tel que l’application
+		math
+			\applic{G × G}{G}{(x,y)}{x · y^{-1}}
+		soit continue.
+
+Q: Groupe $SU(2)$
+	A: Groupe des matrices à coefficients complexes de la forme
+		math
+			M = \mtx{a & b \\ -b^{*} & a^{*}}
+		avec la contrainte
+		math
+			\abs{a}^{2} + \abs{b}^{2} = 1
+
+Q: Relation de conjugaison sur un groupe $G$
+	A: Relation binaire définie par
+		math
+			x\rel y ⟺ ∃ g ∈ G: y = g · x · g^{-1}
+		C’est une relation d’équivalence qui partitionne $G$ en classes de conjugaison, celle d’un élément $g_{0}$ étant :
+		math
+			C_{g_{0}} = \set{g · g_{0} · g^{-1} \where g ∈ G}
+
+Q: Produit direct des groupes $(G, ·_{G})$ et $(H, ·_{H})$
+	A: Groupe $(G × H, \circ)$ avec
+		math
+			(g, h) \circ (g', h') = (g ·_{G} g', h ·_{H} h')
+		Il est abélien si et seulement si $G$ et $H$ le sont, et si ces deux groupes sont d’ordre fini, alors
+		math
+			\abs{G × H} = \abs{G} × \abs{H}
+
+Q: Projection canonique de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$
+	A: Application de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$ définie par
+		math
+			p(g_{1}, …, g_{n}) = g_{i_{0}}
+
+example Exemples de groupes
+	Q: Groupe cyclique d’ordre $n$
+		A: Groupe d’ordre $n$ engendré par un élément: $\C_{n} = \grp{\set c}$ avec $c^{n} = 1$. Une représentation en est $\U_{n}$.
+
+	Q: Groupe ponctuel diédral
+		A: Groupe de symétrie qui décrit les symétries d’un polygone régulier (rotations et réflexions). Le groupe diédral $\D_{n}$ a $n$ rotations et $n$ réflexions.
+
+	Q: Groupe spécial linéaire
+		A: Groupe $SL(n,\K)$ des matrices $n$, $n$ de déterminant 1 à coefficients dans $\K$
+
+	Q: Groupe orthogonal
+		A: math
+				O(n) = \set{A \in GL(n,\R) \where A\transp A = I_n}
+
+	Q: Groupe spécial orthogonal
+		A: math
+				SO(n) = \set{A \in SL(n,\R) \where A\transp A = I_n}
+
+	Q: Groupe symplectique
+		A: math
+				Sp(2n) = \set{A \in GL(2n,\R) \where A\transp J_n A = J_n}
+			où
+			math
+				J_{n} = \mtx{0 & I_{n} \\ -I_{n} & 0}
+	Q: Groupe unitaire
+		A: math
+				U(n) = \set{A \in GL(n,\C)\where A\dag A = I_n}
+
+	Q: Groupe spécial
+		A: math
+				U(n) = \set{A \in SL(n,\C)\where A\dag A = I_n}
+
+Q: Sous-groupe de $(G, · )$. Sous-groupes triviaux, propres.
+	A: Partie $H$ *non vide* de $G$
+		- stable par la loi de $G$
+		- telle que $(H, · )$ ait une structure de groupe
+		Il est dit _trivial_ si égal à $\set{1_{G}}$ ou à $G$, et _propre_ sinon.
+
+Q: Caractérisation des sous-groupes
+	A: Une partie $H$ non vide de $G$ est un sous-groupe de $(G, · )$ si et seulement si
+		- $H$ est stable par $·$
+		- $H$ est stable par prise de l’inverse
+
+		Une caractérisation équivalente est :
+		math
+			∀ h, h' ∈ H, h · h^{-1} ∈ H
+
+Q: Intersection de sous-groupes
+	A: Une intersection de sous-groupes d’un groupe $G$ est un sous-groupe de $G$. On peut dès lors parler du plus petit sous-groupe d’un groupe.
+
+Q: Sous-groupe engendré par $A$
+	A: Plus petit sous-groupe de $G$ (au sens de l’inclusion) contenant $A$. On le note $\grp A$.
+		Si $A$ est fini, alors $\grp A$ est dit de _type fini_.
+
+Q: Description d’un sous-groupe enjendré
+	A: Le sous-groupe engendré par $A$ est
+		math
+			\grp A = \set{a_{1}^{ε_{1}} · ⋯ · a_{n}^{ε_{n}} \where n ∈ \N^{*} \text{ et } \big(∀ i ∈ \icc{1,n}, a_{i} ∈ A \text{ et } ε_{i} = \pm 1\big)}
+
+		_Preuve :_ $\set{…}$ est un groupe et $A ⊂ \set{…} ⊂ \grp{A}$ d’où l’égalité (car $\grp A$ est le plus petit sous-groupe de $G$ contenant $A$).
+
+
+Q: Ordre d’un élément $x ∈ G$ A: Ordre du groupe $\grp{\set{x}}$ si celui-ci est fini. C’est le plus petit entier $k$ positif tel que $g^{k} = 1$.
+
+Q: Puissances « annulant » un élément d’un groupe
+	A: Il existe un unique entier $d ∈ \N$ tel que
+		math
+			\set{k ∈ \Z \where x^{k} = e} = d\Z
+
+		_Preuve :_ le noyau du morphisme $k ∈ (\Z,+) ⟼ x^{k} ∈ (G, · )$ est un sous-groupe de $(\Z,+)$, d’ou le résultat.
+
+Q: Description des sous-groupes additifs de $(\Z,+)$
+	A: Si $H$ est un sous-groupe de $(\Z,+)$, alors il existe un unique entier $n ⩾ 0$ tel que $H = n\Z = \grp{\set n}$.
+
+Q: Congruences à droite et à gauche suivant $H$ et leur classes d’équivalence
+	A: Relations d’équivalence respectives
+		math
+			x\rel_{H}^{(d)}y ⟺ x · y^{-1} ∈ H
+		et
+		math
+			x\rel_{H}^{(g)}y ⟺ y^{-1} · x ∈ H
+		La classe d’équivalence de $g$ pour la relation
+		- $\rel_{H}^{(d)}$ est $Hg$
+		- $\rel_{H}^{(g)}$ est $gH$
+		On les appelle _classes à droite (resp. gauche) de $G$ modulo $H$_ (right/left coset en anglais).
+
+Q: Ensembles $(G/H)_{g}$, $(G/H)_{g}$ et $G/H$
+	A: Respectivement
+		- Ensemble des classes d’équivalence pour la relation de congruence à gauche selon $H$, dont les classes sont $Hg$
+		- Ensemble des classes d’équivalence pour la relation de congruence à droite selon $H$, dont les classes sont $gH$
+		- Notation de $(G/H)_{g}$
+
+Q: Indice d’un sous-groupe $H$ de $G$ dans $G$
+	A: Nombre $[G:H]$ de classes d’équivalences pour la relation de congruence à gauche selon $H$ si ce nombre est fini.
+
+Q: Théorème de Lagrange
+	A: Si $H$ est un sous-groupe d’un groupe $G$ fini, alors
+		math
+			\abs{G} = [G:H]\abs{H}
+		donc dans un groupe fini, l’ordre de tout sous-groupe divise l’ordre du groupe.
+
+Q: Formule des indices
+	A: Si $K < H < G$, alors $G/K$ est fini si et seulement si $G/H$ et $H/K$ sont finie et dans ce cas
+		math
+			[G:K] = [G:H][H:K]
+
+Q: Sous-groupe normal (ou invariant ou distingué)
+	A: Sous-groupe $H$ de $G$ tel que $\rel_{H}^{(g)} = \rel_{H}^{(g)}$, i.e. tel que
+		math
+			∀ g ∈ G, gH = Hg
+		On le note $H \subnormal G$.
+
+Q: Caractérisation des sous-groupes normaux
+	A: $H$ est normal dans $G$ si et seulement si
+		math
+			∀ g ∈ G, ∀ h ∈ H, gH g^{-1} = H
+
+Q: Sous-groupes d’indice 2
+	A: Les sous-groupes d’indice 2 d’un groupe sont distingués dans ce groupe.
+
+Q: Propriétés de base des sous-groupes distingués
+	A: Soit $H$ distingué dans $G$ et $K$ un sous-groupe de $G$.
+		- $H$ est distingué dans tout sous-groupe de $G$ contenant $H$
+		- La normalité n’est pas transitive
+		- $H · K = K · H$ est un sous-groupe de $G$, distingué dans $G$ si $K$ l’est.
+
+## Groupes quotients
+
+Q: Groupe quotient de $G$ par $N$
+	A: Si $N$ est un sous-groupe normal de $G$, la loi $\rel_{N} = \rel_{N}^{(g)} = \rel_{N}^{(d)}$ est compatible avec la loi interne de $G$, donc l’ensemble quotient $G/N = (G/N)_{g} = (G/N)_{d}$ muni de la loi induite est un groupe, appelé _groupe quotient_ de $G$ par $N$.
+		math
+			(gN) ·_{G/N} (g' N) = (gN) ·_{G} (g' N) = (g · g')N
+
+Q: Ordre du groupe quotient $G/N$
+	A: math
+			\abs{G/N} = \abs{G}/\abs{N}
+
+Q: Sous-groupe induit dans un groupe quotient
+	A: Sous-groupe $\tilde{H} = \{h · N \where h ∈ H\} ⊂ G/N$ de $G/N$ si $N \subnormal G$ et $H < G$.
+
+## Approfondissements
+
+### Groupes simples, semi-simples, dérivés, résolubles
+
+Q: Groupes simples et semi-simples
+	A: Un groupe $G$ est dit
+		- _simple_ s’il ne possède pas de sous-groupe normal non-trivial
+		- _semi-simple_ s’il est le produit direct de groupes simples
+
+Q: Commutateur de $a$ et $b$
+	A: math
+		\commu{a}{b} = aba^{-1}b^{-1}
+
+Q: math
+		\big(\commu{a}{b}\big)^{-1}
+	Q: math
+			\commu{b}{a}
+
+Q: math
+		x\commu{a}{b}x^{-1}
+	Q: math
+			\commu{xax^{-1}}{xbx^{-1}}
+		On en déduit que le groupe dérivé de $G$ est normal dans $G$.
+
+Q: Groupe dérivé de $G$
+	A: Noté $D(G)$, c’est le sous-groupe de $G$ engendré par l’ensemble des commutateurs $\commu{a}{b}$.
+
+Q: Groupe $G/D(G)$
+	A: $D(G)$ est normal dans $G$ et le groupe quotient $G/D(G)$ est abélien.
+
+Q: Cas simples de sous-groupes dérivés
+	A: - $G$ est abélien si et seulement si $D(G) = \set{1_{G}}$
+		- Si $G$ est simple et non-abélien, alors $D(G) = G$
+
+Q: Groupe parfait A: Groupe $G$ tel que $D(G) = G$.
+
+Q: Groupes résolubles
+	A: Groupe $G$ tel que pour un certain $n ∈ \N$, on ait $D^{n}(G) = \set{1_{G}}$ (i.e. $D^{n-1}(G)$ est abélien).
+
+Q: Caractérisation des groupes résolubles
+	A: $G$ est résoluble si et seulement s’il existe une suite finie décroissante de sous-groupes de $G$
+		math
+			\set{1_{G}} = H_{n} ⊂ H_{n-1} ⊂ ⋯ ⊂ H_{0} = G
+		tels que pour tout $i ∈ \icc{0,n-1}$, $H_{i+1}$ est normal dans $H_{i}$ et $H_{i} / H_{i+1}$ est abélien.
+
+### Centralisateur, formule des classes
+
+Q: Centralisateur de $g ∈ G$
+	A: Ensemble des éléments qui commutent avec $G$ :
+		math
+			Z_{g} = \set{x ∈ G \where gx = xg}
+		Il a une structure de groupe.
+
+Q: Centre d’un groupe
+	A: Groupe normal dans $G$ formé de l’ensemble des éléments qui commutent avec tous les éléments de $G$ :
+		math
+			Z(G) = \bigcap_{g ∈ G}Z_{g} = \set{x ∈ G \where ∀ g ∈ G, gx = xg}
+
+Q: Relation centralisateur / classe de conjugaison
+	A: Soit $G$ un groupe, $g ∈ G$ et $Z_{g}$ le sous-groupe centralisateur de $g$. L’ensemble quotient $G/Z_{g}$ est en bijection avec la classe de conjugaison $C_{g}$ de $g$.
+
+Q: Formule des classes
+	A: Si $G$ est un groupe fini et $g ∈ G$, alors le cardinal de la classe de conjugaison de $g$ divise l’ordre de $G$ et :
+		math
+			\abs{G} = \abs{C_{g}}\abs{Z_{g}}
+
+### Groupes topologiques métrisables
+
+Q: Distance sur un ensemble $X$
+	A: Application $d: X × X ⟶ \R_{+}$ telle que pour tous $x,y,z ∈ X$,
+		- $d(x,y) = 0 ⟺ x=y$
+		- $d(x,y) = d(y,x)$
+		- $d(x,y) ⩽ d(x,z) + d(z,y)$
+
+Q: Distances $d_{1}$ et $d_{2}$ Lipchitz-équivalentes
+	A: Distances qui définissent la même topologie, ce qui est le cas si et seulement si il existe deux constantes $α, β > 0$ telles que
+		math
+			∀ x,y ∈ X, αd_{1}(x,y) ⩽ d_{2}(x,y) ⩽ β d_{1}(x,y)
+
+Q: Norme sur un groupe $G$
+	A: Application $N: G ⟶ \R_{+}$ telle que pour tout $x,y ∈ G$,
+		- $N(x) = 0 ⟺ x=1_{G}$
+		- $N(xy) ⩽ N(x)+N(y)$
+		- $N(x^{-1}) = N(x)$
+
+
+// groupe libre, arbre de…, cloture normale
