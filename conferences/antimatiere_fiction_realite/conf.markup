@@ -1,0 +1,51 @@
+../../common/conf.lib.markup
+
+title Antimatière, entre fiction et réalité
+by Roland Lehoucq
+date 17/09/2026
+
+L’antimatière: une fiction scientifique.
+De Broglie: la matière peut-elle se comporter comme une onde ? Équation de Schrödinger.
+Problème : incompatibilité avec la relativité restreinte.
+Dirac essaye de corriger le problème. Il aboutit à l’équation de Dirac, qui a des avantages (intègre le spin).
+Cependant cette équation a des solutions dont l’énergie est négative…
+Dirac décide en faveur de l’équation, et imagine les positrons. L’antimatière est alors une fiction.
+
+> The dirac Equation, Physics Explained, Youtube
+
+En 1932, Carl Anderson observe le rayonnement cosmique à l’aide d’une chambre à brouillard, et découvre le muon et l’« électron positif » (trajectoire courbée correspondant à une charge $+e$ mais n’intéragissant peu avec la matière (2000 fois plus légère qu’un proton)). Cette particule est nommée « positron ».
+Le positron est repris dans un texte de science fiction (The Great Thirst, Nat Schachner, Astounding Stories, November 1934).
+
+Le terme « anti-matter » a été utilisé pour la première fois en 1898 par Arthur Schuster dans un article intitulé « Potential matter – A Holiday Dream »
+- Pourquoi n’y aurait-il pas de la « matière (masse) négative », au même titre qu’un des charges négatives ?
+En 1935, le physicien Vladimir Rojansky forge le mot « contraterrene » pour parler d’une hypothétique matière formée d’antiparticules.
+
+! Une particule d’énergie négative n’a pas de niveau fondamental, et donc rayonne indéfiniment une quantité infinie d’énergie.
+Dirac propose la « Mer de Dirac » comme un ensemble d’électrons remplissant une infinité de niveaux d’énergie négative. Créer un trou dans la mer d’énergie négative produit un électron d’énergie positive. Le trou dans la mer se comporte comme un électron positif, d’énergie positive. Il se fome une paire électron-positron. La paire peut se désingégrer, auquel cas l’énergie dissipée est supérieure à $2mc^{2}$, ce qui correspond à un rayonnement gamma.
+On observe effectivement (par exemple en chambre à bulles) la création et l’anihilation de paires électron/positron
+
+Dirac conclut sa conférence Nobel (1933) en disant qu’on ne saurait différencier une étoile faite d’antimatière d’une étoile faite de matière conventionnelle.
+
+1940 calcule la température que devraient avoir des astéroïdes, qui rencontrent une certaine densité de matière conventionnelle.
+L’astronome américain Lincoln LaPaz imagine en 1941 que l’astéroïde de Tunguska (1908) puisse avoir été fait d’antimatière.
+
+Changer le signe du temps propre d’une particule dans l’équation décrivant la propagation dans un champ électromagnétique revient à changer le signe de sa charge.
+
+1955: découverte de l’anti-proton, émergence du mot « antimatière ».
+
+jason et les argonautes, squelettes sortent du sol
+
+1996: Observation de sursauts gamma (gamma-ray bursts), hypothèses sur leur nature
+
+Propulsion avec de l’antimatière ?
+- Leslie Shepherd passe en revue différents modes de propulsion non chimiques
+- elle rendrait possible une éjection à 80% de la vitesse de la lumière, ce qui assure une propulsion efficace
+	math
+		\frac{v}{c} = \tanh \left[\frac{u}{c}\ln \left(\frac{M_{i}}{M_{f}}\right)\right]
+En pratique, c’est plus compliqué
+- grande taille des composants du vaisseau
+- beaucoup de chaleur à évacuer
+- nécessite une grande quantité d’antimatière
+
+math
+	1\u{g} = 1\u{ly · an^{-2}}

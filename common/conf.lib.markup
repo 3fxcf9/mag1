@@ -6,21 +6,10 @@ css_file_link static/css/figure_zoom.css
 
 parser description
 	metadata $arg
+parser by
+	metadata $arg
 
-// Show flashcards if ?hidden=true
-js
-	if (new URLSearchParams(window.location.search).get('hidden') === 'true') {
-		let el = document.createElement('style');
-		el.type = 'text/css';
-		el.innerText = '.flashcard{display:block;}';
-		document.head.appendChild(el);
-
-		document.querySelectorAll("a.back-button").forEach(s => {
-			const url = new URL(s.href);
-			url.searchParams.append('hidden', 'true');
-			s.href = url.href
-		})
-	}
+// TODO
 
 // Katex math rendering
 
@@ -31,7 +20,6 @@ parser setup_fonts_head
 		<link href="$http_rootcommon/static/fonts/computer-modern/fonts/sans.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.5/dist/katex.css" integrity="sha384-zfuvpaZ3OjmRVaLPkCCrb0YbSTd5NgPmLIum+Cmsr06+WhmECuyum4BEipwHyWW4" crossorigin="anonymous">
 		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.5/dist/katex.js" integrity="sha384-lgE5fLZdZtJPuiuEHfJ/cUyVe41JJcbOcsUC0USgJJ4WZ9bCD+vZYFeg7hOoBt4R" crossorigin="anonymous"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/mhchem.min.js" integrity="sha384-fB8BH//9nBzROkMUsu/Dr35jWHIbnKesUo9rW0hfEgw8mZGnkAyBAjKX9F98OVuo"  crossorigin="anonymous"></script>
 setup_fonts_head
 
 

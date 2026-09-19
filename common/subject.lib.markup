@@ -22,3 +22,14 @@ parser chapter
 			<input type="text" name="search_query" placeholder="Search…" autofocus>
 		</div>
 		<div class="chapter-list">$elements</div>
+
+// Propagate ?hidden=true
+js
+	if (new URLSearchParams(window.location.search).get('hidden') === 'true') {
+		document.querySelectorAll("a.chapter").forEach(s => {
+			const url = new URL(s.href);
+			url.searchParams.append('hidden', 'true');
+			s.href = url.href
+		})
+		document.querySelector("a.back-button").href = "../hidden.html"
+	}

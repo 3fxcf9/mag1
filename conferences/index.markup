@@ -1,0 +1,80 @@
+../common/header.lib.markup
+
+css
+	.header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+	}
+
+	.conf-grid {
+		display: grid;
+		gap: 1em;
+		grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+		grid-auto-flow: row;
+	}
+
+	@media screen and (max-width: 700px) {
+		.conf-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.conf {
+		text-decoration: none;
+		color: inherit;
+		border: 1px solid var(--subtext-color);
+	}
+
+	.cover {
+		height: 5em;
+		background-size: cover;
+		background-position: center;
+		opacity: 0.7;
+		transition: opacity 0.1s ease;
+	}
+
+	.conf:hover .cover {
+		opacity: 1;
+	}
+
+	.content {
+		padding: 1em;
+	}
+
+	.conf-title {
+		font-weight: bold;
+		font-size: 1.1em;
+	}
+
+	.conf-bydate {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 0.8rem;
+	}
+
+	.conf-date {
+		color: var(--subtext-color);
+	}
+
+back_link
+
+title Conférences
+
+parser conf
+	build_html
+		<a class="conf" href="$arg">
+			<div class="cover" style="background-color: #aaaaff22"></div> <!-- TODO: Cover -->
+			<div class="content">
+				<div class="conf-title">$external_metadata[$arg/conf.markup][title]</div>
+				<div class="conf-bydate">
+					<div class="conf-by">$external_metadata[$arg/conf.markup][by]</div>
+					<div class="conf-date">$external_metadata[$arg/conf.markup][date]</div>
+				</div>
+			</div>
+		</a>
+	list_wrap <div class="conf-grid">$elements</div>
+
+conf antimatiere_fiction_realite
+conf yield_stress_foam_age

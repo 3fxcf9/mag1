@@ -81,5 +81,6 @@ subject math
 subject meca_analytique
 subject meca_quantique
 subject cosmologie
+subject conferences
 
 generate_project_flashcards_json

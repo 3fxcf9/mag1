@@ -1,0 +1,23 @@
+const local_macros = {
+  "\\E": "\\vec{E}",
+  "\\B": "\\vec{B}",
+  "\\A": "\\vec{A}",
+  "\\j": "\\vec j",
+  "\\poynting": "\\vec{\\Pi}",
+  "\\g": "\\vec g",
+  "\\r": "\\vec r",
+  "\\v": "\\vec v",
+  "\\0": "\\vec 0",
+
+  "\\rot": "\\operatorname{\\overrightarrow{rot}}",
+  "\\grad": "\\operatorname{\\overrightarrow{grad}}",
+  "\\div": "\\operatorname{div}",
+  "\\Vol": "\\mathscr{V}",
+  "\\Surf": "\\mathscr{S}",
+  "\\Contour": "\\mathscr{C}",
+  "\\lapl": "\\Delta",
+  "\\ur": "\\vec{u_r}",
+  "\\large": ">\\!\\!>",
+  "\\small": "<\\!\\!<",
+  "\\u": "\\;\\mathrm{#1}",
+};

@@ -1,0 +1,132 @@
+../../common/course.lib.markup
+
+title Fundamental concepts
+date 09/09/2026
+
+## Scalar potential, vector potential
+
+Q: Helmholtz’s theorem
+	A: Any vector field $\vec{F}(\r)$ with continuous derivatives and decaying faster than $1/r$ at infinity can be decomposed as tre sum of a _solenoidal field_ (zero divergence) $\vec{F}_{\perp}$ and an irrotational field (whose curl is zero), $\vec{F}_{∥}$ :
+	math
+		\vec{F} = \vec{F}_{∥} + \vec{F}_{\perp}
+	More precisely, when the integrals converge, we have
+	math
+		\vec{F}(\r) = \rot \vec{C}(\r) - \grad \vec{ψ}(\r)
+	where
+	math
+		\vec{C}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\rot_{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
+	and
+	math
+		\vec{ψ}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\div{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
+	When this decomposition exists, it is unique.
+
+Q: According to Helmholz’s theorem, what is sufficient de fully characterize a vector field ?
+	A: The knowledge of its curl and divergence. Therefore, the Maxwell equations are sufficient to characterize the fields $\vec{E}$ and $\vec{B}$.
+
+Q: Helmholtz’s theorem applied to an electrostatic field
+	A: math
+			\vec{E}(\r) = \frac{1}{4 π ε_{0}}\iiint_{\R^{3}}ρ(\r') \frac{\r - \r'}{\abs{\r - \r'}^{3}}\dd^{3}\r'
+
+Q: Helmholtz’s theorem applied to an electrostatic field
+	A: We find the Biot-Savart law :
+		math
+			\vec{B}(\r) = \frac{μ_{0}}{4 π}\iiint_{\R^{3}}\j(\r') ∧ \frac{\r - \r'}{\abs{\r - \r'}^{3}}\dd^{3}\r'
+
+Q: Vector potential of $\B$
+	A: From the Maxwell-Thomson equation $\div \B = 0$, we de duce from the Helmholtz’s theorem that there exists a vector $\A$, called _vector potential_, such that
+		math
+			\B = \rot \A
+		Note: $\A$ is a "true" (or polar) vector.
+		Note: $\A$ is not unique since it is defined by its curl alone.
+
+Q: Scalar potential of $\E$ in the general case
+	A: Substituing $\B = \rot\A$ into the Maxwell-Faraday equation $\rot\E = - \pdv{\B}{t}$, we obtain
+		math
+			\rot \big(\E + \pdv{\A}{t}\big) = 0
+		By Helmholtz’s theorem, there therefore exists a scalar field, denoted $V$, such that
+		math
+			E = -\grad V - \pdv{\A}{t}
+
+Q: Flux across a surface in function of $\A$
+	A: math
+			\phi = \int_S\B \cdot \dd\vec{S} = \int_S\rot\A\cdot\dd\vec{S} = \int_C\A\cdot\dd\vec{\ell}
+
+Q: Continuity of the $\A$ vector field
+	A: The tangential component on the vector potential $\A$ is continuous across an interface, even if current flows through it.
+	If in addition we have $\div \A = 0$, then all components of $\A$ are continuous.
+
+Q: Maxwell equations relating to potentials
+	A: By taking the divergence of $\E = -\grad V - \pdv{\A}{t}$, we get
+		math
+			\lapl V + \pdv{}{t}(\div \A) = - \frac{ρ}{ε_{0}}
+		and by taking the curl of $\B = \rot\A$, we get
+		math
+			\lapl \A - \frac{1}{c^{2}} \pdvN{\A}{t}{2} - \grad \left(\div \A + \frac{1}{c^{2}}\pdv{V}{t}\right) = -μ_{0} \j
+
+Q: Gauge transformation
+	A: Combination of the two transformations
+		- $\A \to \A' = \A + \grad \Lambda$ (does not change $\B = \rot\A$)
+		- $V \to V' = V - \pdv{\Lambda}{t}$ (does not change $\E = -\grad V - \pdv{\A}{t}$)
+
+Q: Lorenz gauge
+	A: math
+			\div \A + \frac{1}{c^{2}} \pdv{V}{t}=0
+		Used in particular
+		- for radiation problems
+		- in special relativity
+
+
+Q: Maxwell equations in the Lorenz gauge
+	A: math
+			\lapl V_{L} - \frac{1}{c^{2}}\pdvN{}{t}{2}V_{L} = -\frac{ρ}{ε_{0}}
+		and
+		math
+			\lapl \A_{L} - \frac{1}{c^{2}}\pdvN{}{t}{2}\A_{L} = -μ_{0}\j
+		- $V_{L}$ and the three components of $\A_{L}$ are threated the same
+
+Q: Coulomb gauge
+	A: math
+			\div \A = 0
+		Used in particular
+		- in (quasi-)statics
+		- in quantum electrodynamics
+
+Q: Maxwell equations in the Coulomb gauge
+	A:
+		math
+			\lapl V_{C} = - \frac{ρ}{ε_{0}}
+		and
+		math
+			\lapl \A_{C} - \frac{1}{c^{2}}\pdvN{}{t}{2}\A_{C} = - μ_{0}\j + \frac{1}{c^{2}}\grad \left(\pdv{V_{C}}{t}\right)
+		Since $V_{C}$ satisfies the Poisson equation, if $V_{C} \to 0$ at infinity, we know
+		math
+			V_{C}(\r, t) = \frac{1}{4 π ε_{0}} \int_{\R^{3}}\frac{ρ(\r', t)}{\abs{r-r'}}\dd^{3} r'
+
+
+
+proof Poynting’s theorem
+	math
+		\begin{align*}
+			\dv{W_{\text{mech}}}{t} &= \int_{V} \Big(ρ \E + \underbrace{\j}_{ρ \v} ∧ \B\Big) · \v \dd^{3} r \\
+			&= \int_{V}(\underbrace{ρ\E}_{\j · \E} · \v) + \underbrace{ρ(\v ∧ \B)· \v}_{=0} \dd^{3} r \\
+			&= \int_{V} \Big(\frac{\rot \B}{μ_{0}} - ε_{0} \pdv{\E}{t}\Big) · \E \dd^{3}r
+		\end{align*}
+	But
+	math
+		\div (\E × \B) = (\rot\E) · \B - (\rot\B) · \E = - \pdv{\B}{t} · (\B - \rot\B)· \E
+	Thus,
+	math
+		\begin{align*}
+			\dv{W_{\text{mech}}}{t} &= \int_{V} - \frac{\div (\E ∧ \B)}{μ_{0}} - \frac{1}{μ_{0}}\pdv{\B}{t}· \B - ε_{0}\pdv{\E}{t}· \E \dd^{3}r \\
+			&= \int_{V} \j · \E \dd^{3} r \\
+			&= -\int_{V} \div  \left(\frac{\E ∧ \B}{μ_{0}}\right)\dd^{3}r - \pdv{}{t}\int_{V} \left(\frac{1}{2}ε_{0}E^{2} + \frac{1}{2 μ_{0}}\B^{2}\right)\dd^{3}r
+		\end{align*}
+	Therefore,
+	math
+		\dv{}{t} \left(W_{\text{mech}} + E_{\text{EM}}\right) = -\int_{V} \div \poynting \dd^{3}r
+	with $\poynting = \frac{\E ∧ \B}{μ_{0}}$ the _Poynting’s vector_ and
+	math
+		E_{\text{EM}} = \int_{V}\frac{1}{2}ε_{0}\E^{2} + \frac{\B^{2}}{2 μ_{0}}\dd^{3}r
+
+
+

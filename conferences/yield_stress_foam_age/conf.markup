@@ -1,0 +1,41 @@
+../../common/conf.lib.markup
+
+title When Capillarity Meets Yield Stress: How Foams Age in Complex Fluids
+by Anniina Salonen
+date 16/09/2026
+
+Les micro-structure (nm - µm) sont organisés en méso-structures, qui forment des matériaux lesquels ont des propriétés physiques.
+Dans le cas des mousses, l’objet individuel est une bulle (~10µm), ensemble les bulles forment un réseau (grace à une structure secondaire), qui constitue une mousse.
+
+On va s’intéresser à l’influence de cette structure secondsire sur les propriétés des mousses (vieillissement, propriétés physiques…)
+
+Un paramètre important est la tension de surface (énergie contenue dans l’interface fluide-air, proportionnelle à la surface de cette interface). Les bulles s’organisent de sorte à minimiser cette énergie, et donc en vue de réduire la surface exposée.
+
+Mécanismes de vieillissement :
+- murissement (coarsening): vise à diminuer la surface de contact gaz/liquide. La pression de Laplace est plus grande dans une petite bulle que dans une bulle plus grosse. Une petite bulle va donc se vider dans une bulle plus grosse si elles communiquent.
+	La différence de pression à l’interface entre les bulles $i$ et $j$ s’écrit
+	math
+		ΔP = 2 γ \left(\frac{1}{R_{i}} - \frac{1}{R_{j}}\right)
+	avec $R_{i/j}$ le rayon des bulles.
+	- Le système est auto-similaire (avancer dans le temps revient à zoomer).
+	- Le rayon évolue en $t^{1/2}$ dans le cas d’une limite sèche, et en $t^{1/3}$ dans le cas d’une limite humide.
+	- Nombre de réarangements (déplacement d’un voisin) est fixé par le taux de vieillissement.
+
+? Que deviennent ce résultats pour un fluide complexe ?
+
+Les fluides complexes se comportent comme des solides à faible force de cisaillement, et comme des liquides au delà de ce seuil (appelé seuil de fluidité)
+Les mousses élastocapillaires (Elastocapillary foams) auxquelles nous allon nous intéresser se situent entre les mousses solides (ne vieillit pas) et les mousses liquides. Elles sont caractérisées par leur nombre elastocapillaire $Ca_{el} = \frac{G_{0}}{γ/R}$.
+On ne dispose pas de critère pour différentier les mousses solides des mousses liquides.
+
+On ne s’intéresse désormais qu’aux propriétés macroscopiques des fluides complexes, en délaissant leur structure de mousse.
+On mesure l’asymétrie de la distribution des rayons des bulles pour savoir à quel point le vieillissement est différent de celui d’une mousse « classique ».
+
+- Mousses acqueuses -> réarangement des bulles
+- Mousses d’émulsion -> décroissance de la taille des bulles, qui s’accumulent autour des bulles restantes
+	- les bulles font face à la résistance de l’épaisseur de liquide laissé par les bulles qui disparaissent (terme résistant dans la pression de Laplace: $ΔP = \frac{γ}{R_{ys}} - τ_{y} \frac{\ell}{d} = 0$) en plus de l’affaiblissement de la pression de Laplace due à leur grossissement
+	- on arrive à un instant critique où les bulles n’arrivent plus à s’étendre en raison de cette force
+	- le taux de vieillissement diminue alors, puis s’arrête
+
+Note:
+- les effets du confinement ne sont pas très importants, des études sont en cours
+- les échanges de gaz entre les bulles sont dues à la diffusion du gaz dans film inter-bulles (équilibre: il se dissout depuis les petites bulles et dégaze dans les bulles plus grandes)

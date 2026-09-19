@@ -1178,6 +1178,7 @@ body {
 /* Flashcards */
 .flashcard {
   display: none;
+  margin: 0.5rem 0;
   font-size: smaller;
   background-color: var(--bg-greyed);
   border: 2px solid var(--subtext-color);

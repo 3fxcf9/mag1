@@ -1,0 +1,31 @@
+index.markup
+
+## Hidden
+	id hidden_section
+
+css
+	#hidden_section{
+		margin: 2rem 0 1rem 0;
+	}
+
+subject electromagnetisme
+subject theorie_groupes
+
+js
+	document.querySelectorAll("a.subject").forEach(s => {
+		const url = new URL(s.href);
+		url.searchParams.append('hidden', 'true');
+		s.href = url.href
+	})
+
+Go back to normal
+	link index.html
+	id back-normal
+
+css
+	#back-normal {
+		margin-top: 2rem;
+		a {
+			color: var(--subtext-color);
+		}
+	}

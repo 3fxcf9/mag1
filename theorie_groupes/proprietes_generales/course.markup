@@ -1,5 +1,7 @@
 ../../common/course.lib.markup
+
 title Propriétés générales
+date 10/09/2026
 
 ## Structure de groupe
 
@@ -216,16 +218,16 @@ Q: Groupes simples et semi-simples
 
 Q: Commutateur de $a$ et $b$
 	A: math
-		\commu{a}{b} = aba^{-1}b^{-1}
+			\commu{a}{b} = aba^{-1}b^{-1}
 
 Q: math
 		\big(\commu{a}{b}\big)^{-1}
-	Q: math
+	A: math
 			\commu{b}{a}
 
 Q: math
 		x\commu{a}{b}x^{-1}
-	Q: math
+	A: math
 			\commu{xax^{-1}}{xbx^{-1}}
 		On en déduit que le groupe dérivé de $G$ est normal dans $G$.
 

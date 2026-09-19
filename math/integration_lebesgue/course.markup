@@ -224,7 +224,8 @@ prop
 
 proof
 	Soit $a ∈ \R$.
-	~ math
+	~ Pour tout $a ∈ \R$,
+		math
 			\begin{align*}
 				(f+g)^{-1} \big(\oo{a, +∞}\big) &= \set{x ∈ X \where f(x) + g(x) > a} \\
 				&= \set{x ∈ X \where f(x) > a-g(x)} \\
@@ -232,7 +233,8 @@ proof
 				&= \bigcup_{r ∈ Q} \Big(\set{x ∈ X \where f(x) > r} ∩ \set{x ∈ X \where g(x) > a-r}\Big) \\
 				&= \bigcup_{r ∈ Q} \Big(f^{-1} \big(\oo{r, +∞}\big) ∩ g^{-1} \big(\oo{a-r, +∞}\big)\Big)
 			\end{align*}
-	~ math
+	~ Pour tout $a ∈ \R$,
+		math
 			\begin{align*}
 				\max(f, g)^{-1}\big(\oo{a, +∞}\big) &= \set{x ∈ X \where \max(f, g) > a}\\
 				&= \set{x ∈ X \where f(x) > a \text{ ou } g(x) > a}\\
@@ -240,7 +242,8 @@ proof
 				&= \underbrace{f^{-1} \big(\oo{a, +∞}\big)}_{∈ T_{X}} ∪ \underbrace{g^{-1} \big(\oo{a,+∞}\big)}_{∈ T_{X}} ∈ T_{X}
 			\end{align*}
 	~ Les fonctions $f_{\pm} = \max(\pm f, 0)$ sont mesurables (troisième point) donc $\abs{f} = f_{+} + f_{-}$ l’est également.
-	~ math
+	~ Pour tout $a ∈ \R$,
+		math
 			\begin{align*}
 				(f^{2})^{-1} \big(\oo{a, +∞}\big) &= \set{x ∈ X \where f^{2}(x) > a} \\
 				&= \begin{cases}\set{x ∈ X \where f > \sqrt{a}} \if a ⩾ 0 \\ X ∈ T_{X} \if a < 0\end{cases} \\
@@ -251,9 +254,9 @@ proof
 prop
 	Soit $(X, T)$ un espace mesurable et soit $(f_{n}: X ⟶ \R)$ une suite de fonctions mesurables. Alors
 	- $\sup_{n ∈ \N} f_{n}$ est mesurable,
-	- $\inf{n ∈ \N} f_{n}$ est mesurable,
-	- $\limsup{n \to +∞} f_{n}$ est mesurable,
-	- $\liminf{n \to +∞} f_{n}$ est mesurable,
+	- $\inf_{n ∈ \N} f_{n}$ est mesurable,
+	- $\limsup_{n \to +∞} f_{n}$ est mesurable,
+	- $\liminf_{n \to +∞} f_{n}$ est mesurable,
 	- si elle existe, $\lim_{n\to+∞} f_{n}$ est mesurable.
 
 proof
