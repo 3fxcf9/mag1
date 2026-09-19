@@ -6,7 +6,6 @@ const local_macros = {
   "\\Proba": "\\mathbf{P}",
   "\\Puiss": "\\mathscr{P}",
   "\\moy": "\\Braket{#1}",
-  "\\cte": "\\mathrm{c^{te}}",
 
   "\\r": "\\vec{r}",
   "\\v": "\\vec{v}",

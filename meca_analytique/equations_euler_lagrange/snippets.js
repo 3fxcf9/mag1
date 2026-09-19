@@ -1,5 +1,4 @@
 const local_macros = {
-  "\\cte": "\\mathrm{c^{te}}",
   "\\Lagr": "\\mathscr{L}",
   "\\x": "\\cancel{#1}",
   "\\dx": "\\dot{x}",

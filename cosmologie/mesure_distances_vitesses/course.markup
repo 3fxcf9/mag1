@@ -1,0 +1,48 @@
+../../common/course.lib.markup
+
+title Mesures de distances et de vitesses dans l’Univers
+date 17/09/2026
+
+Dans un Univers en expansion, potentiellement courbe, la notion même de distance est compliquée.
+
+callout
+	- Distance Terre-Soleil: unité astronomique. Fixée à
+		math
+			1 \u{ua} = 149 597 870 700 \u{m}
+	- L’année lumière
+		math
+			1 \u{ly} \simeq 0.95 · 10^{16}m
+	- Le parsec (_parallax second_) est la distance à laquelle se situe un astre dont la parallaxe vaut une seconde d’arc
+		math
+			1 \u{pc} = \frac{1\u{ua}}{1''} = \frac{1 \u{ua}}{\frac{1}{3600} × \frac{π}{180}}\simeq 3.086 · 10^{16}\u{m}
+		On a
+		math
+			1\u{pc} = 3.26\u{ly}
+	- Magnitude apparente $m$ :
+		math
+			m = -2.5 \log_{10} ϕ + C
+		avec $C$ une constante qui dépend de la bande de longueur d’onde, fixée sur des étoiles « standard ».
+	- Magnitude absolue $M$ : magnitude apparente qu’aurait l’astre vu à une distance de $10\u{pc}$ :
+		math
+			M = -2.5\log_{10} \left(\frac{L}{4 π (10\u{pc})^{2}}\right) + C
+	- Module de distance :
+		math
+			μ = m-M = -2.5\log_{10} \left(\left(\frac{10\u{pc}}{D}\right)^{2}\right) = 5 \log_{10} \left(\frac{D}{10\u{pc}}\right)
+	rem
+		Augmenter la magnitude de $1$ revient à diviser le flux par $2.5$.
+
+
+- Pour les objets du système solaire: mesure par echo radar
+- Pour les étoiles proches: méthode de la parallaxe
+	fig $p$ est l’angle de parallaxe, et $p \simeq \tan p = 2 d_{TS}/D$. On peut donc en déduire $D$.
+		./figures/parallaxe.svg
+- Pour les objets plus lointains: chandelles standards (relier flux reçu et distance pour une luminosité connue)
+	math
+		ϕ = \frac{L}{4 π D}
+- Astres pour lesquels on peut prédire la luminosité intrinsèque (ou magnitude absolue) :
+	- Céphéides (étoiles variables dont la luminosité varie sur une période allant de 1 à 100 jours). Il existe une relation linéaire entre leur luminosité intrinsèque et leur période. On calibre cette relation sur des céphéides proches dont on peut mesurer la distance par parallaxe (on calcule la distance et magnitude apparente des céphéides proches, on en déduit leur magnitude absolue qu’on trace en fonction de la période. On en déduit le modèle affine permettant de relier ces deux grandeurs pour toutes les céphéides. Pour mesurer la distance d’une céphéide, on mesure sa période dont on déduit la magnitude absolue grace au modèle, et enfin on utilise $m - M = 5\log_{10} \frac{D}{10\u{pc}}$).
+- Supernovae de type Ia: système binaire avec une naine blanche qui accrète de la matière de son compagnon. Elle exploce quand elle atteint 1.4 millions de masses solaires. Sa luminosité suit alors une courbe standard, augmentant puis diminuant en environ un mois.
+- Relation de Tally-Fischer: la luminosité intrinsèque des galaxies spirales est corrélée à la vitesse maximale de rotation des étoiles
+
+fig Échelle de distances
+	./figures/echelle_distance.svg

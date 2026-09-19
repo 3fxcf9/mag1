@@ -1,9 +1,14 @@
 const macros = {
+  // Variations
   "\\leq": "\\leqslant",
   "\\geq": "\\geqslant",
   "\\subsetneq": "\\varsubsetneq",
   "\\supsetneq": "\\varsupsetneq",
   "\\emptyset": "\\varnothing",
+
+  // Common
+  "\\cte": "\\mathrm{c^te}",
+
   "\\1": "\\mathbf{1}",
   "\\N": "\\mathbf{N}",
   "\\Z": "\\mathbf{Z}",
