@@ -7,9 +7,9 @@ date 15/09/2026
 ++Hiatoire++:
 - Vers le 17-18e siècle, Newton démontre le théorème fondamental de l’analyse.
 - Leibniz formalise à la même période le calcul infinitésimal. On lui doit le symbole intégral.
-- Riemann cnostruit en 1843 l’intégrale, mais son travail ne sera publié qu’en 1868, à titre posthume.
-- Borel retravaille la théorè de Riemann et aboutit à un nouveau cadre théorique: la théorie de la mesure.
-- Lebesgue crée en 1904 la théorie intégrale du même nom.
+- Riemann construit en 1843 l’intégrale, mais son travail ne sera publié qu’en 1868, à titre posthume.
+- Borel retravaille la théorie de Riemann et aboutit à un nouveau cadre théorique: la théorie de la mesure.
+- Lebesgue crée en 1904 la théorie intégrale qui porte son nom.
 - En 1930, Kolmogorov reformule la théorie des probabilités dans le cadre de la théorie de la mesure.
 - En 1950, Kurzweil-Henstock établissent en parallèle une autre théorie d’intégration, fondée sur celle de Lebesgue.
 
@@ -41,16 +41,15 @@ math
 	\Func_{\text{escalier}}^{⩾}(I) = \set{F ∈ \Func_{\text{escalier}}(I)\where F ⩾ f}
 On a alors
 math riemann:ineq
-	\sup_{F ∈ \Func_{\text{escalier}}^{⩽}}(I) ∫_{I}\dd xF(x) ⩽ \inf_{G ∈ \Func_{\text{escalier}}^{⩾}(I)} ∫_{I}\dd x G(x)
+	\sup_{F ∈ \Func_{\text{escalier}}^{⩽}(I)} ∫_{I}\dd xF(x) ⩽ \inf_{G ∈ \Func_{\text{escalier}}^{⩾}(I)} ∫_{I}\dd x G(x)
 On dira que $f$ est _Riemann-intégrable_ sur $I$ si [riemann:ineq] est une égalité, et on notera dans ce cas
 math
 	∫_{I} \dd xf(x) = \sup_{F ∈ \Func_{\text{escalier}}^{⩽}}(I) ∫_{I}\dd xF(x) = \inf_{G ∈ \Func_{\text{escalier}}^{⩾}(I)} ∫_{I}\dd x G(x)
 
 thm
-	Soit $(f_{n})_{n ∈ \N}$ une suite de fonctions Riemann-intégrables sur $I = \cc{a,b}$ convergeant uniformément sur $f$ sur $I$. Alors,
-	~ $f$ est Riemann-intégrable sur $I$
-	~ math
-			\lim_{n\to +∞} ∫_{I}\dd xf(x) = ∫_{I}\dd xf(x)
+	Soit $(f_{n})_{n ∈ \N}$ une suite de fonctions Riemann-intégrables sur $I = \cc{a,b}$ convergeant uniformément sur $f$ sur $I$. Alors, $f$ est Riemann-intégrable sur $I$ et
+	math
+		\lim_{n\to +∞} ∫_{I}\dd xf(x) = ∫_{I}\dd xf(x)
 
 rem
 	La convergence uniforme assure deux résultats à la fois :
@@ -103,17 +102,26 @@ def Espace topologique
 	~ $τ$ est stable par intersections finies
 	~ $τ$ est stable par unions quelconques
 	Un sous-ensemble fermé dans la topologie $τ$ est le complément d’un ouvert.
+	as_flashcard
 
 example
 	Soit $X$ un ensemble.
 	- On appelle $\big(X, \set{\emptyset, X}\big)$ l’espace topologique tivial sur $X$.
+		Q: Espace topologique trivial sur $X$
+			A: math
+					\big(X, \set{\emptyset, X}\big)
 	- On appelle(($2^{X}$ est l’ensemble des parties de $X$.)) $\big(X, 2^{X}\big)$ l’espace topologique discret sur $X$.
+		Q: Espace topologique discret sur $X$
+			A: math
+					\big(X, 2^X\big)
+				avec $2^{X}$ l’ensemble des parties de $X$.
 	- $\R$ avec sa topologie usuelle (métrique) est un espace topologique.
 
 def Fonction continue
 	Soient $(X, τ_{X})$ et $(Y, τ_{Y})$ deux espaces topologiques. On dit que $f: X ⟶ Y$ est _continue_ si l’image réciproque de tout ouvert est un ouvert, i.e.
 	math
 		∀ Ω ∈ τ_{Y}, f^{-1}(Ω) = \set{x ∈ X \where f(x) ∈ Ω} ∈ τ
+	as_flashcard
 
 example
 	Soit $X = \oo{0,1}$. Reprenons les fonctions $f_{n} = \1_{\set{q_{0}, …, q_{n}}}$. Pour tout $n ∈ \N$,
@@ -130,6 +138,7 @@ def $\sigma$-algèbre
 	~ $T$ est stable par complémentation
 	~ $T$ est stable par intersection dénombrable
 	On appellera les éléments de $T$ les (sous-ensembles) mesurables de $X$.
+	as_flashcard
 
 prop
 	Soit $T$ une $σ$-algèbre sur un ensemble $X$. Alors
@@ -147,7 +156,13 @@ rem
 example
 	Soit $X$ un ensemble.
 	- $\set{\emptyset, X}$ est la $σ$-algèbre triviale
+		Q: $σ$-algèbre triviale sur $X$
+			A: math
+					\set{\emptyset, X}
 	- $2^{X}$ est la $σ$-algèbre discrète
+		Q: $σ$-algèbre discrète sur $X$
+			A: math
+					2^X
 
 defprop
 	Soit $X$ un ensemble et soit $Σ$ un ensemble non-vide de sous-ensembles de $X$. Il existe une unique plus petite $σ$-algébre sur $X$ contenant $Σ$, qu’on appellera $σ$-algèbre _engendrée_ sur $X$ par $Σ$ et qu’on notera $σ(Σ)$.
@@ -155,16 +170,17 @@ defprop
 proof
 	La $σ$-algèbre $2^{X}$ sur $X$ contient $Σ$; on peut donc poser
 	math
-		σ(Σ) = \bigcap_{\substack{T σ-\text{algèbre sur } X \\ T \text{ contient } Σ}}
+		σ(Σ) = \bigcap_{\substack{T \;σ-\text{algèbre sur } X \\ T \text{ contient } Σ}}T
 	Alors $Σ ⊂ σ(Σ)$ et toute $σ$-algèbre de l’intersection contient $σ(Σ)$, qui est donc la plus petite.
 	Il reste à vérifier que $σ(Σ)$ est bien une $σ$-algèbre :
 	- $σ(Σ) \ne\emptyset$ car $Σ ⊂ σ(Σ)$ avec $Σ \ne\emptyset$
 	- Pour toute suite $(A_{n})_{n ∈ \N}$ d’éléments de $σ(Σ)$, $\bigcap_{n ∈ \N} A_{n} ∈ σ(Σ)$. En effet, les $A_{n}$ sont des éléments de toute $σ$-algèbre sur $X$ contenant $Σ$ et donc leur intersection en est un aussi.
 	- On montre de même la stabilité par complémentation.
 
-def
+def $\sigma$-algèbre de Borel
 	id boreliens
 	Soit $(X,τ)$ un espace topologique. On appelle _$σ$-algèbre de Borel de $(X, τ)$_ la $σ$-algèbre engendrée sur $X$ par $τ$ et on la note $B_{X} = B_{(X, τ)} = σ(τ)$. Les mesurables de $B_{X}$ sont appelés les _boléliens de $X$_.
+	as_flashcard
 
 rem
 	On peut montrer qu’il est impossible d’obtenir un borélien de $\R$ quelconque par intersections, complémentations et unions dénombrables d’ouverts de $\R$. Il s’agit donc d’objets très compliqués.
@@ -177,11 +193,12 @@ proof
 
 ### Espaces et fonctions mesurables
 
-def
+def Espaces et fonctions mesurables
 	On appelle _espace mesurable_ tout couple $(X,T)$ où $X$ est un ensemble et $T$ une $σ$-algèbre sur $X$.
 	Si $(X,T_{X})$ et $(Y,T_{Y})$ sont deux espaces mesurables, on dira que $f: X ⟶ Y$ est _mesurable_ si
 	math
 		∀ A ∈ T_{Y}, f^{-1}(A) ∈ T_{X}
+	as_flashcard
 
 prop
 	Soient $(X,T_{X})$, $(Y, T_{Y})$ et $(Z, T_{Z})$ trois espaces mesurables. Soient $f: Y ⟶ Z$ et $g: X ⟶ Y$ deux fonctions mesurables. Alors, $f\circ g: X ⟶ Z$ est mesurable.
@@ -190,10 +207,11 @@ proof
 	math
 		∀ A ∈ T_{Z}, (f\circ g)^{-1}(A) = g^{-1}\big(\underbrace{f^{-1}(A)}_{∈ T_{Y}}\big) ∈ T_{X}
 
-prop
+prop Caractérisation des fonctions mesurables
 	Soient $(X,T_{X})$ et $(Y, T_{Y})$ deux espaces mesurables tels que $T_{Y} = σ(Σ)$ avec $Σ$ un ensemble non vide de sous-ensembles de $Y$. Alors, $f: X ⟶ Y$ est mesurable si et seulement si
 	math
 		∀ A ∈ Σ, f^{-1}(A) ∈ T_{X}
+	as_flashcard
 
 proof
 	_Montrons le sens direct, le sens réciproque étant trivial:_ supposons que $∀ A ∈ Σ, f^{-1}(A) ∈ T_{X}$. Considérons l’ensemble
@@ -210,10 +228,11 @@ rem
 			∀ Ω ∈ τ_{Y}, f^{-1}(Ω) ∈ B_{X}
 		En particulier, si $f$ est continue sur $X$, alors $f$ est mesurable.
 
-cor
+cor Caractérisation des fonctions réelles mesurables
 	Soit $(X,T)$ un espace mesurable. La fonction $f: X ⟶ \R$ est mesurable (pour les boréliens de $\R$) si
 	math
 		∀ a ∈ \R, f^{-1}\big(\oo{a, +∞}\big) ∈ T_{X}
+	as_flashcard
 
 prop
 	Soit $(X,T)$ un espace mesurable et soient $f$ et $g$ deux fonctions de $X$ dans $\R$ mesurables. Alors
@@ -221,6 +240,7 @@ prop
 	- $fg$ est mesurable
 	- $\max(f, g)$ est mesurable
 	- $\abs{f}$ est mesurable
+	as_flashcard Conservation du caractère mesurable par opérations simples
 
 proof
 	Soit $a ∈ \R$.
@@ -253,11 +273,12 @@ proof
 
 prop
 	Soit $(X, T)$ un espace mesurable et soit $(f_{n}: X ⟶ \R)$ une suite de fonctions mesurables. Alors
-	- $\sup_{n ∈ \N} f_{n}$ est mesurable,
-	- $\inf_{n ∈ \N} f_{n}$ est mesurable,
-	- $\limsup_{n \to +∞} f_{n}$ est mesurable,
-	- $\liminf_{n \to +∞} f_{n}$ est mesurable,
-	- si elle existe, $\lim_{n\to+∞} f_{n}$ est mesurable.
+	- $\displaystyle\sup_{n ∈ \N} f_{n}$ est mesurable,
+	- $\displaystyle\inf_{n ∈ \N} f_{n}$ est mesurable,
+	- $\displaystyle\limsup_{n \to +∞} f_{n}$ est mesurable,
+	- $\displaystyle\liminf_{n \to +∞} f_{n}$ est mesurable,
+	- si elle existe, $\displaystyle\lim_{n\to+∞} f_{n}$ est mesurable.
+	as_flashcard Conservation du caractère mesurable par passage à la limite
 
 proof
 	Il suffit de montrer que $\sup_{n ∈ \N} f_{n}$ est mesurable.

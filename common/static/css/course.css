@@ -542,6 +542,13 @@ body {
   }
 
   /*************** Lists ***************/
+  ul {
+    margin: 1rem 0;
+  }
+  p:has(+ ul) {
+    margin-bottom: 0 !important;
+  }
+
   ul > li {
     list-style-type: "▷  ";
   }
