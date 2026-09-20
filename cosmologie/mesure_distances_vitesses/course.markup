@@ -22,12 +22,26 @@ callout
 		math
 			m = -2.5 \log_{10} ϕ + C
 		avec $C$ une constante qui dépend de la bande de longueur d’onde, fixée sur des étoiles « standard ».
+		Q: Magnitude apparente
+			A: Elle est donnée par la _loi de Pogson_ :
+				math
+					m = -2.5 \log_{10} ϕ + C
+				avec $ϕ = \frac{L}{4 π d^{2}}$ l’éclairement, qui s’exprime avec la luminosité intrinsèque $L$ de l’étoile, et $C$ une constante de calibration (sur des étoiles standard).
 	- Magnitude absolue $M$ : magnitude apparente qu’aurait l’astre vu à une distance de $10\u{pc}$ :
 		math
 			M = -2.5\log_{10} \left(\frac{L}{4 π (10\u{pc})^{2}}\right) + C
+		Q: Magnitude absolue
+			A: Magnitude que verrait un observateur situé à une distance d'exactement 10 parsecs (32,6 années-lumière) de cet objet.
+				math
+					M = -2.5\log_{10} \left(\frac{L}{4 π (10\u{pc})^{2}}\right) + C
 	- Module de distance :
 		math
 			μ = m-M = -2.5\log_{10} \left(\left(\frac{10\u{pc}}{D}\right)^{2}\right) = 5 \log_{10} \left(\frac{D}{10\u{pc}}\right)
+		Q: Module de distance
+			A: Différence entre la magnitude apparente et la magnitude absolue d’un astre :
+				math
+					μ = m-M = -2.5\log_{10} \left(\left(\frac{10\u{pc}}{D}\right)^{2}\right) = 5 \log_{10} \left(\frac{D}{10\u{pc}}\right)
+
 	rem
 		Augmenter la magnitude de $1$ revient à diviser le flux par $2.5$.
 
@@ -41,8 +55,8 @@ callout
 		ϕ = \frac{L}{4 π D}
 - Astres pour lesquels on peut prédire la luminosité intrinsèque (ou magnitude absolue) :
 	- Céphéides (étoiles variables dont la luminosité varie sur une période allant de 1 à 100 jours). Il existe une relation linéaire entre leur luminosité intrinsèque et leur période. On calibre cette relation sur des céphéides proches dont on peut mesurer la distance par parallaxe (on calcule la distance et magnitude apparente des céphéides proches, on en déduit leur magnitude absolue qu’on trace en fonction de la période. On en déduit le modèle affine permettant de relier ces deux grandeurs pour toutes les céphéides. Pour mesurer la distance d’une céphéide, on mesure sa période dont on déduit la magnitude absolue grace au modèle, et enfin on utilise $m - M = 5\log_{10} \frac{D}{10\u{pc}}$).
-- Supernovae de type Ia: système binaire avec une naine blanche qui accrète de la matière de son compagnon. Elle exploce quand elle atteint 1.4 millions de masses solaires. Sa luminosité suit alors une courbe standard, augmentant puis diminuant en environ un mois.
-- Relation de Tally-Fischer: la luminosité intrinsèque des galaxies spirales est corrélée à la vitesse maximale de rotation des étoiles
+- Supernovae de type Ia : système binaire avec une naine blanche qui accrète de la matière de son compagnon. Elle exploce quand elle atteint 1.4 millions de masses solaires. Sa luminosité suit alors une courbe standard, augmentant puis diminuant en environ un mois.
+- Relation de Tally-Fischer : la luminosité intrinsèque des galaxies spirales est corrélée à la vitesse maximale de rotation des étoiles
 
 fig Échelle de distances
 	./figures/echelle_distance.svg

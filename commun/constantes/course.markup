@@ -1,0 +1,29 @@
+../../common/course.lib.markup
+
+title Constantes
+date 20/09/2026
+
+## Distances
+
+Q: Ångström
+	A: math
+			1\u{\AA} = 10^{-10}\u{m}
+
+Q: Unité astronomique
+	A: math
+			1\u{au} = 149\:597\:870\:700\u{m} \simeq 1.5\cdot 10^{11}\u{m}
+
+Q: Année lumière
+	A: math
+			1\u{ly} = 9\:460\:730\:472\:580,8\u{km} \simeq 0.95\cdot 10^{16}\u{m}
+
+Q: Parsec
+	A: Distance à laquelle se situe un astre dont la parallaxe entre le soleil et la terre vaut une seconde d’arc :
+		math
+			1\u{pc} = \frac{648\;000}{\pi}\u{au} \simeq 3.26\u{ly}
+
+## SI
+
+Q: Vitesse de la lumière dans le vide
+	A: math
+			299\:792\:458\u{m\cdot s^{-1}}

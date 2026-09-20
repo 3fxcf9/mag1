@@ -5,6 +5,7 @@ const macros = {
   "\\subsetneq": "\\varsubsetneq",
   "\\supsetneq": "\\varsupsetneq",
   "\\emptyset": "\\varnothing",
+  "\\u": "\\;\\mathrm{#1}", // units
 
   // Common
   "\\cte": "\\mathrm{c^te}",
