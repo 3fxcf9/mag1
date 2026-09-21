@@ -31,7 +31,7 @@ Q: Énergie potentielle gravitationnelle d’une masse ponctuelle $m$ dans un ch
 
 Q: Énergie potentielle d’une boule homogène de rayon $R$ et de masse $M$
 	A: math
-		E_p = -\frac35\frac{GM^2}{R}
+			E_p = -\frac35\frac{GM^2}{R}
 
 Q: Moment d’inertie d’une boule homogène de rayon $R$ et de masse $M$
 	A: math

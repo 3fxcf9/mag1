@@ -3,9 +3,14 @@
 title Rayonnements et équilibres hydrostatiques
 date 14/09/2026
 
-Q: Loi de déplacement de Wien
+Q: Loi de déplacement de Wien en longueur d’onde
 	A: math
 			\lambda_{\max} T = 2.9\cdot 10^{-3}\u{m\cdot K}
 
+Q: Loi de déplacement de Wien en fréquence
+	A: math
+			\frac{\nu_{\max}}{T} = 5.9\cdot 10^{10}\u{Hz\cdot K^{-1}}
+
 Q: Dispositif expérimental immmitant un « corps noir »
 	A: Cavité régulée thermiquement dont l’intérieur est couvert de matériaux absorbants et percée d’un trou, ce dernier ayant un comportement proche de celui d’un corps noir.
+

@@ -1,7 +1,7 @@
 ../common/subject.lib.markup
 
 title Astrophysique
-teacher Jonathan Biteau (IJCLab), Mathieu Vincendon (IAS)
+teacher Jonathan Biteau, Mathieu Vincendon
 
 Cours hébergé ici.
 	https://astro-mpfo.gitlab.dsi.universite-paris-saclay.fr/l3-astrophysique/ ici
@@ -11,3 +11,4 @@ Livre recommmandé: Principles of Astrophysics, Charles Keeton
 ## Chapitres
 
 chap gravitation_1
+chap rayonnement

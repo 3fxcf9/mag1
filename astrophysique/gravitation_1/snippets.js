@@ -1,4 +1,5 @@
 const local_macros = {
+  "\\r": "\\vec r",
   "\\g": "\\vec g",
   "\\0": "\\vec 0",
   "\\msol": "m_{\\odot}",

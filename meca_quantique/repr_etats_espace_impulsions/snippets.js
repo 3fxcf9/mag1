@@ -1,12 +1,16 @@
 const local_macros = {
-  "\\p": "\\vec{p}",
+  "\\L": "\\mathscr{L}",
+  "\\TF": "\\operatorname{TF}",
+
   "\\k": "\\vec{k}",
+  "\\p": "\\vec{p}",
   "\\E": "\\vec{E}",
   "\\B": "\\vec{B}",
   "\\Lagr": "\\mathscr{L}",
   "\\Proba": "\\mathbf{P}",
   "\\Puiss": "\\mathscr{P}",
   "\\moy": "\\Braket{#1}",
+  "\\H": "\\mathscr{H}",
 
   "\\r": "\\vec{r}",
   "\\v": "\\vec{v}",

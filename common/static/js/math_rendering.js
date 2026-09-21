@@ -8,7 +8,7 @@ const macros = {
   "\\u": "\\;\\mathrm{#1}", // units
 
   // Common
-  "\\cte": "\\mathrm{c^te}",
+  "\\cte": "\\mathrm{c^{te}}",
 
   "\\1": "\\mathbf{1}",
   "\\N": "\\mathbf{N}",

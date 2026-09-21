@@ -115,7 +115,7 @@ recall Retour sur le modèle de Bohr de l’atome d’hydrogène
 	Les idées de base sont: des orbites circulaires et discrètes, ce qui mène à un moment cinétique disscret $L = n \hbar$ avec $n ∈ \N^{*}$. Dans le référentiel de l’électron, la force de coulomb compense la force centrifuge, d’où
 	math
 		\boxed{r_{n} = n^{2} \frac{h^{2}}{m_{e} e^{2}} = n^{2} r_{0}}
-	avec $r_{0} \simeq 0.53\u{\Ang}$ le rayon de Bohr. Dans le cas d’orbites stables, on trouve
+	avec $r_{0} \simeq 0.53\u{\AA}$ le rayon de Bohr. Dans le cas d’orbites stables, on trouve
 	math
 		E_{\text{tot}} = E_{n} = - \frac{E_{I}}{n^{2}}
 	où $E_{I} = \frac{me^{4}}{2 h^{2}} \simeq 13.6 \u{eV}$ et $e^{2} = \frac{q_{e}^{2}}{4 π ε_{0}}$. Alors,

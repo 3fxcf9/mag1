@@ -4,8 +4,10 @@ title La fonction d’onde et l’équation de Schrödinger
 date 14/09/2026
 
 Nous allons réutiliser
-math
+math intro:1
 	E = h ν = \hbar ω \quad \text{et} \quad \p = \hbar\k
+
+## Premier concept fondamental
 
 env Premier concept fondamental
 	L’état d’un système quantique (toutes les informations qui le caractérisent) est décrit par une fonction d’onde
@@ -63,6 +65,8 @@ example Conséquence immédiate : quantification des niveaux d’énergie d’
 ? Quel sens donner à $ψ$ ?
 Discutons d’abord le sens de $\abs{ψ}^{2}$.
 
+## Deuxième concept fondamental
+
 env Deuxième concept fondamental
 	- $\abs{ψ(x,t)}^{2}$ est une _densité de probabilité_. Il faut penser $x$ comme une variable aléatoire, et $\abs{ψ(x,t)}^{2}$ comme sa loi, i.e. la distribution de probabilité que le corpuscule se trouve en $x$ à l’instant $t$. En fait, $\dd\Proba(x,t) = \abs{ψ(x,t)}^{2}$ est la probabilité élémentaire que le corpuscule soit dans $\cc{x, x+\dd x}$ à l’instant $t$. Il suit que
 	math
@@ -71,6 +75,116 @@ env Deuxième concept fondamental
 	- $ψ(x,t)$ est l’amplitude de probabilité.
 	NB: seules les fonctions de carré sommable conviennent (comme fonctions d’onde physiques).
 
+## Postulat d’évolution
 
+Le but de cette partie est d’aboutir à un équivalent du P.F.D.^livre
 
+La fonction d’onde doit satisfaire une sorte d’équation d’ondes (équation aux dérivées partielles). Celle-ci doit être compatible avec [intro:1], et l’énergie (plus précisément le Hamiltonien) y jouera un role central. Pour un système libre :
+- En électromagnétisme, une onde plane monochromatique
+	math
+		δ \E(\r, t) = \vec{a}(\vec{k}) e^{i (\vec{k} · \r - ωt)}
+	satisfait l’équation d’onde
+	math
+		\left(\frac{1}{c^{2}} \pdvN{}{t}{2} - \lapl\right) δ\E(\r, t) = \0
+	ou de façon équivalente, l’équation
+	math
+		\left(- \frac{ω^{2}}{c^{2}} + \vec{k}^{2}\right)δ\E(\r, t) = 0
+	d’où la _relation de dispersion_ $ω = ω(k) = kc$.
+- En mécanique quantique, on doit retrouver
+	math
+		E = \hbar ω = \frac{\p^{2}}{2m} = \frac{\hbar^{2} k^{2}}{2m}
+	soit $ω = ω(k) = \frac{\hbar k^{2}}{2m}$. De toute évidence, avec $ψ(\r, t) = α( \vec{k})e^{i(\k · \r - ωt)}$, on a
+	- $∂_{t}ψ = -i ω ψ$ soit $i ∂_{t} ψ = \frac{E}{\hbar}ψ = ω ψ$
+	- $\lapl ψ = -\k^{2} ψ = - \frac{p^{2}}{\hbar^{2}}ψ$
+	Pour une particule libre, $E = E_{\text{cin}} = \frac{p^{2}}{2m}$ et donc
+	math evo:1
+		E ψ = \frac{p^{2}}{2m}ψ ⟺ i \hbar ∂_{i} ψ = - \frac{\hbar^{2}}{2m}\lapl ψ
+	En complément, pour un système non-libre, on postule que c’est l’énergie totale qui compte, sans changer la structure de [evo:1] :
+	math
+		E ψ = E_{\text{cin}}ψ + E_{\text{pot}}ψ = \frac{p^{2}}{2m}ψ + V ψ
+	d’où l’_équation de Schrödinger_ :
+	math schrodinger
+		\boxed{i \hbar  \pdv{}{t}ψ = \underbrace{- \frac{\hbar^{2} \lapl}{2m}ψ + V(\r, t)ψ}_{H ψ}}
+	rem
+		- Il s’agit d’un postulat, vérifié par l’expérience.
+		- Avec $V=0$, [schrodinger] devient une équation de diffusion, mais avec un $i$… ??
+		- L’équation  est linéaire
+
+	Dans le cas de potentiels stationnaires, $\pdv{V}{t} = 0$ d’où $\pdv{E}{t} = 0$ : le problème est stationnaire. Dans ce cas, $V = V(\r)$ et avec $E = \hbar ω$ indépendant de $t$ :
+	math
+		\pdv{E}{t} = 0 ⟹ i\hbar \frac{∂_{t} ψ}{ψ} = E = \cte_{/t}
+	Intégrons $i \hbar ∂_{t} \ln ψ = E$ :
+	math
+		ψ(\r, t) = e^{-i \frac{E}{\hbar}t}\underbrace{e^{g(\r)}}_{φ(\r)} = χ(t) φ(\r)
+	où $χ(t) = e^{-i \frac{E}{\hbar}t}$. On injecte dans [schrodinger] pour obtenir l’_équation de Schrodinger stationnaire_ :
+	math
+		\boxed{\lapl φ + \frac{2m}{\hbar^{2}}(E-V(\r))φ = 0}
+	rem
+		- On peut réécrire cette équation
+			math
+				\left(- \frac{\hbar}{2m} \lapl + V(\r)\right)φ(\r) = E φ(\r)
+			ce qui donne une équation aux valeurs propres :
+			math
+				H φ = E φ
+		- L’ensemble $\set{E}$ qui satisfait cette équation est le spectre de $H$.
+		- Les $φ(\r)$ solutions, associées aux $E$, sont les fonctions d’onde propres de $H$. Elles constituent une base des états.
+
+## Conditions de raccordement
+
+Pour alléger, plaçons-nous dans le cas unidimensionnel :
+math
+	φ''(x) + \frac{2m}{\hbar^{2}}(E - V(x)) φ(x) = 0
+Prenons $ε \small 1$. On a pour tout $x_{0}$ :
+math raccordement:1
+	∫_{x_{0}-ε}^{x_{0}+ε} \dd x \left(φ''(x) + \frac{2m}{\hbar^{2}} \big(te - V(x)\big) φ(x)\right) = 0
+$φ$ est bornée, au moins au sens où $∫_{-∞}^{+∞} \dd x \abs{φ(x)}^{2} < ∞$. Pour commencer, considérons les $V(x)$ avec, au pire, des discontinuités finies. Alors, [raccordement:1] donne
+math
+	φ'(x_{0} + ε) - φ'(x_{0}-ε) + \frac{2m}{\hbar^{2}} ∫_{x_{0}-ε}^{x_{0}+ε} \dd x \big(E - V(x)\big) φ(x) = 0
+alors
+math
+	\lim_{ε\to 0} \Big(φ'(x_{0} + ε) - φ'(x_{0}- ε)\Big) = 0
+Finalement,
+- si $x ⟼ V(x)$ a au plus des discontinuités finies, $x ⟼ φ'(x)$ est continue et donc $x ⟼ φ(x)$ aussi.
+- si $x ⟼ V(x)$ a des discontinuités infinies, seule $φ$ est continue.
+
+^livre Voir _Mémoires sur la mécanique ondulatoire_, E. Schrödinger
+
+## Le paquet d’onde
+
+Revenons sur les ondes planes de de Broglie censées représenter des corpuscules libres :
+math
+	ψ(\r, t) ∝ e^{i \left(\k · \r - ωt\right)} = e^{i \left(\frac{\p · \r}{\hbar} - ωt\right)}
+Visiblement,
+math
+	\underbrace{-i \hbar \grad }_{\text{opérateur implusion}}ψ_{p}(\r, t = \p) = \p i_{p}(\r, t)
+$φ_{p}$ sont des les fonctions d’onde propres de l’opérateur impulsion. On est alors tentés de dire que les ondes planes correspondent à des « états » d’impulsion bien définie. Pourquoi « états » entre guillemets ?
+math
+	\abs{φ_{p}(\r, t)}^{2} ∝ \abs{e^{i \left(\frac{\p · \r}{\hbar} - ωt\right)}}^{2} = \cte
+et donc, l’intégrale $∫ \dd^{3}\r \abs{φ_{p}(\r, t)}^{2}$ diverge ! Il ne s’agit donc pas de vrais étate. Cependant, ces fonctions d’onde sont des solutions de l’_équation de Schrödinger libre_ :
+math
+	i \hbar ∂_{t}	φ = - \frac{\hbar^{2}}{2m} \lapl φ
+
+## Principe de superposition
+
+De manière générale,
+math superposition:1
+	φ(\r, t) = \frac{1}{(2 π)^{\frac{3}{2}}} \int g(\k) e^{i (\hbar · k - ω t)}\dd^{3}\k
+avec $g(\k)$ une fonction complexe, suffisamment régulière (au moins $L^{1}(\C)$). Toute fonction $φ(\r, t)$ de carré sommable peut s’écrire sous la forme présente dans [superposition:1], don [superposition:1] implique
+math
+	\eqref{superposition:1} ⟹ \int \abs{φ(\r, t)}^{2} \dd^{3}\r < ∞
+Les fonctions d’onde de ce type correspondent aux états stationnaires; elles sont appelées _paquets d’ondes_.
+rem
+	math
+		\begin{align*}
+			- i \hbar \grad φ &= \frac{1}{(2 π)^{3/2}} \int g(\k) \hbar \k e^{i(\k \cdot \r - ω t)}\dd^{3}\k \\
+			&= \frac{1}{(2 π)^{3/2}} \int \tilde{g}(\p) e^{i \left(\frac{\p · \r}{\hbar} - ω t\right)}\dd^{3}\p
+		\end{align*}
+	où l’on a posé $\tilde{g}(\p) = \frac{1}{\hbar^{3/2}}g \left(\frac{\p}{\hbar}\right)$. Le paquet d’ondes n’est pas fonction d’onde de l’opérateur impulsion, il n’est pas d’impulsion bien définie.
+Prenons, pour simplifier, le tout à $t=0$. À trois dimensions,
+math
+	ψ(\r, 0) = \frac{1}{(2 π)^{3/2}} \int \dd^{3}\p \tilde{g}(\p)e^{i \frac{\p · \r}{\hbar}}
+et à une dimension
+math
+	ψ(x, 0) = \frac{1}{\sqrt{2 π}} ∫_{-∞}^{+∞} \dd p \tilde{g}(p) e^{i \frac{p x}{\hbar}}
+c’est la transformée de Fourrier.
 

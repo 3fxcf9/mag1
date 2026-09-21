@@ -1,0 +1,104 @@
+../../common/course.lib.markup
+
+title Représentation des états dans l’espace des impulsions
+date 21/09/2026
+
+## Préambule mathématique 1
+
+def
+	Toute fonction $f ∈ \L^{1}(\R)$ (ou $\L^{1}(\C)$) admet une transformée de Fourrier $\hat f$ définie par
+	- à une dimension :
+		math
+			f(x) = \frac{1}{\sqrt{2 π}} \int \hat f(k) e^{i kx} \dd k
+	- à $n$ dimensions :
+		math
+			f(\r) = \frac{1}{(2 π)^{n/2}} \int \hat f(\k)e^{i\k · \r}\dd^{n}\k
+
+rem
+	- Le préfacteur $\frac{1}{(2 π)^{n/2}}$ est une convention utilisée en mécanique quantique.
+	- La transformée de Fourrier est une transformation intégrale parmi d’autres.
+	- Ces intégrales sont définies pour des fonction de $\L^{1}$ et donc naturellement extensible aux fonctions de $\L^{2}(\C)$.
+	- Les $\hat f(\k)$ sont les coefficients de la décomposition sur les ondes planes.
+
+La transformation inverse existe et s’écrit
+- à une dimension :
+	math
+		\hat f (k) = \frac{1}{\sqrt{2 π}}\int \dd x f(x)e^{-ikx}
+- à $n$ dimensions :
+	math
+		\hat f(\k) = \frac{1}{(2 π)^{n/2}} \in \dd^{n}(\r) e^{i\k \r}
+
+On a l’habitude d’écrire $\hat = \TF[f]$ et $f = \TF^{-1}[\hat f]$.
+
+property
+	- La transformée de Fourrier est linéaire
+	- Dérivée en temporel revient à multiplier par $ik$ :
+		math
+			\TF[f'(x)] = ik\hat f(k)
+		et plus généralement,
+		math
+			\TF \left[f^{(n)}(x)\right] = (ik)^{n} \hat f(k)
+	- À l’inverse,
+		math
+			\TF \left[x f(x)\right] = i \pdv{\hat f(k)}{k}
+		et
+		math
+			\TF \left[x^{n}f(x)\right] = \left(i \dv{}{k}\right)^{n}\hat f(k)
+	- Le produit de convolution correspond au produit algébrique des transformées :
+		math
+			\TF \left[f * g(\r)\right] = (2 π)^{n/2} \hat f(\k)\hat g(\k)
+		recall Produit de convolution
+			math
+				f * g (\r) = \int \dd^{n}\r' f(\r')g(\r - \r') = \int \dd^{n}\r' f(\r - \r')g(\r)
+	- Translater une fonctoin revient à déphaser sa transformée :
+		math
+			\TF \big[f(\r - \r_{0})\big] = e^{-i \k · \r} \hat(\k)
+		et
+		math
+			\TF \left[e^{i \k_{0} · \r}f(\r)\right] = \hat f (\k - \k_{0})
+	- La réalité d’une fonction est équivalente à la parité de sa transformée :
+		math
+			\hat f \text{ paire} ⟺ f(\r) ∈ \R
+	- Isométrie : théorème de Parseval-Plancerel
+		math
+			\int \conj f (\r) \dd^{n}\r = \int \conj{\hat f}(\k)\hat g(\k) \dd^{n}\k
+		(pas de perte d’information). En particulier,
+		math
+			\int \abs{f(\r)}^{2}\dd^{n}\r = \int \abs{\hat f(\k)}^{2} \dd^{n}\k
+	- Dilater une fonction revient à contracter sa transformée :
+		Prenons $f ∈ \L^{1}(\C)$ et $g(\R) \defeq f(a\r)$. Alors,
+		math
+			\TF [g(\r)] = \TF[f(a \r)] = \frac{1}{\abs{a}^{n}} \hat f \left(\frac{\k}{a}\right)
+	- L’invariant de la tranformée de Fourrier : la gaussienne. A une dimension, c'st la loi normale :
+		math
+			g_{σ, \bar{x}} (x) = \frac{1}{\sqrt{2 π σ^{2}}} e^{- \frac{(x-\bar{x})^{2}}{2 σ^{2}}}
+		où $\bar{x}$ (aussi noté $E(x)$ ou $\moy{x}$) est la valeur moyenne de $x$, définie par
+		math
+			\bar{x} = ∫_{-∞}^{+∞}x g_{σ, \bar{x}} (x) \dd x
+		et $σ$ est l’écart type. On a par ailleurs
+		math
+			σ^{2} = E \big((x-\bar{x})^{2}\big) = ⋯ = \moy{x^{2}} - \moy{x}^{2}
+		On peut montrer que
+		math
+			\TF \left[e^{- \frac{x^{2}}{2}}\right] = e^{- \frac{k^{2}}{2}}
+
+## Préambule mathématique 2
+
+La _« fonction » delta de Dirac_, notée $δ$ (qui est en fait une distribution), est définie comme la limite $ε \to 0$ de la suite de fonctions $δ_{ε}(x)$, satisfaisant :
+- $δ_{ε}$ est paire
+- $δ_{ε}$ a une largeur $Δx \sim ε$ et une hauteur $h \sim \frac{1}{ε}$.
+- $∫_{-∞}^{+∞}δ_{ε}(x)\dd x = 1$
+
+Exemples de fonctions qui conviennent :
+- $\frac{1}{2 ε}e^{- \frac{\abs{x}}{ε}}$
+- $\frac{1}{ε} \prod_{ε}(t) = \begin{cases}\frac{1}{ε} \if x ∈ \cc{-\frac{ε}{2}, \frac{ε}{2}}\\ 0 \else\end{cases}$ (porte unité)
+- $g_{ε}(x) = \frac{1}{\sqrt{2 π ε^{2}}}e^{- \frac{x^{2}}{2 ε^{2}}}$ (gaussienne normée centrée sur 0)
+
+Propriétés de $δ(x)$ :
+math
+	∫_{-∞}^{+∞}δ(x-a)f(x)\dd x = f(a)
+(peut être choisi comme définition). Pour $λ ∈ \R^{*}$,
+math
+	δ(λ x) = \frac{1}{\abs{λ}} δ(x)
+
+
