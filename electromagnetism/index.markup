@@ -1,6 +1,6 @@
 ../common/subject.lib.markup
 
-title Électromagnétisme
+title Électromagnetism
 teacher Xavier Checoury
 
 Livres:
@@ -11,3 +11,4 @@ Livres:
 - Robert Fleckinger José-Philippe Pérez, Robert Carles, Électromagnétisme: Fondements et applications – 4e éd., Dunod
 
 chap fundamental_concepts
+chap radiation

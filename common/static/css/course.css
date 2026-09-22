@@ -579,7 +579,7 @@ body {
 
   ol.paren-roman-list {
     counter-reset: item;
-    li::marker {
+    & > li::marker {
       counter-increment: item;
       content: "(" counter(item, lower-roman) ") ";
     }

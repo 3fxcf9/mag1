@@ -287,3 +287,282 @@ proof
 		math
 			\left(\sup_{n ∈ \N}f_{n}\right)^{-1} \big(\oo{a,+∞}\big) = \bigcup_{n ∈ \N}\underbrace{f_{n}^{-1} \big(\oo{a,+∞}\big)}_{∈ T_{X}} ∈ T_{X}
 	- On en déduit que $\inf_{n ∈ \N}f_{n} = -\sup_{n ∈ \N}(-f_{n})$ est mesurable.
+
+def Fonctions étagées
+	Soit $(X,T)$ un espace mesurable. On appelle _fonction étagée sur $X$_ toute fonction mesurable $s: X ⟶ \R$ dont l’image est un ensemble fini. De manière équivalente, on peut écrire $s = ∑_{p=1}^{N}s_{p}\1_{A_{p}}$ avec $s_{1}, …, s_{N}$ des réels et $A_{1}, …, A_{N}$ des mesurables deux à deux disjoints. On notera $\Fetag(X)$ l’ensemble des fonction étagées sur $X$.
+	//FIXME: as_flashcard
+
+prop
+	Soit $(X,T)$ un espace mesurable. Toute fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ est limite d’une suite $(s_{n})_{n ∈ \N}$ de fonctions étagées positives.
+	as_flashcard Limite de fonctions étagées
+
+proof
+	On pose, pour $n ∈ \N$,
+	math
+		s_{n} f ∑_{k=1}^{2^{2n}-1}\frac{k}{2^{n}}\1_{f^{-1} \left(\cc{\frac{k}{2^{n}}, \frac{k+1}{2^{n}}}\right)} + 2^{n}\1_{f^{-1} \left(\cc{2^{n}, +∞}\right)}
+	fig
+		./figures/fonction_etagee.svg
+	Alors, $s_{n} ⩽ f$ et la suite $(s_{n})$ est croissante et converge vers $f$.
+
+### Mesures et espaces mesurés
+
+On étend l’arighmétique de $\R_{+}$ à $\bar{\R_{+}}$ en posant, pour $x ∈ \bar{\R}$ :
+- $x + ∞ = ∞ + x = ∞$
+- $x × ∞ = ∞ × x = \begin{cases}∞ \if x > 0 \\ 0 \if x=0\end{cases}$
+
+def Mesure
+	On appelle _mesure_ (positive) sur un espace mesurable $(X,T)$ toute application $μ: T ⟶ \bar{\R_{+}}$ telle que
+	~ $μ(\emptyset) = 0$
+	~ $μ$ soit $σ$-additive, i.e. pour toute suite $(A_{n})_{n ∈ \N}$ de mesurables *deux à deux disjoints*, on a
+		math
+			μ \left(\bigcup_{n ∈ \N} A_{n}\right) = ∑_{n ∈ \N}μ(A_{n})
+	Si en outre, $μ(X) = 1$, on dira que $μ$ est une _mesure de probabilité_.
+	as_flashcard
+
+example
+	- Pour tout ensemble $X$ et tout $a ∈ X$, on définit la _mesure de Dirac_ $δ_{a}$ sur $(X, 2^{X})$, en posant pour $A ⊂ X$
+		math
+			δ_{a}(A) = \1_{A}(a) = \begin{cases}1 \if a ∈ A \\ 0 \else\end{cases}
+		Q: Mesure de Dirac
+			A: Mesure définie sur $(X, 2^{X})$ par
+				math
+					δ_{a}(A) = \1_{A}(a) = \begin{cases}1 \if a ∈ A \\ 0 \else\end{cases}
+	- Pour tout ensemble $X$, on définit la _mesure de dénombrement_ $μ_{D}$ sur $(X, 2^{X})$ en posant pour $A ⊂ X$ :
+		math
+			μ_{D}(A) = \begin{cases}\card A \if A \text{ est fini}\\ ∞\else\end{cases}
+		Q: Mesure de dénombrementn
+			A: Mesure définie sur $(X, 2^{X})$ par
+				math
+					μ_{D}(A) = \begin{cases}\card A \if A \text{ est fini}\\ ∞\else\end{cases}
+	- Sur $(\R, B_{R})$, on définira la mesure de Lebesgue $μ_{L}$.
+
+// TODO Flashcard
+prop
+	Soit $μ$ une mesure sur un espace mesurable $(X,T)$. Alors,
+	~ pour touts mesurables $A_{1}, …, A_{N}$ deux à deux disjoints ($N ∈ \N$),
+		math
+			μ \left(\bigcup_{p=1}^{N}A_{p}\right) = ∑_{p=1}^{N}μ(A_{p})
+	~ pour tous mesurables $A$ et $B$ tels que $A ⊂ B$, on a $μ(A) ⩽ μ(B)$,
+	~ pour toute suite $(A_{p})_{p ∈ \N}$ de mesurables croissante pour l’inclusion (i.e. telle que $A_{0} ⊂ A_{1} ⊂ ⋯$), on a
+		math
+			\lim_{n\to+∞}μ(A_{n}) = μ \left(\bigcup_{n ∈ \N}A_{n}\right)
+
+proof
+	~ Considérons la suite de $(B_{n})_{n ∈ \N}$ telle que
+		math
+			∀ p ∈ \icc{1, N}, tb_{p} = A_{p} \quad\text{et}\quad ∀ p > N, B_{p} = \emptyset
+		Il s’agit d’une suite de mesurables deux à deux disjoints donc
+		math
+			μ \left(\bigcup_{p=1}^{N}A_{p}\right) = μ \left(\bigcup_{p ∈ \N}B_{p}\right) = ∑_{p ∈ \N}μ(B_{p}) = ∑_{p=1}^{N}μ(A_{p})
+	~ Soient $A ⊂ B$. Alors $B = A\uplus \big(B ∩ A^{\complement}\big)$ et par le premier point,
+		math
+			μ(tb) = μ(A) + μ\big(B ∩ A^{\complement}\big) ⩾ μ(A)
+	~ Soient une suite $(A_{p})_{p ∈ \N}$ croissante de mesurables. Posons
+		math
+			B_{0} = A_{0} \; ; \quad B_{1} = A_{1} ∖ A_{0} \; ; \quad B_{2} = A_{2} ∖ A_{1}  \quad ⋯ \quad B_{n} = A_{n} ∖ A_{n-1}
+		La suite $(B_{n})_{n ∈ \N}$ est constituée de mesurables et est telle que
+		math
+			∀ n ∈ \N, A_{n} = \bigcup_{p=0}^{n}B_{p}
+		Or, les $B_{p}$ sont deux à deux disjoints et $\bigcup_{n ∈ \N}A_{n} = \bigcup_{n ∈ \N}B_{n}$ donc pour tout $n ∈ \N$,
+		math
+			μ(A_{n}) = μ \left(\bigcup_{p=0}^{n}B_{p}\right) = ∑_{p=0}^{n}μ(B_{p})
+		Si bien qu’en passant à la limite $n \to +∞$, on obtient
+		math
+			\lim_{n\to+∞}μ(A_{n}) = ∑_{p ∈ \N} μ(B_{p}) = μ \left(\bigcup_{n ∈ \N}B_{n}\right) = μ(A_{n})
+
+def Espace mesuré
+	On appelle _espace mesuré_ tout triplet $(X,T, μ)$ avec $(X,T)$ est un espace mesurable et $μ$ une mesure sur cet espace.
+	- On dira qu’un *mesurable* $A$ est un _ensemble de mesure nulle_ si $μ(A) = 0$.
+	- On dira que $N ⊂ X$ (non-nécessairement mesurable) est _négligeable_ si $N$ est contenu dans un ensemble de mesure nulle.
+	- D’une propriété dépendant de $x ∈ X$ on dira qu’elle est vraie $μ$-presque partout ($μ-\pp$) si elle est vraie sur $X ∖ N$ avec $N$ est un ensemble négligeable.
+	Q: Espace mesuré A: Triplet $(X,T, μ)$ avec $(X,T)$ un espace mesurable et $μ$ une mesure sur cet espace.
+	Q: Ensemble de mesure nulle A: *Mesurable* $X$ tel que $μ(A) = 0$.
+	Q: Ensemble négligeable A: Ensemble (non-nécessairement mesurable) contenu dans un ensemble de mesure nulle.
+	Q: Propriété vraie $μ$-presque partout dans $(X,T, μ)$ A: Propriété dépendant de $x ∈ X$ vraie sur $X ∖ N$ avec $N$ un ensemble négligeable.
+
+rem
+	- Les ensembles négligeables ne sont pas nécessairement mesurables.
+	- Un espace mesuré $(X, T, μ)$ dont tous les ensembles négligeables sont mesurables (et donc de mesure nulle) est dit _$σ$-complet_.
+	- Tout espace mesuré non $σ$-complet peut être $σ$-complété (essentiellement en étendant $T$ à la $σ$-algèbre engendrée par $T$ et les négligeables, et en étendant $μ$ par 0 aux négligeables).
+
+### Mesure de Lebesgue de $\R$
+
+thm Lebesgue - Carathéodory
+	Il existe une unique mesure sur $(\R, B_{\R})$, appelée _mesure de Lebesgue_ sur $\R$ telle que
+	math
+		∀ a,b ∈ \R, μ_{L} \big(\cc{a,b}\big) = \abs{b-a}
+
+proof Ébauche de preuve
+	Soit $I = \set{\oo{a,b} \where a ⩽ b ∈ \R}$ et
+	math
+		\long: \applic{I_{\R}}{\bar{\R_{+}}}{\oo{a,b}} ⟼ \long \big(\oo{a,b}\big) = \abs{b-a}
+	Comme $\R = \bigcup_{n ∈ \N} \oo{-n, n}$, tout sous-ensemble $A ⊂ \R$ admet un recouvrement dénombrable par des segments de $I_{\R}$. On définit alors $λ: 2^{\R} ⟶ \bar{\R_{+}}$ en posant, pour $A ⊂ \R$,
+	math
+		λ(A) = \inf \set{∑_{n ∈ \N}\long(I_{n}) \where (I_{n})_{n ∈ \N} ∈ I_{\R}^{\N} \text{ et } A ⊂ \bigcup_{n ∈ \N}I_{n}}
+	On montre que
+	- $λ(\emptyset) = 0$,
+	- $∀ A ⊂ B ⊂ \R, λ(A) ⩽ λ(B)$,
+	- pour toute suite $(A_{n})_{n ∈ \N}$ de mesurables (parties de $\R$),
+		math
+			λ \left(\bigcup_{n ∈ \N} A_{n}\right) ⩽ ∑_{n ∈ \N}λ(A_{n})
+	Ainsi, $λ$ constitue une _mesure extérieure_ sur $(\R, 2^{\R})$, appelée _mesure extérieure de Lebesgue_. Ce n’est cependant *pas* une mesure sru $(\R, 2^{\R})$.
+	On montre alors :
+	~ que
+		math
+			L_{\R} = \set{B ⊂ \R, ∀ A ⊂ \R, λ(A) = λ(A ∩ B) + λ(A ∩ B^{\complement})}
+		est une $σ$-algèbre sur $\R$ appelée $σ$-algèbre de Lebesgue,
+	~ $B_{\R} ⊂ L_{\R}$,
+	~ $λ_{|L_{\R}}$ est une mesure.
+	Voici comment s’y prendre :
+	~ - $\emptyset ∈ L_{\R}$,
+		- $B ∈ L_{\R} ⟹ B^{\complement} ∈ L_{\R}$,
+		- L’union des termes de toute suite d’éléments de $L_{\R}$ est dans $L_{\R}$.
+		On montre ensuite par récurrence que pour tout $N ∈ \N$ et toute liste $(B_{1}, …, B_{N})$ d’éléments deux à deux disjoints de $L_{\R}$, on a, pour tout $∀ A ⊂ \R$,
+		- $λ \left(A ∩ \bigcup_{n=1}^{N}B_{n}\right) = ∑_{n=1}^{N}λ(A ∩ B_{n})$
+		- $\bigcup_{n=1}^{N}B_{n} ∈ L_{\R}$
+		Alors, pour tout $N ∈ \N$,
+		math
+			\begin{align*}
+				λ(A) &= λ \left(A ∩ \bigcup_{n=1}^{N}B_{n}\right) + λ \left(A ∩  \left(\bigcup_{n=1}^{N}B_{n}\right)^{\complement}\right) \\
+				&= ∑_{n=1}^{N}λ(A ∩ B_{n}) + λ \left(A ∩  \left(\bigcup_{n=1}^{N}B_{n}\right)^{\complement}\right)\\
+				&⩾ ∑_{n=1}^{N}λ(A ∩ B_{n}) + λ \left(A ∩  \left(\bigcup_{n ∈ \N}B_{n}\right)^{\complement}\right)
+			\end{align*}
+		d’où en passant à la limite $N \to+∞$, on obtient
+		math lebesgue-caratheodory:proof:1
+			\begin{align*}
+				λ(A) &= ∑_{n ∈ \N}λ(A ∩ B_{n}) + λ \left(A ∩  \left(\bigcup_{n ∈ \N}B_{n}\right)^{\complement}\right) \\
+				&⩾ λ \left(A ∩ \bigcup_{n ∈ \N}B_{n}\right) + λ \left(A ∩  \left(\bigcup_{n ∈ \N}B_{n}\right)^{\complement}\right) & \text{($\sigma$-sous-additivité)}\\
+				&⩾  λ(A) & \text{($\sigma$-sous-additivité)}
+			\end{align*}
+		Par conséquent,
+		math
+			λ(A) = λ \left(A ∩ \bigcup_{n ∈ \N} B_{n}\right) + λ \left(A ∩  \left(\bigcup_{n ∈ \N}B_{n}\right)^{\complement}\right)
+		et donc $\bigcup_{n ∈ \N} B_{n} ∈ L_{\R}$. Ainsi, $L_{\R}$ est une $σ$-algèbre.
+	~ On montre que les ouverts du type $\oo{a, +∞}$ avec $a ∈ \R$ sont dans $L_{\R}$. Ceux-ci engeandrant $B_{\R}$, on a nécessairement $B_{\R} ⊂ L_{\R}$.
+	~ On sait déjà que $λ(\emptyset) = 0$. D’autre part, en prenant $A = \bigcup_{n ∈ \N}B_{n}$ dans [lebesgue-caratheodory:proof:1], on obtient par $σ$-additivité
+		math
+			λ \left(\bigcup_{n ∈ \N}B_{n}\right) = ∑_{n ∈ \N}λ(B_{n})
+	On admet l’unicité (cf. théorème d’extension de Carathéodory).
+
+rem
+	$(\R, B_{\R}, μ_{L})$ n’est pas $σ$-complet, et sa $σ$-complétion est $(\R, L_{\R}, μ_{L})$, l’espace normé associé à la $σ$-algèbre de Lebesgue.
+
+prop
+	Dans l’espace mesuré $(\R, L_{\R}, μ_{L})$ :
+	~ $μ_{L}$ est invariante par translation, i.e.
+		math
+			∀ A ∈ L_{\R}, ∀ x ∈ \R, μ_{L}(A + x) = μ_{L}(A)
+	~ $μ_{L}$ est invariante par parité, i.e.
+		math
+			∀ A ∈ L_{\R}, μ_{L}(-A) = μ_{L}(A)
+	~ $(\R, L_{\R}, μ_{L})$ est $σ$-fini (s’écrit comme l’union des termes d’une suite de mesurables de mesure fini), i.e. il existe $(λ_{n})_{n ∈ \N} ∈ (L_{\R})^{\N}$ telle que
+		math
+			\R = \bigcup_{n ∈ \N}A_{n} \quad\text{et}\quad ∀ n ∈ \N, μ_{L}(A_{n}) < ∞
+	~ $μ_{L}$ est _diffuse_ (la mesure de tout ensemble fini (partie de $\R$) est nulle).
+
+proof
+	~ par construction
+	~ évident
+	~ $\R = \bigcup_{n ∈ \N} \oo{-n,n}$ et $μ_{L} (\oo{-n, n}) = 2n < ∞$
+	~ Pour tout $x ∈ \R$,
+		math
+			μ_{L}(\set x) ⩽  μ \big(\oo{x - ε/2, x + ε/2}\big) = ε \arrowlim{ε \to 0^{+}} 0
+		Par conséquent, $λ_{L}(\set x) = 0$ et pour tout ensemble dénombrable $\set{x_{n}\where n ∈ \N}$, on a
+		math
+			μ_{L} \big(\set{x_{n} \where n ∈ \N}\big) = μ_{L} \left(\bigcup_{n ∈ \N}\set{x_{n}}\right) = ∑_{n ∈ \N}μ_{L} \big(\set{x_{n}}\big) = 0
+
+rem
+	$\Q$ étant dénombrable, $μ_{L}(\Q) = 0$.
+
+## Intégration des fonctions mesurables positives
+
+### Définition
+
+def Intégrale d’une fonction étagée
+	Soit $(X,T, μ)$ un espace mesuré. Pour toute fonction étagée positive
+	math
+		s = ∑_{p=1}^{N}s_{p}\1_{A_{p}} ∈ \Fetag(X)
+	avec $s_{1}, …, s_{N}$ des réels positifs et $A_{1}, …, A_{N}$ des mesurables deux-à-deux disjoints, on pose
+	math
+		∫_{X}\dd μ s = ∑_{p=1}^{N}s_{p} μ(A_{p})
+
+rem
+	- La valeur de l’intégrale dépend du choix de la mesure !
+	- Le nombre de droite est toujours bien défini comme somme (possiblement de valeur infinie) de nombres dans $\R_{+}$. On n’aura donc j’amais $∞ - ∞$.
+
+def Intégrale d’une fonction mesurable positive
+	Soit $(X,T, μ)$ un espace mesuré. Pour toute fonction mesurable positive $f: X ⟶ \bar{\R_{+}}$, on pose
+	math
+		∫_{X}\dd μ f = \sup_{\substack{s ∈ \Fetag(X) \\ s ⩽ f}} ∫_{X}\dd μ s
+
+example
+	$\1_{\Q}$ est une fonction étagée sur $(\R, B_{\R}, μ)$ donc
+	math
+		∫_{\R}\dd  μ \1_{\Q} = μ(\Q) \oeq{si $\scriptsize \mu = \mu_{\L}$} 0
+
+### Propriétés
+
+prop
+	Soit $(X,T, μ)$ un espace mesuré. Soient $0 ⩽ f ⩽ g$ deux fonctions mesurables positives. Alors,
+	math
+		∫_{X} \dd  μ f ⩽ ∫_{X}\dd  μ g
+
+proof
+	En exercice.
+
+prop
+	Soit $(X, T, μ)$ un espace mesuré. Soit $f: X ⟶ \bar{\R_{+}}$ une fonction mesurable positive. Pour tout $A ∈ T$, on pose
+	math
+		∫_{A}\dd μ f = ∫_{x}\dd μ f\1_{A}
+	On a alors
+	math
+		∫_{A}\dd  μ f ⩽ ∫_{X}\dd μ f
+
+proof
+	Application de la propriété précédente à l’inégalité $f\1_{A} ⩽ f$.
+
+prop
+	Soit $(X, T, μ)$ un espace mesuré. Soit $f: X ⟶ \bar{\R_{+}}$ une fonction mesurable positive telle que
+	math
+		∫_{X}\dd μ f = 0
+	Alors $f = 0$ $μ-\pp X$.
+
+proof
+	_Par l’absurde._ Supposons qu’il existe $a > 0$ tel que
+	math
+		μ \left(f^{-1} \big(\oo{a, +∞}\big)\right) > 0
+	Alors en prenant $b ∈ \oo{0,a}$, on a
+	math
+		s = b\1_{f^{-1}(\oo{a, +∞})} < f
+	et donc
+	math
+		∫_{X}\dd μ f ⩾ ∫_{X}\dd  μ s = b μ \Big(f^{-1} \big(\oo{a,+∞}\big)\Big) > 0
+
+### Théorème de convergence monotone
+
+thm TCM, Lebesgue / Beppo Leir
+	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite croissante de fonctions positives mesurables. Alors, il existe une fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ telle que
+	math
+		\lim_{n\to+∞}f_{n} = f \quad\text{et}\quad \lim_{n\to+∞}∫_{X}\dd μ f_{n} = ∫_{X}\dd μ f
+
+proof
+	Comme $(f_{n})_{n ∈ \N}$ est croissante, la suite $ \left(∫_{tx}\dd μ f_{n}\right)_{n ∈ \N}$ est également croissante. Il existe donc $λ ∈ \bar{\R_{+}}$ tel que
+	math
+		\lim_{n\to+∞} ∫_{X}\dd  μ f_{n} = λ
+	Comme pour tout $n ∈ \N$, $f_{n} ⩽ f$, on a nécessairement
+	math
+		λ ⩽ ∫_{X}\dd  μ f
+	Il suffit alors de montrer que $λ ⩾ ∫_{X}\dd μf$. Soit $s$ une fonction étagée sur $X$ telle que $0 ⩽ s ⩽ f$. Considérons pour $n ∈ \N$,
+	math
+		A_{n} = \set{x ∈ X \where f_{n}(x) ⩾ s(x)}
+	Clairement, $A_{0} ⊂ A_{1} ⊂ A_{2} ⋯$ sont mesurables et $\bigcup_{n ∈ \N}A_{n} = X$. Ainsi,
+	math
+		∀ n ∈ \N, ∫_{X}\dd μ f_{n} ⩾ ∫_{A_{n}}\dd μ f_{n} ⩾ ∫_{A_{n}} \dd μs
+	En passant à la limite $n \to+∞$, on obtient
+	math
+		λ ⩾ ∫_{X} \dd μ s
+	Ceci étant vérifié pour toute fonction étagée $s$ telle que $0 ⩽ s ⩽ f$, on a donc
+	math
+		λ ⩾ ∫_{X}\dd  μ f
+
+

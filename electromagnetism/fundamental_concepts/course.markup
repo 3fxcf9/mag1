@@ -129,4 +129,19 @@ proof Poynting’s theorem
 		E_{\text{EM}} = \int_{V}\frac{1}{2}ε_{0}\E^{2} + \frac{\B^{2}}{2 μ_{0}}\dd^{3}r
 
 
-
+proof Interface condition
+	We consider two media characterized by respective volumetric change densities $ρ_{1}$ and $ρ_{2}$, separated by the plane $z=0$ carrying a surface charge density $σ$.
+	math
+		\begin{cases}
+			\E = \E_{1} H(-z) + \E_{2} H(z)\\
+			ρ = ρ_{1} H(-z) + ρ_{2} H(z) + σ δ(z)
+		\end{cases}
+	Thus,
+	math
+		\div \E = -δ(z)\z · \E_{1} + H(-z)\underbrace{\div \E_{1}}_{=ρ_{1} / ε_{0}} + δ(z) \z · \E_{2} + H(z) \underbrace{\div \E_{2}}_{=ρ_{2} / ε_{0}}
+	Maxwell-Gauss $\div \E = \frac{ρ}{ε_{0}}$ gives
+	math
+		δ(z)\E_{1} · \z + δ(z)\E_{2}· \z = σδ(z)
+	Hence,
+	math
+		(\E_{2} - \E_{1}) · \z = \frac{σ}{ε_{0}}

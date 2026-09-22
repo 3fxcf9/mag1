@@ -8,6 +8,9 @@ const local_macros = {
   "\\r": "\\vec r",
   "\\v": "\\vec v",
   "\\0": "\\vec 0",
+  "\\x": "\\vec x",
+  "\\y": "\\vec y",
+  "\\z": "\\vec z",
 
   "\\rot": "\\operatorname{\\overrightarrow{rot}}",
   "\\grad": "\\operatorname{\\overrightarrow{grad}}",
