@@ -50,7 +50,7 @@ const macros = {
   "\\ch": "\\operatorname{ch}",
   "\\sh": "\\operatorname{sh}",
   "\\th": "\\operatorname{th}",
-  "\\set": "\\{\\,#1\\,\\}",
+  "\\set": "\\left\\{\\,#1\\,\\right\\}",
   "\\cgm": "\\equiv #1 \\left[#2\\right]",
   "\\ncgm": "\\not\\equiv #1 \\left[#2\\right]",
   "\\vv": "\\overrightarrow{#1}",
