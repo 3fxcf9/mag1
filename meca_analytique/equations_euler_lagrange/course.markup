@@ -197,7 +197,7 @@ proof
 	math
 		∑_{i}m_{i}\dr_{i} · \dv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right) = ∑_{i}m_{i}\dr_{i} ·  \pdv{\dr_{i}}{q_{α}} = \pdv{}{q_{α}} \underbrace{\left(∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}\right)}_{T}
 	d’où l’_équation d’Euler-Lagrange_ :
-	math
+	math euler-lagrange-qt:1
 		\boxed{\dv{}{t} \left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}} \eforall α = 1, …, n
 	Les fonctions $Q_{α}$ et $T$ sont définies avec les $\r_{i}$, $\dr_{i}$ et $t$ à réexprimer en fonction des $(q_{α}, \dq_{α}, t)$. On a
 	Q: Équation d’Euler-Lagrange sans Lagrangien
@@ -276,7 +276,74 @@ example
 
 ### Potentiel généralisé et force de Lorentz
 
-Si
+Si prend
 math
 	Q_{α} = \dv{}{t} \left(\pdv{U}{\dq_{α}}\right) - \pdv{U}{q_{α}}
-on retombe sur Euler-Lagrange avec $\Lagr = T - U(q_{α}, \underline{\dot{q}_{α}}, t)$
+dans [euler-lagrange-qt:1], on retombe sur Euler-Lagrange car $\Lagr = T - U(q_{α}, \underline{\dot{q}_{α}}, t)$.
+
+example Force de Lorentz
+	Pour une particule de charge $q$ plongée dans des champs électromagnétiques,
+	math
+		\E(\r, t) = -\grad_{\r} - \pdv{\A(\r,t)}{t}
+	et $\B = \rot \A(\r, t)$. Elle est soumise à la force
+	math
+		\boxed{\vec{F} = q \big(\E(\r, t) + \dr ∧ \B(\r, t)\big)}
+	Montrons qu’elle peut se mettre sous la forme d’un potentiel généralisé avec
+	math
+		\boxed{U(\r, \dr, t) = q \big(V(\r, t) - \dr · \A(\r, t)\big)}
+	On vérifie que ce potentiel convient en regardant la composante selon $x$ de la force généralsée. On traite $x$ et $\dx$ comme des variables indépendantes :
+	math
+		U = q \big(V(x, y, z, t) - \dx A_{x}(x, y, z, t) - \dy A_{y}(x, y, z, t) - \dz A_{z}(x, y, z, t)\big)
+	d’où
+	math
+		\pdv{U}{x} = q \left(\pdv{V}{x} - \dx \pdv{A_{x}}{x} - \dy \pdv{A_{y}}{x} - \dz \pdv{A_{z}}{x}\right)
+	et
+	math
+		\dv{}{t}\left(\pdv{U}{\dx}\right) = -q \dv{}{t}A_{x}(x,y,z,t) = -q \left(\pdv{A_{x}}{t} + \pdv{A_{x}}{x}\dx + \pdv{A_{x}}{y}\dy + \pdv{A_{x}}{z}\dz\right)
+	Ainsi,
+	math
+		Q_{x} = \dv{}{t}\left(\pdv{U}{\dx}\right) - \pdv{U}{x} = q \left(-\pdv{V}{x} - \pdv{A_{x}}{t} + \dy \underbrace{\left(\pdv{A_{y}}{x} - \pdv{A_{x}}{y}\right)}_{=B_{z}} + \dz \underbrace{\left(\pdv{A_{z}}{x} - \pdv{A_{x}}{z}\right)}_{=-B_{y}}\right)
+	On retrove bien la force de Lorentz (le calcul marche également pour les autres composantes) :
+	math
+		Q_{x} = q \big(E_{x} + (\dr ∧ \B)_{x}\big)
+	Finalement,
+	math
+		\boxed{\Lagr(\r, \dr, t) = \frac{1}{2}m\dr^{2} - q \left(V(\r, t) - \dr \A(\r, t)\right)}
+
+## Covariance
+
+On considère une transformation ponctuelle $(q_{α}, \dq_{α}) ⟶ (u_{α}, \du_{α})$ avec $u_{α} = u_{α}(q_{1}, …, q_{n}, t)$. On montre (cf. poly) que les équations d’Euler-Lagrange conservent la même forme :
+math
+	\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0 \rightsquigarrow \dv{}{t} \left(\pdv{\Lagr}{\du_{α}}\right) - \pdv{\Lagr}{u_{α}} = 0
+
+example Particule 2D soumise à un potentiel $U$
+	En coordonnéès cartésiennes $(x, y, \dx, \dy)$ :
+	math
+		F_{x} = - \pdv{U}{x} \quad\text{et}\quad F_{y} = - \pdv{U}{y}
+	En coordonnées polaires $(r,\dr, θ, \dot{θ})$ avec $x = r\cos θ$ et $y = r\sin θ$ :
+	math
+		\vec{F} = F_{r}\er + F_{θ}\eth = - \pdv{U}{r}\er - \frac{1}{r} \pdv{U}{θ}\eth
+	La force généralisée s’écrit alors
+	math
+		Q_{r} = « \sum_{i} \vec{F}_{i} · \pdv{\r_{i}}{q_{α}} » = F_{x} \pdv{x}{r} + F_{y} \pdv{y}{r} = F_{r}
+	et
+	math
+		Q_{θ} = F_{x} \pdv{x}{θ} + F_{y} \pdv{y}{θ} = r F_{θ}
+	Le lagrangien vaut en cartésiennes
+	math
+		\Lagr(x, \dx, y,\dy) = \frac{1}{2}m(\dr^{2} + \dy^{2}) - U(x,y)
+	et en polaires
+	math
+		\Lagr(r, \dr, θ, \dot{θ}) = \frac{1}{2}m(\dr^{2} + r^{2} \dot{θ}^{2}) - U(r θ)
+	Les équations d’Euler-Lagrange donnent
+	math
+		\dv{}{t} \left(\pdv{\Lagr}{\dx/\dy}\right) - \pdv{\Lagr}{x/y} = 0 ⟹ m\ddx = F_{x/y}
+	et en polaires
+	math
+		\dv{}{t} \left(\pdv{\Lagr}{\dr}\right) - \pdv{\Lagr}{r} = 0 ⟹ m(\ddr - r\dot{θ}^{2}) = F_{r}
+	et
+	math
+		\dv{}{t} \left(\pdv{\Lagr}{\dot θ}\right) - \pdv{\Lagr}{θ} = 0 ⟹ \dv{}{t} \underbrace{\left(mr^{2} \dot θ\right)}_{\text{moment cin. } \r ∧ m\v} = r F_{θ}
+
+
+
