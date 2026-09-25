@@ -68,11 +68,17 @@ Q: Projection canonique de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$
 			p(g_{1}, …, g_{n}) = g_{i_{0}}
 
 example Exemples de groupes
+	Q: Groupe des permutations
+		A: Groupe $S_{X}$ formé par l’ensemble des permutations (bijection d’un ensemble dans lui-même) d’un ensemble $X$.
+
+	Q: Groupe symétrique de degré $n$
+		A: Groupe $S_{n}$ des permutations de $\icc{1,n}$. Son ordre est $n!$.
+
 	Q: Groupe cyclique d’ordre $n$
 		A: Groupe d’ordre $n$ engendré par un élément: $\C_{n} = \grp{\set c}$ avec $c^{n} = 1$. Une représentation en est $\U_{n}$.
 
 	Q: Groupe ponctuel diédral
-		A: Groupe de symétrie qui décrit les symétries d’un polygone régulier (rotations et réflexions). Le groupe diédral $\D_{n}$ a $n$ rotations et $n$ réflexions.
+		A: Groupe de symétries de rotation d’un polygone régulier. Le groupe diédral $\D_{n}$ a $n$ rotations et $n$ réflexions (rotations d’angle $π$ autour d’un axe parallèle au polygone).
 
 	Q: Groupe spécial linéaire
 		A: Groupe $SL(n,\K)$ des matrices $n$, $n$ de déterminant 1 à coefficients dans $\K$
@@ -100,9 +106,7 @@ example Exemples de groupes
 				U(n) = \set{A \in SL(n,\C)\where A\dag A = I_n}
 
 Q: Sous-groupe de $(G, · )$. Sous-groupes triviaux, propres.
-	A: Partie $H$ *non vide* de $G$
-		- stable par la loi de $G$
-		- telle que $(H, · )$ ait une structure de groupe
+	A: Partie *non vide* de $G$ qui, munie de la loi de $G$, forme un groupe.
 		Il est dit _trivial_ si égal à $\set{1_{G}}$ ou à $G$, et _propre_ sinon.
 
 Q: Caractérisation des sous-groupes
@@ -121,6 +125,12 @@ Q: Sous-groupe engendré par $A$
 	A: Plus petit sous-groupe de $G$ (au sens de l’inclusion) contenant $A$. On le note $\grp A$.
 		Si $A$ est fini, alors $\grp A$ est dit de _type fini_.
 
+Q: Groupe monogène
+	A: Groupe engendré par un seul élément.
+
+Q: Groupe cyclique
+	A: Groupe monogène fini. Il contient un nombre fini d’éléments qui sont tous des puissances d’un même élément.
+
 Q: Description d’un sous-groupe enjendré
 	A: Le sous-groupe engendré par $A$ est
 		math
@@ -128,6 +138,9 @@ Q: Description d’un sous-groupe enjendré
 
 		_Preuve :_ $\set{…}$ est un groupe et $A ⊂ \set{…} ⊂ \grp{A}$ d’où l’égalité (car $\grp A$ est le plus petit sous-groupe de $G$ contenant $A$).
 
+Q: Sous-groupes de $\Z$
+	A: Ce sont les groupes cycliques $d\Z$.
+		*Preuve :* il existe un élément $\pm x$ positif dans tout sous-groupe de $\Z$, et en divisant n’importe quel élément de ce sous-groupe par le plus petit entier positif qu’il contient, on montre que le reste appartient au sous-groupe et qu’il est donc nul.
 
 Q: Ordre d’un élément $x ∈ G$ A: Ordre du groupe $\grp{\set{x}}$ si celui-ci est fini. C’est le plus petit entier $k$ positif tel que $g^{k} = 1$.
 
@@ -292,5 +305,52 @@ Q: Norme sur un groupe $G$
 		- $N(xy) ⩽ N(x)+N(y)$
 		- $N(x^{-1}) = N(x)$
 
+Q: Majoration de $\abs{N(x) - N(y)}$ si $N$ est une norme sur $G$
+	A: Pour tous $x,y ∈ G$,
+		math
+			\abs{N(x) - N(y)} ⩽ N(x^{-1}y)
+		et
+		math
+			\abs{N(x) - N(y)} ⩽ N(yx^{-1})
+
+Q: Distances invariantes sur un groupe normé
+	A: Soit $G$ un groupe muni d’une norme $N$. Les fonction $d_{L}$ et $d_{R}$ de $G × G$ dans $\R_{+}$ définies pour tous $x,y ∈ G$ par
+		math
+			d_{L}(x,y) = N(x^{-1}y)
+		et
+		math
+			d_{R}(x,y) = N(yx^{-1})
+		définissent deux distances sur $G$.
+		- $d_{L}$ est invariante à gauche
+		- $d_{R}$ est invariante à droite
+		- $d_{R}(x,y) = d_{L}(x^{-1}, y^{-1})$
+
+Q: Module de continuité
+	A: Fonction $f:\R_{+}⟶ \R_{+}$ ++continue++ sur $\R_{+}$ telle que
+		- $f(0) = 0$
+		- $f$ est croissante
+		- $∀ a,b ∈ \R_{+}, f(a+b) ⩽ f(a) + f(b)$
+	On note $\M$ l’ensemble des modules de continuité. Il est stable par
+	- multiplication par un scalaire positif
+	- somme
+	- composition
+
+Q: Module de continuité comme morphisme
+	A: Si $N$ est une norme sur un groupe $G$ et $f$ un module de continuité, alors $f\circ N$ est encore une norme sur $G$ (continue si $N$ l’est). Ainsi, les modules de continuité sont des morphismes de normes continues.
+
+Q: Normes équivalentes sur un groupe
+	A: Normes $N_{1}$ et $N_{2}$ sur $G$ telle qu’il existe deux modules de continuité $f_{1}$ et $f_{2}$ tels que
+		math
+			∀ x ∈ G, \begin{cases}N_{1}(x) &⩽ f_{1}(N_{2}(x)) \\ N_{2}(x) &⩽ f_{2}(N_{1}(x))\end{cases}
+		Il s’agit d’une relation d’équivalence.
+
+Q: Groupe topologique métrisable
+	A: Groupe $G$
+		- muni d’une norme $N$
+		- dans lequel toutes les normes conjuguées ($N_{g}(x) = N(gxg^{-1})$) sont équivalentes
+		- dont la topologie « naturelle » est donnée par la distance $d_{N}$ suivante
+			math
+				d_{N}(x,y) = N(x^{-1}y) + N(y x^{-1})
 
 // groupe libre, arbre de…, cloture normale
+

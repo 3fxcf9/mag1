@@ -558,7 +558,7 @@ proof
 ### Théorème de convergence monotone
 
 thm TCM, Lebesgue / Beppo Levi
-	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite croissante de fonctions positives mesurables. Alors, il existe une fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ telle que $\lim_{n\to+∞}f_{n} = f$ et
+	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite croissante de fonctions mesurables positives. Alors, il existe une fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ telle que $\lim_{n\to+∞}f_{n} = f$ et
 	math
 		\lim_{n\to+∞}∫_{X}\dd μ f_{n} = ∫_{X}\dd μ f
 	as_flashcard
@@ -583,4 +583,229 @@ proof
 	math
 		λ ⩾ ∫_{X}\dd  μ f
 
+cor
+	Soit $(X, T, μ)$ un espace mesuré. Soit $f, g: X ⟶ \bar{\R_{+}}$ deux fonctions mesurables positives. Alors $f+g$ est une fonction mesurable positive et
+	math
+		∫_{X}\dd μ(f+g) = ∫_{X}\dd μ f + ∫_{X}\dd μ g
+
+proof
+	Soient $(X, T, μ)$, $f$ et $g$ de tels objets. Il existe deux suites croissantes $(s_{n})_{n ∈ \N}$ et $(t_{n})_{n ∈ \N}$ de fonctions étagées positives telles que
+	math
+		s_{n} \arrowlim{n\to+∞}f \quad\text{et}\quad t_{n} \arrowlim{n\to+∞}g
+	Alors, $(s_{n}+t_{n})_{n ∈ \N}$ est une suite croissante de fonctoins étagées positives telle que $s_{n}+t_{n} \arrowlim{n\to+∞}f+g$. D’autre part,
+	math
+		∫_{X}\dd μ (s_{n}+t_{n}) = ∫_{X}\dd μs_{n} + ∫_{X}\dd μt_{n}
+	d’où le résultat en passant à la limite $n\to+∞$ et en invoquant le théorème de convergence monotone.
+
+cor
+	Soit $(X, T, μ)$ un espace mesuré. Soit $\big(f_{n}: X ⟶ \bar{\R_{+}}\big)_{n ∈ \N}$ une suite de fonctions mesurables positives. Alors,
+	math
+		∑_{n ∈ \N}∫_{X}\dd μf_{n} = ∫_{X}\dd μ ∑_{n ∈ \N}f_{n}
+
+proof
+	Soient $(X, T, μ)$ et $(f_{n})$ comme ci-dessus. Le corollaire prouve par une récurrence immédiate que pour $N ∈ \N$,
+	math
+		∑_{n=0}^{+∞}∫_{X}\dd μf_{n} = ∫_{X}\dd μ ∑_{n=0}^{N}f_{n}
+	En passant à la limite $N\to+∞$, et en invoquant le théorème de convergence monotone, on obtient
+	math
+		∑_{n ∈ \N}∫_{X}\dd μ f_{n} = \lim_{N\to+∞}∫_{X}\dd μ ∑_{n=0}^{N}f_{n} \oeq{TCM} ∫_{X}\dd μ ∑_{n ∈ \N}f_{n}
+	car $\left(∑_{n=0}^{N}f_{n}\right)_{N ∈ \N}$ est une suite croissante de fonctions mesurables positives.
+
+rem
+	Si $(X, T, μ) = (\N, 2^{\N}, μ_{D})$, le théorème précédent affirme que pour toute suite $(f_{p,n})_{p,n ∈ \N}$ d’éléments de $\bar{\R_{+}}$, on a
+	math
+		∑_{n ∈ \N} ∑_{p ∈ \N}f_{p,n} = ∑_{p ∈ \N} ∑_{n ∈ \N} f_{p,n}
+
+## Intégration de Lebesgue de fonctions à valeurs réelles (ou autre…)
+
+### Définition
+
+def
+	Soit $(X, T, μ)$ un espace mesuré. Pour toute fonction mesurable $f: X ⟶ \bar{\R}$. On définit $f_{\pm} = \max(0, \pm f)$. Ce sont clairement deux fonction mesurables positives vérifiant
+	==FIG: sin, sin+ et sin-==
+	math
+		f = f_{+} - f_{-} \quad\text{et}\quad \abs{f} = f_{+} + f_{-}
+	On en déduit que $\abs{f}$ est mesurable positive.
+
+defprop
+	Soit $(X, T, μ)$ un espace mesuré. On dira d’une fonction mesurable $f: X ⟶ \bar{\R}$ qu’elle est (Lebesgue-)sommable si
+	math
+		∫_{X}\dd μ \abs{f} < ∞
+	On notera $\L^{1}(X, μ)$ l’ensemble des fonctions Lebesgue-sommables sur $X$. On pose alors pour toute fonction $f ∈ \L^{1}(X, μ)$
+	math int-reelle:defprop
+		∫_{X}\dd μ f = ∫_{X}\dd μ f_{+} - ∫_{X}\dd μ f_{-}
+
+proof
+	_Montrons que le membre de droite de [int-reelle:defprop] est toujours bien défini._ Pour toute fonction Lebesgue-sommable $f$, on a par définition
+	math
+		∞ > ∫_{X}\dd μ \abs{f} = ∫_{X}\dd μ f_{+} + ∫_{X}\dd μ f_{-}
+	Par conséquent, $∫_{X}\dd μ f_{\pm} < ∞$ et le membre de droite de [int-reelle:defprop] est toujours dans $\R$.
+
+rem
+	Si $f: X ⟶ \C$, on écrit $f = \Re f + i\Im f$ et on dira que $f$ est Lebesgue-somamble si
+	math
+		∫_{X}\dd μ \abs{f} < ∞
+	En effet, si cette condition est satisfaite, alors $\abs{\Re f} ⩽ \abs{f}$ et $\abs{\Im f} ⩽ \abs{f}$ donc $\Re f$ et $\Im f$ sont des fonctions sommables à valeurs réelles. On peut donc poser
+	math integrale-complexe-proj
+		∫_{X}\dd μf = ∫_{X}\dd μ \Re f + i ∫_{X}\dd μ \Im f
+	Plus généralement, on dit qu’une fonction $f: X ⟶ E$ à valeurs dans un $\R$-espace vectoriel normé est Lebesge-sommable si
+	math
+		∫_{X}\dd μ \norm{f} < ∞
+	et par projection sur une base, on obtient une égalité analogue à [integrale-complexe-proj].
+
+prop
+	Soit $(X, T, μ)$ un espace mesuré.
+	~ Si $f$ est Lebesgue-sommable, alors pour tout réel $α$, on a
+		math
+			∫_{X}\dd μ αf = α ∫_{X}\dd μ f
+	~ Si $f$ et $g$ sont deux fonction Lebesgue-sommables, on a
+		math
+			∫_{X}\dd μ (f+g) = ∫_{X}\dd μ f + ∫_{X}\dd μ g
+	~ Si $f$ est Lebesgue-sommable, alors
+		math
+			\abs{∫_{X}\dd μf} ⩽ ∫_{X}\dd μ \abs{f}
+
+rem
+	$(\L^{1}(X, μ), +, · , \norm{\cdot}_{1})$ où $\norm{f}_{1} = ∫_{X}\dd μ \abs{f}$ est un $\R$-espace vectoriel somi-normé. En tant que tel, il est complet (cf. section V ==TODO: Update ref==).
+		link # section V
+	On notera $\L^{1}(\R)$ l’ensemble $\L^{1}(\R, μ_{L})$ des fonctions Lebesgue-sommables dans $(\R, L_{\R}, μ_{L})$.
+
+### Théorème de convergence dominée de Lebesgue (TCD)
+
+lemma Fatou
+	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n} : X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite de fonctions mesurables positives. Alors
+	math
+		∫_{X}\dd μ \liminf_{n\to+∞}f_{n} ⩽ \liminf_{n\to+∞}∫_{X}\dd μf_{n}
+
+proof
+	Soient $(X, T, μ)$ et $(f_{n})$ de tels objets. On considère la suite de fonctions $(g_{k})_{k ∈ \N}$ définies par
+	math
+		∀ k ∈ \N, g_{k} = inf_{n ⩾ k} f_{n}
+	Il est clair que pour tout $k ∈ \N$, $0 ⩽ g_{k} ⩽ f_{k}$. Par conséquent,
+	math
+		∀ k ∈ \N, ∫_{X}\dd μg_{k} ⩽ ∫_{X}\dd μf_{k}
+	et donc
+	math fatou:1
+		\liminf_{k\to+∞} ∫_{X}\dd μg_{k} ⩽ \liminf_{k\to+∞}∫_{X}\dd μf_{k}
+	D’autre part, $(g_{k})_{k ∈ \N}$ est une suite croissante de fonctions mesurables positives. De plus, par définition,
+	math fatou:2
+		\underbrace{\lim_{n\to+∞}g_{k}}_{\displaystyle= \liminf_{k\to+∞}g_{k} \text{ (suite croissante de fonctions)}} = \lim_{n\to+∞}\inf_{n ⩾ k}f_{n} = \liminf_{n\to+∞}f_{n}
+	Évidemment, $\left(∫_{X}\dd μ g_{k}\right)_{k ∈ \N}$ est une suite croissante si bien que
+	math
+		\begin{align*}
+			\liminf_{k\to+∞} ∫_{X}\dd μg_{k} &= \lim_{k\to+∞} ∫_{X}\dd μ g_{k} \\
+			&\oeq{TCM} ∫_{X}\dd μ \lim_{k\to+∞}g_{k} \\
+			&\ueq{\eqref{fatou:1}} ∫_{X}\dd μ\liminf_{n\to+∞}f_{n} \\
+			&\uleq{\eqref{fatou:2}} \liminf_{n\to+∞} ∫_{X}\dd μf_{n}
+		\end{align*}
+
+thm Théorème de convergence dominée de Lebesgue
+	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R})_{n ∈ \N}$ une suite de fonctions mesurables telles que
+	- $f_{n} \arrowlim{n\to+∞}f μ-\pp X$
+	- il existe une fonction $g$ Lebesgue-sommable telle que
+		math
+			∀ n ∈ \N, \abs{f_{n}} ⩽ g \quad μ-\pp X
+	Alors $f$ est Lebesgue-sommable et
+	math
+		\lim_{n\to+∞}∫_{X}\dd μ \abs{f_{n} - f} = 0
+	(ou de façon équivalente $\lim_{n\to+∞}\norm{f_{n} - f}_{1} = 0$) ce qui entraîne, en particulier, que
+	math
+		\lim_{n\to+∞}∫_{X}\dd μf_{n} = ∫_{X}\dd μ f
+
+proof
+	Soient $(X, T, μ)$, $(f_{n})$ et $f$ de tels objets. $f$ est mesurable comme limite d’une suite de fonctions mesurables, et sous nos hypothèses
+	math
+		∀ n ∈ \N, \abs{f_{n}} ⩽ g \quad μ-\pp X
+	avec $g$ une fonction Lebesgue-sommable. En passant à la limite $n \to+∞$, on obtient
+	math tcd:proof:1
+		\abs{f} ⩽ g \quad μ-\pp X
+	et donc
+	math
+		∫_{X}\dd μ \abs{f} ⩽ ∫_{X}\dd μ g < ∞
+	ce qui prouve que $f$ est Lebesgue-sommable. D’autre part, on a pour tout $n ∈ \N$
+	math
+		\abs{f_{n} - f} ⩽ \abs{f_{n}} + \abs{f} \oleq{\eqref{tcd:proof:1}} 2g \quad μ-\pp X
+	Ainsi, $(2g - \abs{f_{n} - f})_{n ∈ \N}$ est une suite de fonctions mesurables positives et dès lors, le lemme de Fatou fournit
+	math
+		\begin{align*}
+			∫_{X}\dd μ 2g &= ∫_{X}\dd μ\liminf_{n\to+∞} \big[2g - \abs{f_{n} - f}\big] \\
+			&\oeq{Fatou} ⩽ \liminf_{n\to+∞} ∫_{X}\dd μ \big(2g - \abs{f - f_{n}}\big) \\
+			&= \liminf_{n\to+∞} \left(∫_{X}\dd μ 2g - ∫_{X}\dd μ \abs{f_{n} - f}\right) \\
+			&= ∫_{X}\dd μ 2g - \limsup_{n\to+∞} ∫_{X}\dd μ \abs{f_{n} - f}
+		\end{align*}
+	Comme $g$ est Lebesgue-sommable, $∫_{X}\dd μ 2g < ∞$ et on peut donc simplifier l’équation précédente en
+	math
+		0 ⩽ \limsup_{n\to+∞} ∫_{X}\dd μ \abs{f_{n} - f} ⩽ 0
+	La limite supérieure d’une suite positive ne peut être strictement négative et donc
+	math
+		\lim_{n\to+∞} ∫_{X}\dd μ \abs{f_{n} - f} = 0
+	Par conséquent,
+	math
+		\lim_{n\to+∞} \abs{∫_{X}\dd μ f_{n} - ∫_{X}\dd μ f} ⩽ \lim_{n\to+∞} ∫_{X}\dd μ \abs{f_{n} - f} = 0
+
+cor Continuité d’une intégrale à paramètre
+	Soit $Ω$ un ouvert de $\R$ et $(X, T, μ)$ un espace mesuré. Si une fonction $f:Ω × X ⟶ \bar{\R}$ est telle que
+	- la fonction $x ⟼ f(t, x)$ soit mesurable pour tout $t ∈ Ω$,
+	- la fonction $t ⟼  f(t, x)$ est continue _$μ$-presque tout $x ∈ X$.
+	- pour tout $t ∈ Ω$, il existe un ouvert $\tilde{Ω} ⊂ Ω$ contenant $t$ et une fonction $g$ Lebesgue-sommable telle que
+		math
+			∀ \tilde{t} ∈ \tilde{Ω}, \abs{f(\tilde{t}, x)} ⩽ g \quad μ-\text{presque pour tout } x ∈ X
+	Alors,
+	math
+		t ⟼ ∫_{X}\dd μ_{x} f(t, x)
+	est continue sur $Ω$.
+
+proof
+	Il suffit de montrer que pour tout $t_{∞} ∈ Ω$ et toute suite $(t_{n})_{n ∈ \N}$ d’éléments de $Ω$ de limite $t_{∞}$, on ait
+	math
+		\lim_{n\to+∞}∫_{X}\dd μ_{x} f(t_{x}, x) = ∫_{X}\dd μ_{x} f(t_{∞}, x)
+	La première hypothèse assure sur $\big(f_{n}: x ⟼ f(t_{n})x\big)_{n ∈ \N}$ est une suite de fonctions mesurables. La seconde nous permet d’écrire
+	math
+		\lim_{n\to+∞} = f_{∞} μ-\pp X \quad\text{où}\quad f_{∞}: x ⟼ f(t_{∞}, x)
+	Finalement, la dernière hypothèse appliquée à $t_{∞}$ donne l’existence d’un ouvert $\tilde{Ω}$ contenant $t_{∞}$ et d’une fonction $g$ Lebesgue-sommable satisfaisant le critère de domination. Par propriété d’ouvert, $\tilde{Ω}$ contient tous les termes de la suite $(t_{n})$ à partir d’un rang $N ∈ \N$ et par conséquent,
+	math
+		∀ n ⩾ N, \abs{f_{n}(x)} = \abs{f(t_{n}, x)} ⩽ g \quad μ-\text{presque pour tout} x ∈ X
+	D’après le théorème de convergence dominée, on a
+	math
+		\lim_{n\to+∞} ∫_{X}\dd μ_{x} f(t_{x}, x) = \lim_{n\to+∞}∫_{X}\dd μ f_{n} = ∫_{X}\dd μ f_{∞} = ∫_{X}\dd μ_{x} f(t_{∞}, x)
+
+cor Dérivabilité d’une intégrale à paramètre
+	Soient $Ω$ un ouvert de $\R$ et $(X, T, μ)$ un espace mesuré. Si une fonction $f: Ω × X ⟶ \bar{\R}$ est telle que
+	- la fonction $x ⟼  f(t, x)$ soit Lebesgue-sommable pour tout $t ∈ Ω$,
+	- la fonction $t ⟼  f(t, x)$ soit dérivable sur $Ω$ $μ$-presque pour tout $x ∈ X$,
+	- pour tout $t ∈ Ω$, il existe un ouvert $\tilde{Ω} ⊂ Ω$ contenant $t$ et une fonction $g$ Lebesgue-sommable telle que
+	math
+		∀ \tilde{t} ∈ \tilde{Ω}, \abs{\pdv{f}{t}(\tilde{t}, x)} ⩽ g(x) \quad μ-\text{presque pour tout } x ∈ X
+	Alors, $h: t ⟼ ∫_{X}\dd μ_{x} f(x, t)$ est dérivable sur $Ω$ et pour tout $t ∈ Ω$,
+	math
+		h'(t) = ∫_{X}\dd μ_{x} \pdv{f}{t}(t, x)
+
+proof
+	Il suffit de montrer que pour tout $t_{∞} ∈ Ω$ et toute suite $(t_{n})_{n ∈ \N}$ d’éléments de $Ω ∖ \{t_{∞}\}$ de limite $t_{∞}$,
+	math
+		\lim_{n\to+∞}∫_{X}\dd μ_{x} \frac{f(t_{x}, x) - f(t_{∞}, x)}{t_{x} - t_{∞}} = ∫_{X}\dd μ_{x} \pdv{f}{t} (t_{∞}, x)
+	La première hypothèse assure que $\left(f_{n} : x ⟼ \frac{f(t_{n}, x) - f(t_{∞}, x)}{t_{x} - t_{∞}}\right)_{n ∈ \N}$ est une suite de fonctions mesurables. La seconde nous permet d’écrire
+	math
+		\lim_{n\to+∞}f_{n}(x) = \pdv{f}{t}(t_{∞}, x) \quad μ-\text{presqe pour tout }x ∈ X
+	Finalement, la dernière hypothèse appliquée à $t_{∞}$ donne l’existence d’un ouvert $\tilde{Ω}$ contenant $t_{∞}$ et d’une fonction Lebesgue-sommable $g$ satisfaisant le critère de domination. Il existe alors $ε > 0$ tel que l’ouvert $I_{ε} = \oo{t_{∞} - ε, t_{∞} + ε}$ soit inclus dans $\tilde{Ω}$. Comme $t_{n} \arrowlim_{n\to+∞}t_{∞}$, l’ouvert $I_{ε}$ contient tous les termes de la suite $(t_{n})$ à partir d’un rang $N ∈ \N$. Le théorème des accroissements finis donne alors, pour $n ⩾ N$,
+	math
+		\abs{f_{n}(x)} = \abs{\frac{f(t_{n}, x) - f(t_{∞}, x)}{t_{n} - t_{∞}}} = \abs{\pdv{f}{t}(c, x)}
+	avec $c ∈ \oo{t_{x}, t_{∞}} ⊂ I_{ε} ⊂ \tilde{Ω}$. Le critère de domination donne alors $\abs{f_{n}(x)} ⩽ g(x)$ $μ$-presqu’en tout $x ∈ X$, et une application du théorème de convergence dominée permet alors de conclure :
+	math
+		\lim_{n\to+∞} \frac{h(t_{n}) - h(t_{∞})}{t_{n} - t_{∞}} = \lim_{n\to+∞}∫_{X}\dd μ_{x} \frac{f(t_{n}, x) - f(t_{∞}, x)}{t_{n} - t_{∞}} = \lim_{n\to+∞}∫_{X}\dd μ_{x} f = ∫_{X}\dd μ_{x} \pdv{f}{t}(t_{∞}, x)
+
+rem
+	- On peut utiliser ces deux corollaires dans des récurrences pour démontrer qu’une fonction $h$ est de classe $\Cont^{p}$ ou $\Cont^{∞}$ (cf. chapitre sur les transformées de Fourrier).
+	- On peut aisément adapter cette dernière preuve aux fonctions $f: Ω × X ⟶ \C$ avec $Ω$ un ouvert de $\C$ et ainsi obtenir un corollaire prouvant l’holomorphie d’une fonction.
+
+### Théorèmes de Fubini-Tonelli et de Fubini
+
+defprop
+	Soent $(X, T_{Y}, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurées $σ$-finis. On note $T_{X} \xalg T_{Y}$ la $σ$-algèbre sur $X × Y$ engendrée par $\set{A_{X} × A_{Y} \where A_{X} ∈ T_{X} \text{ et } A_{Y} ∈ T_{Y}}$. On l’appelle _$σ$-algèbre produit_ et on appelle $(X × Y, T_{X} \xalg T_{Y})$ l’espace mesurable produit.
+	Il existe sur cet espace mesurable produit une unique mesure notée $μ_{X} × μ_{Y}$ et appelée la _mesure produit_ telle que
+	math
+		∀ A_{X} ∈ T_{X}, ∀ A_{Y} ∈ T_{Y}, (μ_{X} × μ_{Y}) (A_{X} × A_{Y}) = μ_{X}(A_{X}) μ_{Y}(A_{Y})
+	On appellera $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ l’_espace mesuré produit_.
+
+proof
 

@@ -2,4 +2,55 @@
 
 title Théorie des groupes
 
+## Planning du cours
+
+### Séance 1 — Introduction
+- Groupes de symétrie et groupes abstraits
+- Notations et terminologie
+- Autres structures algébriques courantes : anneaux et modules, corps, algèbres
+- Action d'un groupe
+- Exemples de groupes
+- Morphismes de groupes, sous-groupes
+- Produit direct de groupes
+
+### Séance 2 — Structure d'un groupe
+- Classes latérales suivant un sous-groupe
+- Théorème de Lagrange
+- Sous-groupes normaux
+- Groupes quotients
+- Théorèmes d'isomorphisme
+- Présentation d'un groupe par générateurs et relations
+- Exposant d'un groupe
+- Structure des groupes abéliens de type fini
+
+### Séance 3 — Actions de groupe et compléments de structure
+- Théorème orbite-stabilisateur
+- Classes conjuguées, centre et centralisateurs (équation aux classes)
+- Automorphismes intérieurs et extérieurs
+- p-groupes et théorème de Cauchy
+- Groupes finis et théorèmes de Sylow
+- Produit semi-direct et extensions
+- Groupe dérivé et groupes résolubles
+
+### Séance 4 — Intermède : Catégories et construction universelles
+- Motivation
+- Catégories, foncteurs, transformations naturelles
+- Constructions universelles
+- Noyau et conoyau, produit et coproduit
+- Foncteurs adjoints
+- Produit tensoriel comme construction universelle
+- Extension et restriction de scalaires
+
+### Séance 5 — Groupes et algèbres de Lie
+- Groupes topologiques
+- Variétés différentielles (rappels courts)
+- Exemples de groupes de Lie
+- Fibré tangent
+- Champs vectoriels invariants
+- Algèbre de Lie d'un groupe
+- Application exponentielle
+
+### Séance 6 — Représentations linéaires
+*À suivre ...*
+
 chap proprietes_generales
