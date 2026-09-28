@@ -22,6 +22,12 @@ Q: Parsec
 		math
 			1\u{pc} = \frac{648\;000}{\pi}\u{au} \simeq 3.26\u{ly}
 
+## Électromagnétisme
+
+Q: Charge élémentaire
+	A: math
+			e = 1.602\;176\;634 · 10^{-19}\u C
+
 ## SI
 
 Q: Vitesse de la lumière dans le vide

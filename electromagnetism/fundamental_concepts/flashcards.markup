@@ -31,7 +31,6 @@ Q: Helmholtz’s theorem applied to an electrostatic field
 	A: We find the Biot-Savart law :
 		math
 			\vec{B}(\r) = \frac{μ_{0}}{4 π}\iiint_{\R^{3}}\j(\r') ∧ \frac{\r - \r'}{\abs{\r - \r'}^{3}}\dd^{3}\r'
-
 Q: Vector potential of $\B$
 	A: From the Maxwell-Thomson equation $\div \B = 0$, we de duce from the Helmholtz’s theorem that there exists a vector $\A$, called _vector potential_, such that
 		math
@@ -98,22 +97,43 @@ Q: Maxwell equations in the Coulomb gauge
 		and
 		math
 			\lapl \A_{C} - \frac{1}{c^{2}}\pdvN{}{t}{2}\A_{C} = - μ_{0}\j + \frac{1}{c^{2}}\grad \left(\pdv{V_{C}}{t}\right)
-		Since $V_{C}$ satisfies the Poisson equation, if $V_{C} \to 0$ at infinity, we know
+		Since $V_{C}$ satisfies the Poisson equation, if $V_{C} \to 0$ at infinity, we know from electrostatics
 		math
 			V_{C}(\r, t) = \frac{1}{4 π ε_{0}} \int_{\R^{3}}\frac{ρ(\r', t)}{\abs{r-r'}}\dd^{3} r'
 
+## Energy, momentum, angular momentum
 
+### Momentum of the EM field
+
+Q: Lorentz force in potential form for a charged particle
+	A: We find, by writing $\dv{\vec{p}}{t} = q(-\grad V - \pdv{\A}{t} + v ∧ (\rot \A))$ and using the $\grad(\v · \A)$ identity that
+		math
+			\dv{}{t}(\vec{p}+q\A) = -\grad \big[q(V-\v · \A)\big]
+		with $\dv{\A}{t} = \pdv{A}{t} + (\v · \grad)\A$ the convective derivative of $\A$.
+
+Q: Convective derivative of a vector field $\A(\r, t)$
+	A: The field varies for two distinct reasons, (i) it varies in time (ii) the particle moves and finds itself in a new place where the field in different because of its variation in space. Thus,
+		math
+			\begin{align*}
+				\dd \A &= \A(\r+\v \dd t, t+\dd t) - \A(\r, t)\\
+				&= \pdv{\A}{x}(v_{x}\dd t) + \pdv{\A}{y}(v_{y} \dd t) + \pdv{\A}{z}(v_{z}\dd t) + \pdv{\A}{t}\dd t
+			\end{align*}
+		The partial derivative is therefore
+		math
+			\dv{\A}{t} = \left(\pdv{\A}{t} + (\v · \grad)\A\right)
+
+### Conservation of energy
 
 proof Poynting’s theorem
 	math
 		\begin{align*}
 			\dv{W_{\text{mech}}}{t} &= \int_{V} \Big(ρ \E + \underbrace{\j}_{ρ \v} ∧ \B\Big) · \v \dd^{3} r \\
-			&= \int_{V}(\underbrace{ρ\E}_{\j · \E} · \v) + \underbrace{ρ(\v ∧ \B)· \v}_{=0} \dd^{3} r \\
+			&= \int_{V}(\underbrace{ρ\E · \v}_{\j · \E}) + \underbrace{ρ(\v ∧ \B)· \v}_{=0} \dd^{3} r \\
 			&= \int_{V} \Big(\frac{\rot \B}{μ_{0}} - ε_{0} \pdv{\E}{t}\Big) · \E \dd^{3}r
 		\end{align*}
 	But
 	math
-		\div (\E × \B) = (\rot\E) · \B - (\rot\B) · \E = - \pdv{\B}{t} · (\B - \rot\B)· \E
+		\div (\E × \B) = (\rot\E) · \B - (\rot\B) · \E = - \pdv{\B}{t} · \B - \rot\B· \E
 	Thus,
 	math
 		\begin{align*}
@@ -128,6 +148,76 @@ proof Poynting’s theorem
 	math
 		E_{\text{EM}} = \int_{V}\frac{1}{2}ε_{0}\E^{2} + \frac{\B^{2}}{2 μ_{0}}\dd^{3}r
 
+Q: Local conservation law of energy (Poynting’s theorem)
+	A: math
+			\pdv{}{t}u_{EM} + \div \poynting = -\j · \E
+		where
+		- $u_{EM}(\r, t) = \frac{1}{2} ε_{0}\E^{2} + \frac{\B^{2}}{2 μ_{0}}$ is the electromagnetic energy density
+		- $\poynting = \frac{\E ∧ \B}{μ_{0}}$ is the Poynting vector
+		- $\j · \E$ la densité de puissance fournie aux chaarges
+		On peut aussi l’écrire
+		math
+			\dv{u_{\text{tot}}}{t} = \dv{(u_{\text{mech}} + u_{EM})}{t} = -\div \poynting
+
+Q: Équation locale de conservation de la charge
+	A: math
+			\pdv{ρ}{t} + \div \j = 0
+
+### Conservation of momentum
+
+Q: Volumetric momentum density of the EM field
+	A: math
+			\vec{g} = \frac{\poynting}{c^{2}} = ε_{0} \E ∧ \B
+		en $\u{kg · m^{-2} · s^{-1}}$.
+
+Q: Local conservation law of momentum
+	A: math
+			\pdv{\vec{g}}{t} + \nabla · (-\mathbb T) = -\vec{f}_{\text{mech}}
+
+==TODO: Conservation of momentum==
+
+### Angular momentum carried by the EM field
+
+Q: Volumetric angular momentum density of the EM field
+	A: $\vec{l}_{EM} = \r ∧ \vec{g} = ε_{0}\r ∧ (\E ∧ \B)$
+
+==TODO: Angular momentum==
+
+## Introduction to distributions
+
+### Dirac delta
+
+Q: Dirac delta distribution
+	A: It is defined by the relation
+		math
+			∀ f ∈ \Cont^{∞}, \int_{\R}f(x)δ(x)\dd x = f(0)
+		or in three dimensions,
+		math
+			∀ f ∈ \Cont^{∞}, \int_{\R^{3}}f(\r)δ(\r)\dd \r = f(\0)
+
+Q: Volumetric charge density and E field for a point charge distribution
+	A: math
+			ρ(\r) = ∑_{k=1}^{N}q_{k}δ(\r - \r_{k})
+		and thus,
+		math
+			\E(\r) = \frac{1}{4 π ε_{0}}\iiint_{\R^{3}}ρ(\r') \frac{\r - \r'}{\norm{\r-\r'}}\dd^{3}\r' = \frac{1}{4 π ε_{0}} ∑_{k=1}^{N}q_{k} \frac{\r-\r'}{\norm{\r - \r_{k}}^{3}}
+
+Q: Homogeneity of $δ(x)$
+	A: $δ(x)$ is homogeneous to the inverse of $x$.
+
+Q: $δ(α x)$ A: $\frac{1}{\abs{α}}δ(x)$ and in particular, $δ(-x) = δ(x)$.
+
+Q: Heaviside distribution
+	A: math
+			H(x) = \begin{cases}0 \if x < 0 \\ \frac{1}{2} \if x=0 \\ 1 \if x > 0\end{cases}
+		In the sense of distributions, we have
+		math
+			\dv{H}{x} = δ(x)
+
+Q: math
+		\lapl \frac{1}{\norm{\r - \r_{0}}}
+	A: math
+			\lapl \frac{1}{\norm{\r - \r_{0}}} = -4 π δ(\r - \r_{0})
 
 proof Interface condition
 	We consider two media characterized by respective volumetric change densities $ρ_{1}$ and $ρ_{2}$, separated by the plane $z=0$ carrying a surface charge density $σ$.
@@ -145,3 +235,30 @@ proof Interface condition
 	Hence,
 	math
 		(\E_{2} - \E_{1}) · \z = \frac{σ}{ε_{0}}
+
+## Boundary conditions at the interface between two media
+
+Q: Boundary condition for the $\E$ field
+	A: If two media (1) and (2) are separated by a surface carrying a surface charge density $σ$, then, close to the surface,
+		math
+			\E_{2} - \E_{1} = \frac{σ}{ε_{0}}\vec{n}_{1\to 2}
+		with $\vec{n}_{1\to 2}$ the normal to the surface, oriented from medium (1) to medium (2).
+
+Q: Boundary condition for the $\B$ field
+	A: If two media (1) and (2) are separated by a surface carrying a surface current $\j_{S}$, then, close to the surface,
+		math
+			\B_{2} - \B_{1} = μ_{0}\j_{S} ∧ \vec{n}_{1\to 2}
+		with $\vec{n}_{1\to 2}$ the normal to the surface, oriented from medium (1) to medium (2).
+
+Q: Continuity of $V$ and $\A$ across a surface
+	A: - The scalar potential $V$ is continuous across a charged surface
+		- The vector potential $\A$, in Coulomb gauge, is continuous across a surface crossed by a current
+
+Q: Propagation equation for the EM field
+	A: In the vacuum,
+		math
+			\lapl\E - μ_{0} ε_{0} \pdvN{}{t}{2}\E = 0
+		The equation is the same for the $\B$ field.
+
+Q: Curie’s principle
+	A: If a cause has a certain cymmetry (or invariance), then its effect will have the same symmetry (or invariance) or a higher symmetry (provided the solution is unique).
