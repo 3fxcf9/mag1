@@ -3,24 +3,11 @@
 title Propriétés générales
 date 10/09/2026
 
+==TODO: Noms des solides de Platon==
+
 ## Structure de groupe
 
-Q: Relation binaire sur un ensemble $E$
-	A: Sous-ensemble $G_{\rel}$ de $E × E$. $x$ est en relation avec $y$ si et seulement si $(x,y) ∈ G_{\rel}$
-
-Q: Relation d’équivalence
-	A: Relation binaire
-		- Réflexive
-		- Symétrique
-		- Transitive
-
-Q: Classes d’équivalence pour une relation d’équivalence $\rel$
-	A: Ensembles $\hat x = \set{y ∈ E \where x\rel y}$ pour $x ∈ E$. Elles forment une partition (union disjointe recouvrante) de $E$. On note leur ensemble $E/\rel$.
-
-Q: Compatibilité d’une relation binaire avec une loi de composition interne
-	A: La relation $\rel$ est compatible avec une la loi interne $·$ si et seulement si
-		math
-			x\rel y \text{ et } x'\rel y' ⟹ (x · x') \rel (y · y')
+### Groupes
 
 Q: Groupe
 	A: Ensemble $G$ muni d’une loi de composition interne $\circ$ satisfaisant trois axiomes :
@@ -38,44 +25,21 @@ Q: Groupe topologique
 			\applic{G × G}{G}{(x,y)}{x · y^{-1}}
 		soit continue.
 
-Q: Groupe $SU(2)$
-	A: Groupe des matrices à coefficients complexes de la forme
-		math
-			M = \mtx{a & b \\ -b^{*} & a^{*}}
-		avec la contrainte
-		math
-			\abs{a}^{2} + \abs{b}^{2} = 1
-
-Q: Relation de conjugaison sur un groupe $G$
-	A: Relation binaire définie par
-		math
-			x\rel y ⟺ ∃ g ∈ G: y = g · x · g^{-1}
-		C’est une relation d’équivalence qui partitionne $G$ en classes de conjugaison, celle d’un élément $g_{0}$ étant :
-		math
-			C_{g_{0}} = \set{g · g_{0} · g^{-1} \where g ∈ G}
-
-Q: Produit direct des groupes $(G, ·_{G})$ et $(H, ·_{H})$
-	A: Groupe $(G × H, \circ)$ avec
-		math
-			(g, h) \circ (g', h') = (g ·_{G} g', h ·_{H} h')
-		Il est abélien si et seulement si $G$ et $H$ le sont, et si ces deux groupes sont d’ordre fini, alors
-		math
-			\abs{G × H} = \abs{G} × \abs{H}
-
-Q: Projection canonique de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$
-	A: Application de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$ définie par
-		math
-			p(g_{1}, …, g_{n}) = g_{i_{0}}
-
 example Exemples de groupes
 	Q: Groupe des permutations
 		A: Groupe $S_{X}$ formé par l’ensemble des permutations (bijection d’un ensemble dans lui-même) d’un ensemble $X$.
 
+	Q: Décomposition des permutations
+		A: Toute permutation peut s’écrire comme produit de cycles à supports disjoints ou comme produit de transpositions. Cette dernière décomposition n’est pas unique.
+
+	Q: Signature d’une permutation
+		A: $(-1)^{i}$ avec $i$ le nombre d’inversions de cette permutation. C’est un morphisme multiplicatif.
+
 	Q: Groupe symétrique de degré $n$
 		A: Groupe $S_{n}$ des permutations de $\icc{1,n}$. Son ordre est $n!$.
 
-	Q: Groupe cyclique d’ordre $n$
-		A: Groupe d’ordre $n$ engendré par un élément: $\C_{n} = \grp{\set c}$ avec $c^{n} = 1$. Une représentation en est $\U_{n}$.
+	Q: Groupe alterné d’ordre $n$ et ordre de ce groupe
+		A: Sous-groupe $A_{n}$ du groupe symétrique formé des permutatio paires. Il est d’ordre $n!$. C’est un sous-groupe normal de $S_{n}$.
 
 	Q: Groupe ponctuel diédral
 		A: Groupe de symétries de rotation d’un polygone régulier. Le groupe diédral $\D_{n}$ a $n$ rotations et $n$ réflexions (rotations d’angle $π$ autour d’un axe parallèle au polygone).
@@ -90,6 +54,7 @@ example Exemples de groupes
 	Q: Groupe spécial orthogonal
 		A: math
 				SO(n) = \set{A \in SL(n,\R) \where A\transp A = I_n}
+			C’est un sous-groupe normal de $O(n)$.
 
 	Q: Groupe symplectique
 		A: math
@@ -101,9 +66,24 @@ example Exemples de groupes
 		A: math
 				U(n) = \set{A \in GL(n,\C)\where A\dag A = I_n}
 
-	Q: Groupe spécial
+	Q: Groupe spécial unitaire
 		A: math
-				U(n) = \set{A \in SL(n,\C)\where A\dag A = I_n}
+				SU(n) = \set{A \in SL(n,\C)\where A\dag A = I_n}
+
+	Q: Groupe $SU(2)$ spécial unitaire de rang 2
+		A: Groupe des matrices à coefficients complexes de la forme
+			math
+				M = \mtx{a & b \\ -b^{*} & a^{*}}
+			avec la contrainte
+			math
+				\abs{a}^{2} + \abs{b}^{2} = 1
+
+	Q: Groupe de Klein
+		A: Groupe
+			math
+				\Z/2\Z × \Z/2\Z
+
+### Sous-groupes
 
 Q: Sous-groupe de $(G, · )$. Sous-groupes triviaux, propres.
 	A: Partie *non vide* de $G$ qui, munie de la loi de $G$, forme un groupe.
@@ -151,8 +131,104 @@ Q: Puissances « annulant » un élément d’un groupe
 
 		_Preuve :_ le noyau du morphisme $k ∈ (\Z,+) ⟼ x^{k} ∈ (G, · )$ est un sous-groupe de $(\Z,+)$, d’ou le résultat.
 
-Q: Description des sous-groupes additifs de $(\Z,+)$
-	A: Si $H$ est un sous-groupe de $(\Z,+)$, alors il existe un unique entier $n ⩾ 0$ tel que $H = n\Z = \grp{\set n}$.
+
+## Morphismes de groupes
+
+Q: (Homo)morphisme de groupe
+	A: Application $f: G ⟶ G'$ entre les groupes $(G, · )$ et $(G', ·')$ telle que
+		math
+			∀ x,y ∈ G, φ(x · y) = φ(x) ·' φ(y)
+		On note leur ensemble $\Hom(G, G')$.
+		- Si $G=G'$ et $· = ·'$, on dit que $f$ est un _endomorphisme_.
+		- Si $φ$ est bijectif, on parle d’_isomorphisme_.
+
+Q: À quoi sont isomorphes les groupes monogènes infinis ?
+	A: Tout groupe monogène infini est isomorphe à $\Z$.
+
+Q: À quoi sont isomorphes les groupes cycliques ?
+	A: Tout groupe cyclique d’ordre $n$ est isomorphe à $\Z/n\Z$ (où à $\U_{n}$).
+
+Q: Image d’un sous-groupe par un morphisme de groupes
+	A: L’image par un morphisme de groupe d’un sous-groupe du groupe de départ est un sous-groupe du groupe d’arrivée.
+
+Q: Image réciproque d’un sous-groupe par un morphisme de groupes
+	A: L’image réciproque par un morphisme de groupe d’un sous-groupe du groupe d’arrivée est un sous-groupe du groupe de départ, *distingué dans le groupe de départ si le sous-groupe dont il est l’image réciproque est distingué dans le groupe de départ.
+
+Q: Théorème de Cayley
+	A: Tout groupe $G$ est isomorphe à un sous-groupe du groupe symétrique $S_{G}$ des permutations de $G$. En particulier, si $G$ est un groupe fini d'ordre $n$, il est isomorphe à un sous-groupe de $S_{n}$.
+		L’isomorphisme est $g ∈ G ⟼  (x ⟼ gx)$.
+
+## Produits de groupes
+
+Q: Produit direct des groupes $(G, ·_{G})$ et $(H, ·_{H})$
+	A: Groupe $(G × H, \circ)$ avec
+		math
+			(g, h) \circ (g', h') = (g ·_{G} g', h ·_{H} h')
+		Il est abélien si et seulement si $G$ et $H$ le sont, et si ces deux groupes sont d’ordre fini, alors
+		math
+			\abs{G × H} = \abs{G} × \abs{H}
+
+Q: Projection canonique de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$
+	A: Application de $G_{1} × ⋯ × G_{n}$ sur $G_{i_{0}}$ définie par
+		math
+			p(g_{1}, …, g_{n}) = g_{i_{0}}
+
+Q: Condition nécessaire et suffisante pour que $\Z/m\Z × \Z/n\Z$ soit cyclique
+	A: $\Z/m\Z × \Z/n\Z$ est cyclique si et seulement si $m ∧ n = 1$.
+
+Q: Décomposition d’un groupe en produit de groupes
+	A: Si $G = HK$ avec $H$ et $K$ deux sous-groupes de $G$ n’ayant que le neutre en commun et tels que tout élément de $H$ commute avec tout élément de $K$, alors $G$ est isomorphe à $H × K$.
+		L’isomorphisme est
+		math
+			φ:\applic{H × K}{G}{(h, k)}{hk}
+
+## Théorème de Lagrange
+
+Q: Théorème de Lagrange
+	A: L’ordre d’un sous-groupe d’un groupe fini divise l’ordre de ce groupe.
+
+Q: Relation entre l’ordre d’un élément d’un groupe et celui du groupe
+	A: L’ordre de tout élément d’un groupe divise l’ordre du groupe.
+		En effet, l’ordre d’un élément est l’ordre du sous-groupe qu’il engendre.
+
+Q: Que dire si l’ordre d’un groupe est premier ?
+	A: Alors ce groupe est cyclique (l’ordre de tout élément non neutre divise l’ordre du groupe, et est donc égal à celui-ci).
+
+Q: Fonction $φ$ d’Euler
+	A: Ordre du groupe $\set{m ∈ \icc{1, n-1} \where m ∧ n = 1}$ pour la multiplication modulo $n$.
+
+Q: Théorème d’Euler
+	A: math
+			x ∧ n = 1 ⟹ x^{φ(n)} \cgm{1}{n}
+		_Preuve :_ le reste $m$ de la division euclidienne de $x$ par $n$ appartient au groupe $\set{m ∈ \icc{1, n-1} \where m ∧ n =1}$ dont l’ordre est $φ(n)$, donc $m^{φ(n)}\cgm{1}{n}$ d’où le résultat car $x \cgm{m}{n}$.
+
+Q: Petit théorème de Fermat
+	A: Si $p$ est un nombre premier et $x$ n’est pas un multiple de $p$, alors
+		math
+			x^{p-1}\cgm{1}{p}
+		_Preuve :_ appliquer le théorème d’Euler.
+
+## Partitions et relations binaires
+
+Q: Partition d’un ensemble
+	A: Décomposition de l’ensemble en une union de sous-ensemble non vides disjoints.
+
+Q: Relation binaire sur un ensemble $X$
+	A: Sous-ensemble $\rel$ de $X × X$. $x$ est en relation avec $y$ si et seulement si $(x,y) ∈ \rel$
+
+Q: Relation d’équivalence
+	A: Relation binaire
+		- Réflexive
+		- Symétrique
+		- Transitive
+
+Q: Classes d’équivalence pour une relation d’équivalence $\rel$
+	A: Ensembles $\hat x = \set{y ∈ E \where x\rel y}$ pour $x ∈ E$. Elles forment une partition (union disjointe recouvrante) de $E$. On note leur ensemble $E/\rel$.
+
+Q: Compatibilité d’une relation binaire avec une loi de composition interne
+	A: La relation $\rel$ est compatible avec une la loi interne $·$ si et seulement si
+		math
+			x\rel y \text{ et } x'\rel y' ⟹ (x · x') \rel (y · y')
 
 Q: Congruences à droite et à gauche suivant $H$ et leur classes d’équivalence
 	A: Relations d’équivalence respectives
@@ -164,193 +240,159 @@ Q: Congruences à droite et à gauche suivant $H$ et leur classes d’équivalen
 		La classe d’équivalence de $g$ pour la relation
 		- $\rel_{H}^{(d)}$ est $Hg$
 		- $\rel_{H}^{(g)}$ est $gH$
-		On les appelle _classes à droite (resp. gauche) de $G$ modulo $H$_ (right/left coset en anglais).
+		On les appelle _classes à droite (resp. gauche) (_left/right coset_ en anglais) de $G$ modulo $H$_ (right/left coset en anglais).
 
-Q: Ensembles $(G/H)_{g}$, $(G/H)_{g}$ et $G/H$
-	A: Respectivement
-		- Ensemble des classes d’équivalence pour la relation de congruence à gauche selon $H$, dont les classes sont $Hg$
-		- Ensemble des classes d’équivalence pour la relation de congruence à droite selon $H$, dont les classes sont $gH$
-		- Notation de $(G/H)_{g}$
-
-Q: Indice d’un sous-groupe $H$ de $G$ dans $G$
-	A: Nombre $[G:H]$ de classes d’équivalences pour la relation de congruence à gauche selon $H$ si ce nombre est fini.
-
-Q: Théorème de Lagrange
-	A: Si $H$ est un sous-groupe d’un groupe $G$ fini, alors
+Q: Relation de conjugaison sur un groupe $G$
+	A: Relation binaire définie par
 		math
-			\abs{G} = [G:H]\abs{H}
-		donc dans un groupe fini, l’ordre de tout sous-groupe divise l’ordre du groupe.
-
-Q: Formule des indices
-	A: Si $K < H < G$, alors $G/K$ est fini si et seulement si $G/H$ et $H/K$ sont finie et dans ce cas
+			x\rel y ⟺ ∃ g ∈ G: y = g · x · g^{-1}
+		C’est une relation d’équivalence qui partitionne $G$ en classes de conjugaison, celle d’un élément $g_{0}$ étant :
 		math
-			[G:K] = [G:H][H:K]
+			C_{g_{0}} = \set{g · g_{0} · g^{-1} \where g ∈ G}
 
-Q: Sous-groupe normal (ou invariant ou distingué)
-	A: Sous-groupe $H$ de $G$ tel que $\rel_{H}^{(g)} = \rel_{H}^{(g)}$, i.e. tel que
+## Théorème de Cauchy
+
+Q: Théorème de Cauchy
+	A: Si $p$ est un diviseur premier de l’ordre d’un groupe fini $G$, alors $G$ contient un élément d’ordre $p$.
+
+Q: Classification des groupes d’ordres 2-8
+	A: - les groupes d’ordre 2, 3, 5 et 7 sont cycliques
+		- les groupes d’ordre 4 sont isomorphes à $\Z/4\Z$ ou au groupe de Klein ($(\Z/2\Z)^{2}$)
+		- les groupes d’ordre 6 sont isomorphes à $\Z/6\Z = \Z/2\Z × \Z/3\Z$ ou à $D_{3} = S_{3}$.
+		- les groupes d’ordre 8 sont isomorphes à un des groupes suivants : $\Z/8\Z$, $\Z/4\Z × \Z/2\Z$, $(\Z/2\Z)^{3}$, $D^{4}$ ou le groupe des quaternions $Q$.
+
+Q: Démonstration : classification des groupes d’ordre 6
+	A: Il existe d’après le théorème de Cauchy un élément $x$ d’ordre 3. Les sous-groupes $\grp x$ et $\grp{x}y$ rassemblent les 6 éléments $e, x, x^{2}, y, xy, x^{2}y$. L’élément $yx$ est donc un de ceux-ci, or il n’appartient pas à $\grp x$ et n’est pas égal à $y$. Par conséquent il est soit égal à $xy$, auquel cas le groupe est isomorphe à $\grp x × \gmp y$ (propriété), soit à $x^{2}y$ auquel cas le groupe est isomorphe à $D^{3}$.
+
+Q: Groupe des quaternions
+	A: Groupe formé des symboles $\pm 1$, $\pm i$, $\pm i$, $\pm j$, $\pm k$ qui satisfont
 		math
-			∀ g ∈ G, gH = Hg
-		On le note $H \subnormal G$.
-
-Q: Caractérisation des sous-groupes normaux
-	A: $H$ est normal dans $G$ si et seulement si
+			i^{2} = j^{2} = k^{2} = -1
+		et
 		math
-			∀ g ∈ G, ∀ h ∈ H, gH g^{-1} = H
+			ij = -ji = k
 
-Q: Sous-groupes d’indice 2
-	A: Les sous-groupes d’indice 2 d’un groupe sont distingués dans ce groupe.
+## Conjugaison et groupes quotients
 
-Q: Propriétés de base des sous-groupes distingués
-	A: Soit $H$ distingué dans $G$ et $K$ un sous-groupe de $G$.
-		- $H$ est distingué dans tout sous-groupe de $G$ contenant $H$
-		- La normalité n’est pas transitive
-		- $H · K = K · H$ est un sous-groupe de $G$, distingué dans $G$ si $K$ l’est.
-
-## Groupes quotients
-
-Q: Groupe quotient de $G$ par $N$
-	A: Si $N$ est un sous-groupe normal de $G$, la loi $\rel_{N} = \rel_{N}^{(g)} = \rel_{N}^{(d)}$ est compatible avec la loi interne de $G$, donc l’ensemble quotient $G/N = (G/N)_{g} = (G/N)_{d}$ muni de la loi induite est un groupe, appelé _groupe quotient_ de $G$ par $N$.
+Q: Definition et structure du centre d’un groupe
+	A: Le centre d’un groupe est l’ensemble des éléments commutant avec tous les éléments du groupe :
 		math
-			(gN) ·_{G/N} (g' N) = (gN) ·_{G} (g' N) = (g · g')N
+			Z(G) = \set{x ∈ G \where ∀ g ∈ G, xg = gx}
+		Le centre de $G$ est un sous-groupe de $G$ et est formé des classes de conjugaisons ne contenant qu’un seul élément.
 
-Q: Ordre du groupe quotient $G/N$
-	A: math
-			\abs{G/N} = \abs{G}/\abs{N}
+Q: Sous-groupe normal de $G$
+	A: Sous-groupe de $G$ étant l’union de classes de conjugaison de $G$. On note $H \normal G$.
 
-Q: Sous-groupe induit dans un groupe quotient
-	A: Sous-groupe $\tilde{H} = \{h · N \where h ∈ H\} ⊂ G/N$ de $G/N$ si $N \subnormal G$ et $H < G$.
+Q: Groupe quotient $G/H$
+	A: Si $H$ est normal dans $G$, l’ensemble des classes latérales à gauche $gH$ de $H$ forme un groupe pour la loi
+	math
+		∀ X,Y ⊂ G, XY = \set{xy \where x ∈ X, y ∈ Y}
+	On appelle ce groupe le _groupe quotient $G/H$_.
 
-## Approfondissements
+Q: Comment prouver qu’un sous-groupe est normal ?
+	A: Un sous-groupe $H$ de $G$ est normal dans $G$ si et seulement si
+		math
+			∀ h ∈ H, ∀ x ∈ X, xhx^{-1} ∈ H
+		avec $X$ un ensemble de générateurs de $G$.
 
-### Groupes simples, semi-simples, dérivés, résolubles
+Q: Indice d’un sous-groupe $H$ de $G$
+	A: Nombre de classes latérales à gauches (ou à droite) de $H$ dans $G$.
 
-Q: Groupes simples et semi-simples
-	A: Un groupe $G$ est dit
-		- _simple_ s’il ne possède pas de sous-groupe normal non-trivial
-		- _semi-simple_ s’il est le produit direct de groupes simples
+Q: Que dire si l’indice de $H$ dans $G$ vaut 2 ?
+	A: Alors $H$ est normal dans $G$ et le groupe quotient $G/H$ est isomorphe à $\Z/2\Z$.
+		_Preuve :_ Si $x ∈ G ∖ H$, les classes $H$ et $xH$ partitionnent $G$, au même titre que les classes $H$ et $Hx$. On a donc $xH = ×H$ pour tout $x ∈ G$ (immédiat si $x ∈ H$). Le groupe $G/H$ est alors d’ordre 2 donc isomorphe à $\Z/2\Z$.
+
+Q: Classification des groupes d’ordre $2p$
+	A: Ils sont soit cycliques soit dihédraux.
+		_Preuve :_ D’après Cauchy, il existe $x$ d’ordre $p$ et $y$ d’ordre $2$. Les classes $\grp x$ et $\grp{x}y$ fournissent $2p$ éléments d’où $\grp x$ est d’indice 2 donc normal. L’ordre de $xy$ est, d’après le théorème de Lagrange, $2p$, $p$ ou 2.
+		- si il vaut $2p$, alors le groupe est cyclique
+		- si il vaut 2, alors $xy = x^{-1}y$ donc le groupe est isomorphe à $D_{p}$
+		- il ne peut pas valoir $p$ car sinon
+			math
+				\grp x = \grp x (xy)^{p} = (\grp{x}xy)^{p} = (\grp{x}y)^{p} = \grp{x}y^{p} \grp{x}y
+			car $\grp x$ est normal, ce qui contredit $y \notin \grp x$.
 
 Q: Commutateur de $a$ et $b$
 	A: math
 			\commu{a}{b} = aba^{-1}b^{-1}
 
-Q: math
-		\big(\commu{a}{b}\big)^{-1}
-	A: math
-			\commu{b}{a}
-
-Q: math
-		x\commu{a}{b}x^{-1}
-	A: math
-			\commu{xax^{-1}}{xbx^{-1}}
-		On en déduit que le groupe dérivé de $G$ est normal dans $G$.
+Q: Sous-groupe engendré par l’ensemble des commutateurs de $G$
+	A: Groupe dérivé de $G$, noté $[G, G]$.
 
 Q: Groupe dérivé de $G$
-	A: Noté $D(G)$, c’est le sous-groupe de $G$ engendré par l’ensemble des commutateurs $\commu{a}{b}$.
+	A: Noté $[G, G]$, c’est le sous-groupe de $G$ engendré par l’ensemble des commutateurs $\commu{a}{b}$ de $G$.
+		Son ordre est une « mesure » du défaut de commutativité de $G$.
 
-Q: Groupe $G/D(G)$
-	A: $D(G)$ est normal dans $G$ et le groupe quotient $G/D(G)$ est abélien.
+Q: Groupe $G/[G,G]$
+	A: $[G,G]$ est normal dans $G$ et le groupe quotient $G/[G,G]$ est abélien.
+		Si $H$ est un sous-groupe de $G$ tel que $G/H$ soit abélien, alors $[G,G]$ est contenu dans $H$.
+		*Le groupe dérivé est le _plus petit_ sous-groupe normal de $G$ pour lequel le groupe quotient est abélien.*
+		En effet, si $G/H$ est abélien, alors $Hxy = Hyx$ pour $x,y ∈ G$, donc $Hxyx^{-1}y^{-1} = H$ en particulier $xyx^{-1}y^{-1} ∈ H$.
 
-Q: Cas simples de sous-groupes dérivés
-	A: - $G$ est abélien si et seulement si $D(G) = \set{1_{G}}$
-		- Si $G$ est simple et non-abélien, alors $D(G) = G$
+Q: Groupe simple
+	A: Groupe dont les seuls sous-groupes normaux sont $\{e\}$ et le groupe entier.
+		Groupe no possédant pas de sous-groupe normal non-trivial.
 
-Q: Groupe parfait A: Groupe $G$ tel que $D(G) = G$.
+## Isomorphismes
 
-Q: Groupes résolubles
-	A: Groupe $G$ tel que pour un certain $n ∈ \N$, on ait $D^{n}(G) = \set{1_{G}}$ (i.e. $D^{n-1}(G)$ est abélien).
+Q: Premier théorème d’Isomorphisme
+	A: Le noyau $\ker φ$ d’un morphisme $φ:G ⟶ G'$ est un sous-groupe normal dans $G$ et la correspondance $x \ker φ ⟶ φ(x)$ est un isomorphisme de $G/\ker φ$ dans $\img φ$.
 
-Q: Caractérisation des groupes résolubles
-	A: $G$ est résoluble si et seulement s’il existe une suite finie décroissante de sous-groupes de $G$
+Q: Second théorème d’Isomorphisme
+	A: Si $H$ et $J$ sont des sous-groupes d’un groupe $G$ et que $J$ est normal dans $G$, alors
+		- $HJ$ est un sous-groupe de $G$,
+		- $H ∩ J$ est un sous-groupe normal de $H$ et les groupes quotients $HJ/J$,
+		- $H/(H ∩ J)$ sont isomorphes.
+
+Q: Troisième théorème d’isomorphisme
+	A: Si $H$ et $J$ sont des sous-groupes normaux d’un groupe $G$ avec $J ⊂ H$, alors
+	- $J/H$ est un sous-groupe normal de $G/H$
+	- $(G/H)/(J/H)$ est isomorphe à $G/J$
+	_Preuve :_ la fonction $φ: G/H ⟶ G/J$ définie par $φ(xH) = xJ$ est un morphisme surjectif. Une classe à gauche $xH$ appartient au noyau de $φ$ ssi $xJ = J$, i.e. ssi $x ∈ J$. Le noyau de $φ$ est don $J/H$ d’où le résultat par le premier théorème d’isomorphisme.
+
+## Actions, Orbites et Stabilisateurs
+
+Q: Action d’un groupe $G$ sur un ensemble $X$
+	A: Homomorphisme de $G$ à $S_{X}$.
+		Si $φ$ est une telle action, on note $g · x$ (ou $g(x)$) au lieu de $\big(φ(g)\big)(x)$. La propriété de morphisme se traduit alors par
 		math
-			\set{1_{G}} = H_{n} ⊂ H_{n-1} ⊂ ⋯ ⊂ H_{0} = G
-		tels que pour tout $i ∈ \icc{0,n-1}$, $H_{i+1}$ est normal dans $H_{i}$ et $H_{i} / H_{i+1}$ est abélien.
+			gh(x) = g(h(x))
 
-### Centralisateur, formule des classes
+Q: Orbite de $x ∈ X$ sous l’action de $G$
+	A: Ensemble $G · x$ (ou $G(x)$) des images $g(x)$ avec $g ∈ G$. Les orbites partitionnent $X$ car la relation $x\sim y ⟺ ∃ g ∈ G: y = g(x)$ est une relation d’équivalence.
 
-Q: Centralisateur de $g ∈ G$
-	A: Ensemble des éléments qui commutent avec $G$ :
+Q: Stabilisateur de $x ∈ X$
+	A: Ensemble $G_{x}$ des éléments $g ∈ G$ laissant $x$ fixe par action.
+
+Q: Action transitive
+	A: Action n’ayant qu’une orbite (deux éléments de $X$ peuvent toujours être envoyés l’un sur l’autre par l’action d’un élément du groupe).
+
+Q: Stabilisateurs des éléments d’une orbite
+	A: Des points d’une même orbite ont des stabilisateurs conjugués (si $g(x) = y$, alors $gG_{x}g^{-1} = G_{y}$).
+
+Q: Théorème Orbite-Stabilisateur
+	A: Pour tout $x ∈ X$, la correspondance $g(x) ⟶ gG_{x}$ est une bijection entre $G(x)$ et l’ensemble de ses classes à gauche $G_{x}$ dans $G$.
+		Ce théorème dit que le cardinal de l’orbite de $x$ est égal à l’indice du stabilisateur de $x$ dans $G$.
+
+Q: Formule des orbites (conséquence du théorème Orbite-Stabilisateur)
+	A: si $G$ est fini, la taille des orbites divise l’ordre de $G$.
+		En effet, d’après le théorème Orbite-Stabilisateur, la taille de $G(x)$ est $\abs{G}/\abs{G_{x}}$ d’où
 		math
-			Z_{g} = \set{x ∈ G \where gx = xg}
-		Il a une structure de groupe.
+			\abs{G(x)}\abs{G_{x}} = \abs{G}
 
-Q: Centre d’un groupe
-	A: Groupe normal dans $G$ formé de l’ensemble des éléments qui commutent avec tous les éléments de $G$ :
+Q: Centre d’un $p$-groupe
+	A: Le centre d’un groupe d’ordre une puissance d’un nombre premier est non-trivial.
+		_Preuve :_ Partitionnons $G$ en classes de conjuaison. Elles sont toutes de taille 1 ou $p$. Le centre est l’ensemble des classes de taille 1. Si le centre était trivial, l’ordre de $G$ serait congru à 1 modulo $p$ ce qui est faux.
+
+Q: Classification des groupes d’ordre $p^{2}$
+	A: Un groupe d’ordre $p^{2}$ avec $p$ premier est soit cyclique, soit isomorphe à $(\Z/p\Z)^{2}$.
+		_Preuve :_ si $p$ contient un élément d’ordre $p^{2}$, il est cyclique. Sinon, tous les éléments (hors $e$) sont d’ordre $p$. Soit $x$ un élément du centre (non trivial) de $G$ et $y \notin\grp x$. Les $p^{2}$ éléments $x^{i}y^{i}$ $(1 ⩽ i, j, p)$ sont distincts car $\grp x ∩ \grp y = \set e$. Ainsi, $\grp x\grp y = G$ et tout élément de $\grp x$ commute avec toute élément de $\grp y$ car $x ∈ Z(G)$ donc $G$ est isomorphe à $\grp x × \grp y$ et donc à $(\Z/p\Z)^{2}$.
+
+Q: Nombre d’orbites distinctes lors de l’action de $G$ sur $X$
+	A: Le nombre d’orbites distinctes est
 		math
-			Z(G) = \bigcap_{g ∈ G}Z_{g} = \set{x ∈ G \where ∀ g ∈ G, gx = xg}
+			\frac{1}{\abs{G}} ∑_{g ∈ G}\abs{G^{g}}
+		avec $X^{g}$ l’ensemble des éléments de $X$ fixés par $g$.
+		Le nombre d’orbites distinctes est le nombre moyenne de points que fixe un élément de $G$.
 
-Q: Relation centralisateur / classe de conjugaison
-	A: Soit $G$ un groupe, $g ∈ G$ et $Z_{g}$ le sous-groupe centralisateur de $g$. L’ensemble quotient $G/Z_{g}$ est en bijection avec la classe de conjugaison $C_{g}$ de $g$.
-
-Q: Formule des classes
-	A: Si $G$ est un groupe fini et $g ∈ G$, alors le cardinal de la classe de conjugaison de $g$ divise l’ordre de $G$ et :
-		math
-			\abs{G} = \abs{C_{g}}\abs{Z_{g}}
-
-### Groupes topologiques métrisables
-
-Q: Distance sur un ensemble $X$
-	A: Application $d: X × X ⟶ \R_{+}$ telle que pour tous $x,y,z ∈ X$,
-		- $d(x,y) = 0 ⟺ x=y$
-		- $d(x,y) = d(y,x)$
-		- $d(x,y) ⩽ d(x,z) + d(z,y)$
-
-Q: Distances $d_{1}$ et $d_{2}$ Lipchitz-équivalentes
-	A: Distances qui définissent la même topologie, ce qui est le cas si et seulement si il existe deux constantes $α, β > 0$ telles que
-		math
-			∀ x,y ∈ X, αd_{1}(x,y) ⩽ d_{2}(x,y) ⩽ β d_{1}(x,y)
-
-Q: Norme sur un groupe $G$
-	A: Application $N: G ⟶ \R_{+}$ telle que pour tout $x,y ∈ G$,
-		- $N(x) = 0 ⟺ x=1_{G}$
-		- $N(xy) ⩽ N(x)+N(y)$
-		- $N(x^{-1}) = N(x)$
-
-Q: Majoration de $\abs{N(x) - N(y)}$ si $N$ est une norme sur $G$
-	A: Pour tous $x,y ∈ G$,
-		math
-			\abs{N(x) - N(y)} ⩽ N(x^{-1}y)
-		et
-		math
-			\abs{N(x) - N(y)} ⩽ N(yx^{-1})
-
-Q: Distances invariantes sur un groupe normé
-	A: Soit $G$ un groupe muni d’une norme $N$. Les fonction $d_{L}$ et $d_{R}$ de $G × G$ dans $\R_{+}$ définies pour tous $x,y ∈ G$ par
-		math
-			d_{L}(x,y) = N(x^{-1}y)
-		et
-		math
-			d_{R}(x,y) = N(yx^{-1})
-		définissent deux distances sur $G$.
-		- $d_{L}$ est invariante à gauche
-		- $d_{R}$ est invariante à droite
-		- $d_{R}(x,y) = d_{L}(x^{-1}, y^{-1})$
-
-Q: Module de continuité
-	A: Fonction $f:\R_{+}⟶ \R_{+}$ ++continue++ sur $\R_{+}$ telle que
-		- $f(0) = 0$
-		- $f$ est croissante
-		- $∀ a,b ∈ \R_{+}, f(a+b) ⩽ f(a) + f(b)$
-	On note $\M$ l’ensemble des modules de continuité. Il est stable par
-	- multiplication par un scalaire positif
-	- somme
-	- composition
-
-Q: Module de continuité comme morphisme
-	A: Si $N$ est une norme sur un groupe $G$ et $f$ un module de continuité, alors $f\circ N$ est encore une norme sur $G$ (continue si $N$ l’est). Ainsi, les modules de continuité sont des morphismes de normes continues.
-
-Q: Normes équivalentes sur un groupe
-	A: Normes $N_{1}$ et $N_{2}$ sur $G$ telle qu’il existe deux modules de continuité $f_{1}$ et $f_{2}$ tels que
-		math
-			∀ x ∈ G, \begin{cases}N_{1}(x) &⩽ f_{1}(N_{2}(x)) \\ N_{2}(x) &⩽ f_{2}(N_{1}(x))\end{cases}
-		Il s’agit d’une relation d’équivalence.
-
-Q: Groupe topologique métrisable
-	A: Groupe $G$
-		- muni d’une norme $N$
-		- dans lequel toutes les normes conjuguées ($N_{g}(x) = N(gxg^{-1})$) sont équivalentes
-		- dont la topologie « naturelle » est donnée par la distance $d_{N}$ suivante
-			math
-				d_{N}(x,y) = N(x^{-1}y) + N(y x^{-1})
-
-// groupe libre, arbre de…, cloture normale
 

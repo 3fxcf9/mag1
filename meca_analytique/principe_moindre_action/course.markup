@@ -1,0 +1,44 @@
+../../common/course.lib.markup
+
+title Principe de moindre action
+date 25/09/2026
+
+Objectifs de ce cours :
+- introduction au calcul des variations
+- approche variationnelle de la mécanique
+- multiplicateurs de Lagrange
+
+Nous avons dérivé les équations de Euler-Lagrange à partir du principe de d’Alembert (c’est-à-dire les équations de Newton). Il est également possible de le dériver à partir d’un principe variationnel, le principe de Hamilton, c’est à dire sous la forme d’une recherche d’un extremum d’une fonctionnelle. Une fonctionnelle généralise le concept de fonction qui dépend d’une ou plusieurs variables. Une fonctionnelle va dépendre d’une ou plusieurs fonctions. L’avantage d’un principe variationnel réside dans le fait qu’il s’affranchit de tout système de cordonnées.
+
+## Calcul des variations
+
+### Le brachistochrone
+
+On cherche la coube $y(x)$ qui minimise le temps de parcours (sans frottement) entre $A$ et $B$.
+fig
+	./figures/brachistochrone.svg
+
+On a conservation de l’énergie :
+math
+	E = \frac{1}{2}m\v^{2} +mgz = \cte = mg α
+d’où
+math
+	v = \sqrt{2g(α-y)} \quad\text{si}\quad \v_{A} = \0
+On suppose $\dx > 0$ (pas de rebroussement).
+math
+	v = \sqrt{\left(\dv{x}{t}\right)^{2} + \left(\dv{y}{t}\right)^{2}} = \abs{\dv{x}{t}}\sqrt{1 + y'(x)^{2}} \aussieq \sqrt{2g(α - y(x))}
+Le temps de parcours s’écrit
+math
+	T = ∫_{0}^{et}\dd t = ∫_{a}^{b}\dd x \sqrt{\frac{1 + y'^{2}(x)}{2g(α - y(x))}} = T[y]
+
+### Fonctionnelles
+
+def
+	Soit $y: \cc{a,b} ⟶ \R$ une fonction et $\Y$ un espace de fonctions satisfaisant les les mêmes propriétés (domaine de définition, continuité, dérivabilité …). Alors
+	math
+		F[y] :y ∈ \Y ⟼ F[y] ∈ \R
+	est une fonctionnelle de $y$ que l’on note $F[y(x)]$. Il s’agit d’une « fonction de fonctions ». En physique, on les retrouve en général sous la forme
+	math
+		F[y] = ∫_{a}^{b} \dd x f(y(x), y'(x), …, x)
+
+++Interprétation intuitive++ : On imagine une discrétisation d’une fonction en $N$ points d’abscisses distantes de $Δ$. La fonctionnelle peut être vue comme le passage à la limite $N \to +∞$ de la fonction à plusieurs variables $F(y_{1}, …, y_{n})$ qui devient $F[y(x)]$ à une infinité de variables.
