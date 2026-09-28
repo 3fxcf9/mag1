@@ -68,13 +68,27 @@ div header
 
 parser subject
 	build_html
-		<a class="subject" href="$arg">
-			<div class="cover" style="background-color: #aaaaff22"></div>
-			<div class="content">
-				<div class="subject-title">$external_metadata[$arg/index.markup][title]</div>
-				<div class="subject-teacher">$external_metadata[$arg/index.markup][teacher]</div>
-			</div>
-		</a>
+		lua
+		local meta = external_metadata[path_relative_to_toplevel(this.arg .. "/index.markup")]
+		local cover_css = "background-color: #aaaaff22"
+		local cover_path = path_relative_to_toplevel(this.arg .. "/cover.svg")
+		if read_file(cover_path) then
+			fs_copy(cover_path, dirname(cover_path))
+			cover_css = string.format("background-image: url('%s/cover.svg')", this.arg)
+		end
+		return string.format([[
+			<a class="subject" href="%s">
+				<div class="cover" style="%s"></div>
+				<div class="content">
+					<div class="subject-title">%s</div>
+					<div class="subject-teacher">%s</div>
+				</div>
+			</a>
+		]],
+		this.arg,
+		cover_css,
+		(meta.title or {""})[1],
+		(meta.teacher or {""})[1])
 	list_wrap <div class="subject-grid">$elements</div>
 
 subject math

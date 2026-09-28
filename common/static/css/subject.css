@@ -21,6 +21,10 @@ body {
   &.hidden {
     display: none;
   }
+
+  &.fc .chapter-title::after {
+    content: " — ";
+  }
 }
 
 .cover {

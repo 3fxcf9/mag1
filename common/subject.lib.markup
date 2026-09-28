@@ -23,6 +23,22 @@ parser chapter
 		</div>
 		<div class="chapter-list">$elements</div>
 
+parser chapter
+	cue chap_fc
+	build_html
+		<a class="chapter fc" href="$arg/course.html">
+			<span class="chapter-title">$external_metadata[$arg/course.markup][title]</span>
+			<a class="chapter-flashcards" href="$arg/flashcards.html?hidden=true">flashcards</a>
+			<span class="chapter-date">$external_metadata[$arg/course.markup][date]</span>
+		</a>
+	list_wrap
+		<div class="chapter-list">$elements</div>
+	list_wrap_old
+		<div class="search">
+			<input type="text" name="search_query" placeholder="Search…" autofocus>
+		</div>
+		<div class="chapter-list">$elements</div>
+
 // Propagate ?hidden=true
 js
 	if (new URLSearchParams(window.location.search).get('hidden') === 'true') {

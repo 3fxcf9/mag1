@@ -113,7 +113,7 @@ La fonction d’onde doit satisfaire une sorte d’équation d’ondes (équatio
 	Dans le cas de potentiels stationnaires, $\pdv{V}{t} = 0$ d’où $\pdv{E}{t} = 0$ : le problème est stationnaire. Dans ce cas, $V = V(\r)$ et avec $E = \hbar ω$ indépendant de $t$ :
 	math
 		\pdv{E}{t} = 0 ⟹ i\hbar \frac{∂_{t} ψ}{ψ} = E = \cte_{/t}
-	Intégrons $i \hbar ∂_{t} \ln ψ = E$ :
+	En intégrant cette expression, on obtient $i \hbar ∂_{t} \ln ψ = Et$, d’où
 	math
 		ψ(\r, t) = e^{-i \frac{E}{\hbar}t}\underbrace{e^{g(\r)}}_{φ(\r)} = χ(t) φ(\r)
 	où $χ(t) = e^{-i \frac{E}{\hbar}t}$. On injecte dans [schrodinger] pour obtenir l’_équation de Schrodinger stationnaire_ :

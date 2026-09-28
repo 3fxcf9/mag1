@@ -14,3 +14,6 @@ Q: Loi de déplacement de Wien en fréquence
 Q: Dispositif expérimental immmitant un « corps noir »
 	A: Cavité régulée thermiquement dont l’intérieur est couvert de matériaux absorbants et percée d’un trou, ce dernier ayant un comportement proche de celui d’un corps noir.
 
+Q: Température au centre du soleil
+	A: math
+		T \simeq 1.5 \cdot 10^7 \u K

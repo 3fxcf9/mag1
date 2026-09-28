@@ -262,7 +262,7 @@ Q: Classification des groupes d’ordres 2-8
 		- les groupes d’ordre 8 sont isomorphes à un des groupes suivants : $\Z/8\Z$, $\Z/4\Z × \Z/2\Z$, $(\Z/2\Z)^{3}$, $D^{4}$ ou le groupe des quaternions $Q$.
 
 Q: Démonstration : classification des groupes d’ordre 6
-	A: Il existe d’après le théorème de Cauchy un élément $x$ d’ordre 3. Les sous-groupes $\grp x$ et $\grp{x}y$ rassemblent les 6 éléments $e, x, x^{2}, y, xy, x^{2}y$. L’élément $yx$ est donc un de ceux-ci, or il n’appartient pas à $\grp x$ et n’est pas égal à $y$. Par conséquent il est soit égal à $xy$, auquel cas le groupe est isomorphe à $\grp x × \gmp y$ (propriété), soit à $x^{2}y$ auquel cas le groupe est isomorphe à $D^{3}$.
+	A: Il existe d’après le théorème de Cauchy un élément $x$ d’ordre 3. Les sous-groupes $\grp x$ et $\grp{x}y$ rassemblent les 6 éléments $e, x, x^{2}, y, xy, x^{2}y$. L’élément $yx$ est donc un de ceux-ci, or il n’appartient pas à $\grp x$ et n’est pas égal à $y$. Par conséquent il est soit égal à $xy$, auquel cas le groupe est isomorphe à $\grp x × \grp y$ (propriété), soit à $x^{2}y$ auquel cas le groupe est isomorphe à $D^{3}$.
 
 Q: Groupe des quaternions
 	A: Groupe formé des symboles $\pm 1$, $\pm i$, $\pm i$, $\pm j$, $\pm k$ qui satisfont

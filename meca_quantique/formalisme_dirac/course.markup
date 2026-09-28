@@ -1,0 +1,58 @@
+../../common/course.lib.markup
+
+title Formalisme de Dirac, une représentation unifiée
+date 28/09/2026
+
+Motivations :
+- Que choisir entre $ψ(\r, t)$ et $\tilde{ψ}(\p, t)$ ?
+- Quid des degrés de libertés internes (par exemple le spin) ?
+
+L’idée est de mettre au point une nouvelle écriture :
+math
+	\scalar{ϕ(x)}{ψ(x)}_{x} = \scalar{\hat{ϕ}(k)}{\hat{ψ}(k)}_{k} = \scalar{\tilde{ϕ}(p)}{\tilde{ψ}(p)}_{p}
+Il est tentant de juste écrire $\scalar{ϕ}{ψ}$. On appelle cette écriture le _crochet_ (_bracket_) de $ϕ$ et $ψ$.
+
+## Vecteurs d’état, espace vectoriel d’états, espace dual
+
+### Postulat 1
+
+Toute l’information physique sur l’état d’un système à l’instant $t$ est entièrement encodée par $\ket{ψ(t)}$, un vecteur d’état appelé _ket_. L’espace des états est $\H = \set{\ket{ψ(t)}}$.
+rem
+	Les espaces $\set{ψ(x, t)}$, $\set{\tilde{ψ}(p, t)}$ et $\set{\ket{ψ(t)}}$ sont isomorphes.
+
+### Espace dual $\H^{*}$ de $\H$
+
+Comme d’ordinaire, $\H^{*}$ est l’espace des applications linéaires définies sur $\H$, i.e. l’espace des $χ$ tels que
+math
+	∀ \ket{ψ} ∈ \H, \ket{ψ} \overset{χ}{⟼} q ∈ \C
+notation
+	Au lieu d’écrire $q = χ(\ket{ψ})$, on écrit $q = \braket{χ|ψ}$ avec $\bra{χ} ∈ \H^{*}$, et on appelle $\braket{χ|ψ}$ _bracket_.
+Bien sûr, $\set{\bra χ} = \H^{*}$ est l’ensemble des applications linéaires donc pour tous $α, β ∈ \C$ et pour tous $\ket{ϕ}, \ket{ψ} ∈ \H$, on a
+math
+	\bra{χ} \left(α \ket{ϕ} + β \ket{ψ}\right) = \bra{χ}α \ket{ϕ} + \bra{χ}β\ket{ψ} = α\braket{χ|ϕ} + β\braket{χ | ϕ}
+
+### Correspondance entre _bras_ et _kets_
+
+rem
+	Tout $\ket ψ ∈ \H$ permet de définir une application linéaire de $\H^{*}$ particulière : celle qui donne pour tout $\ket{φ}$ le nombre complexe égal au _produit hermitien_ entre $\ket{ψ}$ et $\ket{φ}$.
+
+prop
+	Pour tous $α, β ∈ \C$ et tous $\ket{ψ_{1}}, \ket{ψ_{2}}, \ket{φ} ∈ \H$, on a
+	math
+		\begin{align*}
+			\scalar{α ψ_{1} + β ψ_{2}}{φ} &= α^{*} \braket{ψ_{1} | φ} + β^{*} \braket{φ_{2} | φ} \\
+			&= \underbrace{\left(α^{*} \bra{φ_{1}} + β^{*} \bra{ψ_{2}}\right)}_{\text{bra associé au ket } α\ket{ψ_{1}} + β\ket{ψ_{2}}}\ket φ
+		\end{align*}
+
+### kets et bras spéciaux
+
+recall
+	Pour toute fonction d’onde $ψ(x)$, on a
+	math
+		∀ x_{0}, \int δ(x-x_{0})ψ(x)\dd x = ψ(x_{0}) ∈ \C
+On peut voir $ψ(x_{0})$ comme le produit scalaire hermitien de deux entiers, ou encore, ici, comme le résultat de l’application d’une application linéaire sur le ket $\ket{ψ}$, i.e. un braket.
+Notons $\bra{x_{0}}$ le bra tel que $\braket{x_{0}|ψ} = ψ(x_{0}) ∈ \C$. Plus généralement,
+math
+	∀ x, ∃ \bra x : \braket{x|ψ} = ψ(x)
+
+? Quel est le ket associé au bra $\bra x$ ?

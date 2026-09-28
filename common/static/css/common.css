@@ -147,6 +147,11 @@ h1 {
   text-decoration: none;
 }
 
+hr {
+  margin: 2rem 0;
+  border-top: 2px solid var(--subtext-color);
+}
+
 /* Edit on github */
 .edit-on-github {
   margin-top: auto;

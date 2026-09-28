@@ -1,0 +1,50 @@
+header.lib.markup
+
+css_file_link static/css/subject_tiles.css
+
+parser teacher
+	metadata $arg
+
+back_link
+
+parser chap
+	build_html
+		lua
+		local meta = external_metadata[path_relative_to_toplevel(this.arg .. "/course.markup")]
+		local fc_html = ""
+		if read_file(path_relative_to_toplevel(this.arg .. "/flashcards.markup")) then
+			fc_html = string.format('<a class="flashcards-link" href="%s/flashcards.html">Flashcards</a>', this.arg)
+		end
+		return string.format([[
+			<div class="chapter">
+				<div class="cover" style="background-color: #aaaaff22"></div> <!-- TODO: Cover -->
+				<div class="content">
+					<a class="chapter-title" href="%s/course.html">%s</a>
+					%s
+					<div class="chapter-body">
+						<div class="chapter-description">%s</div>
+						<div class="chapter-date">%s</div>
+					</div>
+				</div>
+			</div>]],
+			this.arg,
+			(meta.title or {""})[1],
+			fc_html,
+			(meta.description or {""})[1],
+			(meta.date or {""})[1])
+	list_wrap <div class="chapter-grid">$elements</div>
+
+// Propagate ?hidden=true
+js
+	if (new URLSearchParams(window.location.search).get('hidden') === 'true') {
+		document.querySelectorAll("a.chapter-title, a.flashcards-link").forEach(s => {
+			const url = new URL(s.href);
+			url.searchParams.append('hidden', 'true');
+			s.href = url.href
+		})
+		document.querySelectorAll("a.flashcards-link").forEach(a => {
+			a.style.display = "block";
+		})
+		document.querySelector("a.back-button").href = "../hidden.html"
+	}
+

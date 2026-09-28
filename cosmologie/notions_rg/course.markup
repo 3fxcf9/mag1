@@ -1,0 +1,14 @@
+../../common/course.lib.markup
+
+title Quelques notions de relativité générale
+date 28/09/2026
+
+## Relativité restreinte
+
+recall Rappels de mécanique classique
+	- ++Référentiel galiléen :++ référentiel dans lequel le principe d’inertie est vérifié. Les référentiels galiléens sont en translation rectiligne uniforme entre eux. Dans un référentiel galiléen, le PFD s’écrit $m\a = \sum\vec F$.
+	- ++Transformation galiléenne :++ si $\Ref$ et $\Ref'$ sont deux référentiels galiléens, on a composition des vitesses :
+		math
+			\v_{\Ref}(M) = \v_{\Ref'} (M) + \v_{\Ref'/\Ref}
+	- ++Référentiel non galiléen :++ des pseudo-forces (entraînement et Coriolis) apparaissent dans le PFD.
+

@@ -28,11 +28,11 @@ La transformation inverse existe et s’écrit
 	math
 		\hat f(\k) = \frac{1}{(2 π)^{n/2}} \in \dd^{n}(\r) e^{i\k \r}
 
-On a l’habitude d’écrire $\hat = \TF[f]$ et $f = \TF^{-1}[\hat f]$.
+On a l’habitude d’écrire $\hat f = \TF[f]$ et $f = \TF^{-1}[\hat f]$.
 
 property
 	- La transformée de Fourrier est linéaire
-	- Dérivée en temporel revient à multiplier par $ik$ :
+	- Dériver en temporel revient à multiplier par $ik$ :
 		math
 			\TF[f'(x)] = ik\hat f(k)
 		et plus généralement,
@@ -101,4 +101,189 @@ math
 math
 	δ(λ x) = \frac{1}{\abs{λ}} δ(x)
 
+rem
+	La dimension de $δ(x)$ est celle de l’inverse de $x$.
+
+### $δ$ et la transformée de Fourrier
+
+On a
+	math
+		\hat δ = \TF \big[δ(k)\big] = \frac{1}{\sqrt{2 π}}∫_{-∞}^{+∞}\dd x δ(x) e^{-ikx} = \frac{1}{\sqrt{2 π}}
+
+Alors, $\TF^{-1} \big[\hat δ(k)\big] = δ(k)$ et formellement,
+math
+	\TF^{-1}\big[\hat δ(k)\big] = \frac{1}{\sqrt{2 π}}\int\dd k \hat δ(k)e^{ikx}
+On obtient alors une représentation de $δ(x)$ :
+math delta-repr-tf
+	δ(x) = \frac{1}{2 π}\int \dd k e^{ikx}
+De même, en $n$ dimensions,
+math
+	δ(\r) = \frac{1}{(2 π)^{n}} \int \dd^{n}\k e^{i\k · \r}
+
+Revenons sur la normalisation.
+- ++cas des spectres discrets++ : $\set{φ_{n}(x)}$ est une base orthonormée des états au ense où
+	math cond-bon-discret
+		\scalar{φ_{n}(x)}{φ_{m}(x)} = δ_{m,n}
+- ++cas des spectres continus++ : Prenons $α ∈ \R$ un paramètre continu. Un équivalent de [cond-bon-discret] est
+	math cond-bon-continu
+		\scalar{φ_{α}(x)}{φ_{α'}(x)} = ∫_{-∞}^{+∞}\dd x φ_{α}^{*}(x) φ_{α'}(x) = δ(α-α')
+	example
+		Dans le cas des ondes planes à 1D, on a des « états » d’impulsion bien déterminée
+		math
+			φ_{p}(x) ∝ e^{ikx} ∝ e^{i \frac{p x}{h}}
+		Posons $φ_{p}(x) = N_{p} e^{i \frac{p x}{\hbar}}$ avec, _a priori_, $N_{p} ∈ \C$. Appliquons l’orthonormalisation [cond-bon-continu] :
+		math
+			\scalar{φ_{p}(x)}{φ_{p'}(x)} = δ(p-p')
+		mais
+		math
+			\scalar{φ_{p}(x)}{φ_{p'}(x)} = N_{p}N_{p'} \int \dd x e^{-ikx} e^{ik' x}
+		On a donc, en posant $z = x/\hbar$ :
+		math
+			\begin{align*}
+				δ(p-p') &= N_{p}^{*} N_{p}\int \dd xe^{i \frac{p'-p}{\hbar}x}\\
+				&= N_{p}^{*}N_{p'} \hbar \int \dd z e^{i(p-p')z}
+			\end{align*}
+		Or, on a vu que $δ(x) = \frac{1}{2 π}\int \dd k e^{ikx}$ donc
+		math
+			\int \dd z e^{i(p-p')z} = 2 π δ(p' - p)
+		Ainsi,
+		math
+			δ(p-p') = 2 π \hbar N_{p}^{*}N_{p'} δ(p-p')
+		d’où, nécessairement,
+		math
+			N_{p} = \frac{1}{\sqrt{2 π \hbar}}\eforall p
+		Les ondes planes orthonormées sont donc
+		math
+			\boxed{φ_{p}(x)} = \frac{1}{\sqrt{2 π \hbar}}e^{i \frac{p x}{\hbar}}
+
+## Représentation des états dans l’espace des impulsions
+
+recall
+	À une dimension, toute fonction d’onde peut s’écrire
+	math
+		ψ(x) = \frac{1}{\sqrt{2 π}}\int \dd k\hat{ψ}(k)e^{ikx} = \frac{1}{\sqrt{2 π}}\int \frac{\dd p}{\hbar}\hat{ψ} \left(\frac{p}{\hbar}\right) e^{i \frac{p x}{\hbar}}
+	Posons $\tilde{ψ}(p) = \frac{1}{\sqrt{\hbar}}\hat ψ \left(\frac{p}{\hbar}\right)$. On a
+	math
+		ψ(x) = \frac{1}{\sqrt{2 π \hbar}} \int \dd p \tilde{ψ}(p) e^{i \frac{p x}{\hbar}}
+	Réciproquement,
+	math
+		\tilde{ψ}(p) = \frac{1}{\sqrt{2 π \hbar}} \int \dd x ψ(x) e^{^-i \frac{p x}{\hbar}}
+	c’est-à-dire
+	math
+		\tilde{ψ}(p) = \scalar{φ_{p}(x)}{ψ(x)}
+	En d’autres termes, $\tilde{ψ}(p)$ est la projection de $ψ(x)$ sur la base des ondes planes orthonormalisées. On appelle $\tilde{ψ}(p)$ la _représentation impulsion_ de l’état $ψ(x)$.
+
+rem
+	- $ψ(x)$ et $\tilde{ψ}(p)$ sont deux représentations équivalentes.
+	- Interprétation physique de $\tilde{ψ}(p)$ : $\tilde{ψ}(p)$ est l’amplitude de probabilité et $\abs{\tilde{ψ}(p)}^{2}$ est la densité de probabilité de $p$. $\abs{\tilde{ψ}(p)}^{2}\dd p$ est la probabilité élémentaire que l’impulsion du système soit $p$.
+
+recall Parseval-Plancherel
+	math
+		\scalar{ψ(x)}{ϕ(x)} = \scalar{\hat{ψ}(k)}{\hat{ϕ}(k)} = \scalar{\tilde{ψ}(p)}{\tilde{ϕ}(p)}
+	et donc
+	math
+		\int \dd x \abs{ψ(x)}^{2} = \int \dd p \abs{\tilde{ψ}(p)}^{2}
+
+exercise
+	Quelle est la représentation impulsion d’un « état » de position bien défini ?
+
+++Illustration du fait que $ψ(x)$ et $\tilde{ψ}(p)$ ait le même contenu en information :++ prenons l’exemple da la valeur moeyenne $\bar{p} = \moy p$ de l’impulsion. Puisque $\abs{\tilde{ψ}(p)}^{2}$ est la loi de $p$,
+math
+	\Esp(p) \defeq ∫_{-∞}^{+∞}\dd p p \abs{\tilde{ψ}(p)}^{2} = \moy p
+recall Moment d’ordre $n$ de $p$
+	math
+		μ_{n}(p) \defeq ∫_{-∞}^{+∞}\dd p p^{n} \abs{\tilde{ψ}(p)}^{2} = \moy{p^{n}}
+recall Déviation standard
+	math
+		σ_{p} = Δp = \Big[\moy{p^{2}} - \moy{p}^{2}\Big]^{1/2}
+On peut écrire
+math
+	\begin{align*}
+		\moy p &= \int p \abs{\tilde{ψ}(p)}^{2} \dd p\\
+		&= \int p \tilde{ψ}^{*}(p) \tilde{ψ}(p)\dd p \\
+		&= \int \tilde{ψ}^{*}(p)p \tilde{ψ}(p) \dd p \\
+		&= \scalar{\tilde{ψ}(p)}{p \tilde{ψ}(p)}
+	\end{align*}
+Mais on sait que
+- $\tilde{ψ}(p) = \frac{1}{\sqrt{\hbar}} \hat{ψ}(k) = \frac{1}{\sqrt{\hbar}}\TF[ψ(x)]$
+- $p = \hbar k$
+- $\scalar{\cdot}{\cdot}_{p} = \int ·^{*} ·  \dd p = \hbar \int ·^{*} · \dd k = \hbar \scalar{\cdot}{\cdot}_{k}$
+donc
+math
+	\begin{align*}
+		\moy p &= \hbar \scalar{\frac{\TF[ψ(x)]}{\sqrt{\hbar}}}{\frac{\hbar k}{\sqrt{\hbar}}\TF[ψ(x)]}_{k} \\
+		&= \hbar \scalar{\TF[ψ(x)]}{k\TF[ψ(x)]}_{k}\\
+	\end{align*}
+mais $k\TF[ψ(x)] = k \hat{ψ}(k) = \frac{1}{i}\TF[ψ'(x)]$ d’où
+math
+	\begin{align*}
+		\moy p &= -i \hbar \scalar{\hat{ψ}(k)}{\hat{ψ'}(x)} \\
+		&=-i \hbar \int \hat{ψ}^{*}\hat{ψ'}(x)\dd k \\
+		&= -i \hbar \int ψ^{*}(x) ψ'(x)\dd x
+	\end{align*}
+i.e.
+math
+	\moy p = -i\hbar \int ψ^{*}(x) \dv{}{x}ψ(x)\dd x
+soit
+math
+	\moy p = \int ψ^{*}(x) \left(-i\hbar \dv{}{x}\right)ψ(x)\dd x
+Ainsi, non seulement il n’y a pas de perte d’information, mais on a en plus l’analogie
+math
+	p \longleftrightarrow -i\hbar \dv{}{t}
+
+exercise
+	Exprimer $\moy x$ grace à $\tilde{ψ}(p)$.
+
+
+## Relation d’indétermination((et non relation d’incertitude)) de Heisenberg
+
+Soit $ψ(x, t)$ une fonction d’onde (à 1D pour simplifier) décrivant l’état d’un système à l’instant $t$. Dans la suite, on sous-entend $t$. Sans perte de généralité, passons dans le référentiel ou $\moy p = 0$. Sans perte de généralité, choisissons les coordonnées où $\moy x = 0$. Alors,
+math
+	σ_{x}^{2} = Δx^{2} = \int x^{2} \abs{ψ(x)}^{2} \dd x
+et
+math
+	σ_{p}^{2} = Δp^{2} = \hbar^{2}Δk^{2} = \hbar^{2} \int k^{2} \abs{\hat{ψ}(x)}^{2} \dd k
+L’inégalité de Cauchy-Schwarz donne, appliquée aux fonction $f,g ∈ \L^{2}$ :
+math
+	\abs{\scalar{f,g}{\cdot}}^{2} = \abs{\int \dd x f^{*}(x)g(x)}^{2} ⩽ \int \abs{f(x)}^{2} \dd x \int \abs{g(x')}^{2} \dd x'
+Prenons $f(x) = x ψ(x)$ et $g(x) = ψ'(x) = \dv{ψ}{x}$. On a alors
+math
+	\abs{\int x ψ^{*}(x) \dv{ψ}{x}\dd x}^{2} ⩽ \int \abs{x,i(x)}^{2} \dd x \int \abs{\dv{ψ}{x}(x)}^{2} \dd x
+On reconnaît à droite
+math
+	\int x^{2} \abs{ψ(x)}^{2}\dd x = σ_{x}^{2} = Δ_{x}^{2}
+car $\moy x= 0$, et
+math
+	\int \abs{ψ'(x)}^{2}\dd x = \int k^{2} \abs{\hat ψ(k)}^{2} \dd k = Δk^{2} = σ_{k}^{2}
+car $\moy p = 0$. Regardons à présent le terme de gauche.
+recall
+	Pour tout $z ∈ \C$,
+	math
+		\abs{z}^{2} = \Re(z)^{2} + \Im(z)^{2} ⩾ \Re(z)^{2} = \frac{(z+z^{*})}{4}
+On a ici
+math
+	\abs{\scalar{f}{g}}^{2} ⩾ \frac{(\scalar{f}{g} + \frac{g}{f})^{2}}{4}
+or
+math
+	\begin{align*}
+		\scalar{f}{g} + \scalar{g}{f} &= \int x ψ^{*}(x) \dv{ψ}{x}\dd x + \int x ψ(x) \dv{ψ^{*}}{x}\dd x\\
+		&= \int x \underbrace{\left(ψ^{*}(x) \dv{ψ}{x} + ψ(x) \dv{ψ^{*}}{x}\right)}_{=\dv{\abs{ψ(x)}^{2}}{x}}\dd x \\
+		&= ∫_{-∞}^{+∞}x \dv{\abs{ψ}^{2}}{\dd x}\dd x \\
+		&\oeq{IPP} \Big[x \abs{ψ(x)}^{2}\Big]_{∞}^{+∞} - ∫_{-∞}^{+∞}\abs{ψ(x)}^{2} \dd x
+	\end{align*}
+Le premier terme est nul car la fonction est de carré sommable, et le second vaut 1. Sinsi,
+math
+	\abs{\scalar{f}{g}}^{2} ⩾ \frac{1}{4}
+donc
+math
+	\boxed{\frac{1}{4} ⩽ Δx^{2} Δk^{2}}
+Finalement, comme $p = \hbar k$, on a
+math
+	\boxed{Δx Δp ⩾ \frac{\hbar}{2}}
+
+exercise
+	Trouver l’équation de Schrödinger
+	math
+		i\hbar \pdv{ψ(\r, t)}{t} = - \frac{\hbar^{2}}{2m}\lapl ψ(\r, t) + V(\r)ψ(\r, t)
+	en représentation impulsion.
 

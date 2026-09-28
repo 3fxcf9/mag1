@@ -45,6 +45,7 @@ callout
 	rem
 		Augmenter la magnitude de $1$ revient à diviser le flux par $2.5$.
 
+## Mesure de distances — échelle de distances
 
 - Pour les objets du système solaire: mesure par echo radar
 - Pour les étoiles proches: méthode de la parallaxe
@@ -55,8 +56,47 @@ callout
 		ϕ = \frac{L}{4 π D}
 - Astres pour lesquels on peut prédire la luminosité intrinsèque (ou magnitude absolue) :
 	- Céphéides (étoiles variables dont la luminosité varie sur une période allant de 1 à 100 jours). Il existe une relation linéaire entre leur luminosité intrinsèque et leur période. On calibre cette relation sur des céphéides proches dont on peut mesurer la distance par parallaxe (on calcule la distance et magnitude apparente des céphéides proches, on en déduit leur magnitude absolue qu’on trace en fonction de la période. On en déduit le modèle affine permettant de relier ces deux grandeurs pour toutes les céphéides. Pour mesurer la distance d’une céphéide, on mesure sa période dont on déduit la magnitude absolue grace au modèle, et enfin on utilise $m - M = 5\log_{10} \frac{D}{10\u{pc}}$).
-- Supernovae de type Ia : système binaire avec une naine blanche qui accrète de la matière de son compagnon. Elle exploce quand elle atteint 1.4 millions de masses solaires. Sa luminosité suit alors une courbe standard, augmentant puis diminuant en environ un mois.
+- Supernovae de type Ia : système binaire avec une naine blanche qui accrète de la matière de son compagnon. Elle explose quand elle atteint 1.4 millions de masses solaires. Sa luminosité suit alors une courbe standard, augmentant puis diminuant en environ un mois.
 - Relation de Tally-Fischer : la luminosité intrinsèque des galaxies spirales est corrélée à la vitesse maximale de rotation des étoiles
 
 fig Échelle de distances
 	./figures/echelle_distance.svg
+
+## Mesure de vitesses et redshift
+
+Soit $v$ la vitesses radiale relative d’un émetteur par rapport à un récepteur (la source s’éloigne si $v > 0$). On montre que
+math
+	\frac{f_{e}}{f_{r}} = \sqrt{\frac{1+v/c}{1-v/c}}
+avec $f_{e}$ la fréquence émise et $f_{r}$ celle reçue. On définit le _redshift_ :
+math
+	z = \frac{λ_{r} - λ_{e}}{λ_{e}}
+avec $λ_{e}$ la longueur d’onde émise et $λ_{r}$ celle reçue. On utilise en pratique
+math
+	1+z = \frac{λ_{r}}{λ_{e}} = \frac{f_{e}}{f_{r}}
+et on fixe la fréquence d’emission à celle de transitions atomiques connues. On a alors
+math
+	\begin{align*}
+		\frac{f_{e}}{f_{r}}&= \left(1+ \frac{v}{c}\right)^{1/2} \left(1-\frac{v}{c}\right)^{-1/2} \\
+		&\simeq \left(1 + \frac{v}{2c}\right) \left(1 + \frac{v}{2c}\right) \\
+		&\simeq 1+\frac{v}{c}\\
+		&=z+1
+	\end{align*}
+soit
+math
+	z \simeq \frac{v}{c}
+
+### Loi de Hubble-Lemaître
+
+Au début du $XXe$ siècle, Vesto Slipher mesure $z$ par des nébuleuses spirale. Edwin Hubble publie en 1929 un papier dans lequel il trace le graphique suivant, montrant une relation linéaire entre la vitesse d’éloignements des céphéides et leur distance : $v = H_{0}D$.
+fig Extrait du papier d’Edwin Hubble _A RELATION BETWEEN DISTANCE AND RADIAL VELOCITY AMONG EXTRA-GALACTIC NEBULAE_, 1929
+	./figures/Hubble-distance-vitesse.jpg
+
+Il mesure $H_{0} \simeq 500\u{km · s^{-1} · Mpc^{-1}}$ et on retient aujourd’hui $H_{0} \simeq 70\u{km · s^{-1} ·  Mpc^{-1}}$ et on écrit $H_{0} = 100h \u{km · s^{-1} · Mpc^{-1}}$ pour tenir compte de l’incertitude.
+fig $v_3 = \dv{r_3}{t} = 3 \dv{r}{t} = 3v_1$
+	./figures/expansion_1d.svg
+La relation $v = H_{0}D$ n’est valable que pour des objets « proches » car $H$ dépend du temps.
+
+## Courbes de rotation, mise en évidence de la matière noire
+
+La répartition de masse observée dans les galaxies mènerait théoriquement à une décroissance de la vitesse des étoiles qu’elle contient en $1/\sqrt{r}$. Cependant, on observe que cette vitesse ne dépend pas du rayon. On en a déduit l’existence d’une matière invisible, perceptible via l’attraction gravitationnelle.
+Cet argument ne constitue en aucun cas à lui tout seul une preuve de l’existence de matière noire.

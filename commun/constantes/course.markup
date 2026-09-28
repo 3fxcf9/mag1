@@ -27,3 +27,11 @@ Q: Parsec
 Q: Vitesse de la lumière dans le vide
 	A: math
 			299\:792\:458\u{m\cdot s^{-1}}
+
+## Relations
+
+Q: Nombre de secondes en un ap
+	A: Environ
+		math
+			1\u{an} \simeq π· 10^{7}\u{s}
+		(erreur de 0.5%)

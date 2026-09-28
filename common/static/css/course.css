@@ -1005,8 +1005,10 @@ body {
 
   /*************** Sidenotes ***************/
   .sidenote {
-    font-size: 80%;
+    font-size: 0.8rem;
     position: relative;
+    font-weight: initial;
+    text-decoration: initial;
   }
 
   /* Wide viewport */
