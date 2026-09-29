@@ -1,11 +1,15 @@
 anglais/
 
 ignore/
+*.mp4
+
+TD
+
+OPP
 
 meca_analytique/Poly_Mecanique_Analytique_2026.pdf
 
 theorie_groupes/polycopiés
-theorie_groupes/TD
 theorie_groupes/books
 
 electromagnetism/books

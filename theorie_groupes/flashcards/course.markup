@@ -394,5 +394,10 @@ Q: Nombre d’orbites distinctes lors de l’action de $G$ sur $X$
 			\frac{1}{\abs{G}} ∑_{g ∈ G}\abs{G^{g}}
 		avec $X^{g}$ l’ensemble des éléments de $X$ fixés par $g$.
 		Le nombre d’orbites distinctes est le nombre moyenne de points que fixe un élément de $G$.
+		_Preuve :_ compter couples $(g,x)$ avec $g(x) = x$ comme somme des cardinaux des $X^{g}$ et comme somme des cardinaux des stabilisateurs. Découper cette dernière somme par orbite, et remarquer que les stabilisateurs sont conjugués. Utiliser enfin le théorème Orbite-Stabilisateur et égaliser avec la première somme.
+
+Q: Si deux éléments sont conjugués, que dire des points qu’ils fixent par action ?
+	A: Des éléments conjugués fixent le même nombre de points.
+		_Preuve :_ si $ugu^{-1} = h$, et si $g$ fixe $x$, alors $h$ fixe $u(x)$. $u$ envoie donc $X^{g}$ sur $X^{h}$. En inversant les roles de $g$ et $h$, on trouve que $u^{-1}$ envoie $X^{h}$ sur $X^{g}$. $u$ est donc une bijection.
 
 
