@@ -701,7 +701,7 @@ proof
 
 thm Théorème de convergence dominée de Lebesgue
 	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R})_{n ∈ \N}$ une suite de fonctions mesurables telles que
-	- $f_{n} \arrowlim{n\to+∞}f μ-\pp X$
+	- $f_{n} \arrowlim{n\to+∞}f \quad μ-\pp X$
 	- il existe une fonction $g$ Lebesgue-sommable telle que
 		math
 			∀ n ∈ \N, \abs{f_{n}} ⩽ g \quad μ-\pp X
@@ -787,7 +787,7 @@ proof
 	La première hypothèse assure que $\left(f_{n} : x ⟼ \frac{f(t_{n}, x) - f(t_{∞}, x)}{t_{x} - t_{∞}}\right)_{n ∈ \N}$ est une suite de fonctions mesurables. La seconde nous permet d’écrire
 	math
 		\lim_{n\to+∞}f_{n}(x) = \pdv{f}{t}(t_{∞}, x) \quad μ-\text{presqe pour tout }x ∈ X
-	Finalement, la dernière hypothèse appliquée à $t_{∞}$ donne l’existence d’un ouvert $\tilde{Ω}$ contenant $t_{∞}$ et d’une fonction Lebesgue-sommable $g$ satisfaisant le critère de domination. Il existe alors $ε > 0$ tel que l’ouvert $I_{ε} = \oo{t_{∞} - ε, t_{∞} + ε}$ soit inclus dans $\tilde{Ω}$. Comme $t_{n} \arrowlim_{n\to+∞}t_{∞}$, l’ouvert $I_{ε}$ contient tous les termes de la suite $(t_{n})$ à partir d’un rang $N ∈ \N$. Le théorème des accroissements finis donne alors, pour $n ⩾ N$,
+	Finalement, la dernière hypothèse appliquée à $t_{∞}$ donne l’existence d’un ouvert $\tilde{Ω}$ contenant $t_{∞}$ et d’une fonction Lebesgue-sommable $g$ satisfaisant le critère de domination. Il existe alors $ε > 0$ tel que l’ouvert $I_{ε} = \oo{t_{∞} - ε, t_{∞} + ε}$ soit inclus dans $\tilde{Ω}$. Comme $t_{n} \arrowlim{n\to+∞}t_{∞}$, l’ouvert $I_{ε}$ contient tous les termes de la suite $(t_{n})$ à partir d’un rang $N ∈ \N$. Le théorème des accroissements finis donne alors, pour $n ⩾ N$,
 	math
 		\abs{f_{n}(x)} = \abs{\frac{f(t_{n}, x) - f(t_{∞}, x)}{t_{n} - t_{∞}}} = \abs{\pdv{f}{t}(c, x)}
 	avec $c ∈ \oo{t_{x}, t_{∞}} ⊂ I_{ε} ⊂ \tilde{Ω}$. Le critère de domination donne alors $\abs{f_{n}(x)} ⩽ g(x)$ $μ$-presqu’en tout $x ∈ X$, et une application du théorème de convergence dominée permet alors de conclure :
@@ -807,5 +807,240 @@ defprop
 		∀ A_{X} ∈ T_{X}, ∀ A_{Y} ∈ T_{Y}, (μ_{X} × μ_{Y}) (A_{X} × A_{Y}) = μ_{X}(A_{X}) μ_{Y}(A_{Y})
 	On appellera $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ l’_espace mesuré produit_.
 
+proof (Preuve partielle)
+	On admet l’unicité, celle-ci découlant du thérème d’extension de Carathéodory.
+		italic
+	On définit pour tout $A ⊂ X × Y$ et pour tous $x ∈ X$, $y ∈ Y$, les ensembles
+	math
+		A_{x, ·} = \set{y ∈ Y \where (x,y) ∈ A}
+	et
+	math
+		A_{· , y} = \set{x ∈ X \where (x,y) ∈ A}
+	fig Idée intuitive de la coupe d’un ensemble
+		right
+		./figures/tranches_xy.svg
+	Alors, pour tout $A ∈ T_{X} \xalg T_{Y}$ et pour tous $x ∈ X, y ∈ Y$,
+	math
+		A_{x, · } ∈ T_{Y} \quad\text{et}\quad A_{· , y} ∈ T_{X}
+	En effet, on montre aisément que
+	math
+		T = \set{A ⊂ X × Y \where ∀ x ∈ X, ∀ y ∈ Y, A_{x, · } ∈ T_{Y} \text{ et } A_{· , y} ∈ T_{X}}
+	est une $σ$-algèbre sur $X × Y$ qui contient
+	math
+		Σ = \set{A_{X} × A_{Y} \where A_{X} ∈ T_{X} \text{ et } A_{Y} ∈ T_{Y}}
+	Or, par définition, $T_{X} \xalg T_{Y}$ est la $σ$-algèbre enjendrée sur $X × Y$ par $Σ$, c’est-à-dire la plus petite $σ$-algèbre contenant $Σ$. Par conséquent, $T_{X} \xalg T_{Y} ⊂ T$.
+	On peut alors définir pour $A ∈ T_{X} \xalg T_{Y}$ les fonctions
+	math
+		f_{X,A}: \applic{X}{\bar{\R_{+}}}{x}{μ_{X}(A_{x, · })}
+	et
+	math
+		f_{Y,A}: \applic{Y}{\bar{\R_{+}}}{y}{μ_{X}(A_{· , y})}
+	Il s’agit de deux fonctions mesurables positives. On peut alors définir, pour tout $A ∈ T_{X} \xalg T_{Y}$,
+	math
+		μ(A) = \int_{X}\dd μ_{X} f_{X,A} = \int_{X}\dd μ_{X}(x)μ_{Y}(A_{x, · })
+	et
+	math
+		ν(A) = \int_{Y}\dd μ_{Y} f_{Y, A} = \int_{Y}\dd μ_{Y}(y)μ_{X}(A_{· , y})
+	L’égalité entre ces deux mesures découlera de l’unicité lorsque l’on aura établi les propriétés souhaitées pour $μ$ et $ν$.
+	Soient à présent $A_{X} ∈ T_{X}$ et $A_{Y} ∈ T_{Y}$. On a, par définition,
+	math
+		\begin{align*}
+			μ(A_{X} × A_{Y}) &= \int_{X} \dd μ_{X}(x)μ_{Y}\big((A_{X} × A_{Y})_{x, · }\big) \\
+			&= \left(\int_{X} \dd μ_{X}\1_{A_{X}}\right)μ_{Y}(A_{Y}) \\
+			&= μ_{X}(A_{X})μ_{Y}(A_{Y})
+		\end{align*}
+	(on intègre sur un rectangle similaire à celui dessiné sur la figure précédente). De même,
+	math
+		ν(A_{X} × A_{Y}) = μ_{X}(A_{X})μ_{Y}(A_{Y})
+	Il est clair que $μ(\emptyset) = ν(\emptyset) = 0$. Par ailleurs, soit $(A_{n})_{n ∈ \N}$ une suite d’éléments de $T_{X} \xalg T_{Y}$ deux à deux disjoints. Alors,
+	math
+		\begin{align*}
+			μ \left(\bigcup_{n ∈ \N}A_{n}\right) &= ∫_{X}\dd μ_{X} f_{X, \bigcup_{n ∈ \N}A_{n}} \\
+			&= ∫_{X}\dd μ_{X}(x)μ_{Y} \left( \left(\bigcup_{n ∈ \N} A_{n}\right)_{x, · }\right) \\
+			&= ∫_{X} \dd μ_{X}(x) μ_{Y} \left(\bigcup_{n ∈ \N}\Big((A_{n})_{x, · }\Big)\right) \\
+			&= ∫_{X}\dd μ_{X}(x) ∑_{n ∈ \N}μ_{Y} \Big((A_{n})_{x, · }\Big) & \text{($\sigma$-additivité de $\mu_{X}$)}\\
+			&= ∫_{X}\dd μ_{X} ∑_{n ∈ \N}f_{X, A_{n}} \\
+			&= ∑_{n ∈ \N}∫_{X} f_{X, A_{n}} & \text{(corollaire du TCM)}\\
+			&= ∑_{n ∈ \N}μ(A_{n})
+		\end{align*}
+	On montre de même la $σ$-additivité de $ν$.
+
+rem
+	L’espace mesuré produit $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ de deux espaces mesurés $σ$-finis et $σ$-complets est $σ$-fini mais non nécessairement $σ$-complet. Dans ce cas, on supposera que l’espace mesuré produit est $σ$-complété.
+
+example
+	On définit l’espace mesuré de Lebesgue $(\R^{2}, L_{\R^{2}}, μ_{L})$ comme le $σ$-complété de $(\R × \R, L_{\R} \xalg L_{\R}, μ_{L} × μ_{L})$. On définit alors par induction l’espace mesuré de Lebesgue $(\R^{n}, L_{\R^{n}}, μ_{L, n})$.
+
+thm Théorème de Fubini-Tonelli
+	Soient $(X, T_{t}x, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurés $σ$-finis. Soit $f: X × Y ⟶ \bar{\R_{+}}$ une fonction mesurable positive. Alors,
+	math
+		∫_{X × Y}\dd  \big(μ_{X} × μ_{Y}\big)f = ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y} f\right) = ∫_{Y}\dd μ_{Y} \left(∫_{Y}\dd μ_{X} f\right)
+
 proof
+	Soient $(X, T_{X}, μ_{X})$, $(Y, T_{Y}, μ_{Y})$ et $f$ tels qu’imposés ci-dessus. D’après la prop ==#!REF!#==, on sait qu’il existe une suite croissante $(s_{n})_{n ∈ \N}$ de fonctions étagées sur $X × Y$ positives telles que $f = \lim_{n\to+∞}s_{n} = \sup_{n ∈ \N}s_{n}$. Alors, d’après le _théorème de convergence monotone_,
+	math fubuni-tonelli:1
+		∫_{X × Y} \dd \big(μ_{t} × μ_{Y}\big) f = ∫_{X × Y}\sup_{n ∈ \N}s_{n} \oeq{TCM} \sup_{n ∈ \N}∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)s_{n}
+	Or, pour toute fonction étagée positive $s f ∑_{p=1}^{N}s_{p}\1_{A_{p}}$ avec $s_{1}, …, s_{p}$ des réels et $A_{1}, …, A_{N}$ des mesurables (éléments de $T_{X} \xalg T_{Y}$), on a par définition
+	math
+		\begin{align*}
+			∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)s &= ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)∑_{p=1}^{N}s_{p}\1_{A_{p}} \\
+			&= ∑_{p=1}^{N}s_{p} ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)\1_{A_{p}} \\
+			&= ∑_{p=1}^{N} s_{p}∫_{X}\dd μ_{X}(x) μ_{X} \Big((A_{p})_{x, · }\Big) \quad \left(= ∑_{p=1}^{N}s_{p}∫_{Y}\dd μ_{Y}(y)μ_{X}\Big((A_{p})_{· , y}\Big)\right) \\
+			&= ∫_{tx}\dd μ_{X}(x) ∑_{p=1}^{N}s_{p}μ_{Y} \Big((A_{p})_{x, · }\Big) \\
+			&= ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}s\right)
+		\end{align*}
+	En revenant à [fubini-tonelli:1], on trouve finalement
+	math
+		\begin{align*}
+			∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big) f &= \sup_{n ∈ \N}∫_{X × Y} \dd  \left(μ_{X} × μ_{Y}\right)s_{p} \\
+			&= \sup_{n ∈ \N} \left(∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}s_{n}\right)\right) = \sup_{n ∈ \N}\left(∫_{Y}\dd μ_{Y} \left(∫_{X}\dd μ_{X} s_{n}\right)\right)\\
+			&\oeq{TCM} ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}\sup_{n ∈ \N}s_{n}\right) = ∫_{Y} \dd μ_{Y} \left(∫_{X}\dd μ_{X} \sup_{n ∈ \N}s_{n}\right) \\
+			&= ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}f\right) = ∫_{Y}\dd μ_{Y} \left(∫_{X}\dd μ_{X} f\right)
+		\end{align*}
+
+thm Théorème de Fubini
+	Soient $(X, T_{X}, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurés $σ$-finis. Soit $f ∈ \L^{1}(X × Y, μ_{X} × μ_{Y})$. Alors,
+	math
+		∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)f = ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y} f\right) = ∫_{Y}\dd μ_{Y} \left(∫_{X}\dd μ_{X} f\right)
+
+proof
+	On écrit $f = f_{+} - f_{-}$ et on applique Fubini-Tonelli à $f_{\pm}$.
+
+rem
+	Soit $f : X × Y ⟶ \bar{\R}$ une fonction mesurable. En pratique :
+	- On établit la sommabilité de $f$ en calculant $∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big)\abs{f}$ par Fubini-Tonelli.
+	- Si $f ∈ \L^{1}(X × Y, μ_{X} × μ_{Y})$, on calcule alors $∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)f$ en appliquant Fubini.
+
+### Intégration de Lebesgue des fonctions Riemann-intégrables sur $\R$
+
+Dans cette sous-partie, $(X, T, μ) = (\R, L_{\R}, μ_{L})$.
+
+thm
+	Soit $f:\R ⟶ \R$ une fonction Riemann-intégrable (au sens propre, c’est-à-dire que $f$ s’annule en dehors d’un segment borné). Alors, $f$ est Lebesgue-sommable et
+	math
+		∫_{\R}\dd μ_{L}f = \Rint_{\R}\dd x f(x)
+
+proof
+	Soit $f: \R ⟶ \R$ une fonction Riemann-intégrable. Par définition, il existe pour tout $n ∈ \N^{*}$ deux fonctions en escalier $s_{n}^{-}$ et $s_{n}^{+}$ telles que
+	math
+		s_{n}^{-} ⩽ f ⩽ s_{n}^{+}
+	et, en posant $I = \Rint_{\R}\dd xf(x)$, on ait
+	math
+		I - \frac{1}{n} ⩽ ∫_{\R}\dd μ_{L} s_{n}^{-} = \Rint_{\R}\dd xs_{n}^{-}(x) ⩽ I ⩽ \Rint_{\R}\dd xs_{n}^{+}(x) = ∫_{\R}\dd μ_{L} s_{n}^{+} ⩽ I + \frac{1}{n}
+	On peut supposer, sans perte de généralité, que
+	- $(s_{n}^{-})_{n ∈ \N}$ est croissante,
+	- $(s_{n}^{+})_{n ∈ \N}$ est décroissante.
+	En effet, il suffit, si tel n’est pas le cas, de poser
+	math
+		\tilde{s}_{n}^{-} = \sup\set{s_{0}^{-}, …, s_{n}^{-}} \quad\text{et}\quad \tilde{s}_{n}^{+} = \inf\set{s_{0}^{+}, …, s_{n}^{+}}
+	Alors,
+	- $\left(∫_{\R}\dd μ_{L}s_{n}^{-}\right)_{n ∈ \N}$ est une suite croissante
+	- $\left(∫_{\R}\dd μ_{L}s_{n}^{+}\right)_{n ∈ \N}$ est une suite décroissante
+	De plus, elles convergent toutes les deux (vers $I$) et sont donc des suites de Cauchy. En particulier, pour $ε > 0$, il existe $N ∈ \N$ tel que
+	math
+		∀ m ⩾ n ⩾ N, ε > \abs{∫_{\R}\dd μ_{L} (s_{m}^{-} - s_{n}^{-})} = ∫_{\R}\dd μ_{L}\abs{s_{m} - s_{n}} = \norm{s_{m} - s_{n}}_{1}
+	et de même pour $(s_{n}^{+})_{n ∈ \N}$. Ainsi, $(s^{+}_{n})_{n ∈ \N}$ est une suite de Cauchy dans $\L^{1}(\R)$ donc, cet espace étant complet (cf. section suivante), il existe $\tilde{f}_{\pm} ∈ \L^{1}(\R)$ telle que
+	math
+		\lim_{n \to+∞} \norm{s_{n}^{\pm} - \tilde{f}_{\pm}}_{1} = 0
+	En particulier,
+	math
+		\lim_{n\to+∞}∫_{\R}\dd μ_{L} s_{n}^{\pm} = \int_{\R}\dd μ_{L} \tilde{f} = I
+	Évidemment,
+	math egalite-riemann-lebesgue:1
+		\tilde{f}_{-} ⩽ f ⩽ \tilde{f}^{+}
+	En particulier,
+	math
+		∫_{\R}\dd μ_{L} \Big(\tilde{f}_{+} - \tilde{f}_{-}\Big) = 0 \quad\text{avec}\quad \tilde{f}_{+} - \tilde{f}_{-} ⩾ 0
+	et donc, $\tilde{f}_{+} = \tilde{f}_{-}$ $μ_{L}-\pp \R$. D’après [egalite-riemann-lebesgue:1],
+	math
+		\tilde{f}_{\pm} = f \quad μ_{L} -\pp \R
+	Finalement, $f ∈ \L^{1}(\R)$ et
+	math
+		I = ∫_{\R}\dd μ_{L} \tilde{f}_{-} = ∫_{\R}\dd μ_{L}\tilde{f}_{+} = ∫_{\R}\dd μ_{L} f
+
+thm
+	Soient $a < u ∈ \bar{\R}$. Soit $f$ localement Riemann intégrable dans $\co{a, u}$. Alors, $f$ est Lebesgue-sommable sur $\co{a, u}$ si et seulement si $\Rint_{a}^{u}f$ est une intégrale de Riemann impropre absolument convergente, et dans ce cas,
+	math
+		∫_{\co{a, μ}}\dd μ_{L} f = \Rint_{a}^{u}f
+
+proof
+	Soit $(u_{n})_{n ∈ \N}$ une suite d’éléments de $\co{a, u}$ de limite $u$. On pose
+	math
+		∀ n ∈ \N, g_{n} = \abs{f}\1_{\cc{a, u_{n}}}
+	Alors $(g_{n})_{n ∈ \N}$ est clairement une suite croissante de fonctions mesurables positives (localement intégrable sur l’intervalle où elles ne sont pas nulles). Alors, d’après le _théorème de convergence monotone_, on a
+	math
+		∫_{\co{a, u}}\dd μ_{L}\abs{f} = \lim_{n \to+∞}∫_{\cc{a, u_{n}}}\dd μ_{L} \abs{f} = \lim_{n\to+∞}\Rint_{a}^{u_{n}}\abs{f}
+	Donc $f$ est Lebesgue-sommable sur $\co{a, u}$ si et seulement si $\Rint_{a}^{u} f$ est absolument convergente. Dans ce cas, on considère
+	math
+		∀ n ∈ \N, f_{n} = f\1_{\cc{a, u_{n}}}
+	C’est une suite de fonctio mesurables, convergeant vers $f$, et vérifiant
+	math
+		∀ n ∈ \N, \abs{f_{n}} ⩽ \abs{f} \quad\text{avec}\quad f ∈ \L^{1}(\co{a, u})
+	Le _théorème de convergence dominée_ donne alors
+	math
+		\begin{align*}
+			∫_{\cc{a, u}}\dd μ_{L} f &= ∫_{\co{a, u}}\dd μ_{L} \lim_{n\to+∞}f_{n} \\
+			&= \lim_{n\to+∞}∫_{\cc{a, u}}\dd μ_{L}f_{n} \\
+			&= \lim_{n\to+∞}∫_{\cc{a, u}}\dd μ_{L}f\1_{\cc{a, u_{n}}} \\
+			&= \lim_{n\to+∞}\Rint_{a}^{u_{n}}f \\
+			&= \Rint_{a}^{u}f
+		\end{align*}
+
+rem
+	- On établira souvent la sommabilité sur $\R$ (pour $(\R, L_{\R}, μ_{L})$) en établissant l’absolue convergence d’intérales de Riemann impropres.
+	- Les intégrandes d’intégrales semi-convengentes (non-absolument convergentes) ne sont pas sommables. La théorie de Henstock–Kurzweil essaye de remédier cette limitation.
+
+## Les espaces $L^{p}$
+
+### Définitions
+
+Soit $(X, T, μ)$ un espace mesuré. Pour toute fonction $f: X ⟶ \bar{\R}$ mesurable et pour tout $p ⩾ 1$, on pose
+math
+	\norm{f}_{p} = \left(∫_{X}\dd μ \abs{f}^{p}\right)^{\frac{1}{p}}
+On dira que $f$ est _essentiellement bornée_ si il existe $λ ∈ \R_{+}$ tel que
+math
+	\abs{f}⩽ λ \quad μ-\pp X
+- On définit le _sup essentiel_
+	math
+		\norm{f}_{∞} = \esssup \left(\abs{f}\right) = \inf \set{λ ∈ \R_{+} \where \abs{f} ⩽ λ \quad μ-\pp X}
+- Si $f, g : X ⟶ \bar{\R}$ sont égales $μ$-presque partout sur $X$, on notera $f \sim g$. C’est une relation d’équivalence.
+
+def
+	Soit $(X, T, μ)$ un espace mesuré. On définit l’ensemble $\L^{p}(X, μ)$ ($p ∈ \cc{1, +∞}$) des fonctions $f: X ⟶ \R$ mesurables telles que
+	math
+		\norm{f}_{p} < ∞
+	On pose $L^{p}(X, μ) = \L^{p}(X, μ)/\sim$
+
+thm
+	Soit $(X, T, μ)$ un espace mesuré et soient $f,g: X ⟶ \bar{\R}$ deux fonctions mesurables. Alors
+	~ _(Inégalité de Hölder)_ Pour tous $p, q ∈ \cc{1, +∞}$ tels que $p^{-1} + q^{-1} = 1$, on a
+		math
+			\norm{fg}_{1} ⩽ \norm{f}_{p} \norm{g}_{q}
+	~ _(Inégalité de Minkowski)_ Pour tout $p ∈ \cc{1, +∞}$,
+		math
+			\norm{f+g}_{p} ⩽ \norm{f}_{p} + \norm{g}_{p}
+
+proof
+	~ Supposons que $p,q ∈ \oo{1,+∞}$. Supposons également que $\norm{f}_{p}, \norm{g}_{p} > 0$, et posons
+		math
+			F = \frac{\abs{f}}{\norm{f}_{p}} \quad\text{et}\quad G = \frac{\abs{g}}{\norm{g}_{p}}
+		Alors,
+		math
+			∫_{X}\dd μ F^{p} = \frac{∫_{X}\dd μ \abs{f}^{p}}{∫_{X}\dd μ \abs{f}^{p}} = 1 = \frac{∫_{X}\dd μ \abs{g}^{q}}{∫_{X}\dd μ \abs{g}^{q}} = ∫_{X}\dd μ G^{q}
+		D’autre part,
+		math
+			\begin{align*}
+				FG &= \exp \left(\frac{q\ln F}{q} + \frac{q\ln G}{q}\right) \\
+				&⩽ \frac{1}{p} \exp \big(p\ln F\big) + \frac{1}{q}\exp \big(q \ln G\big) & \text{(convexité de $\exp$)}\\
+				&= \frac{F^{p}}{p} + \frac{G^{q}}{q}
+			\end{align*}
+		Il suffit alors d’intégrer sur $X$ pour obtenir
+		math
+			\frac{∫_{X}\dd μ \abs{fg}}{\norm{f}_{p} \norm{g}_{q}} = ∫_{X}\dd μFG ⩽ \frac{1}{p} + \frac{1}{q} = 1
+		d’où le résultat en multipliant par $\norm{f}_{p} \norm{g}q$.
+		Si $p=1$ (donc $q = +∞$) ou l’inverse, on a
+		math
+			\abs{fg} ⩽ \abs{f}\norm{g}_{∞} \quad μ - \pp X
+
+
 
