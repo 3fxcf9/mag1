@@ -67,6 +67,10 @@ fig Échelle de distances
 Soit $v$ la vitesses radiale relative d’un émetteur par rapport à un récepteur (la source s’éloigne si $v > 0$). On montre que
 math
 	\frac{f_{e}}{f_{r}} = \sqrt{\frac{1+v/c}{1-v/c}}
+Q: Effet doppler relativiste
+	A: Si une source émet une onde de fréquence $f_{e}$ dans son référentiel, cette onde sera perçue avec la fréquence $f_{r}$ dans le référentiel d’un récepteur qui s’en éloigne à la vitesse $v$, avec
+		math
+			\frac{f_{e}}{f_{r}} = \sqrt{\frac{1+v/c}{1-v/c}}
 avec $f_{e}$ la fréquence émise et $f_{r}$ celle reçue. On définit le _redshift_ :
 math
 	z = \frac{λ_{r} - λ_{e}}{λ_{e}}
@@ -76,14 +80,31 @@ math
 et on fixe la fréquence d’emission à celle de transitions atomiques connues. On a alors
 math
 	\begin{align*}
-		\frac{f_{e}}{f_{r}}&= \left(1+ \frac{v}{c}\right)^{1/2} \left(1-\frac{v}{c}\right)^{-1/2} \\
+		z+1 = \frac{f_{e}}{f_{r}}&= \left(1+ \frac{v}{c}\right)^{1/2} \left(1-\frac{v}{c}\right)^{-1/2} \\
 		&\simeq \left(1 + \frac{v}{2c}\right) \left(1 + \frac{v}{2c}\right) \\
 		&\simeq 1+\frac{v}{c}\\
-		&=z+1
 	\end{align*}
 soit
 math
 	z \simeq \frac{v}{c}
+
+Q: Redshift et lien avec la vitesse
+	A: Le redshift $z$ est défini par
+		math
+			z = \frac{λ_{r} - λ_{e}}{λ_{e}}
+		avec $λ_{e}$ la longueur d’onde émise et $λ_{r}$ celle reçue. On utilise en pratique
+		math
+			1+z = \frac{λ_{r}}{λ_{e}} = \frac{f_{e}}{f_{r}}
+		On a donc
+		math
+			\begin{align*}
+				z+1 = \frac{f_{e}}{f_{r}}&= \left(1+ \frac{v}{c}\right)^{1/2} \left(1-\frac{v}{c}\right)^{-1/2} \\
+				&\simeq \left(1 + \frac{v}{2c}\right) \left(1 + \frac{v}{2c}\right) \\
+				&\simeq 1+\frac{v}{c}\\
+			\end{align*}
+		soit
+		math
+			z \simeq \frac{v}{c}
 
 ### Loi de Hubble-Lemaître
 
@@ -95,6 +116,14 @@ Il mesure $H_{0} \simeq 500\u{km · s^{-1} · Mpc^{-1}}$ et on retient aujourd�
 fig $v_3 = \dv{r_3}{t} = 3 \dv{r}{t} = 3v_1$
 	./figures/expansion_1d.svg
 La relation $v = H_{0}D$ n’est valable que pour des objets « proches » car $H$ dépend du temps.
+
+Q: Loi de Hubble-Lemaître
+	A: Les galaxies s’éloginent les unes des autres avec une vitesse approximativement proportionnelle à leur distance :
+		math
+			v = H_{0}D
+		avec $H_{0}$ la constante de Hubble
+		math
+			H_{0} \simeq 70\u{km · s^{-1} · Mpc^{-1}}
 
 ## Courbes de rotation, mise en évidence de la matière noire
 

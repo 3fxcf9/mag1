@@ -104,8 +104,75 @@ Q: Radiation pattern of an oscillating dipole
 			D(θ, φ) = \frac{3}{2}\sin^{2} θ
 		==picture slide 39/117==
 
-
 ## Radiation in the general case
+
+Q: Definition of radiation
+	A: A source radiates into a solid angle element $\dd Ω$ if $\dd P = \u_{r} · \moy{\poynting(\r, t)}r^{2} \dd Ω$ does not vanish as $r$ tend to infinity.
+		This imposes $\poynting ∝ \frac{\ur}{r^{2}}$ and therefore that the fields decay as $1/r$.
+
+Q: Dipole condition: far zone
+	A: Usually
+		math
+			r \large λ
+		In practice, the classical Fraunhofer condition is often used :
+		math
+			r \arge r_{FF} = \frac{2D^{2}}{λ}
+
+Q: Dipole condition: non-relativistic speed
+	A: We want $v = O \left(\frac{a}{T}\right) \small c$, i.e.
+		math
+			a \small λ
+
+Q: Potentials of the radiated (approximations)
+	A: With the $r \large a$ approximation,
+		math
+			\begin{align*}
+				\abs{\r - \r'} &= \r \sqrt{1 - 2 \frac{\ur · \r'}{r} + \left(\frac{r'}{r}\right)^{2}}\\
+				&\simeq r - \r' · \ur
+			\end{align*}
+		and thus,
+		math
+			φ_{\text{ray}}(\r, t) = \frac{1}{4 π ε_{0}r}\iiint ρ\left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
+		and
+		math
+			\A_{\text{ray}}(\r, t) = \frac{μ_{0}}{4 π r}\iiint \j\left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
+
+Q: Radiated field (with approximations)
+	A: By using
+		math
+			\nabla_{r}\left(t - \frac{r}{c} + \frac{\r' · \ur}{c}\right) = -\frac{\ur}{c} - \frac{\ur}{c}∧  \left(\ur ∧ \frac{\r'}{r}\right) \simeq - \frac{\ur}{c}
+		we get (using the chain rule on $\j$) :
+		math
+			\B_{\text{ray}}(\r, t) = - \frac{\ur}{c} ∧ \pdv{\A_{\text{ray}}(\r, t)}{t}
+		and
+		math
+			\E_{\text{ray}}(\r, t) = -\ur ∧ c\B_{\text{ray}}(\r, t)
+		$(\ur, \E_{\text{ray}}, \B_{\text{ray}})$ form a right-handed triad.
+
+Q: Vector potential of a radiated field in the fourier domain (with approximations)
+	A: In the time domain,
+		math
+			\A_{\text{ray}} (\r, t) = \frac{μ_{0}}{4 πr}\iiint \j \left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
+		Introducing $\k = \frac{ω}{c}\ur$ and taking as time dependence $e^{-i ωt}$, we obtain
+		math
+			\A_{\text{ray}}(\r, ω) = \frac{μ_{0}}{4 π} \frac{e^{ikr}}{r} \iiint \j(\r', ω) e^{-i \k · \r'}\dd^{3}\r'
+		($\j(\r', t) = \j(\r', ω)e^{-i ωt}$ and $\A(\r, t) = \A(\r, ω)e^{-i ωt}$).
+		So by writing $\tilde{\j}(\vec{K}, ω) \defeq \iiint \j(\r', ω)e^{-i \vec{K}· \r'}\dd^{3}\r'$ the spatial (inverse) Fourrier transform of $\j(\r, ω)$, we get
+		math
+			\A_{\text{ray}}(\r, ω) = \frac{μ_{0}}{4 π}\frac{e^{ikr}}{r}\tilde{\j(k\ur, ω)}
+		math
+			\B_{\text{ray}}(\r, ω) = \frac{i ω\ur}{c}∧ \A_{\text{ray}}(\r, ω)
+		math
+			\E_{\text{ray}}(\r, ω) = -i ω\ur ∧ \big(\ur ∧ \A_{\text{ray}}(\r, ω)\big)
+		Furthermore, if $\vec{p}(t) = \vec{p}_{0}e^{-i ωt}$, we have as $kr' = 2 π r'/λ \small 1$, $e^{-i \k · \r'} \simeq 1 - i\k · \r'$ thus, keeping only the dominant term :
+		math
+			\A_{\text{ray}}(\r, ω) = - \frac{μ_{0}}{4 π}\frac{e^{ikr}}{r}i ω \vec{p}
+		as $\j(\r, t) = \dot{\vec{p}}(t)δ(\r)$ or in the harmonic regime $\j(\r, ω) = -i ω \vec{p}_{0}$. (expression still valid for an arbitrary charge distribution if its dimension is small compared to $λ$. Just take the dipole moment of the distribution.)
+
+Q: Radiated power on the frequency domain
+	A: It only depends on the transverse part of the spatial transform of the current :
+		math
+			\moy{\dv{P}{Ω}} = \frac{μ_{0}ω^{2}}{32 π^{2}c} \abs{\ur ∧ \tilde{\j}(k\ur, ω)}^{2}
 
 ## Antennas
 

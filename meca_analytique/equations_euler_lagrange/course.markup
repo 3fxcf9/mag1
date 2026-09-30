@@ -10,340 +10,58 @@ Les objectifs de ce cours sont :
 
 ## Contraintes et principe de d’Alembert
 
-Soit une particule de masse $m$ et de position $\r = \lxyz{x}{y}{z}$ astrainte à se déplacer sur une surface.
-fig
-	right
-	./figures/particule_sur_surface.svg
-Pour le principe fondamental de la dynamique, on introduit une réaction du support, notée $\vec{R}$, qui assure que la particule ne passe pas à travers la surface. On a alors l’équation
-math
-	m \ddot\r = \vec{F} + \vec{R}
-où $\vec{F}$ est parallèle au mouvement (forces de frottement par exemple) et $\vec{R}$ y est orthogonal.
-Notons $f(\r) = 0$ la contrainte d’appartenance à une surface dans un espace à trois dimension.
+Q: Déplacement virtuel
+	A: Déplacement infinitésimal satisfaisant les contraintes d système. Il ne correspond pas forcément à une trajectoire réelle.
 
-def Déplacement virtuel
-	Déplacement infinitésimal $δ\r$ qui satisfait les contraintes du système. Il ne correspond pas forcément à une trajectoire physique.
-	as_flashcard
-
-Si on prend $\r$ et $\r + δ\r$ deux points appartenant à la surface, on a
-math
-	δf = \underbrace{f(\r + δ\r) - f(\r)}_{= \grad_{\r} f(\r) · δ\r} = 0
-donc localement, $\grad f$ est orthogonal à la surface. En particulier, cela nous permet d’exprimer $\vec{R}(t)$ :
-math
-	\vec{R}(t) = λ(t)\grad f(\r(t))
-d’où, en formulation newtonienne, on peut écrire
-math
-	\begin{cases}m \ddot\r = \vec{F} + λ(t)\grad f(\r(t))\\f(\r(t)) = 0\end{cases}
-On a 4 inconnues ($\r$ et $λ$) donc une résolution de ce système est possible.
-On utilise la projection des équations sur les déplacements virtuels pour éliminer la réaction du support. Comme $\vec{R} · δ\r = 0 \eforall δ\r$, ce système peut s’écrire
-math
-	\begin{cases}(\vec{F} - m \ddot\r)· δ\r = 0 & ∀ δ\r \perp \grad f(\r) \\ f(\r) = 0\end{cases}
-Il faut déterminer les $\r(t)$ et $δ\r$ possibles, ce qui n’est pas toujours facile…
-
-example
-	fig
-		right
-		./figures/eg_plan_incline.svg
-	Considérons une bille en chute libre sur un plan incliné d’équation $f(\r) = x+y+z = 0$. On a $\grad f = \lxyz{1}{1}{1}$. Principe de d’Alembert: Soit $δ\r = \lxyz{δx}{δy}{δz}$ tel que $\grad f · δ\r = 0$, i.e. $δx + δy + δz = 0$. Écrivons la seconde équation :
-	math
-		(\vec{F} - m \ddot\r)· δ\r = 0 ⟺ (-m \ddot x δx - m \ddot y δy + (-mg - m \ddot z) δz) = 0
-	On utilise ensuite $δz = -δx - δy$ :
-	math
-		(\ddot x - \ddot z - g)δx + (\ddot y - \ddot z - g)δy = 0 \eforall δx, δy
-	et on peut traiter $δx$ et $δy$ comme deux variables indépendantes, d’où
-	math
-		\begin{cases}\ddot x - \ddot z = g \\ \ddot y - \ddot z = g\end{cases}
-	On a aussi $f(\r(t)) = 0 ⟹ \ddot x + \ddot y + \ddot z = 0$, d’où
-	math
-		\begin{cases}\ddot x = g/3 \\ \ddot y = g/3 \\ \ddot z = -2g/3\end{cases}
-
-## Généralisation à $N$ particules
-
-On étudie un système à $N$ particules à trois dimensions. On a donc $N$ vecteurs positions $\r_{i}$ décrits par $3N$ variables, et $N$ vecteurs vitesses $\v_{i} = \dv{\r_{i}}{t}$ eux aussi décrits par $3N$ variables.
-Il existe plusieurs types de contraintes; voici quelques contraintes courantes :
-+ Liaison rigide: distance fixe entre deux points.
-	fig Ici, $\norm{\r_1, - \r_2}^2 - d^2 = 0$
-		./figures/liaison_rigide.svg
-	Elle est utilisée entre autres dans les systèmes suivants :
-	fig
-		./figures/liaison_rigide_exemples.svg
-+ Roulement sans glissement
-
-On en distingue deux familles :
-- Les _contraintes holonomes_, de la forme $f(\r_{1}, …, \r_{N}, t) = 0$. Les contraintes $f_{1}(\r) = z = 0$ et $f_{2}(\r) = x^{2} + y^{2} - \ell^{2} = 0$ correspondant à un pendule simple en sont des exemples.
-- Les _contraintes non-holonomes_ : tous les autres cas, par exemple $f(\r_{1}, …, \r_{N}, t) ⩾ 0$ ou $f(\r_{1}, …, \r_{N}, \v_{1}, …, \v_{N}, t) = 0$.
-Q: Contrainte holonome A: Contrainte de la forme $f(\r_{1}, …, \r_{N}, t) = 0$. Elle est sinon non-holonome, comme par exemple $f(\r_{1}, …, \r_{N}, t) ⩾ 0$ ou $f(\r_{1}, …, \r_{N}, \v_{1}, …, \v_{N}, t) = 0$.
-
-_Principe de d’Alembert_ : On considère $N$ particules soumises à $K$ contraintes holonomes indicées par $β$: $f_{β}(\r_{1}, …, \r_{N}, t) = 0$. Les déplacements virtuels $δ\r_{i}$ satisfont
-math
-	∑_{i=1}^{N}\grad_{\r_{i}}f_{β}(\r_{1}, …, \r_{n}, t) · δ\r_{i} = 0 \eforall β
-De plus, le PFD s’écrit pour chacune des particules
-math
-	m \ddot{\r_{i}} = \vec{F_{i}} + ∑_{β=1}^{N}λ_{β}(t)\grad_{\r_{i}}f_{β}
-d’où le principe
-math
-	\boxed{∑_{i=1}^{N}(\vec{F_{i}} - m_{i}\ddot{\r_{i}}) · δ\r_{i} = 0 \eforall δ\r_{i} \text{ compatible avec les contraintes}}
-
-Mais les $δ\r_{i}$ ne sont pas toutes indépendantes. On verra plus tard une autre façon de traiter les contraintes avec des multiplicateurs de Lagrange.
-
-## Coordonnées généralisées
-
-On étudie à présent un système de $N$ particules soumises à $K$ contraintes. On a donc en principe $n = 3N-K$ variables indépendantes. On appelle ce nombre $n$ le nombre de _degrés de liberté_ du système.
-
-def Coordonnées généralisées
-	Jeu de $n$ variables *indépendantes* qui permet de satisfaire automatiquement les $K$ contraintes. On les appelle _coordonnées généralisées_ et on les note souvent $q_{1}, …, q_{α} …, q_{n}$. Elles sont telles que
-	math
-		\r_{i} = \r_{i} (q_{1}, q_{2}, …, q_{n}, t) \eforall i = 1, …, N
-	Au lieu de repérer l’état du système par les $\r_{i}$, on peut le faire via les $q_{α}(t)$ qui vivent dans un espace appelé _variété des configurations_. On suppose que l’on peut inverser les relations pour obtenir
-	math
-		q_{α} = q_{α}(\r_{1}, …, \r_{N}, t) \eforall α = 1, …, n
-	Q: Coordonnées généralisés A: Jeu de variables indépendantes en nombre égal au nombre degrés de liberté du système, qui permette de paramétrer celui-ci en vérifiant automatiquement ses contraintes.
-		reversed
-	Q: Variété des configuration A: Espace contenant l'ensemble de toutes les positions possibles d'un système, en respectant ses contraintes géométriques. Il est paramétré par un système de coordonnéès généralisées.
-
-rem
-	- S’il n’y a pas de contraintes, ce reparamétrage est un changement de coordonnées,
-	- les $q_{α}$ n’ont pas nécessairement la dimension d’une longueur (distance, angle, …),
-	- il n’y a pas unicité du jeu de variables choisi.
-
-example
-	+ ++Pendule simple++ : décrit par la seule variable $q_{1} = θ$. La variété des configurations est une portion de cercle.
-	+ ++Pendule double++ (v. TD) : deux degrés de liberté, $q_{1} \equiv θ_{1} ∈ \cc{0, 2 π}$ et $q_{2} \equiv θ_{2} ∈ \cc{0, 2 π}$. La variété des configurations est un tore, le cercle principal correspondant à l’angle du premier pendule et le secondaire correspondant à l’angle du second pendule.
-		fig Variété des configurations d’un pendule double.
-			./figures/variete_tore.svg
-	+ ++Anneau sur un arc de cercle++ : décrit par la variable $q_{1} = θ$ en coordonnées sphériques.
-		fig
-			right
-			./figures/anneau_sur_arc_cercle.svg
+Q: Contrainte holonome
+	reversed
+	A: Contrainte pouvant s’exprimer sous la forme
 		math
-			\begin{cases}x = \ell\cos φ(t)\sin θ\\ y = \ell\sin φ(t) \sin θ \\ z = \ell\cos θ\end{cases}
+			f(\r_{1}, …, \r_{N}, t) = 0
 
-## Réécriture des déplacements virtuels.
+Q: Contrainte holonome scléronome
+	reversed
+	A: Contrainte holonome indépendante du temps
 
-On veut écrire les équations du mouvement en fonction des $q_{α}$. Première étape: réexprimer les déplacements virtuels en fonction des $q_{α}$.
-- Déplacements « naturels » et virtuels
-	On considère deux trajectoires physiques, correspondant à des déplacements « naturels », infiniment proches, notées $\r(t)$ et $\r(t) + δ\r(t)$.
-	fig
-		./figures/trajectoires.svg
-	Vectoriellement, on peut écrire
-	math
-		\begin{cases}
-			\dd\r(t) = \r(t+ \dd t) - \r(t)\\
-			\dd(\r + δ\r) = \dd\r + \dd(δ\r) \aussieq (\r + δ\r)(t+ \dd t) - (\r + δ\r)(t)\\
-			δ\r(t) = (\r + δ\r)(t) - \r(t)\\
-			δ\r(t+\dd t) = (\r + δ\r)(t+ \dd t) - \r(t + \dd t)
-		\end{cases}
-	d’où
-	math
-		δ\r(t) + \dd(\r + δ\r)(t) = \dd\r(t) + δ\r(t+ \dd t)
-	soit
-	math
-		\dd δ\r = δ \dd\r
-- On part de l’expression $\vec{r}_{i}(q_{1}, …, q_{n}, t)$ des coordonnées généralisées et on écrit les déplacements élémentaires :
-	math
-		\dd \vec{r}_{i} = ∑_{α=1}^{n}\pdv{\vec{r}_{i}}{q_{α}}\dd q_{α} + \pdv{\r_{i}}{t}\dd t
-	En divisant par $\dd t$, on obtient après introduction des vitesses généralisées $\dq_{α} = \dv{q_{α}}{t}$
-	math
-		\v_{i} = \dv{\r_{i}}{t} = \pdv{\r_{i}}{t} + ∑_{α=1}^{n}\pdv{\r_{i}}{q_{α}} \underbrace{\dv{q_{α}}{t}}_{\dq_{α}}
-	example
-		Reprenons l’exemple de l’anneau glissant sur un cerceau :
+Q: Contrainte holonome rhéonome
+	reversed
+	A: Contrainte holonome dépendant explicitement du temps
+
+Q: Contrainte non hononome
+	A: Contrainte ne pouvant pas s’exprimer sous la forme
 		math
-			\begin{cases}x = \ell\cos φ(t)\sin θ \\ y = \ell\sin φ(t)\sin θ\\ z = \ell\cos θ\end{cases} ⟹ \begin{cases}\dot x = \ell \Big(\sin θ(-\sin φ(t))\dot{φ}(t) + \cos φ(t)\cos(θ)\dot θ\Big)\\ \dot y = \ell \Big(\sin θ\cos(φ(t))\dot φ(t) + \sin φ(t)\cos (θ)\dot θ\Big)\\ \dot z = -\ell\sin (θ)\dot θ\end{cases}
-- On avait introduit les déplacements virtuels
-	math
-		δ\r_{i} = ∑_{α=1}^{n}\pdv{\r_{i}}{q_{α}}δq_{α}
-- Sur l’indépendance des variables $q_{α}$ et $\dot{q}_{α}$ : En dynamique du point, on va traiter les $q_{α}$ et les $\dot{q}_{α}$ comme des variables indépendantes. On a bien une relation entre $q_{α}$ et $\dot{q}_{α}$ mais elle les relie entre $t$ et $t+\dd t$ et pas au temps $t$. De même, quand on a $(\r, \v)$ pour décrire une particule par une équation du second ordre en temps qui peut se mettre sous forme d’une équation du premier ordre
-	math
-		m \dv{}{t}\dxy{\r}{\v} = \dxy{m\v}{F(\r, \v, t)}
-	alors  $\r$ et $\v$ *au temps $t$* sont indépendantes, et les conditions initiales $\r(0)$ et $\v(0)$ aussi. On a ainsi
-	math
-		\r_{i} = \r_{i}(q_{1}, …, q_{n}, \dot{q}_{1}, …, \dot{q}_{n}, t)
-	et
-	math
-		\v_{i} = \dot{\r}_{i} = \v_{i}(q_{1}, …, q_{n}, \dot{q}_{1}, …, \dot{q}_{n}, t)
-	On est passé des variables $\set{\r_{i}, \v_{i}}$ aux variables $\set{q_{α}, \dot{q}_{α}}$.
-
-## Équations d’Euler-Lagrange
-
-proof
-	On veut les équations du mouvement en fonction des $q_{α}$ et $\dq_{α}$. On part de d’Alembert :
-	math
-		∑_{i} \Big(\vec{F}_{i} - m_{i}\ddot{\r}_{i}\Big) · δ\r_{i} = 0 \eforall t, ∀ δ\r_{i}(t)
-	Or $δ\r_{i} = ∑_{α}\pdv{\r_{i}}{q_{α}}δq_{α}$ (déplacement élémentaire, différentielle d’espace seulement) donc
-	math euler:proof:0
-		∑_{α}^{n}\left(\underbrace{∑_{i}^{N}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}}}_{\defeq Q_{α}}-∑_{i}^{N} m_{i}\ddot{\r}_{i} · \pdv{\r_{i}}{q_{α}}\right)δq_{α} = 0
-	On introduit la force généralisée $\boxed{Q_{α} \defeq ∑_{i=1}^{N}\vec{F}_{i}· \pdv{\r_{i}}{q_{α}}}$. On en déduit $n$ équations (pour $n$ degrés de liberté) :
-	math euler:proof:1
-		∀ α, ∑_{i=1}^{N}m_{i}\ddot{\r}_{i}· \pdv{\r_{i}}{q_{α}} = Q_{α}
-	On exprime la deuxième somme dans les parenthèses de [euler:proof:0] comme un terme d’une dérivée temporelle :
-	math euler:proof:2
-		∑_{i}m_{i}\ddot{\r}_{i} · \pdv{\r_{i}}{q_{α}} = \dv{}{t} \left(∑_{i}m_{i}\dot{\r}_{i} ·  \pdv{\r_{i}}{q_{α}}\right) - ∑_{i}m_{i}\dot{\r}_{i} · \dv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right)
-	Pour le premier terme de [euler:proof:2], on part de
-	math
-		\dot{\r}_{i} = \pdv{\r_{i}}{t}(q_{1}, …, q_{n}, t) + ∑_{α}\pdv{\r_{i}}{q_{α}}(q_{1}, …, q_{n}, t) \dot{q}_{α}
-	On remarque alors que $\displaystyle\pdv{\dot{\r}_{i}}{\dq_{α}} = \pdv{\r_{i}}{q_{α}}$, d’où
-	math
-		\dr_{i} · \pdv{\r_{i}}{q_{α}} = \dr_{i} ·  \pdv{\dr_{i}}{\dq_{α}} = \pdv{}{\dq_{α}} \left(\frac{1}{2}\dr_{i}^{2}\right)
-	Le terme de gauche de [euler:proof:2] est alors
-	math
-		\dv{}{t} \left(∑_{i}m_{i}\dot{\r}_{i} ·  \pdv{\r_{i}}{q_{α}}\right) = \dv{}{t} \left(\pdv{}{\dq_{α}} \left(∑_{i}\frac{1}{2}m_{i} \dr_{i}^{2}\right)\right) = \dv{}{t} \pdv{}{\dq_{α}}T
-	en introduisant l’énergie cinétique $\boxed{T = ∑_{i=1}^{N}\frac{1}{2}m_{i}\dr_{i}^{2}(q_{α}, \dq_{α}, t)}$. Pour le second terme de [euler:proof:2], on dérive $\dr_{i}$ :
-	math
-		\begin{align*}
-			\pdv{\dr_{i}}{q_{α}} &= \frac{∂^{2}\r_{i}}{∂q_{α} ∂t} + ∑_{β} \frac{∂ \r_{i}}{∂q_{α} ∂q_{β}}\dq_{β} \\
-		&= \pdv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right) + ∑_{β}\pdv{}{q_{β}} \left(\pdv{\r_{i}}{q_{α}}\right)\dq_{β} \\
-		&= \dv{}{t}\left(\pdv{\r_{i}}{q_{α}}\right)
-		\end{align*}
-	donc le second terme de [euler:proof:2] s’écrit
-	math
-		∑_{i}m_{i}\dr_{i} · \dv{}{t} \left(\pdv{\r_{i}}{q_{α}}\right) = ∑_{i}m_{i}\dr_{i} ·  \pdv{\dr_{i}}{q_{α}} = \pdv{}{q_{α}} \underbrace{\left(∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}\right)}_{T}
-	d’où l’_équation d’Euler-Lagrange_ :
-	math euler-lagrange-qt:1
-		\boxed{\dv{}{t} \left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}} \eforall α = 1, …, n
-	Les fonctions $Q_{α}$ et $T$ sont définies avec les $\r_{i}$, $\dr_{i}$ et $t$ à réexprimer en fonction des $(q_{α}, \dq_{α}, t)$. On a
-	Q: Équation d’Euler-Lagrange sans Lagrangien
-		A: En coordonnées généralisées $(q_{α})$,
-			math
-				\dv{}{t} \left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}
-			avec
-			math
-				T = ∑_{i=1}^{N}\frac{1}{2}m_{i}\dr_{i}^{2}(q_{α}, \dq_{α}, t)
-			l’énergie cinétique et
-			math
-				Q_{α} \defeq ∑_{i=1}^{N}\vec{F}_{i}· \pdv{\r_{i}}{q_{α}}
-			la force généralisée.
-	math
-		\begin{align*}
-			T &= ∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}\\
-			&= ∑_{i}\frac{1}{2}m_{i} \left(∑_{α}\pdv{\r_{i}}{q_{α}}\dq_{α} + \underbrace{\x{\pdv{}{t}}}_{\text{on supp. pas de dépendance explicite en temps}}\right)^{2} \\
-			&= ∑_{α, β}\frac{1}{2}M_{α, β}\dq_{α} \dq_{β}
-		\end{align*}
-	avec
-	math
-		M_{α, β} = ∑_{i}m_{i} \pdv{\r_{i}}{q_{α}}· \pdv{\r_{i}}{q_{β}}
-	fonction des coordonnées généralisées.
-
-example
-	Reprenons l’exemple de l’anneau glissant sur un cerceau. On a
-	math
-		T = \frac{1}{2}m \big(\dx^{2} + \dy^{2} + \dz^{2}\big) = ⋯ = \frac{m\ell^{2}}{2}\big(\dot{θ}^{2} + \dot{φ}^{2}(t)\sin^{2} θ\big)
-	donc
-	math
-		\dv{}{t} \left(\pdv{T}{\dot{θ}}\right) - \pdv{T}{θ} = \underbrace{\dv{}{t} \left(m\ell^{2} \dot{θ}\right)}_{=m\ell^{2}\ddot θ} - \frac{m\ell^{2}}{2}\dot{φ}(t)2\cos θ\sin θ
-	On trouve la forme généralisée de la force de gravité $m \g$ :
-	math
-		\vec{F}· δ\r = -mg δz = -mg(-\ell\sin θ δθ) \equiv Q_{θ}δ θ ⟹ Q_{θ} = mg\ell\sin θ
-	On écrit Euler-Lagrange :
-	math
-		\ell^{2} \ddot θ - \ell^{2} \dot{φ}^{2}\cos θ\sin θ= g\ell\sin θ
-	donc
-	math
-		\ddot θ - \left(\frac{g}{\ell} + \dot{φ}^{2}(t)\cos θ\right) \sin θ = 0
-
-### Forces dérivant d’un potentiel-Lagrangien
-
-Lorsque les $\vec{F}_{i}$ dérivent d’un potentiel, i.e.
-math
-	\vec{F}_{i} = -\grad_{\r_{i}} U(\r_{1}, …, \r_{N}, t) = -\dxyz{∂_{x_{i}}U}{∂_{y_{i}}U}{∂_{z_{i}}U}
-On sait en mécanique du point que l’énergie mécanique est conservée: $E_{m} = \underbrace{T}_{\text{e. cinétique}} + \underbrace{U}_{\text{e. potentielle}} = \cte$. On part de
-math
-	Q_{α} = ∑_{i}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}} = -∑_{i}\grad_{\r_{i}}U · \pdv{\r_{i}}{q_{α}} = -∑_{j=1}^{3N}\pdv{U}{x_{j}}\pdv{x_{j}}{q_{α}} = - \pdv{}{q_{α}}U(q_{α}, t)
-car
-math
-	\pdv{}{q_{α}}\big(x_{j}(q_{α}, t)\big) = ∑_{j}\pdv{U}{x_{j}}\pdv{x_{j}}{q_{α}}
-Dans l’équation d’Euler-Lagrange, comme $\pdv{U}{\dq_{α}} = 0$, on peut mettre ce terme à gauche :
-math
-	\dv{}{t}\left(\pdv{}{\dq_{α}}(T-U)\right) - \pdv{}{q_{α}}(T-U) = 0
-On introduit alors le _Lagrangien_ :
-math
-	\boxed{\Lagr (q_{α}, \dq_{α}, t) = T(q_{α}, \dq_{α}, t) - U(q_{α}, t)}
-Euler-Lagrange devient alors
-math
-	\boxed{\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0}
-Q: Équation d’Euler-Lagrange avec le Lagrangien
-	A: math
-			\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0
-		avec le Lagrangien
+			f(\r_{1}, …, \r_{N}, t) = 0
+		Par exerple
 		math
-			\Lagr (q_{α}, \dq_{α}, t) = T(q_{α}, \dq_{α}, t) - U(q_{α}, t)
+			f(\r_{1}, …, \r_{N}, t) ⩾ 0
+		ou
+		math
+			f(\r_{1}, …, \r_{N}, \dr_{1}, …, \dr_{N}, t) = 0
 
-example
-	Reprenons l’anneau sur le cerceau. On a $U(θ) = mgz = mg\ell\cos θ$ donc
-	math
-		\Lagr(θ,\dot{θ}, t) = T-U	 = \frac{m\ell^{2}}{2} \Big(\dot{θ}^{2} + \dot{φ}^{2}(t)\sin^{2} θ\Big) - mg\ell\cos θ
-	On en déduit l’équation du mouvement :
-	math
-		\dv{}{t} \left(\pdv{\Lagr}{\dot{θ}}\right) - \pdv{\Lagr}{θ} = 0 ⟹  ⋯ + mg\ell(-\sin θ) = 0
+## Corrdonnées généralisées
 
-### Potentiel généralisé et force de Lorentz
+Q: Coordonnées généralisées
+	A: Jeu de coordonnées indépendantes qui permet de décrire le système en satisfaisant automatiquement ses contraintes. On peut exprimer le vecteur position en fonction de ses coordonnées.
 
-Si prend
-math
-	Q_{α} = \dv{}{t} \left(\pdv{U}{\dq_{α}}\right) - \pdv{U}{q_{α}}
-dans [euler-lagrange-qt:1], on retombe sur Euler-Lagrange car $\Lagr = T - U(q_{α}, \underline{\dot{q}_{α}}, t)$.
+Q: Variété des configuration
+	A: Espace associé aux coordonnées généralisées, contenant l'ensemble de toutes les positions possibles d'un système en respectant ses contraintes géométriques.
 
-example Force de Lorentz
-	Pour une particule de charge $q$ plongée dans des champs électromagnétiques,
-	math
-		\E(\r, t) = -\grad_{\r} - \pdv{\A(\r,t)}{t}
-	et $\B = \rot \A(\r, t)$. Elle est soumise à la force
-	math
-		\boxed{\vec{F} = q \big(\E(\r, t) + \dr ∧ \B(\r, t)\big)}
-	Montrons qu’elle peut se mettre sous la forme d’un potentiel généralisé avec
-	math
-		\boxed{U(\r, \dr, t) = q \big(V(\r, t) - \dr · \A(\r, t)\big)}
-	On vérifie que ce potentiel convient en regardant la composante selon $x$ de la force généralsée. On traite $x$ et $\dx$ comme des variables indépendantes :
-	math
-		U = q \big(V(x, y, z, t) - \dx A_{x}(x, y, z, t) - \dy A_{y}(x, y, z, t) - \dz A_{z}(x, y, z, t)\big)
-	d’où
-	math
-		\pdv{U}{x} = q \left(\pdv{V}{x} - \dx \pdv{A_{x}}{x} - \dy \pdv{A_{y}}{x} - \dz \pdv{A_{z}}{x}\right)
-	et
-	math
-		\dv{}{t}\left(\pdv{U}{\dx}\right) = -q \dv{}{t}A_{x}(x,y,z,t) = -q \left(\pdv{A_{x}}{t} + \pdv{A_{x}}{x}\dx + \pdv{A_{x}}{y}\dy + \pdv{A_{x}}{z}\dz\right)
-	Ainsi,
-	math
-		Q_{x} = \dv{}{t}\left(\pdv{U}{\dx}\right) - \pdv{U}{x} = q \left(-\pdv{V}{x} - \pdv{A_{x}}{t} + \dy \underbrace{\left(\pdv{A_{y}}{x} - \pdv{A_{x}}{y}\right)}_{=B_{z}} + \dz \underbrace{\left(\pdv{A_{z}}{x} - \pdv{A_{x}}{z}\right)}_{=-B_{y}}\right)
-	On retrove bien la force de Lorentz (le calcul marche également pour les autres composantes) :
-	math
-		Q_{x} = q \big(E_{x} + (\dr ∧ \B)_{x}\big)
-	Finalement,
-	math
-		\boxed{\Lagr(\r, \dr, t) = \frac{1}{2}m\dr^{2} - q \left(V(\r, t) - \dr \A(\r, t)\right)}
+Q: Lien entre variations naturelles et virtuelles
+	A: Si deux trajectoires $\r(t)$ et $(\r + δ\r)(t)$ sont séparées par des déplacements virtuels $δ\r$, on a en notant $\dd \r(t) = \t(t+\dd t) - \r(t)$ les variations naturelles (différentielles le long des trajectoires),
+		math
+			\dd δ\r = δ \dd \r
 
-## Covariance
+## Équations de Lagrange
 
-On considère une transformation ponctuelle $(q_{α}, \dq_{α}) ⟶ (u_{α}, \du_{α})$ avec $u_{α} = u_{α}(q_{1}, …, q_{n}, t)$. On montre (cf. poly) que les équations d’Euler-Lagrange conservent la même forme :
-math
-	\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = 0 \rightsquigarrow \dv{}{t} \left(\pdv{\Lagr}{\du_{α}}\right) - \pdv{\Lagr}{u_{α}} = 0
-
-example Particule 2D soumise à un potentiel $U$
-	En coordonnéès cartésiennes $(x, y, \dx, \dy)$ :
-	math
-		F_{x} = - \pdv{U}{x} \quad\text{et}\quad F_{y} = - \pdv{U}{y}
-	En coordonnées polaires $(r,\dr, θ, \dot{θ})$ avec $x = r\cos θ$ et $y = r\sin θ$ :
-	math
-		\vec{F} = F_{r}\er + F_{θ}\eth = - \pdv{U}{r}\er - \frac{1}{r} \pdv{U}{θ}\eth
-	La force généralisée s’écrit alors
-	math
-		Q_{r} = « \sum_{i} \vec{F}_{i} · \pdv{\r_{i}}{q_{α}} » = F_{x} \pdv{x}{r} + F_{y} \pdv{y}{r} = F_{r}
-	et
-	math
-		Q_{θ} = F_{x} \pdv{x}{θ} + F_{y} \pdv{y}{θ} = r F_{θ}
-	Le lagrangien vaut en cartésiennes
-	math
-		\Lagr(x, \dx, y,\dy) = \frac{1}{2}m(\dr^{2} + \dy^{2}) - U(x,y)
-	et en polaires
-	math
-		\Lagr(r, \dr, θ, \dot{θ}) = \frac{1}{2}m(\dr^{2} + r^{2} \dot{θ}^{2}) - U(r θ)
-	Les équations d’Euler-Lagrange donnent
-	math
-		\dv{}{t} \left(\pdv{\Lagr}{\dx/\dy}\right) - \pdv{\Lagr}{x/y} = 0 ⟹ m\ddx = F_{x/y}
-	et en polaires
-	math
-		\dv{}{t} \left(\pdv{\Lagr}{\dr}\right) - \pdv{\Lagr}{r} = 0 ⟹ m(\ddr - r\dot{θ}^{2}) = F_{r}
-	et
-	math
-		\dv{}{t} \left(\pdv{\Lagr}{\dot θ}\right) - \pdv{\Lagr}{θ} = 0 ⟹ \dv{}{t} \underbrace{\left(mr^{2} \dot θ\right)}_{\text{moment cin. } \r ∧ m\v} = r F_{θ}
-
-
+Q: Équations de Lagrange (sans Lagrangien)
+	A: Pour $α = 1, …, n$ indice des coordonnées généralisées,
+		math
+			\dv{}{t}\left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}
+		avec
+		math
+			T = ∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}
+		l’énergie cinétique et
+		math
+			Q_{α} = ∑_{i}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}}
+		la force généralisée.
 
