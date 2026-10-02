@@ -6,7 +6,7 @@ date 21/09/2026
 ## Préambule mathématique 1
 
 def
-	Toute fonction $f ∈ \L^{1}(\R)$ (ou $\L^{1}(\C)$) admet une transformée de Fourrier $\hat f$ définie par
+	Toute fonction $f ∈ \L^{1}(\R)$ (ou $\L^{1}(\C)$) admet une transformée de Fourier $\hat f$ définie par
 	- à une dimension :
 		math
 			f(x) = \frac{1}{\sqrt{2 π}} \int \hat f(k) e^{i kx} \dd k
@@ -16,7 +16,7 @@ def
 
 rem
 	- Le préfacteur $\frac{1}{(2 π)^{n/2}}$ est une convention utilisée en mécanique quantique.
-	- La transformée de Fourrier est une transformation intégrale parmi d’autres.
+	- La transformée de Fourier est une transformation intégrale parmi d’autres.
 	- Ces intégrales sont définies pour des fonction de $\L^{1}$ et donc naturellement extensible aux fonctions de $\L^{2}(\C)$.
 	- Les $\hat f(\k)$ sont les coefficients de la décomposition sur les ondes planes.
 

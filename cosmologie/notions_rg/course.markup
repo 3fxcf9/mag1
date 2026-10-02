@@ -12,3 +12,66 @@ recall Rappels de mécanique classique
 			\v_{\Ref}(M) = \v_{\Ref'} (M) + \v_{\Ref'/\Ref}
 	- ++Référentiel non galiléen :++ des pseudo-forces (entraînement et Coriolis) apparaissent dans le PFD.
 
+Fin XIXe, un problème se pose : les équations de Maxwell ne sont pas invariantes par transformation galiléenne. Des expériences sont réalisées dans le but de vérifier que la composition des vitesse s’applique aussi à la lumière, par exemple celle de Michelson et Morley (1880) mais sont influctueuses. Les idées de la relativité restreintes sont alors élaborées, et Einstein en fera une formulation qui s’appuie sur deux postulats :
+~ Les lois de la physique (y compris celles de l’électromagnétisme) deivent être les mêmes peu importe le référentiel galiléen.
+~ La vitesse de la lumière (dans le vide) est constante, elle ne dépend pas du référentiel choisi.
+
+Les _transformations de Lorentz_ remplacent les transformations galiléennes :
+math
+	\begin{cases}ct' &= γ(ct - βx) \\ x' &= γ(x - βct) \\ y' = y \\ z' = z\end{cases}
+avec $γ$ le facteur de Lorentz, défini par
+math
+	γ = \frac{1}{\sqrt{1- β^{2}}} \quad\text{avec}\quad β = \frac{v}{c}
+
+- On peut vérifier que si $v \small c$, on retrouve les transformations galiléennes.
+- Les équations de Maxwell sont invariantes par transformation de Lorentz.
+
+Conséquences du fait que $c$ ne dépende pas du référentiel :
+- contraction des longueurs
+- dilatation des durées
+
+Un invariant par la transformation de Loretz est l’intervalle espace-temps
+math
+	\dd s^{2} = -c^{2}\dd t^{2} + \dd x^{2} + \dd y^{2} + \dd z^{2}\\
+Pour un rayon lumineux, on aura $\dd s^{2} = 0$, i.e.
+math
+	c^{2}\dd t^{2} = \dd x^{2} + \dd y^{2} + \dd z^{2}
+d’où
+math
+	c = \frac{\sqrt{\dd x^{2} + \dd y^{2} + \dd z^{2}}}{\dd t} = \frac{\abs{\dd \x}}{\dd t}
+
+## Relativité générale
+
+### Principe d’équivalence
+
+- Il y a égalité entre masse grave et masse inertiele :
+	math
+		m_{i}\vec{a} = m_{a}\vec{g} ==> \vec{a} = \vec{g}
+	L’accélération ne dépend pas de la masse. Ce principe est vérifiéexpérimentalement à $10^{-15}$ près (MICROSCOPE).
+	? La gravitation peut-elle être un effet d’accélération ?
+	Un référentiel en chute libre est indiscernable d’un référentiel accéléré selon $\vec{a} = -\frac{1}{2}\vec{g}t^{2}$.
+
+env Principe d’équivalence
+	À chaque point de l’espace-temps, dans un champ gravitationnel arbitraire, il est possible de choisir un système local de coordonnées $(\x', t')$ tel que, dans une région suffisament petite autour de ce point, toutes les lois de la nature prennent la même forme que dans un système de coordonnées cartésien, non accéléré et sans gravitation.
+
+### Notion de métrique
+
+La métrique sert à calculer une longueur.
+
+Par exemple,
+fig
+	right
+	./figures/metrique_eg.svg
+math
+	\dd \ell^{2} = \dd x^{2} + \dd y^{2} = \mtx{\dd x & \dd y} \mtx{1 & 0 \\ 0&1} \mtx{\dd x \\ \dd y}
+avec $\mtx{1&0\\0&1}$ le tenseur métrique $g_{α, β}$.
+
+++Espace courbe :++ En cosmologie, on ne s’intéresse qu’à des espaces qui ont la même courbure en tout point. Il en existe trois types :
+fig De droite à gouche : espace euclidien plat, fermé sphérique, ouvert hyperbolique.
+	./figures/3_surfaces.svg
+La courbure modifie notre intuition sur les angles et les longueurs
+fig Directions de visée dans un espace (i) plan en traits plein (ii) sphérique en pointillés (ii) hyperbolique en tirets
+	./figures/courbure_angles.svg
+
+
+

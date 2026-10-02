@@ -961,7 +961,7 @@ proof
 thm
 	Soient $a < u ∈ \bar{\R}$. Soit $f$ localement Riemann intégrable dans $\co{a, u}$. Alors, $f$ est Lebesgue-sommable sur $\co{a, u}$ si et seulement si $\Rint_{a}^{u}f$ est une intégrale de Riemann impropre absolument convergente, et dans ce cas,
 	math
-		∫_{\co{a, μ}}\dd μ_{L} f = \Rint_{a}^{u}f
+		∫_{\co{a, u}}\dd μ_{L} f = \Rint_{a}^{u}f
 
 proof
 	Soit $(u_{n})_{n ∈ \N}$ une suite d’éléments de $\co{a, u}$ de limite $u$. On pose
@@ -1041,6 +1041,222 @@ proof
 		Si $p=1$ (donc $q = +∞$) ou l’inverse, on a
 		math
 			\abs{fg} ⩽ \abs{f}\norm{g}_{∞} \quad μ - \pp X
+	~ - Si $p = 1$, on a pour tous $f,g ∈ \L^{1}(X,μ)$,
+			math
+				\norm{f+g}_{1} ⩽ \norm{f}_{1} + \norm{g}_{1}
+			car
+			math
+				∫_{X}\dd μ \abs{f+g} ∫_{X}\dd μ \left(\abs{f} + \abs{g}\right)
+		- Faire le cas $p = +∞$ à titre d’exercise.
+		- Si $p ∈ \oo{1,+∞}$, l’inégalité est vraie si $\abs{f+g}_{p} = 0$. On suppose donc $\norm{f+g}_{p} > 0$, et on a
+			math minkowski:proof:1
+				\begin{align*}
+					\norm{f+g}_{p}^{p} &= ∫_{X}\dd μ \abs{f+g}^{p} \\
+					&= ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{f+g} \\
+					&⩽ ∫_{X} \dd μ \abs{f+g}^{p-1}\big[\abs{f}+\abs{g}\big] \\
+					&= ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{f} + ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{g}
+				\end{align*}
+			Or, d’après l’inégalité de Hölder, on a, en posant $q = \frac{p}{p-1}$ :
+			math minkowski:proof:2
+				\begin{align*}
+					∫_{X}\dd μ \abs{f}\abs{f+g}^{p-1} &⩽  \norm{f}_{p} \norm{\abs{f+g}^{p-1}}_{q} \\
+					&= \norm{f}_{p} \left(∫_{X}\dd μ \abs{f+g}^{(p-1)q}\right)^{\frac{1}{q}} \\
+					&= \norm{f}_{p} \left(∫_{X}\dd μ \abs{f+g}^{p}\right)^{\frac{p-1}{p}} \\
+					&= \norm{f}_{p} \norm{f+g}_{p}^{p-1}
+				\end{align*}
+			En échangeant $f$ et $g$ dans [minkowski:proof:2], on obtient également
+			math minkowski:proof:3
+				∫_{X} \dd μ \abs{g} \abs{f+g}^{p-1} ⩽ \norm{g}_{p} \norm{f+g}_{p}^{p-1}
+			En utilisant [minkowski:proof:2] et [minkowski:proof:3], on obtient finalement
+			math
+				\norm{f+g}_{p}^{p} ⩽ \Big(\norm{f}_{p} + \norm{g}_{p}\Big)\norm{f+g}_{p}^{p-1}
+			Comme on a supposé $\norm{f+g}_{p} > 0$, on peut simplifier pour obtenir
+			math
+				\norm{f+g}_{p} ⩽ \norm{f}_{p} + \norm{g}_{p}
 
+thm Riesz - Fischer
+	Soit $(X, T, μ)$ un espace mesuré. Pour tout $p ∈ \cc{1, +∞}$, $(L^{p}(X, μ), +, · , \norm{\cdot}_{p})$ est un espace vectoriel normé complet, i.e. un espace de Banach.
 
+proof
+	Soit $p ∈ \cc{1,+∞}$.
+	- $\big(L^{p}(X, μ), +, · , \norm{\cdot}_{p}\big)$ est clairement un espace vectoriel normé, l’inégalité de Minkowski garantissant la stabilité par combinaison linéaire. De plus, pour tout $f ∈ \L^{p}(X, μ)$,
+		math
+			\norm{f}_{p} = 0 ⟹  f = 0 \quad μ-\pp X
+		Donc $\norm{\cdot}_{p}$ est définie positive dans $L^{p}$.
+	- Soit $(f_{n})_{n ∈ \N}$ une suite de Cauchy de $\L^{p}(X, μ)$. Il suffit de démontrer que celle-ci admet une sous-suite convergente dans $\L^{p}(X, μ)$ pour prouver sa convergence. Comme $(f_{n})_{n ∈ \N}$ est une suite de Cauchy, il existe $φ: \N ⟶ \N$ strictement croissante telle que la suite $(f_{φ(k)})_{k ∈ \N}$ vérifie
+		math riesz-fischer:proof:1
+			∀ k ∈ \N, \norm{f_{φ(k+1)} - f_{φ(k)}} ⩽ \frac{1}{2^{k+1}}
+		On pose ensuite
+		math
+			g = ∑_{k ∈ \N} \abs{f_{φ(k+1)} - f_{φ(k)}}
+		Il s’agit d’une fonction mesurable positive. En utilisant l’inégalité de Minkowski de façon répétée, on obtient
+		math
+			\begin{align*}
+				\norm{g}_{p} &= \norm{∑_{k ∈ \N} \abs{f_{φ(k+1)} - f_{φ(k)}}}_{p} \\
+				&⩽ ∑_{k ∈ \N}\norm{f_{φ(k+1)} - f_{φ(k)}}_{p} \\
+				&\uleq{\eqref{riesz-fischer:proof:1}} ∑_{k ∈ \N} \frac{1}{2^{k+1}} = \frac{1}{2}∑_{k ∈ \N}\frac{1}{2^{n}} = \frac{1}{2}\frac{1}{1-\frac{1}{2}} = 1 < ∞
+			\end{align*}
+		Donc $g ∈ \L^{p}(X, μ)$. Par conséquent,
+		math
+			g < ∞ \quad μ - \pp X
+		Donc, au vu de la définition de $g$, on en déduit que $∑_{k ∈ \N}(f_{φ(k+1)} - f_{φ(k)})$ est absolument convergente, donc convergente $μ$-presque partout sur $X$. On peut donc définir
+		math
+			f = f_{φ(0)} + ∑_{k ∈ \N} \Big(f_{φ(k+1)} - f_{φ(k)}\Big)
+		qui est évidemment mesurable. Clairement,
+		math
+			∀ k ∈ \N, f_{φ(k)} = f_{φ(0)} + ∑_{q=0}^{k-1} \Big(f_{φ(q+1)} - f_{φ(q)}\Big)
+		si bien que pour tout $k ∈ \N$,
+		math rissz-fischer:2
+			\begin{align*}
+				\norm{f - f_{φ(k)}}_{p} &= \norm{∑_{q=k}^{+∞}\Big(f_{φ(q+1)} - f_{φ(q)}\Big)}_{p} \\
+				&⩽ ∑_{q=k}^{+∞} \norm{f_{φ(q+1)} - f_{φ(q)}}_{p} \\
+				&\uleq{\eqref{riesz-fischer:proof:1}} ∑_{q=k}^{+∞}\frac{1}{2^{q+1}} \\
+				&= \frac{1}{2^{k+1}}∑_{q ∈ \N} \frac{1}{2^{q}} \\
+				&= \frac{1}{2^{k+1}}\frac{1}{1-\frac{1}{2}} = \frac{1}{2^{k}} < ∞
+			\end{align*}
+		On en déduit que la fonction mesurable $f - f_{φ(k)}$ est dans $\L^{p}(X, μ)$ quel que soit $k ∈ \N$. Or, $f_{φ(k)} ∈ \L^{p}(X, μ)$ donc par structure d’espace vectoriel de cet ensemble, $f ∈ \L^{p}(X, μ)$. En prenant [riesz-fischer:2] à la limite $k \to+∞$, on obtient
+		math
+			\norm{f - f_{φ(k)}}_{p} \arrowlim{k\to+∞}0
 
+rem
+	$(L^{2}(X, μ), +, · , \scalar{\cdot}{\cdot})$ est un espae de Hilbert avec((L’application suivante n’est pas définie positive dans $\L^{p}$ mais l’est dans $L^{p}$.))
+	math
+		\scalar{\cdot}{\cdot}: \applic{L^{2}(X, μ)^{2}}{\C}{(f,g)}{(f,g) = ∫_{X}\dd μ fg^{*}}
+	En effet, on a
+	math
+		∀ f ∈ \L^{2}(X, μ), \norm{f}_{2} = \scalar{f}{f}^{1/2}
+	Dans ce cas, l’inégalité de Hölder est connue sous le nom d’inégalité de Schwarz, à savoir
+	math
+		∀ f,g ∈ \L^{2}(X, μ), ∫_{X}\dd μ \abs{fg} ⩽ \norm{f}_{2} \norm{g}_{2}
+	Elle entraîne l’inégalité de Cauchy-Schwarz : si $f,g ∈ \L^{2}(X, μ)$,
+	math
+		\begin{align*}
+			\abs{\scalar{f}{g}} &= \abs{∫_{X}\dd μ fg^{*}} \\
+			&⩽ ∫_{X}\dd μ \abs{fg^{*}} \\
+			&⩽ \norm{f}_{2} \norm{g}_{2}
+		\end{align*}
+	d’où l’inégalité de Cauchy-Schwarz :
+	math
+		\abs{\scalar{f}{g}} ⩽ \norm{f}_{2} \norm{g}_{2}
+
+### L’algèbre de convolution $\L^{p}(\R)$
+
+def Algèbre de Banach
+	Algèbre $(E, +, · , \star, \norm{· })$ telle que :
+	- $(E, +, · , \norm{· })$ soit un espace de Banach,
+	- $(E, +, · , \star)$ soit une algèbre,
+	- $∀ x, y ∈ E, \norm{x \star y}⩽ \norm{x}\norm{y}$
+
+	On dira d’une algèbre de Banach $(E, +, · , \star, \norm{\cdot})$ qu’elle est :
+	- _associative_ si $(te, +, · , \star)$ est une algèbre associative
+	- _commutative_ si $(E, +, · , \star)$ est commutative
+	- _unitaire_ si il existe une unité pour la loi $\star$. Elle est non-unitaire dans le cas contraire.
+
+	Dans une algèbre de Banach non-unitaire, on dira d’une suite $(u_{n})_{n ∈ \N}$ qu’elle est une _approximation de l’unité_ si
+	math
+		∀ x ∈ E, \begin{cases}\norm{u_{n}\star x - x} \arrowlim{n\to+∞} 0 \\ \norm{u\star u_{n} - x} \arrowlim_{n\to+∞}0\end{cases}
+
+defprop Algèbre de convolution
+	Pour toutes fonction $f,g ∈ \L^{1}(\R)$, on définit $f\star g ∈ \L^{1}(\R)$ en posant
+	math
+		∀ x ∈ \R, f\star g(x) = ∫_{\R}\dd t f(x-t)g(t)
+	On appelle $\star$ le _produit de convolution_. Alors $(L^{1}(\R), +, · , \star, \norm{\cdot}_{1})$ est une algèbre de Banach associative, commutative et non unitaire.
+
+proof
+	Montrons dans un premier temps les trois axiomes de la définition d’une algèbre de Banach.
+	- D’après Riesz-Fischer, $(L^{1}(\R), +, · , \norm{\cdot}_{1})$ est un espace de Banach.
+	- $(\L^{1}(\R), +, · , \star)$ est une algèbre par linéarité de l’intégrale.
+	- Soient $f,g ∈ \L^{1}(\R)$. Alors, en utilisant Fubini-Tonelli, on obtient
+		math
+			\begin{align*}
+				∫_{\R}\abs{f\star g(x)} &= ∫_{\dd x \abs{∫_{\R} f(x-t)g(t)}} \\
+				&⩽ ∫_{\R}\dd x∫_{\R}\dd t \abs{f(x-t)} \abs{g(t)} \\
+				&= ∫_{\R}\dd t \left(∫_{\R}\dd x \abs{f(x-t)}\right)\abs{g(t)} \\
+				&=\norm{f}_{1} \norm{g}_{1}
+			\end{align*}
+		de sorte que
+		math
+			\norm{f\star g}_{1} ⩽ \norm{f}_{1} \norm{g}_{1}
+		ce qui montre le dernier point.
+	Si $f,g ∈ \L^{1}(\R)$, on a pour tout $x ∈ \R$, par définition
+	math
+		\begin{align*}
+			(f\star g)(x) &= ∫_{\R}\dd tf(x-t)g(t)\\
+			&= ∫_{\R}\dd y f(y)g(x-y)\\
+			&= (g\star f)(x)
+		\end{align*}
+	et on montre de même l’associativité. On montrera au troisième chapitre le caractère non-unitaire de l’algèbre de convolution.
+
+rem
+	- On peut définir une algèbre de convolution sur $L^{1}(G)$ où $G$ est un groupe topologique compact en posant
+		math
+			∀ g ∈ G, F_{\star}(G)(g) = ∫_{G}\dd μ_{H}(h)F(gh^{-1})G(h)
+	- Il n’y a pas d’unité dans cette algèbre, d’où l’approximation de l’unité.
+
+Pour $y ∈ \R$, on définit la translatée $τ_{y}(f)$ de toute fonction mesurable $f:\R ⟶ \bar{\R}$ par
+	math
+		∀ x ∈ \R , τ_{y}(f)(x) = f(x-y)
+
+prop Continuité de la translation au sens de $\norm{\cdot}_p$
+	Si $p ∈ \cc{1,+∞}$ et $f ∈ \L^{p}(\R)$, l’application
+	math
+		\applic{\R}{\L^{p}(\R)}{y}{τ_{y}(f)}
+	est continue, c’est-à-dire que
+	math
+		\lim_{y\to 0}\norm{τ_{y}(f) - f}_{p} = 0
+
+proof
+	La propriété est clairement vraie si $f = \1_{A}$ pour $A ∈ \L_{\R}$, elle l’est donc également si $f$ est une fonction étagée.
+	Soit $f$ une fonction mesurable positive, qui est donc la limite d’une suite croissante de fonctions étagées positives $(s_{n})_{n ∈ \N}$. Alors, pour $p ∈ \co{1,+∞}$, la suite $\left(\abs{f-s_{n}}^{p}\right)_{n ∈ \N}$ est une suite de fonctions mesurables telle que $\abs{f-s_{n}}^{p} \arrowlim_{n\to+∞}0$. D’autre part, comme $∀ n ∈ \N, 0 ⩽ s_{n} ⩽ f$, on a
+	math
+		∀ n ∈ \N, \abs{f-s_{n}}^{p} ⩽ 2^{p} \abs{f}^{p}
+	et $f ∈ \L^{p}(\R)$ entraîne $\abs{f}^{p} ∈ \L^{1}(\R)$. On peut donc utiliser le théorème de convergence dominée, qui donne
+	math
+		\lim_{n\to+∞}∫_{\R}\dd μ_{L} \abs{f-s_{n}}^{p} = 0
+	i.e. $\norm{f-s_{n}}_{p} \arrowlim{n\to+∞}0$. Ainsi, pour $y ∈ \R$,
+	math
+		\begin{align*}
+			\norm{τ_{y}(f) - f}_{p} &= \norm{τ_{y}(f) - τ_{y}(s_{n}) + τ_{y}(s_{n}) - s_{n} + s_{n} - f}_{p} \\
+			&⩽ \norm{τ_{y}(f) - τ_{y}(s_{n})}_{p} + \norm{τ_{y}(s_{n}) - s_{n}}_{p} + \norm{s_{n} - f}_{p} \\
+			&= 2 \norm{f - s_{n}}_{p} + \norm{τ_{y}(s_{n}) - s_{n}}_{p} \arrowlim{y\to 0} 2 \norm{f-s_{n}}_{p}
+		\end{align*}
+	et ce dernier terme tend vers $0$.
+
+Pour toute fonction mesurable $f:\R ⟶ \bar{\R}$ et tout $a ∈ \R_{+}^{*}$, on définit la _dilatée de $f$_ $ξ_{a}(f)$ en posant $∀ x ∈ \R$,
+math
+	ξ_{a}(f)(x) = f(ax)
+
+thm Approximation de l’unité dans $(\L^1(\R), +, \cdot, \star, \norm{\cdot}_1)$
+	Soit $u ∈ \L^{1}(\R)$ telle que $∫_{\R}\dd μ_{L} u = 1$. Alors, la suite $(u_{n} = n ξ_{n}(u))_{n ∈ \N^{*}}$ est une approximation de l’unité de l’algèbre de Banach $\big(L^{1}(\R), +, · , \star, \norm{\cdot}_{1}\big)$.
+
+proof
+	Soit $f ∈ \L^{1}(\R)$. Alors, par définition, on a pour $n ∈ \N^{*}$ et $x ∈ \R$
+	math approx-unite:1
+		\begin{align*}
+			f\star u_{n}(x) &= n ∫_{\er}\dd t f(x-t)u(nt) \\
+			&= ∫_{\er}\dd y f \left(x - \frac{y}{n}\right) u(y)
+		\end{align*}
+	D’autre part, comme $∫_{\R}\dd μ_{L} u = 1$, on peut écrire
+	math
+		∀ x ∈ \R, ∫_{\R}\dd y f(x)u(y)
+	et on obtient alors, pour tout $n ∈ \N^{*}$ :
+	math
+		\begin{align*}
+			\norm{f\strar u_{n} - f}_{1} &= ∫_{\R}\dd x \abs{f\star u_{n}(x) - f(x)} \\
+			&= ∫_{\R} \dd x \abs{∫_{\R}\dd y \left[f \left(x - \frac{y}{n}\right) - f(x)\right]u(y)} \\
+			⩽ ∫_{\R}\dd x ∫_{\R}\dd y \abs{f \left(x- \frac{y}{n} - f(x)\right)}\abs{u(y)} \\
+			&\oleq{Fubini-T} ∫_{\R}\dd y \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} \\
+		\end{align*}
+	Or, $\big(y ⟼  \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)}\big)_{n ∈ \N}$ est une suite de fonctions mesurables de limite 0 d’après la continuité de la translation, et pour tout $y ∈ \R$,
+	math
+		\begin{align*}
+			\norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} &⩽ \Big(\norm{τ_{y/n}(f)}_{1} + \norm{f}_{1}\Big) \abs{u(y)} \\
+			&= 2 \norm{f}_{1} \abs{u(y)}
+		\end{align*}
+	où $u ∈ \L^{1}(\R)$. Ainsi, le théorème de convergence dominée donne $\lim_{n\to+∞} ∫_{\er}\dd y \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} = 0$, dont on déduit
+	math
+		\lim_{n\to+∞} \norm{f \star a_{n} - f}_{1} = 0
+
+rem
+	- L’hypothèse $∫_{\R}\dd μ_{L} u = 1$ est peu restrictive; il simple normalisation de la fonction permet de la satisfaire.
+	- Nous répondrons dans le chapitre quatre à la question _Qu’approximent les approximations de l’unité ?_

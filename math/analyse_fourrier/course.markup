@@ -1,0 +1,11 @@
+../../common/course.lib.markup
+
+title Analyse de Faurier
+date 02/10/2026
+
+## Historique
+
+- Euler, Bernoulli et d’Alembert résolvent en 1750 résout le problème de la corde vibrante avec des outils s’assimilent aux décompositions en séries de Fourier.
+- Fourier publie sa _Théorie analytique de la chaleur_ en 1822, dans laquelle il résout l’équation de diffusion en utilisant des séries qui porteront son nom.
+- Riemann, et plus tard Lebesgue et Riesz s’intéressent à l’analyse spectrale de fonction non-périodiques, et développent l’analyse de Fourier.
+- Aujourd’hui, on utilise l’analyse harmonique sur des variétés, sur des groupes et d’autres objets, ce qui fait de cette théorie un domaine actif.
