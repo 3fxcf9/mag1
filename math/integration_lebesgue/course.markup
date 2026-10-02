@@ -258,7 +258,7 @@ proof
 			\begin{align*}
 				\max(f, g)^{-1}\big(\oo{a, +∞}\big) &= \set{x ∈ X \where \max(f, g) > a}\\
 				&= \set{x ∈ X \where f(x) > a \text{ ou } g(x) > a}\\
-				&= \set{x ∈ X \where f(x) > a} ∪ \set{x ∈ tx, g(x) > a}\\
+				&= \set{x ∈ X \where f(x) > a} ∪ \set{x ∈ X, g(x) > a}\\
 				&= \underbrace{f^{-1} \big(\oo{a, +∞}\big)}_{∈ T_{X}} ∪ \underbrace{g^{-1} \big(\oo{a,+∞}\big)}_{∈ T_{X}} ∈ T_{X}
 			\end{align*}
 	~ Les fonctions $f_{\pm} = \max(\pm f, 0)$ sont mesurables (troisième point) donc $\abs{f} = f_{+} + f_{-}$ l’est également.
@@ -558,13 +558,13 @@ proof
 ### Théorème de convergence monotone
 
 thm TCM, Lebesgue / Beppo Levi
-	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite croissante de fonctions mesurables positives. Alors, il existe une fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ telle que $\lim_{n\to+∞}f_{n} = f$ et
+	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n}: X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite croissante de fonctions mesurables positives. Alors, cette suite converge vers une fonction mesurable positive $f: X ⟶ \bar{\R_{+}}$ et
 	math
 		\lim_{n\to+∞}∫_{X}\dd μ f_{n} = ∫_{X}\dd μ f
 	as_flashcard
 
 proof
-	Comme $(f_{n})_{n ∈ \N}$ est croissante, la suite $ \left(∫_{tx}\dd μ f_{n}\right)_{n ∈ \N}$ est également croissante. Il existe donc $λ ∈ \bar{\R_{+}}$ tel que
+	Comme $(f_{n})_{n ∈ \N}$ est croissante, la suite $ \left(∫_{X}\dd μ f_{n}\right)_{n ∈ \N}$ est également croissante. Il existe donc $λ ∈ \bar{\R_{+}}$ tel que
 	math
 		\lim_{n\to+∞} ∫_{X}\dd  μ f_{n} = λ
 	Comme pour tout $n ∈ \N$, $f_{n} ⩽ f$, on a nécessairement
@@ -601,11 +601,12 @@ cor
 	Soit $(X, T, μ)$ un espace mesuré. Soit $\big(f_{n}: X ⟶ \bar{\R_{+}}\big)_{n ∈ \N}$ une suite de fonctions mesurables positives. Alors,
 	math
 		∑_{n ∈ \N}∫_{X}\dd μf_{n} = ∫_{X}\dd μ ∑_{n ∈ \N}f_{n}
+	as_flashcard Corollaire du théorème de convergence monotone pour les séries
 
 proof
 	Soient $(X, T, μ)$ et $(f_{n})$ comme ci-dessus. Le corollaire prouve par une récurrence immédiate que pour $N ∈ \N$,
 	math
-		∑_{n=0}^{+∞}∫_{X}\dd μf_{n} = ∫_{X}\dd μ ∑_{n=0}^{N}f_{n}
+		∑_{n=0}^{N}∫_{X}\dd μf_{n} = ∫_{X}\dd μ ∑_{n=0}^{N}f_{n}
 	En passant à la limite $N\to+∞$, et en invoquant le théorème de convergence monotone, on obtient
 	math
 		∑_{n ∈ \N}∫_{X}\dd μ f_{n} = \lim_{N\to+∞}∫_{X}\dd μ ∑_{n=0}^{N}f_{n} \oeq{TCM} ∫_{X}\dd μ ∑_{n ∈ \N}f_{n}
@@ -622,10 +623,11 @@ rem
 
 def
 	Soit $(X, T, μ)$ un espace mesuré. Pour toute fonction mesurable $f: X ⟶ \bar{\R}$. On définit $f_{\pm} = \max(0, \pm f)$. Ce sont clairement deux fonction mesurables positives vérifiant
-	==FIG: sin, sin+ et sin-==
 	math
 		f = f_{+} - f_{-} \quad\text{et}\quad \abs{f} = f_{+} + f_{-}
 	On en déduit que $\abs{f}$ est mesurable positive.
+	fig En couleur et tirets, les parties respectivement positive et négative de la fonction en transparence
+		./figures/parties_positive_negative.svg
 
 defprop
 	Soit $(X, T, μ)$ un espace mesuré. On dira d’une fonction mesurable $f: X ⟶ \bar{\R}$ qu’elle est (Lebesgue-)sommable si
@@ -634,6 +636,11 @@ defprop
 	On notera $\L^{1}(X, μ)$ l’ensemble des fonctions Lebesgue-sommables sur $X$. On pose alors pour toute fonction $f ∈ \L^{1}(X, μ)$
 	math int-reelle:defprop
 		∫_{X}\dd μ f = ∫_{X}\dd μ f_{+} - ∫_{X}\dd μ f_{-}
+	Q: Fonction Lebesgue-sommable
+		A: Fonction $f: X ⟶ \bar{\R}$ sur un espace mesuré $(X, T, μ)$ vérifiant
+			math
+				∫_{X}\dd μ \abs{f} < ∞
+			L’ensemble des fonctions Lebesgue-sommables est $\L^{1}(X, μ)$ et on définit l’intégrale d’une telle fonction comme la différence de l’intégrale de sa partie positive et de l’intégrale de sa partie négative.
 
 proof
 	_Montrons que le membre de droite de [int-reelle:defprop] est toujours bien défini._ Pour toute fonction Lebesgue-sommable $f$, on a par définition
@@ -676,6 +683,7 @@ lemma Fatou
 	Soit $(X, T, μ)$ un espace mesuré. Soit $(f_{n} : X ⟶ \bar{\R_{+}})_{n ∈ \N}$ une suite de fonctions mesurables positives. Alors
 	math
 		∫_{X}\dd μ \liminf_{n\to+∞}f_{n} ⩽ \liminf_{n\to+∞}∫_{X}\dd μf_{n}
+	as_flashcard Lemme de Fatou
 
 proof
 	Soient $(X, T, μ)$ et $(f_{n})$ de tels objets. On considère la suite de fonctions $(g_{k})_{k ∈ \N}$ définies par
@@ -886,7 +894,7 @@ proof
 			∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)s &= ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)∑_{p=1}^{N}s_{p}\1_{A_{p}} \\
 			&= ∑_{p=1}^{N}s_{p} ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)\1_{A_{p}} \\
 			&= ∑_{p=1}^{N} s_{p}∫_{X}\dd μ_{X}(x) μ_{X} \Big((A_{p})_{x, · }\Big) \quad \left(= ∑_{p=1}^{N}s_{p}∫_{Y}\dd μ_{Y}(y)μ_{X}\Big((A_{p})_{· , y}\Big)\right) \\
-			&= ∫_{tx}\dd μ_{X}(x) ∑_{p=1}^{N}s_{p}μ_{Y} \Big((A_{p})_{x, · }\Big) \\
+			&= ∫_{X}\dd μ_{X}(x) ∑_{p=1}^{N}s_{p}μ_{Y} \Big((A_{p})_{x, · }\Big) \\
 			&= ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}s\right)
 		\end{align*}
 	En revenant à [fubini-tonelli:1], on trouve finalement
@@ -1154,7 +1162,7 @@ def Algèbre de Banach
 
 	Dans une algèbre de Banach non-unitaire, on dira d’une suite $(u_{n})_{n ∈ \N}$ qu’elle est une _approximation de l’unité_ si
 	math
-		∀ x ∈ E, \begin{cases}\norm{u_{n}\star x - x} \arrowlim{n\to+∞} 0 \\ \norm{u\star u_{n} - x} \arrowlim_{n\to+∞}0\end{cases}
+		∀ x ∈ E, \begin{cases}\norm{u_{n}\star x - x} \arrowlim{n\to+∞} 0 \\ \norm{u\star u_{n} - x} \arrowlim{n\to+∞}0\end{cases}
 
 defprop Algèbre de convolution
 	Pour toutes fonction $f,g ∈ \L^{1}(\R)$, on définit $f\star g ∈ \L^{1}(\R)$ en posant
