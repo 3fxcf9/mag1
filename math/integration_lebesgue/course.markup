@@ -1215,7 +1215,7 @@ prop Continuité de la translation au sens de $\norm{\cdot}_p$
 
 proof
 	La propriété est clairement vraie si $f = \1_{A}$ pour $A ∈ \L_{\R}$, elle l’est donc également si $f$ est une fonction étagée.
-	Soit $f$ une fonction mesurable positive, qui est donc la limite d’une suite croissante de fonctions étagées positives $(s_{n})_{n ∈ \N}$. Alors, pour $p ∈ \co{1,+∞}$, la suite $\left(\abs{f-s_{n}}^{p}\right)_{n ∈ \N}$ est une suite de fonctions mesurables telle que $\abs{f-s_{n}}^{p} \arrowlim_{n\to+∞}0$. D’autre part, comme $∀ n ∈ \N, 0 ⩽ s_{n} ⩽ f$, on a
+	Soit $f$ une fonction mesurable positive, qui est donc la limite d’une suite croissante de fonctions étagées positives $(s_{n})_{n ∈ \N}$. Alors, pour $p ∈ \co{1,+∞}$, la suite $\left(\abs{f-s_{n}}^{p}\right)_{n ∈ \N}$ est une suite de fonctions mesurables telle que $\abs{f-s_{n}}^{p} \arrowlim{n\to+∞}0$. D’autre part, comme $∀ n ∈ \N, 0 ⩽ s_{n} ⩽ f$, on a
 	math
 		∀ n ∈ \N, \abs{f-s_{n}}^{p} ⩽ 2^{p} \abs{f}^{p}
 	et $f ∈ \L^{p}(\R)$ entraîne $\abs{f}^{p} ∈ \L^{1}(\R)$. On peut donc utiliser le théorème de convergence dominée, qui donne
@@ -1241,8 +1241,8 @@ proof
 	Soit $f ∈ \L^{1}(\R)$. Alors, par définition, on a pour $n ∈ \N^{*}$ et $x ∈ \R$
 	math approx-unite:1
 		\begin{align*}
-			f\star u_{n}(x) &= n ∫_{\er}\dd t f(x-t)u(nt) \\
-			&= ∫_{\er}\dd y f \left(x - \frac{y}{n}\right) u(y)
+			f\star u_{n}(x) &= n ∫_{\R}\dd t f(x-t)u(nt) \\
+			&= ∫_{\R}\dd y f \left(x - \frac{y}{n}\right) u(y)
 		\end{align*}
 	D’autre part, comme $∫_{\R}\dd μ_{L} u = 1$, on peut écrire
 	math
@@ -1261,7 +1261,7 @@ proof
 			\norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} &⩽ \Big(\norm{τ_{y/n}(f)}_{1} + \norm{f}_{1}\Big) \abs{u(y)} \\
 			&= 2 \norm{f}_{1} \abs{u(y)}
 		\end{align*}
-	où $u ∈ \L^{1}(\R)$. Ainsi, le théorème de convergence dominée donne $\lim_{n\to+∞} ∫_{\er}\dd y \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} = 0$, dont on déduit
+	où $u ∈ \L^{1}(\R)$. Ainsi, le théorème de convergence dominée donne $\lim_{n\to+∞} ∫_{\R}\dd y \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} = 0$, dont on déduit
 	math
 		\lim_{n\to+∞} \norm{f \star a_{n} - f}_{1} = 0
 
