@@ -1,0 +1,134 @@
+../../common/course.lib.markup
+
+show_flashcards
+
+title Introduction aux mesures expérimentales
+date 05/10/2026
+
+Q: Expérience d’Eddington et Dyson A: Première confirmation expérimentale de la relativité générale par observation de la déviation angulaire de l’image d’étoiles au passage du Soleil. Elle a été réalisée lors de l’éclipse de 1919.
+
+## Erreurs et incertitudes
+
+Mesure physique : Détermination par l’epérience d’une grandeur inconnue.
+Erreur : Différence entre la valeur mesurée et la valeur vraie.
+
+### Types d’erreurs
+
+Q: Deux types d’erreurs de mesure
+	A:
+		1. Erreur aléatoire : imprévisible. Distribution de probabilité répartie autour de la valeur vraie. Se caractérise par une étude statistique. Elles peuvent être estimées.
+		2. Erreur systématique : Écart reproductible, indétectable par étude statistique. Il peut être corrigé. (étalonnage, oubli d’un paramètre, mauvaise procédure…)
+
+table
+	Erreur | Aléatoire | Systématique
+	faible | précise | non (ou peu) biaisée
+	forte | imprécise, bruitée | biaisée
+
+- incertitude relative $δx$
+- incertitude absolue $δx/x$
+
+On écrit $X_{m} = x \pm δx$ avec $x$ la valeur mesurée et $δx$ l’incertitude absolue.
+
+### Chiffres significatifs
+
+Q: Nombre de chiffres significatifs
+	A: Nombre de chiffres d’un résultat, sans tenir compte des zéros à gauche (qui peuvent être enlevés en changeant d’unité), ni des puissances de dix. Une précision de plus ou moins une unité à la puissance du chiffre le moins significatif est sous-entendue.
+
+Q: Méthode d’écriture d’un résultat entaché d’une incertitude
+	A: Le dernier chiffre significatif de la valeur mesurée doit être à la même position que l’incertitude :
+		- on tronque l’incertitude pour ne garder qu’un chiffre significatif
+		- on arrondit le résultat pour ne plus avoir de chiffre moins significatif que l’incertitude.
+
+### Méthode du majorant
+
+Pour une mesure unique (étude statistique impossible), on ajoute les incertituedes de chaque étape de la mesure, pour obtenir une majoration de l’incertitude de lamesure.
+
+Q: Incertitude lors d’une mesure unique sur un ++appareil analogique++
+	A: math
+			δx_{\text{constructeur}} = C_{\%} × \text{calibre utilisé}
+		avec $C$ la classe (v. notice ou choisir 2 à défaut).
+Q: Incertitude lors d’une mesure unique sur un ++appareil numérique++
+	A: math
+			δx_{\text{constructeur}} = \%L + N_{ur}
+		avec
+		- $\%L$ un porcentage de la valeur lue,
+		- $N_{ur}$ (unité de représentation) un multiple de la plus petite valeur que l’affichage numérique peut donner dans le calibre utilisé.
+
+Vernier : graduations secondaires espacées de $(N-1)/N^{\text{ièmes}}$ d’une graduation principale. La graduation secondaire alignée à une graduation principale fournit le digit supplémentaire.
+
+### Méthode statistique
+
+Q: Loi normale (distribution Gaussienne) et résultats
+	A: math
+			G(x) = \frac{1}{σ \sqrt{2 π}}e^{- \frac{(x-\bar{x})^{2}}{2 σ^{2}}}
+		On en déduit
+		math
+			G(σ) = \frac{G(\bar{x})}{e^{2}} \quad\text{et}\quad G(G \sqrt{2 \ln 2}σ) = \frac{G(\bar{x})}{2}
+
+Q: Écart type
+	A: Racine carrée de la moyenne (ou presque, cf $N-1$) du carré des écarts à la moyenne :
+		math
+			σ_{x} = \sqrt{\frac{1}{N-1} ∑_{i=1}^{N} (x_{i} - \bar{x})^{2}}
+		Il a la dimension de $x$.
+
+Q: Intervalles de confiance $\cc{\bar{x} - α σ, \bar{x} + α σ}$ d’une loi gaussienne en fonction de $α$
+	A: Calculé avec
+		math
+			P_{\cc{\bar{x} - σ_{x}, \bar{x} + σ_{x}}} = ∫_{\bar{x}-σ_{x}}^{\bar{x}+σ_{x}}G(x)\dd x
+		On trouve
+		table
+			$α$ | 1 | 2 | 3 | 4
+			$P$ | 68.3% | 95.4% | 99.7% | 99.99%
+
+Q: Écart-type de la distribution obtenue par moyennage de $N$ mesures d’une grandeur $x$
+	A: Si $σ_{x}$ est l’écart-type de la distribution liée à une mesure unique,
+		math
+			σ_{\bar{x}} = \frac{σ_{x}}{\sqrt{N-1}}
+
+#### Coefficient de Student
+
+Q: Coefficient de Student
+	A: L’écart-type favorise la moyenne d’échantillon. On utilise alors
+		math
+			σ_{\bar{x}} = k \frac{σ_{x}}{\sqrt{n-1}}
+		avec $k$ le coefficient de Student. Il vaut
+		table
+			N | 2 | 5 | 10 | 100 | $∞$
+			$k_{95\%}$ | 12.7 | 2.78 | 2.26 | 1.98 | 1.96
+
+
+Q: Types de probabilités et méthodes utilisées
+	A: Type A: calculées à partir de plusieurs mesures
+		- méthode statistique
+		- incertitude type : écart-type de la distribution
+		- incertitude élargie (95%) : 2 fois l’écart-type
+		Type B: calcurées à partir d’une seule mesure effective.
+		- méthode du majorant
+			- méthode probabiliste (choix d’une loi de probabilité)
+
+Q: Choix usuels de lois de probabilité, utilisation et écart-types associés
+	A:
+		- ++loi normale++ (instruments à graduations)
+			math
+				σ = \frac{a}{3} = \frac{\text{graduation}}{6}
+			fig
+				./figures/loi_normale.svg
+		- ++loi uniforme++ (indicateurs numériques, jauge avec tolérance)
+			math
+				σ = \frac{a}{\sqrt{3}} = \frac{\text{résolution}}{2 \sqrt{3}}
+			fig
+				./figures/loi_uniforme.svg
+		- ++dérivée d’arcsinus++ (variation sinusoïdale entre deux valeurs)
+			math
+				σ = \frac{a}{\sqrt{2}} = \frac{\text{variations}}{\sqrt{2}}
+			fig
+				./figures/loi_arcsin.svg
+
+Q: Incertitude sur $f(x)$ (mesure indirecte)
+	A: math
+		math
+			δ_{y} = \abs{\pdv{f}{x}}δx
+		La pente de la tangente peut être vue comme la sensibilité de la variable $y$ au paramètre $x$.
+		Si $f$ dépend des variables $α_{1}, …, α_{n}$ et que les valeurs de ces paramètres ont été obtenues par des mesures uniques, on a
+		math
+			δy = \abs{\pdv{f}{α_{1}}}δα_{1} + ⋯ + \abs{\pdv{f}{α_{n}}}δα_{n}

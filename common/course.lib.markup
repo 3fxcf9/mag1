@@ -7,6 +7,17 @@ css_file_link static/css/figure_zoom.css
 parser description
 	metadata $arg
 
+parser show_flashcards
+	markup
+		css
+			.flashcard {
+				display:block;
+				font-size: 1rem;
+				& * {
+					font-size: 1rem !important;
+				}
+			}
+
 // Show flashcards if ?hidden=true
 js
 	if (new URLSearchParams(window.location.search).get('hidden') === 'true') {

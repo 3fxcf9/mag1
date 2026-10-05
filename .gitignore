@@ -1,3 +1,5 @@
+todo.markup
+
 anglais/
 
 ignore/
@@ -15,3 +17,5 @@ theorie_groupes/books
 electromagnetism/books
 electromagnetism/*/lecture_slides.pdf
 electromagnetism/*/lecture_notes.pdf
+
+incertitudes/intro/cours.pdf
