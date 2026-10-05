@@ -1,0 +1,148 @@
+../../common/course.lib.markup
+
+title Theory
+date 05/10/2026
+
+## The Wave Function
+
+### The Schrödinger equation
+
+Q: Schrodinger equation
+	A: math
+			i\hbar \pdv{Ψ}{t} = -\frac{\hbar^{2}}{2m}\pdvN{}{x}{2} + V Ψ
+
+Q: Born’s statistical interpretation of the wave function
+	A: The probability of finding the particle between $a$ and $b$ at time $t$ is
+		math
+			∫_{a}^{b}\abs{Ψ(x,t)}^{2}\dd x
+
+Q: Schools of thought regarding quantum indeterminacy
+	A: Where was a particle just before being mesured at a point ?
+		- The *realist* position : it was at the same location. The quantum mechanics is then incomplete, unable to tell us its precise location.
+		- The *orthodox* position (Copenhagen interpretation) : the particle wasn’t really anywhere. Observation produce what is to be mesured.
+		- The *agnostic* position : "Before measurement" simply doesn’t exist.
+		John Bell proved in 1964 the importance of knowing which position is correct.
+
+Q: What happens when a measurement is conducted on a particle ?
+	A: Its wave function collapses immediately after the measurement and form a thin spike around the point the particle was found at. It then spreads out again, in accordance with the Schrödinger equation.
+
+Q: Normalisation condition
+	A: According the the statistical interpretation,
+		math
+			∫_{-∞}^{+∞}\abs{Ψ(x,t)}^{2} \dd x = 1
+		- This condition is compatible with the Schrödinger equation because the latter is linear.
+		- This condition cannot be satisfied for non square-integrable functions which are then non-physical solutions.
+		- *Schrödinger equation preserves the normalization*. In fact, starting with Schrödinger equation, we obtain
+			math
+				\dv{}{t}∫_{-∞}^{+∞}\abs{Ψ(x,t)}^{2} \dd x = 0
+
+### Momentum
+
+Q: Expectation value of the position of a particle
+	A: The expectation value is the average of measurements on an ensemble of *identically-prepared systems*, not the average of repeated measumerents on one and the same system.
+
+
+Q: Expectation value of the momentum
+	A: The expectation value of the velocity is equal to the time derivative of the expectation value of position (note: the velocity of the expectation value of $x$ is not the same thing as the velocity of the particle) :
+		math
+			\moy p = m \dv{\moy x}{t} = i\hbar \int \left(Ψ^{*} \pdv{Ψ}{x}\right)\dd x
+
+Q: Expectation value of a classical dynamical variable from the wave function. Position and momentum.
+	A: Every such variable $Q$ can be expressed in terms of position and momentum. We then simply
+		- replace every $p$ by $-i \hbar \pdv{}{x}$
+		- insert the resulting operator between $Ψ^{*}$ and $Ψ$
+		- integrate
+		math
+			\moy{Q(x,p)} = ∫ Ψ^{*} \Big[Q \left(x, -i\hbar \pdv{}{x}\right)\Big]Ψ\dd x
+		In particular,
+		math
+			\moy x = ∫Ψ^{*} x Ψ\dd x = ∫ x \abs{Ψ}^{2}\dd x
+		and
+		math
+			\moy p = -i\hbar ∫ \left(Ψ^{*} \pdv{Ψ}{x}\right)\dd x
+
+## Time-Independant Schrödinger Equation
+
+Q: Time-independant Schrödinger equation
+	A: Using the separation of variables $Ψ(x,t) = ψ(x)φ(t)$ in the Schrödinger equation, we get
+		math
+			- \frac{\hbar^{2}}{2m} \dvN{ψ}{x}{2} + V ψ = Eψ
+		and
+		math
+			\dv{φ}{t} = - \frac{iE}{\hbar}φ
+		(with $E$ the separation constant, equal to both sides of the Schrödinger equation for independent variables) which integrate as
+		math
+			φ(t) = e^{-i \frac{E}{\hbar}t}
+
+Q: Hamiltonian in quantum mechanics
+	A: In classical mechanics,
+		math
+			H(x,p) = \frac{p^{2}}{2m} + V(x)
+		The he corresponding Hamiltonian operator obtained by the canonical substitution $p \to -i\hbar \pdv{}{x}$ is therefore
+		math
+			\hat H = - \frac{\hbar^{2}}{2m}\pdvN{}{x}{2} + V(x)
+		The time-independent Schrödinger equation can be written
+		math
+			\hat H ψ = E ψ
+
+Q: Time-independant Schrödinger equation written with the Hamiltonian
+	A:
+		math
+			\hat H = - \frac{\hbar^{2}}{2m}\pdvN{}{x}{2} + V(x)
+		The time-independent Schrödinger equation can be written
+		math
+			\hat H ψ = E ψ
+
+Q: Expectation value of the Hamiltonian in stationnary regime
+	A: The time-independant Schrödinger equation is
+		math
+			\hat H ψ = E ψ
+		and the expectation value of the total energy is
+		math
+			\moy H = ∫ ψ^{*}\hat H ψ\dd x = E ∫ \abs{ψ}^{2} \dd x = E ∫ \abs{Ψ}^{2} \dd x = E
+
+Q: Variance of the Hamiltonian in stationnary regime
+	A: The time-independant Schrödinger equation is
+		math
+			\hat H ψ = E ψ
+		and the expectation value of the total energy is
+		math
+			\moy H = ∫ ψ^{*}\hat H ψ\dd x = E ∫ \abs{ψ}^{2} \dd x = E ∫ \abs{Ψ}^{2} \dd x = E
+		Moreover, $\hat H^{2}ψ = E^{2} ψ$ and hence
+		math
+			\moy{H^{2}} = ∫ ψ^{*}\hat H^{2} ψ\dd x = E^{2} ∫ \abs{ψ}^{2} \dd x = E^{2}
+		so the variance of $H$ is
+		math
+			σ_{H}^{2} = \moy{H^{2}} - \moy{H}^{2} = E^{2} - E^{2} = 0
+
+Q: General solution to the Schrödinger equation for a time-independant potential
+	A: It is the linear conbination of the solutions $\set{ψ_{n}(x)}}$ of the time-independant Schrödinger equation :
+		math
+			Ψ(x,t) = ∑_{n=1}^{+∞}c_{n}ψ_{n}(x)e^{-i \frac{E_{n}}{\hbar}t} = ∑_{n=1}^{+∞}c_{n}Ψ_{n}(x, t)
+		(by matching the initial state $Ψ(x, 0)$). *$\abs{c_{n}}^{2}$ is the probability that a measurement of the energy would return the value $E_{n}$*, hence
+		math
+			∑_{n=1}^{+∞}\abs{c_{n}}^{2} = 1
+		and
+		math
+			\moy H = ∑_{n=1}^{+∞}\abs{c_{n}}^{2} E_{n}
+
+Q: Orthonormality condition
+	A: math
+			∫ ψ_{m}(x)^{*} ψ_{n}(x)\dd x = δ_{mn}
+
+Q: Completeness of the states $\set{ψ_{n}(x)}$ of the infinite square well + coefficients
+	A: Every function $f(x)$ can be expressed as a linear conbination of them :
+		math
+			f(x) = ∑_{n=1}^{∞}c_{n}ψ_{n}(x) = \sqrt{\frac{2}{a}}∑_{n=1}^{∞}c_{n}\sin \left(\frac{n π}{a}x\right)
+		Multiplying both sides by $ψ_{m}(x)^{*}$ and integrating yields
+		math
+			\int ,…m(x)^{*} f(x)\dd x = ∑_{n=1}^{∞}c_{n}\int ψ_{m}^{*} ψ_{n}(x)\dd x = ∑_{n=1}^{∞}c_{n}δ_{mn} = c_{m}
+		Thus,
+		math
+			c_{n} = \int ψ_{n}(x)^{*}f(x)\dd x
+
+p35
+
+
+
+

@@ -9,6 +9,7 @@ const macros = {
 
   // Common
   "\\cte": "\\mathrm{c^{te}}",
+  "\\moy": "\\left\\langle #1 \\right\\rangle",
 
   "\\1": "\\mathbf{1}",
   "\\N": "\\mathbf{N}",

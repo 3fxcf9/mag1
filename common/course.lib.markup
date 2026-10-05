@@ -12,10 +12,6 @@ parser show_flashcards
 		css
 			.flashcard {
 				display:block;
-				font-size: 1rem;
-				& * {
-					font-size: 1rem !important;
-				}
 			}
 
 // Show flashcards if ?hidden=true

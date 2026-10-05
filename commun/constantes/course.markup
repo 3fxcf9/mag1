@@ -28,6 +28,12 @@ Q: Charge élémentaire
 	A: math
 			e = 1.602\;176\;634 · 10^{-19}\u C
 
+## Mécanique quantique
+
+Q: Constante de Planck réduite
+	A: math
+			\hbar = \frac{h}{2 π} = 1.054573 · 10^{-34} \u{J · s}
+
 ## SI
 
 Q: Vitesse de la lumière dans le vide

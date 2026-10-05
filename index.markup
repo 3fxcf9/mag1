@@ -92,9 +92,11 @@ parser subject
 	list_wrap <div class="subject-grid">$elements</div>
 
 subject math
+subject electromagnetism
 subject meca_analytique
 subject meca_quantique
 subject cosmologie
 subject conferences
+subject incertitudes
 
 generate_project_flashcards_json

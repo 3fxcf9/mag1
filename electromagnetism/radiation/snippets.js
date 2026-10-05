@@ -3,6 +3,7 @@ const local_macros = {
   "\\B": "\\vec{B}",
   "\\A": "\\vec{A}",
   "\\j": "\\vec j",
+  "\\k": "\\vec k",
   "\\p": "\\vec p",
   "\\poynting": "\\vec{\\Pi}",
   "\\g": "\\vec g",
@@ -12,6 +13,7 @@ const local_macros = {
   "\\x": "\\vec x",
   "\\y": "\\vec y",
   "\\z": "\\vec z",
+  "\\S": "\\vec S",
 
   "\\rot": "\\operatorname{\\overrightarrow{rot}}",
   "\\grad": "\\operatorname{\\overrightarrow{grad}}",
