@@ -1,0 +1,235 @@
+../../common/course.lib.markup
+
+title Analyse de Fourier
+date 02/10/2026
+
+++Historique :++
+- Euler, Bernoulli et d’Alembert résolvent en 1750 résout le problème de la corde vibrante avec des outils s’assimilent aux décompositions en séries de Fourier.
+- Fourier publie sa _Théorie analytique de la chaleur_ en 1822, dans laquelle il résout l’équation de diffusion en utilisant des séries qui porteront son nom.
+- Riemann, et plus tard Lebesgue et Riesz s’intéressent à l’analyse spectrale de fonction non-périodiques, et développent l’analyse de Fourier.
+- Aujourd’hui,
+
+++Motivation :++ l’étude de la réponse d’un système implique souvent des opérateurs différentiels. Un passage dans l’espace de Fourier (décomposition en fréquence) remplaces ces opérations différentielles par des opérations algébriques simples (multiplication, division) et facilement inversibles.
+
+## Analyse de Fourier sur $\L^{1}(\R)$
+
+### Transformation de Fourier et transformation de Fourier inverse
+
+defprop Transformation de Fourier et transformation de Fourier inverse
+	On définit deux applications linéaires et continues $\F$ et $\Fi$ de $\L^{1}(\R)$ dans $\L^{∞}(\R) ∩ \Cont^{0}(\R)$ en posant pour $f ∈ \L^{1}(\R)$ et $k ∈ \R$,
+	math
+		\F(f)(k) = ∫_{\R}\frac{\dd x}{\sqrt{2 π}}f(x)e^{-ikx} \quad\text{et}\quad \Fi(f)(k) = ∫_{\R}\frac{\dd x}{\sqrt{2 π}}f(x)e^{ikx}
+	On appellera $\F$ (resp. $\Fi$) la _transformation de Fourier_ (resp. _transformation de Fourier inverse_) de $\L^{1}(\R)$. On a pour tout $f ∈ \L^{1}(\R)$,
+	math
+		\norm{\F(f)}_{∞} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}} \quad\text{et}\quad \norm{\Fi(f)}_{∞} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}}
+	as_flashcard
+
+proof
+	Soit $f ∈ \L^{1}(\R)$. La fonction $x,k ⟼  f(x)e^{\pm ikx}$ satisfait les hypothèses du corollaire du théorème de convergence dominée relatif à la continuité, à savoir
+	- $x ⟼ f(x)e^{\pm ikx}$ est mesurable pour tout $k ∈ \R$,
+	- $k ⟼  f(x)e^{\pm ikx}$ est continue $μ_{L}$-presqu’en tout $x ∈ \R$,
+	- pour $k$ et $x$ réels,
+		math
+			\abs{f(x)e^{\pm ikx}} ⩽ \abs{f(x)}
+		avec $f ∈ \L^{1}(\R)$.
+	Les fonctions $\F(f)$ et $\Fi(x)$ sont donc continues sur $\R$. De plus, pour tout $k ∈ \R$,
+	math tf:l1:proof:1
+		\abs{\F(f)(k)} = \abs{∫_{\R} \frac{\dd x}{\sqrt{2 π}} f(x)e^{-ikx}} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}} < ∞
+	(on peut remplacer $\F$ par $\Fi$ et « $-$ » par « $+$ » dans la dernière expression). Les fonctions $\F(f)$ et $\Fi(f)$ sont continues car mesurables sur $\R$, d’où d’après [tf:l1:proof:1],
+	math tf:l1:proof:2
+		\norm{\F(f)}_{∞} = \esssup \abs{\F(f)} = \sup \abs{\F(f)} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}} < ∞
+	(relation aussi vraie avec $\Fi$) ce qui montre que $\F(f), \Fi(f) ∈ \L^{∞}(\R)$.
+	- $\F$ et $\Fi$ sont évidemment linéaires du fait de la linéarité de l’intégrale,
+	- Montrons la continuité de $\F$ et $\Fi$ : soit $(f_{n})_{n ∈ \N}$ une suite de fonctions Lebesgue-sommables sur $\R$ telle que $\lim_{n\to+∞}\norm{f_{n} - f}_{1} = 0$ pour $f ∈ \L^{1}(\R)$. Alors, d’après [tf:l1:proof:2] et par linéarité de $\F$, on a pour tout $n ∈ \N$
+		math
+			\norm{\F(f_{n}) - \F(f)}_{∞} = \norm{\F(f_{n} - f)}_{∞} ⩽ \frac{\norm{f_{n} - f}_{1}}{\sqrt{2 π}} \arrowlim{n\to+∞}0
+		ce qui montre la continuité de $\F$. On montre de même la celle de $\Fi$.
+
+rem
+	- Il existe différentes définitions de $\F$ et $\Fi$ et *certains résultats du cours dépendent explicitement de celle choisie ici*. On peut cependant toujours se ramener à une certaine définition par un changement de variable.
+	- Pour $n ∈ \N^{*}$, on définit $\F_{n}$ et $\Fi_{n}$ sur $\L^{1}(\R^{n})$ en posant pour $f ∈ \L^{1}(\R)$ et $\vec{k} ∈ \R^{n}$ :
+		math
+			\F_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{d^{n}x}{(2 π)^{n/2}}f(\vec{x})e^{-i \vec{k}· \vec{x}}
+		et
+		math
+			\Fi_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{d^{n}x}{(2 π)^{n/2}}f(\vec{x}) e^{i \vec{k}· \vec{x}}
+	- On a évidemment $\F_{n} = \F$ et $\Fi_{n} = \Fi$ (évident pour $n=1$, voir TD pour $n > 1$).
+	- $\Fi$ est un « inverse conditionnel » de $\F$, noté $\Fi$ et non $\F^{-1}$ pour cette raison. En effet, $\F$ et $\Fi$ sont toutes deux des fonctions de $\L^{1}(\R)$ dans $\L^{∞}(\R) ∩ \Cont^{0}(\R) ∩ \Cont^{0}(\R)$.
+
+### Propriétés de symétrie
+
+prop
+	Soit $f$ une fonction Lebesgue-sommable sur $\R$. Alors,
+	~ $∀ k ∈ \R, \F(f^{*})(k) = \big(\F(f)\big)^{*}(-k)$
+	~ En notant $P: \L^{1}(\R) ⟶ \L^{1}(\R)$ l’opérateur parité défini par $∀ x ∈ \R, P(f)(x) = f(-x)$, on a
+		math
+			P \circ \F = \Fi = \F \circ P
+		Ainsi, si $f$ est paire (resp. impaire), il en est de même de $\F(f)$ et de $\Fi(f)$, et de surcroît $\Fi(f) = \F(f)$ (resp. $\Fi(f) = -\F(f)$).
+	~ Pour $λ ∈ \R^{*}$,
+		math
+			\F \big(ξ_{λ}(f)\big) = \frac{1}{\abs{λ}}ξ_{1/λ} \circ \F(f)
+	~ Pour $x_{0}$ et $k$ réels,
+		math
+			\F \big(τ_{x_{0}}(f)\big)(k) = e^{-ikx_{0}} \F(f)(k)
+	~ Pour $k_{0}$ réel,
+		math
+			τ_{k_{0}} \circ \F(f) = \F \big(x ⟼  e^{ik_{0}x} f(x)\big)
+
+proof
+	En exercice
+
+### Lemme de Riemann-Lebesgue
+
+lemma Riemann-Lebesgue
+	Pour toute fonction $f$ Lebesgue-sommable,
+	math
+		\lim_{k\to\pm ∞}\F(f)(k) = 0 \quad\text{et}\quad \lim_{k\to\pm ∞}\Fi(f)(k) = 0
+
+proof
+	Soit $f$ Lebesgue-sommable. D’après la proposition précédente, on a
+	math
+		∀ k ∈ \R, \F \big(τ_{π/k}(f)\big)(k) = e^{-i π}\F(f)(k) = -\F(f)(k)
+	Alors, pour tout $k ∈ \R$,
+	math
+		\F \big(τ_{π/k}(f) - f\big)(k) = -2 \F(f)(k)
+	et donc, pour tout $k ∈ \R$, en utilisant [tf:l1:proof:1] et la continuité de $τ$ (cf. chapitre 2),
+	math
+		\abs{\F(f)(k)} = \frac{1}{2} \abs{\F \big(τ_{π / k}(f) - f\big)(k)} ⩽ \frac{\norm{τ_{π/k}(f) - f}_{1}}{2 \sqrt{2 π}} \arrowlim{k\to\pm ∞}0
+	d’où le résultat. La preuve pour $\Fi$ est analogue.
+
+### Théorème d’inversion de Fourier de $\L^{1}(\R)$
+
+thm
+	Soient $f$ et $g$ deux fonctions Lebesgue-sommables sur $\R$. Alors $f\F(g)$ et $\F(f)g$ sont Lebesgue-sommables et
+	math
+		∫_{\R}\dd μ_{L} f \F(g) = ∫_{\R}\dd μ_{L}\F(f)g
+
+proof
+	Soient $f$ et $g$ de telles fonctions. En tant que produit d’une fonction mesurable et d’une fonction continue, $f\F(g)$ est mesurable. De plus,
+	math
+		∫_{\R}\dd μ_{L} \abs{f\F(g)} ⩽ \left(∫_{\R}\dd μ_{L} \abs{f}\right) \norm{\F(g)}_{∞} = \norm{f}_{1} \norm{\F(g)}_{∞} < ∞
+	et donc $f\F(g) ∈ \L^{1}(\R)$. La preuve pour $\F(f)g$ est identique.
+	Soit à présent $h: (x,k) ⟼ f(x)g(k)e^{-ikx}$. C’est une fonction mesurable. D’après Fubini-Tonelli, on a
+	math
+		∫_{\R^{2}}\dd x \dd k \abs{h(x,k)} = ∫_{\R^{2}}\dd x \dd k \abs{f(x)}\abs{g(k)} = \norm{f}_{1} \norm{g}_{1} < ∞
+	et donc $h ∈ \L^{1}(\R^{2})$. Le résultat découle alors de l’application du théorème de Fubini.
+
+thm Théorème d’inversion de Fourier de $\L^1(\R)$
+	Soit $f ∈ \L^{1}(\R)$ telle que $\F(f) ∈ \L^{1}(\R)$. Alors,
+	~ $\Fi \circ \F(f) = \F \circ \Fi(f) = f$ $μ_{L}$-presque partout sur $\R$.
+	~ Si en outre $f$ est continue sur $\R$,
+		math
+			\Fi \circ \F(f) = \F \circ \Fi(f) = f \text{ partout dans } \R
+
+proof
+	Soit $f ∈ \L^{1}(\R)$ telle que $\F(f) ∈ \L^{1}(\R)$. On considère, pour $n ∈ \N^{*}$,
+	math
+		g_{n} = \sqrt{2 π} \Fi \big(\F(f)h_{n}\big)
+	avec $h_{n} : x ⟼ \frac{1}{\sqrt{2 π}} e^{- \frac{x^{2}}{2n^{2}}}$.
+	- D’une part,
+		- pour $x ∈ \R$, la suite $\Big(k ⟼  \F(f)(k)h_{n}(k)e^{+ikx}\Big)_{n ∈ \N}$ est une suite de fonctions mesurables tendant vers $k ⟼  \F(f)(k)\frac{e^{ikx}}{\sqrt{2 π}}$
+		- pour tout $n ∈ \N^{*}$ et tout $k ∈ \R$,
+			math
+				\abs{\F(f)(k)h_{n}(k)e^{ikx}} ⩽ \frac{\abs{\F(f)(k)}}{\sqrt{2 π}}
+			où $\abs{\F(f)} ∈ \L^{1}(\R)$ car on a supposé $\F(f) ∈ \L^{1}(\R)$.
+		On peux donc appliquer le théorème de convergence dominée, qui donne, pour tout $x ∈ \R$ :
+		math
+			\begin{align*}
+				\lim_{n\to+∞}g_{n}(x) &= \lim_{n\to+∞}∫_{\R} \dd k\F(f)(k)h_{n}(k)e^{ikx} \\
+				&= ∫_{\R}\frac{\dd k}{\sqrt{2 π}}\F(f)(k)e^{ikx} \\
+				&= \Fi \circ \F(f)(x)
+			\end{align*}
+		soit
+		math inversion:convergence:1
+			g_{n} \arrowlim{n\to+∞}\Fi\circ\F(f)
+	- D’autre part, en utilisant le théorème précédent, on obtient pour $n ∈ \N^{*}$ et $x ∈ \R$,
+		math
+			g_{n}(x) = ∫_{\R}\dd k \F(f)(k)h_{n}(k)e^{ikx} = ∫_{\R}f(y)\F \big(k ⟼ h_{n}(k)e^{ikx}\big)
+		En effet, pour tout $n ∈ \N^{*}$, $h_{n} ∈ \L^{1}(\R)$ donc la fonction $k ⟼ h_{n}(k)e^{ikx}$ est Lebesgue-sommable pour tout $n ∈ \N^{*}$ et $x ∈ \R$. Le facteur de phase se réécrit en translation :
+		math
+			∫_{\R}f(y)\F \big(k ⟼ h_{n}(k)e^{ikx}\big) = ∫_{\R}\dd yf(y)\F(h_{n})(y-x)
+		En remarquant que $∀ n ∈ \N, h_{n} = ξ_{1/n}(h_{1})$,
+		math
+			∫_{\R}\dd yf(y)\F(h_{n})(y-x) = ∫_{\R}\dd y f(y)\F \big(ξ_{1/n}(h_{1})\big)(y-x) = ∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x)
+		si bien qu’en utilisant $\F(h_{1}) = h_{1}$ (v. TD) et la parité de $h_{1}$,
+		math
+			∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x) = ∫_{\R}\dd y f(y)n ξ_{n} (h_{1})(y-x) = ∫_{\R}\dd y f(y)n ξ_{n}(h_{1})(x-y) = \big(n ξ_{n}(h_{1}) \conv f\big)(x)
+		Ainsi, en mettant bout-à-bout les 4 dernières équations, on a
+		math
+			∀ n ∈ \N^{*}, g_{n} = n ξ_{n}(h_{1})\conv f
+		Or $h_{1}$ est Lebesgue-sommable et $∫_{\R}\dd μ_{L} h_{1} = 1$ donc d’après le théorème des approximations de l’unité, la suite $\big(n ξ_{n}(h_{1})\big)_{n ∈ \N}$ est une approximation de l’unité dans $\L^{1}(\R)$. On en déduit que
+		math inversion:convergence:2
+			\norm{g_{n} - f}_{1} = \norm{n ξ_{n}(h_{1}) \conv f - f}_{1} \arrowlim{n\to+∞}0
+	Ainsi,
+	math
+		\begin{align*}
+			\norm{\Fi \circ \F(f) - f}_{1} &\ueq{\eqref{inversion:convergence:1}} ∫_{\R}\dd x \lim_{n\to+∞}\abs{g_{n}(x) - f(x)} \\
+			&= ∫_{\R}\dd x \liminf_{n\to+∞} \abs{g_{n}(x) - f(x)} \\
+			&\oleq{Fatou} \liminf_{n\to+∞}∫_{\R}\dd x \abs{g_{n}(x) - f(x)} \\
+			&=\lim_{n\to+∞} \norm{g_{n} - f}_{1}\\
+			&\ueq{\eqref{inversion:convergence:2}}0
+		\end{align*}
+	On a donc $\Fi \circ \F(f) = f$ $μ_{L}$-presque partout sur $\R$ et on prouverait de même $\F\circ\Fi (f) = f$ $μ_{L}$-presque partout sur $\R$.
+	Comme $\F(f)$ est Lebesgue-sommable, on sait que $\Fi\circ \F(f)(f)$ est continue sur $\R$, donc si $f$ est également continue sur $\R$, alors $\Fi\circ\F(f) = f$ $μ_{L}$-presque partout sur $\R$ entraîne
+	math
+		\Fi \circ \F(f) = f \text{ partout sur }\R
+
+rem
+	Il s’agit d’une inversion conditionnelle; l’hypothèse $\F(f) ∈ \L^{1}(\R)$ est peu naturelle.
+
+### Échange opérateur différentiel / opérateur algébrique sous $\F$
+
+thm
+	Soit $p ∈ \N$ et $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p}f(x)$ soit Lebesgue-sommable. Alors, $\F(f)$ est continue sur $\R$ et pour tout $n ∈ \icc{0,p}$, on a
+	math
+		\F(f)^{(n)} = \F \big(x ⟼  (-ix)^{n}f(x)\big)
+
+proof
+	Par récurrence sur $p ∈ \N$, le cas $p=0$ étant déjà connu. Supposons la proposition démontrée pour tout $m ∈ \icc{0,p}$ avec $p ∈ \N$ et considérons $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p+1}f(x) ∈ \L^{1}(\R)$. On pose
+	math
+		g: x ⟼  \big(1 + \abs{x}^{p+1}\big)\abs{f(x)}
+	Clairement, $g$ est mesurable et
+	math
+		∫_{\R}\dd μ_{L} g = ∫_{\R}\dd μ_{L} \big(1 + \abs{x^{p+1}}\big)\abs{f(x)} = \underbrace{∫_{\R}\dd μ_{L} \abs{f}}_{< ∞} + \underbrace{∫_{\R}\dd x \abs{x^{p+1}} \abs{f}}_{< ∞} < ∞
+	Donc $g$ est Lebesgue-sommable. De plus, pour tout réel $x$,
+	math
+		\abs{x}^{p} ⩽ 1 + \abs{x}^{p+1}
+	et donc $\abs{x}^{p} \abs{f(x)} ⩽ g$ si bien que $x ⟼  x^{p}f(x) ∈ \L^{1}(\R)$. D’après l’hypothèse de récurrence, $\F(f)$ est de classe $\Cont^{p}$ sur $\R$ et
+	math
+		∀ n ∈ \icc{0,p}, \F(f)^{(n)} = \F \big(x ⟼  (-ix)^{n} f(x)\big)
+	soit en particulier,
+	math
+		\F(f)^{(p)} = \F \big(x ⟼  (-ix)^{p}f(x)\big)
+	Or :
+	- $x ⟼  (-ix)^{p} f(x)e^{-ikx}$ est Lebesgue-sommable pour tout $k ∈ \R$,
+	- $k ⟼  (-ix)^{p} f(x)e^{-ikx}$ est de classe $\Cont^{1}$ $μ_{L}$-presqu’en tout $x ∈ \R$,
+	- Pour tous réels $k$ et $x$,
+		math
+			\abs{(-ix)^{p+1} f(x)e^{-ikx}} ⩽ \abs{x}^{p+1}f(x)
+		avec $x ⟼  x^{p+1}f(x)$ Lebesgue-sommable sur $\R$.
+	Les corollaires du théorème de convergence dominée donnent $\F(f)^{p} ∈ \Cont^{1}(\R)$ et
+	math
+		\F(f)^{(p+1)} = \F \big(x ⟼  (-ix)^{p+1}f(x)\big)
+	ce qui complète la récurrence.
+
+prop
+	Soit $f$ une fonction Lebesgue-sommable sur $\R$, continue sur $\R$, de classe $\Cont^{1}$ par morceaux et de dérivée par morceaux $f'$ Lebesgue-sommable. Alors,
+	math
+		∀ k ∈ \R, \F(f')(k) = ik \F(f)(k)
+
+proof
+	Sous no hypothèses, $\lim_{n\to+∞}f(x) = 0$. En effet, si $x_{0} ∈ \R$, on peut écrire
+	math
+		∀ x ∈ \R, f(x) = f(x_{0}) + ∫_{x_{0}}^{x}\dd y f'(y)
+	Or, $f'$ étant Lebesgue-sommable, l’intégrale $∫^{\pm ∞}\dd x f'(x)$ est absolument convergente. Il existe donc $λ_{\pm} ∈ \C$ tels que $\lim_{x\to\pm ∞}f(x) = λ_{\pm}$. L’hypothèse $f ∈ \L^{1}(\R)$ entraîne alors $λ_{\pm} = 0$. En intégrant par parties, on obtient finalement, pour $k ∈ \R$,
+	math
+		\begin{align*}
+			\F(f')(k) &= ∫_{\R}\frac{\dd x}{\sqrt{2 π}} f'(x)e^{-ikx} \\
+			&= \underbrace{\left[\frac{f(x)}{\sqrt{2 x}}e^{-ikx}\right]_{-∞}^{+∞}}_{=0} + ik ∫_{\R}\frac{\dd x}{\sqrt{2 π}}f(x)e^{-ikx} \\
+			&= ik \F(f)(k)
+		\end{align*}
+
+prop
+	Soit $p ∈ \N$. Si $f$ est Lebesgue-sommable sur $\R$, de classe $\Cont^{p}$ sur $\R$ et telle que $∀ n ∈ \icc{0,p}, f^{(n)} ∈ \L^{1}(\R)$, alors
+	math
+		∀ k ∈ \R, \F \big(f^{(n)}\big) (k) = (ik)^{n} \F(f)(k)
