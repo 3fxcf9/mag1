@@ -234,13 +234,14 @@ cor Caractérisation des fonctions réelles mesurables
 		∀ a ∈ \R, f^{-1}\big(\oo{a, +∞}\big) ∈ T_{X}
 	as_flashcard
 
-prop
+prop Conservation du caractère mesurable par opérations simples
+	id conservation_mesurabilite_limite
 	Soit $(X,T)$ un espace mesurable et soient $f$ et $g$ deux fonctions de $X$ dans $\R$ mesurables. Alors
 	- $f+g$ est mesurable
 	- $fg$ est mesurable
 	- $\max(f, g)$ est mesurable
 	- $\abs{f}$ est mesurable
-	as_flashcard Conservation du caractère mesurable par opérations simples
+	as_flashcard
 
 proof
 	Soit $a ∈ \R$.
@@ -293,7 +294,8 @@ def Fonctions étagées
 	as_flashcard
 
 prop
-	Soit $(X,T)$ un espace mesurable. Toute fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ est limite d’une suite $(s_{n})_{n ∈ \N}$ de fonctions étagées positives.
+	id limite_croissante_fonctions_etagees
+	Soit $(X,T)$ un espace mesurable. Toute fonction positive mesurable $f: X ⟶ \bar{\R_{+}}$ est limite d’une suite croissante $(s_{n})_{n ∈ \N}$ de fonctions étagées positives.
 	as_flashcard Limite de fonctions étagées
 
 proof
@@ -468,11 +470,15 @@ prop Propriétés de la mesure de Lebesgue
 	~ $μ_{L}$ est invariante par parité, i.e.
 		math
 			∀ A ∈ L_{\R}, μ_{L}(-A) = μ_{L}(A)
-	~ $(\R, L_{\R}, μ_{L})$ est $σ$-fini (s’écrit comme l’union des termes d’une suite de mesurables de mesure fini), i.e. il existe $(λ_{n})_{n ∈ \N} ∈ (L_{\R})^{\N}$ telle que
+	~ $(\R, L_{\R}, μ_{L})$ est $σ$-fini (s’écrit comme l’union des termes d’une suite de mesurables de mesure finie), i.e. il existe $(A_{n})_{n ∈ \N} ∈ (L_{\R})^{\N}$ telle que
 		math
 			\R = \bigcup_{n ∈ \N}A_{n} \quad\text{et}\quad ∀ n ∈ \N, μ_{L}(A_{n}) < ∞
 	~ $μ_{L}$ est _diffuse_ (la mesure de tout ensemble fini (partie de $\R$) est nulle).
 	as_flashcard
+Q: Espace mesuré $σ$-fini
+	A: Espace mesuré s’écrivant comme l’union des termes d’une suite de mesurables de mesure finie. C’est le cas de $(\R, L_{\R}, μ_{L})$.
+Q: Mesure diffuse
+	A: Mesure donnant une mesure nulle à tout ensemble fini. C’est le cas de la mesure de Lebesgue $μ_{L}$.
 
 proof
 	~ par construction
@@ -570,7 +576,8 @@ proof
 	Comme pour tout $n ∈ \N$, $f_{n} ⩽ f$, on a nécessairement
 	math
 		λ ⩽ ∫_{X}\dd  μ f
-	Il suffit alors de montrer que $λ ⩾ ∫_{X}\dd μf$. Soit $s$ une fonction étagée sur $X$ telle que $0 ⩽ s ⩽ f$. Considérons pour $n ∈ \N$,
+	Il suffit alors de montrer que $λ ⩾ ∫_{X}\dd μf$((L’existence de $f$ est donnée par cette proposition.)). Soit $s$ une fonction étagée sur $X$ telle que $0 ⩽ s ⩽ f$. Considérons pour $n ∈ \N$,
+		link #conservation_mesurabilite_limite cette proposition
 	math
 		A_{n} = \set{x ∈ X \where f_{n}(x) ⩾ s(x)}
 	Clairement, $A_{0} ⊂ A_{1} ⊂ A_{2} ⋯$ sont mesurables et $\bigcup_{n ∈ \N}A_{n} = X$. Ainsi,
@@ -817,19 +824,25 @@ defprop
 	math
 		∀ A_{X} ∈ T_{X}, ∀ A_{Y} ∈ T_{Y}, (μ_{X} × μ_{Y}) (A_{X} × A_{Y}) = μ_{X}(A_{X}) μ_{Y}(A_{Y})
 	On appellera $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ l’_espace mesuré produit_.
+	Q: Espace mesuré produit de $(X, T_{X}, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$
+		A: Espace $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ avec
+			- $T_{X} \xalg T_{Y}$ la $σ$-algèbre (dite _produit_) engendrée par $\set{A_{X} × A_{Y} \where A_{X} ∈ T_{X} \text{ et } A_{Y} ∈ T_{Y}}$,
+			- $μ_{X} × μ_{Y}$ l’unique mesure (dite _produit_) telle que
+				math
+					∀ A_{X} ∈ T_{X}, ∀ A_{Y} ∈ T_{Y}, (μ_{X} × μ_{Y}) (A_{X} × A_{Y}) = μ_{X}(A_{X}) μ_{Y}(A_{Y})
 
-proof (Preuve partielle)
+proof Preuve partielle
 	On admet l’unicité, celle-ci découlant du thérème d’extension de Carathéodory.
 		italic
-	On définit pour tout $A ⊂ X × Y$ et pour tous $x ∈ X$, $y ∈ Y$, les ensembles
-	math
-		A_{x, ·} = \set{y ∈ Y \where (x,y) ∈ A}
-	et
-	math
-		A_{· , y} = \set{x ∈ X \where (x,y) ∈ A}
 	fig Idée intuitive de la coupe d’un ensemble
 		right
 		./figures/tranches_xy.svg
+	On définit pour tout $A ⊂ X × Y$ et pour tous $x ∈ X$, $y ∈ Y$, les ensembles
+	math
+		\begin{gather*}
+			A_{x, ·} = \set{y ∈ Y \where (x,y) ∈ A}\\
+			A_{· , y} = \set{x ∈ X \where (x,y) ∈ A}
+		\end{gather*}
 	Alors, pour tout $A ∈ T_{X} \xalg T_{Y}$ et pour tous $x ∈ X, y ∈ Y$,
 	math
 		A_{x, · } ∈ T_{Y} \quad\text{et}\quad A_{· , y} ∈ T_{X}
@@ -877,30 +890,32 @@ proof (Preuve partielle)
 	On montre de même la $σ$-additivité de $ν$.
 
 rem
-	L’espace mesuré produit $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ de deux espaces mesurés $σ$-finis et $σ$-complets est $σ$-fini mais non nécessairement $σ$-complet. Dans ce cas, on supposera que l’espace mesuré produit est $σ$-complété.
+	L’espace mesuré produit $(X × Y, T_{X} \xalg T_{Y}, μ_{X} × μ_{Y})$ de deux espaces mesurés $σ$-finis et $σ$-complets est $σ$-fini mais non nécessairement $σ$-complet. Dans ce cas, on supposera que l’espace mesuré produit peut être $σ$-complété.
 
 example
 	On définit l’espace mesuré de Lebesgue $(\R^{2}, L_{\R^{2}}, μ_{L})$ comme le $σ$-complété de $(\R × \R, L_{\R} \xalg L_{\R}, μ_{L} × μ_{L})$. On définit alors par induction l’espace mesuré de Lebesgue $(\R^{n}, L_{\R^{n}}, μ_{L, n})$.
 
 thm Théorème de Fubini-Tonelli
-	Soient $(X, T_{t}x, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurés $σ$-finis. Soit $f: X × Y ⟶ \bar{\R_{+}}$ une fonction mesurable positive. Alors,
+	Soient $(X, T_{X}, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurés $σ$-finis. Soit $f: X × Y ⟶ \bar{\R_{+}}$ une fonction mesurable positive. Alors,
 	math
 		∫_{X × Y}\dd  \big(μ_{X} × μ_{Y}\big)f = ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y} f\right) = ∫_{Y}\dd μ_{Y} \left(∫_{Y}\dd μ_{X} f\right)
+	as_flashcard
 
 proof
-	Soient $(X, T_{X}, μ_{X})$, $(Y, T_{Y}, μ_{Y})$ et $f$ tels qu’imposés ci-dessus. D’après la prop ==#!REF!#==, on sait qu’il existe une suite croissante $(s_{n})_{n ∈ \N}$ de fonctions étagées sur $X × Y$ positives telles que $f = \lim_{n\to+∞}s_{n} = \sup_{n ∈ \N}s_{n}$. Alors, d’après le _théorème de convergence monotone_,
-	math fubuni-tonelli:1
-		∫_{X × Y} \dd \big(μ_{t} × μ_{Y}\big) f = ∫_{X × Y}\sup_{n ∈ \N}s_{n} \oeq{TCM} \sup_{n ∈ \N}∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)s_{n}
-	Or, pour toute fonction étagée positive $s f ∑_{p=1}^{N}s_{p}\1_{A_{p}}$ avec $s_{1}, …, s_{p}$ des réels et $A_{1}, …, A_{N}$ des mesurables (éléments de $T_{X} \xalg T_{Y}$), on a par définition
+	Soient $(X, T_{X}, μ_{X})$, $(Y, T_{Y}, μ_{Y})$ et $f$ tels qu’imposés ci-dessus. D’après cette propriété, on sait qu’il existe une suite croissante $(s_{n})_{n ∈ \N}$ de fonctions étagées sur $X × Y$ positives telles que $f = \lim_{n\to+∞}s_{n} = \sup_{n ∈ \N}s_{n}$. Alors, d’après le _théorème de convergence monotone_,
+		link #limite_croissante_fonctions_etagees cette propriété
+	math fubini-tonelli:1
+		∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big) f = ∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)\sup_{n ∈ \N}s_{n} \oeq{TCM} \sup_{n ∈ \N}∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)s_{n}
+	Or, pour toute fonction étagée positive $s = ∑_{p=1}^{N}s_{p}\1_{A_{p}}$ avec $s_{1}, …, s_{p}$ des réels et $A_{1}, …, A_{N}$ des mesurables (éléments de $T_{X} \xalg T_{Y}$), on a par définition
 	math
 		\begin{align*}
 			∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)s &= ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)∑_{p=1}^{N}s_{p}\1_{A_{p}} \\
 			&= ∑_{p=1}^{N}s_{p} ∫_{X × Y}\dd  \left(μ_{X} × μ_{Y}\right)\1_{A_{p}} \\
-			&= ∑_{p=1}^{N} s_{p}∫_{X}\dd μ_{X}(x) μ_{X} \Big((A_{p})_{x, · }\Big) \quad \left(= ∑_{p=1}^{N}s_{p}∫_{Y}\dd μ_{Y}(y)μ_{X}\Big((A_{p})_{· , y}\Big)\right) \\
+			&= ∑_{p=1}^{N} s_{p}∫_{X}\dd μ_{X}(x) μ_{Y} \Big((A_{p})_{x, · }\Big) \\
 			&= ∫_{X}\dd μ_{X}(x) ∑_{p=1}^{N}s_{p}μ_{Y} \Big((A_{p})_{x, · }\Big) \\
 			&= ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y}s\right)
 		\end{align*}
-	En revenant à [fubini-tonelli:1], on trouve finalement
+	On peut aussi exprimer $(μ_{X} × μ_{Y})(A_{p})$ en fonction de $μ_{Y}$ à la troisième ligne de l’équation précédente, ce qui donne la même expression avec les symboles « $X$ » et « $Y$ » échangés. En revenant à [fubini-tonelli:1], on trouve finalement
 	math
 		\begin{align*}
 			∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big) f &= \sup_{n ∈ \N}∫_{X × Y} \dd  \left(μ_{X} × μ_{Y}\right)s_{p} \\
@@ -913,6 +928,7 @@ thm Théorème de Fubini
 	Soient $(X, T_{X}, μ_{X})$ et $(Y, T_{Y}, μ_{Y})$ deux espaces mesurés $σ$-finis. Soit $f ∈ \L^{1}(X × Y, μ_{X} × μ_{Y})$. Alors,
 	math
 		∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)f = ∫_{X}\dd μ_{X} \left(∫_{Y}\dd μ_{Y} f\right) = ∫_{Y}\dd μ_{Y} \left(∫_{X}\dd μ_{X} f\right)
+	as_flashcard
 
 proof
 	On écrit $f = f_{+} - f_{-}$ et on applique Fubini-Tonelli à $f_{\pm}$.
@@ -921,6 +937,11 @@ rem
 	Soit $f : X × Y ⟶ \bar{\R}$ une fonction mesurable. En pratique :
 	- On établit la sommabilité de $f$ en calculant $∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big)\abs{f}$ par Fubini-Tonelli.
 	- Si $f ∈ \L^{1}(X × Y, μ_{X} × μ_{Y})$, on calcule alors $∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)f$ en appliquant Fubini.
+	Q: Procédure permettant d’échanger l’ordre d’intégration d’une fonction $f: X × Y → \bar{\R}$ sur ces deux variables
+		A:
+			- On établit la sommabilité de $f$ en calculant $∫_{X × Y} \dd \big(μ_{X} × μ_{Y}\big)\abs{f}$ par Fubini-Tonelli.
+			- Si $f ∈ \L^{1}(X × Y, μ_{X} × μ_{Y})$, on calcule alors $∫_{X × Y}\dd \big(μ_{X} × μ_{Y}\big)f$ en appliquant Fubini.
+
 
 ### Intégration de Lebesgue des fonctions Riemann-intégrables sur $\R$
 
@@ -935,7 +956,7 @@ proof
 	Soit $f: \R ⟶ \R$ une fonction Riemann-intégrable. Par définition, il existe pour tout $n ∈ \N^{*}$ deux fonctions en escalier $s_{n}^{-}$ et $s_{n}^{+}$ telles que
 	math
 		s_{n}^{-} ⩽ f ⩽ s_{n}^{+}
-	et, en posant $I = \Rint_{\R}\dd xf(x)$, on ait
+	et telles qu’en en posant $I = \Rint_{\R}\dd xf(x)$, on ait
 	math
 		I - \frac{1}{n} ⩽ ∫_{\R}\dd μ_{L} s_{n}^{-} = \Rint_{\R}\dd xs_{n}^{-}(x) ⩽ I ⩽ \Rint_{\R}\dd xs_{n}^{+}(x) = ∫_{\R}\dd μ_{L} s_{n}^{+} ⩽ I + \frac{1}{n}
 	On peut supposer, sans perte de généralité, que
@@ -959,10 +980,10 @@ proof
 	Évidemment,
 	math egalite-riemann-lebesgue:1
 		\tilde{f}_{-} ⩽ f ⩽ \tilde{f}^{+}
-	En particulier,
+	dont on déduit
 	math
 		∫_{\R}\dd μ_{L} \Big(\tilde{f}_{+} - \tilde{f}_{-}\Big) = 0 \quad\text{avec}\quad \tilde{f}_{+} - \tilde{f}_{-} ⩾ 0
-	et donc, $\tilde{f}_{+} = \tilde{f}_{-}$ $μ_{L}-\pp \R$. D’après [egalite-riemann-lebesgue:1],
+	ce qui prouve que $\tilde{f}_{+} = \tilde{f}_{-}$ $μ_{L}$-presque partout sur $\R$. L’encadrement [egalite-riemann-lebesgue:1] donne alors
 	math
 		\tilde{f}_{\pm} = f \quad μ_{L} -\pp \R
 	Finalement, $f ∈ \L^{1}(\R)$ et
@@ -984,18 +1005,24 @@ proof
 	Donc $f$ est Lebesgue-sommable sur $\co{a, u}$ si et seulement si $\Rint_{a}^{u} f$ est absolument convergente. Dans ce cas, on considère
 	math
 		∀ n ∈ \N, f_{n} = f\1_{\cc{a, u_{n}}}
-	C’est une suite de fonctio mesurables, convergeant vers $f$, et vérifiant
+	C’est une suite de fonctions mesurables convergeant vers $f$, et vérifiant
 	math
 		∀ n ∈ \N, \abs{f_{n}} ⩽ \abs{f} \quad\text{avec}\quad f ∈ \L^{1}(\co{a, u})
 	Le _théorème de convergence dominée_ donne alors
 	math
 		\begin{align*}
-			∫_{\cc{a, u}}\dd μ_{L} f &= ∫_{\co{a, u}}\dd μ_{L} \lim_{n\to+∞}f_{n} \\
-			&= \lim_{n\to+∞}∫_{\cc{a, u}}\dd μ_{L}f_{n} \\
-			&= \lim_{n\to+∞}∫_{\cc{a, u}}\dd μ_{L}f\1_{\cc{a, u_{n}}} \\
+			∫_{\co{a, u}}\dd μ_{L} f &= ∫_{\co{a, u}}\dd μ_{L} \lim_{n\to+∞}f_{n} \\
+			&= \lim_{n\to+∞}∫_{\co{a, u}}\dd μ_{L}f_{n} \\
+			&= \lim_{n\to+∞}∫_{\co{a, u}}\dd μ_{L}f\1_{\cc{a, u_{n}}} \\
 			&= \lim_{n\to+∞}\Rint_{a}^{u_{n}}f \\
 			&= \Rint_{a}^{u}f
 		\end{align*}
+
+Q: Lien entre intégrales de Riemann et intégrales de Lebesgue
+	A:
+		- Une fonction proprement Riemann-intégrable est Lebesgue-sommable
+		- Une fonction localement Riemann-intégrable est Lebesgue-sommable sur un intervalle si et seulement elle converge sur cet intervalle
+		Dans les deux cas, la valeur des intégrales de Riemann et de Lebesgue est la même.
 
 rem
 	- On établira souvent la sommabilité sur $\R$ (pour $(\R, L_{\R}, μ_{L})$) en établissant l’absolue convergence d’intérales de Riemann impropres.
@@ -1009,12 +1036,23 @@ rem
 Soit $(X, T, μ)$ un espace mesuré. Pour toute fonction $f: X ⟶ \bar{\R}$ mesurable et pour tout $p ⩾ 1$, on pose
 math
 	\norm{f}_{p} = \left(∫_{X}\dd μ \abs{f}^{p}\right)^{\frac{1}{p}}
+Q: Norme $\norm{\cdot}_{p}$
+	A: math
+			\norm{f}_{p} = \left(∫_{X}\dd μ \abs{f}^{p}\right)^{\frac{1}{p}}
 On dira que $f$ est _essentiellement bornée_ si il existe $λ ∈ \R_{+}$ tel que
 math
 	\abs{f}⩽ λ \quad μ-\pp X
+Q: Fonction essentiellement bornée
+	A: Fonction $f:X → \bar{\R}$ mesurable telle que
+		math
+			\abs{f}⩽ λ \quad μ-\pp X
+		avec $λ ∈ \R_{+}$.
 - On définit le _sup essentiel_
 	math
 		\norm{f}_{∞} = \esssup \left(\abs{f}\right) = \inf \set{λ ∈ \R_{+} \where \abs{f} ⩽ λ \quad μ-\pp X}
+	Q: Sup essentiel d’une fonction $f: X → \bar{\R}$ mesurable
+		A: math
+				\norm{f}_{∞} = \esssup \left(\abs{f}\right) = \inf \set{λ ∈ \R_{+} \where \abs{f} ⩽ λ \quad μ-\pp X}
 - Si $f, g : X ⟶ \bar{\R}$ sont égales $μ$-presque partout sur $X$, on notera $f \sim g$. C’est une relation d’équivalence.
 
 def
@@ -1022,48 +1060,67 @@ def
 	math
 		\norm{f}_{p} < ∞
 	On pose $L^{p}(X, μ) = \L^{p}(X, μ)/\sim$
+	Q: Ensembles $\L^{p}(X, μ)$ et $L^{p}(X, μ)$
+		A: Pour $p ∈ \cc{1,+∞}$, on définit l’ensemble $\L^{p}(X, μ)$ des fonctions $f: X → \R$ mesurables telles que
+			math
+				\norm{f}_{p} < ∞
+			En définissant la relation $\sim$ par
+			math
+				f \sim g ⟺ (f = g \quad  μ - \pp X)
+			on définit $L^{p}(X, μ) = \L^{p}(X, μ) / \sim$.
 
 thm
 	Soit $(X, T, μ)$ un espace mesuré et soient $f,g: X ⟶ \bar{\R}$ deux fonctions mesurables. Alors
 	~ _(Inégalité de Hölder)_ Pour tous $p, q ∈ \cc{1, +∞}$ tels que $p^{-1} + q^{-1} = 1$, on a
 		math
 			\norm{fg}_{1} ⩽ \norm{f}_{p} \norm{g}_{q}
+	Q: Inégalité de Hölder
+		A: Si $f,g: X → \bar{\R}$ sont deux fonctions définies sur un espace mesuré $(X, T, μ)$, alors pour tous $p,q ∈ \cc{1, +∞}$ tels que $p^{-1} + q^{-1} = 1$, on a
+			math
+				\norm{fg}_{1} ⩽ \norm{f}_{p} \norm{g}_{q}
 	~ _(Inégalité de Minkowski)_ Pour tout $p ∈ \cc{1, +∞}$,
 		math
 			\norm{f+g}_{p} ⩽ \norm{f}_{p} + \norm{g}_{p}
+	Q: Inégalité de Minkowski
+		A: Si $f,g: X → \bar{\R}$ sont deux fonctions définies sur un espace mesuré $(X, T, μ)$, alors pour tout $p ∈ \cc{1,+∞}$,
+			math
+				\norm{f+g}_{p} ⩽ \norm{f}_{p} + \norm{g}_{p}
 
 proof
-	~ Supposons que $p,q ∈ \oo{1,+∞}$. Supposons également que $\norm{f}_{p}, \norm{g}_{p} > 0$, et posons
-		math
-			F = \frac{\abs{f}}{\norm{f}_{p}} \quad\text{et}\quad G = \frac{\abs{g}}{\norm{g}_{p}}
-		Alors,
-		math
-			∫_{X}\dd μ F^{p} = \frac{∫_{X}\dd μ \abs{f}^{p}}{∫_{X}\dd μ \abs{f}^{p}} = 1 = \frac{∫_{X}\dd μ \abs{g}^{q}}{∫_{X}\dd μ \abs{g}^{q}} = ∫_{X}\dd μ G^{q}
-		D’autre part,
-		math
-			\begin{align*}
-				FG &= \exp \left(\frac{q\ln F}{q} + \frac{q\ln G}{q}\right) \\
-				&⩽ \frac{1}{p} \exp \big(p\ln F\big) + \frac{1}{q}\exp \big(q \ln G\big) & \text{(convexité de $\exp$)}\\
-				&= \frac{F^{p}}{p} + \frac{G^{q}}{q}
-			\end{align*}
-		Il suffit alors d’intégrer sur $X$ pour obtenir
-		math
-			\frac{∫_{X}\dd μ \abs{fg}}{\norm{f}_{p} \norm{g}_{q}} = ∫_{X}\dd μFG ⩽ \frac{1}{p} + \frac{1}{q} = 1
-		d’où le résultat en multipliant par $\norm{f}_{p} \norm{g}q$.
-		Si $p=1$ (donc $q = +∞$) ou l’inverse, on a
-		math
-			\abs{fg} ⩽ \abs{f}\norm{g}_{∞} \quad μ - \pp X
+	~ - Si $p=1$ (donc $q = +∞$) ou l’inverse, on a
+			math
+				\abs{fg} ⩽ \abs{f}\norm{g}_{∞} \quad μ - \pp X
+			ou
+			math
+				\abs{fg} ⩽ \abs{g}\norm{f}_{∞} \quad μ - \pp X
+		- Supposons que $p,q ∈ \oo{1,+∞}$. Supposons également que $\norm{f}_{p}, \norm{g}_{p} > 0$, et posons
+			math
+				F = \frac{\abs{f}}{\norm{f}_{p}} \quad\text{et}\quad G = \frac{\abs{g}}{\norm{g}_{p}}
+			Alors,
+			math
+				∫_{X}\dd μ F^{p} = \frac{∫_{X}\dd μ \abs{f}^{p}}{∫_{X}\dd μ \abs{f}^{p}} = 1 = \frac{∫_{X}\dd μ \abs{g}^{q}}{∫_{X}\dd μ \abs{g}^{q}} = ∫_{X}\dd μ G^{q}
+			D’autre part,
+			math
+				\begin{align*}
+					FG &= \exp \left(\frac{p\ln F}{p} + \frac{q\ln G}{q}\right) \\
+					&⩽ \frac{1}{p} \exp \big(p\ln F\big) + \frac{1}{q}\exp \big(q \ln G\big) & \text{(convexité de $\exp$)}\\
+					&= \frac{F^{p}}{p} + \frac{G^{q}}{q}
+				\end{align*}
+			Il suffit alors d’intégrer sur $X$ pour obtenir
+			math
+				\frac{∫_{X}\dd μ \abs{fg}}{\norm{f}_{p} \norm{g}_{q}} = ∫_{X}\dd μFG ⩽ \frac{1}{p} + \frac{1}{q} = 1
+			d’où le résultat en multipliant par $\norm{f}_{p} \norm{g}_{q}$.
 	~ - Si $p = 1$, on a pour tous $f,g ∈ \L^{1}(X,μ)$,
 			math
 				\norm{f+g}_{1} ⩽ \norm{f}_{1} + \norm{g}_{1}
 			car
 			math
-				∫_{X}\dd μ \abs{f+g} ∫_{X}\dd μ \left(\abs{f} + \abs{g}\right)
+				∫_{X}\dd μ \abs{f+g} ⩽ ∫_{X}\dd μ \left(\abs{f} + \abs{g}\right)
 		- Faire le cas $p = +∞$ à titre d’exercise.
-		- Si $p ∈ \oo{1,+∞}$, l’inégalité est vraie si $\abs{f+g}_{p} = 0$. On suppose donc $\norm{f+g}_{p} > 0$, et on a
+		- Si $p ∈ \oo{1,+∞}$, l’inégalité est vraie si $\norm{f+g}_{p} = 0$. On suppose donc $\norm{f+g}_{p} > 0$, et on a
 			math minkowski:proof:1
 				\begin{align*}
-					\norm{f+g}_{p}^{p} &= ∫_{X}\dd μ \abs{f+g}^{p} \\
+					\norm{f+g}_{p} &= ∫_{X}\dd μ \abs{f+g}^{p} \\
 					&= ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{f+g} \\
 					&⩽ ∫_{X} \dd μ \abs{f+g}^{p-1}\big[\abs{f}+\abs{g}\big] \\
 					&= ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{f} + ∫_{X}\dd μ \abs{f+g}^{p-1} \abs{g}
@@ -1079,7 +1136,7 @@ proof
 			En échangeant $f$ et $g$ dans [minkowski:proof:2], on obtient également
 			math minkowski:proof:3
 				∫_{X} \dd μ \abs{g} \abs{f+g}^{p-1} ⩽ \norm{g}_{p} \norm{f+g}_{p}^{p-1}
-			En utilisant [minkowski:proof:2] et [minkowski:proof:3], on obtient finalement
+			En injectant [minkowski:proof:2] et [minkowski:proof:3] dans [minkowski:proof:1], on obtient finalement
 			math
 				\norm{f+g}_{p}^{p} ⩽ \Big(\norm{f}_{p} + \norm{g}_{p}\Big)\norm{f+g}_{p}^{p-1}
 			Comme on a supposé $\norm{f+g}_{p} > 0$, on peut simplifier pour obtenir
@@ -1087,11 +1144,12 @@ proof
 				\norm{f+g}_{p} ⩽ \norm{f}_{p} + \norm{g}_{p}
 
 thm Riesz - Fischer
-	Soit $(X, T, μ)$ un espace mesuré. Pour tout $p ∈ \cc{1, +∞}$, $(L^{p}(X, μ), +, · , \norm{\cdot}_{p})$ est un espace vectoriel normé complet, i.e. un espace de Banach.
+	Soit $(X, T, μ)$ un espace mesuré. Pour tout $p ∈ \cc{1, +∞}$, $(L^{p}(X, μ), +,\,·\, , \norm{\cdot}_{p})$ est un espace vectoriel normé complet, i.e. un espace de Banach.
+	as_flashcard
 
 proof
 	Soit $p ∈ \cc{1,+∞}$.
-	- $\big(L^{p}(X, μ), +, · , \norm{\cdot}_{p}\big)$ est clairement un espace vectoriel normé, l’inégalité de Minkowski garantissant la stabilité par combinaison linéaire. De plus, pour tout $f ∈ \L^{p}(X, μ)$,
+	- $\big(L^{p}(X, μ), +,\,·\, , \norm{\cdot}_{p}\big)$ est clairement un espace vectoriel normé, l’inégalité de Minkowski garantissant la stabilité par combinaison linéaire. De plus, pour tout $f ∈ \L^{p}(X, μ)$,
 		math
 			\norm{f}_{p} = 0 ⟹  f = 0 \quad μ-\pp X
 		Donc $\norm{\cdot}_{p}$ est définie positive dans $L^{p}$.
@@ -1118,7 +1176,7 @@ proof
 		math
 			∀ k ∈ \N, f_{φ(k)} = f_{φ(0)} + ∑_{q=0}^{k-1} \Big(f_{φ(q+1)} - f_{φ(q)}\Big)
 		si bien que pour tout $k ∈ \N$,
-		math rissz-fischer:2
+		math riesz-fischer:2
 			\begin{align*}
 				\norm{f - f_{φ(k)}}_{p} &= \norm{∑_{q=k}^{+∞}\Big(f_{φ(q+1)} - f_{φ(q)}\Big)}_{p} \\
 				&⩽ ∑_{q=k}^{+∞} \norm{f_{φ(q+1)} - f_{φ(q)}}_{p} \\
@@ -1131,7 +1189,7 @@ proof
 			\norm{f - f_{φ(k)}}_{p} \arrowlim{k\to+∞}0
 
 rem
-	$(L^{2}(X, μ), +, · , \scalar{\cdot}{\cdot})$ est un espae de Hilbert avec((L’application suivante n’est pas définie positive dans $\L^{p}$ mais l’est dans $L^{p}$.))
+	$(L^{2}(X, μ), +, \,·\, , \scalar{\cdot}{\cdot})$ est un espae de Hilbert avec((L’application suivante n’est pas définie positive dans $\L^{p}$ mais l’est dans $L^{p}$.))
 	math
 		\scalar{\cdot}{\cdot}: \applic{L^{2}(X, μ)^{2}}{\C}{(f,g)}{(f,g) = ∫_{X}\dd μ fg^{*}}
 	En effet, on a
@@ -1154,39 +1212,41 @@ rem
 ### L’algèbre de convolution $\L^{p}(\R)$
 
 def Algèbre de Banach
-	Algèbre $(E, +, · , \star, \norm{· })$ telle que :
-	- $(E, +, · , \norm{· })$ soit un espace de Banach,
-	- $(E, +, · , \star)$ soit une algèbre,
+	Algèbre $(E, +, \,·\, , \star, \norm{· })$ telle que :
+	- $(E, +, \,·\, , \norm{· })$ soit un espace de Banach,
+	- $(E, +, \,·\, , \star)$ soit une algèbre,
 	- $∀ x, y ∈ E, \norm{x \star y}⩽ \norm{x}\norm{y}$
 
-	On dira d’une algèbre de Banach $(E, +, · , \star, \norm{\cdot})$ qu’elle est :
-	- _associative_ si $(te, +, · , \star)$ est une algèbre associative
-	- _commutative_ si $(E, +, · , \star)$ est commutative
+	On dira d’une algèbre de Banach $(E, +, \,·\, , \star, \norm{\cdot})$ qu’elle est :
+	- _associative_ si $(E, +, \,·\, , \star)$ est une algèbre associative
+	- _commutative_ si $(E, +, \,·\, , \star)$ est commutative
 	- _unitaire_ si il existe une unité pour la loi $\star$. Elle est non-unitaire dans le cas contraire.
 
 	Dans une algèbre de Banach non-unitaire, on dira d’une suite $(u_{n})_{n ∈ \N}$ qu’elle est une _approximation de l’unité_ si
 	math
 		∀ x ∈ E, \begin{cases}\norm{u_{n}\star x - x} \arrowlim{n\to+∞} 0 \\ \norm{u\star u_{n} - x} \arrowlim{n\to+∞}0\end{cases}
+	as_flashcard Algèbre de Banach et approximation de l’unité
 
 defprop Algèbre de convolution
 	Pour toutes fonction $f,g ∈ \L^{1}(\R)$, on définit $f\star g ∈ \L^{1}(\R)$ en posant
 	math
 		∀ x ∈ \R, f\star g(x) = ∫_{\R}\dd t f(x-t)g(t)
-	On appelle $\star$ le _produit de convolution_. Alors $(L^{1}(\R), +, · , \star, \norm{\cdot}_{1})$ est une algèbre de Banach associative, commutative et non unitaire.
+	On appelle $\star$ le _produit de convolution_. Alors $(L^{1}(\R), +, \,·\, , \star, \norm{\cdot}_{1})$ est une algèbre de Banach associative, commutative et non unitaire.
+	as_flashcard Algèbre de convolution (et définition du produit de convolution)
 
 proof
 	Montrons dans un premier temps les trois axiomes de la définition d’une algèbre de Banach.
-	- D’après Riesz-Fischer, $(L^{1}(\R), +, · , \norm{\cdot}_{1})$ est un espace de Banach.
-	- $(\L^{1}(\R), +, · , \star)$ est une algèbre par linéarité de l’intégrale.
+	- D’après Riesz-Fischer, $(L^{1}(\R), +, \,·\, , \norm{\cdot}_{1})$ est un espace de Banach.
+	- $(\L^{1}(\R), +, \,·\, , \star)$ est une algèbre par linéarité de l’intégrale.
 	- Soient $f,g ∈ \L^{1}(\R)$. Alors, en utilisant Fubini-Tonelli, on obtient
 		math
 			\begin{align*}
-				∫_{\R}\abs{f\star g(x)} &= ∫_{\dd x \abs{∫_{\R} f(x-t)g(t)}} \\
+				∫_{\R}\abs{f\star g(x)} &= ∫_{\R}\dd x \abs{∫_{\R} f(x-t)g(t)} \\
 				&⩽ ∫_{\R}\dd x∫_{\R}\dd t \abs{f(x-t)} \abs{g(t)} \\
 				&= ∫_{\R}\dd t \left(∫_{\R}\dd x \abs{f(x-t)}\right)\abs{g(t)} \\
 				&=\norm{f}_{1} \norm{g}_{1}
 			\end{align*}
-		de sorte que
+		si bien que
 		math
 			\norm{f\star g}_{1} ⩽ \norm{f}_{1} \norm{g}_{1}
 		ce qui montre le dernier point.
@@ -1206,8 +1266,8 @@ rem
 	- Il n’y a pas d’unité dans cette algèbre, d’où l’approximation de l’unité.
 
 Pour $y ∈ \R$, on définit la translatée $τ_{y}(f)$ de toute fonction mesurable $f:\R ⟶ \bar{\R}$ par
-	math
-		∀ x ∈ \R , τ_{y}(f)(x) = f(x-y)
+math
+	∀ x ∈ \R , τ_{y}(f)(x) = f(x-y)
 
 prop Continuité de la translation au sens de $\norm{\cdot}_p$
 	Si $p ∈ \cc{1,+∞}$ et $f ∈ \L^{p}(\R)$, l’application
@@ -1216,6 +1276,16 @@ prop Continuité de la translation au sens de $\norm{\cdot}_p$
 	est continue, c’est-à-dire que
 	math
 		\lim_{y\to 0}\norm{τ_{y}(f) - f}_{p} = 0
+	Q: Continuité de la translation au sens de $\norm{\cdot}_{p}$
+		A: Si $p ∈ \cc{1,+∞}$ et $f ∈ \L^{p}(\R)$, l’application
+			math
+				\applic{\R}{\L^{p}(\R)}{y}{τ_{y}(f)}
+			avec
+			math
+				∀ x ∈ \R , τ_{y}(f)(x) = f(x-y)
+			est continue, c’est-à-dire que
+			math
+				\lim_{y\to 0}\norm{τ_{y}(f) - f}_{p} = 0
 
 proof
 	La propriété est clairement vraie si $f = \1_{A}$ pour $A ∈ \L_{\R}$, elle l’est donc également si $f$ est une fonction étagée.
@@ -1238,8 +1308,10 @@ Pour toute fonction mesurable $f:\R ⟶ \bar{\R}$ et tout $a ∈ \R_{+}^{*}$, on
 math
 	ξ_{a}(f)(x) = f(ax)
 
-thm Approximation de l’unité dans $(\L^1(\R), +, \cdot, \star, \norm{\cdot}_1)$
-	Soit $u ∈ \L^{1}(\R)$ telle que $∫_{\R}\dd μ_{L} u = 1$. Alors, la suite $(u_{n} = n ξ_{n}(u))_{n ∈ \N^{*}}$ est une approximation de l’unité de l’algèbre de Banach $\big(L^{1}(\R), +, · , \star, \norm{\cdot}_{1}\big)$.
+thm Approximation de l’unité dans $(\L^1(\R), +, \,\cdot\,, \star, \norm{\cdot}_1)$
+	Soit $u ∈ \L^{1}(\R)$ telle que $∫_{\R}\dd μ_{L} u = 1$. Alors, la suite $(u_{n} = n ξ_{n}(u))_{n ∈ \N^{*}}$ est une approximation de l’unité de l’algèbre de Banach $\big(L^{1}(\R), +, \,·\, , \star, \norm{\cdot}_{1}\big)$.
+	Q: Approximation de l’unité dans $(\L^1(\R), +, \,\cdot\,, \star, \norm{\cdot}_1)$
+		A: Soit $u ∈ \L^{1}(\R)$ telle que $∫_{\R}\dd μ_{L} u = 1$. Alors, la suite $(u_{n} = n ξ_{n}(u))_{n ∈ \N^{*}}$ avec $ξ_{a}(f)(x) = f(ax)$ est une approximation de l’unité de l’algèbre de Banach $\big(L^{1}(\R), +, \,·\, , \star, \norm{\cdot}_{1}\big)$.
 
 proof
 	Soit $f ∈ \L^{1}(\R)$. Alors, par définition, on a pour $n ∈ \N^{*}$ et $x ∈ \R$
@@ -1250,13 +1322,13 @@ proof
 		\end{align*}
 	D’autre part, comme $∫_{\R}\dd μ_{L} u = 1$, on peut écrire
 	math
-		∀ x ∈ \R, ∫_{\R}\dd y f(x)u(y)
+		∀ x ∈ \R, f(x) = ∫_{\R}\dd y f(x)u(y)
 	et on obtient alors, pour tout $n ∈ \N^{*}$ :
 	math
 		\begin{align*}
 			\norm{f\star u_{n} - f}_{1} &= ∫_{\R}\dd x \abs{f\star u_{n}(x) - f(x)} \\
 			&= ∫_{\R} \dd x \abs{∫_{\R}\dd y \left[f \left(x - \frac{y}{n}\right) - f(x)\right]u(y)} \\
-			⩽ ∫_{\R}\dd x ∫_{\R}\dd y \abs{f \left(x- \frac{y}{n} - f(x)\right)}\abs{u(y)} \\
+			&⩽ ∫_{\R}\dd x ∫_{\R}\dd y \abs{f \left(x- \frac{y}{n}\right) - f(x)}\abs{u(y)} \\
 			&\oleq{Fubini-T} ∫_{\R}\dd y \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)} \\
 		\end{align*}
 	Or, $\big(y ⟼  \norm{τ_{y/n}(f) - f}_{1} \abs{u(y)}\big)_{n ∈ \N}$ est une suite de fonctions mesurables de limite 0 d’après la continuité de la translation, et pour tout $y ∈ \R$,
@@ -1270,5 +1342,5 @@ proof
 		\lim_{n\to+∞} \norm{f \star a_{n} - f}_{1} = 0
 
 rem
-	- L’hypothèse $∫_{\R}\dd μ_{L} u = 1$ est peu restrictive; il simple normalisation de la fonction permet de la satisfaire.
+	- L’hypothèse $∫_{\R}\dd μ_{L} u = 1$ est peu restrictive; une simple normalisation de la fonction permet de la satisfaire.
 	- Nous répondrons dans le chapitre quatre à la question _Qu’approximent les approximations de l’unité ?_

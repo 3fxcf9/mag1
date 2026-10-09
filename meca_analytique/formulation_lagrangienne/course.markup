@@ -1,0 +1,240 @@
+../../common/course.lib.markup
+
+title Formulation Lagrangienne
+date 09/09/2026
+
+show_flashcards
+
+## Équations d’Euler-Lagrange
+
+### Contraintes et principe de d’Alembert
+
+Q: Déplacement virtuel
+	A: Déplacement infinitésimal satisfaisant les contraintes d système. Il ne correspond pas forcément à une trajectoire réelle.
+
+Q: Contrainte holonome
+	reversed
+	A: Contrainte pouvant s’exprimer sous la forme
+		math
+			f(\r_{1}, …, \r_{N}, t) = 0
+
+Q: Contrainte holonome scléronome
+	reversed
+	A: Contrainte holonome indépendante du temps
+
+Q: Contrainte holonome rhéonome
+	reversed
+	A: Contrainte holonome dépendant explicitement du temps
+
+Q: Contrainte non hononome
+	A: Contrainte ne pouvant pas s’exprimer sous la forme
+		math
+			f(\r_{1}, …, \r_{N}, t) = 0
+		Par exerple
+		math
+			f(\r_{1}, …, \r_{N}, t) ⩾ 0
+		ou
+		math
+			f(\r_{1}, …, \r_{N}, \dr_{1}, …, \dr_{N}, t) = 0
+
+### Coordonnées généralisées
+
+Q: Coordonnées généralisées
+	A: Jeu de coordonnées indépendantes qui permet de décrire le système en satisfaisant automatiquement ses contraintes. On peut exprimer le vecteur position en fonction de ses coordonnées.
+
+Q: Variété des configuration
+	A: Espace associé aux coordonnées généralisées, contenant l'ensemble de toutes les positions possibles d'un système en respectant ses contraintes géométriques.
+
+Q: Lien entre variations naturelles et virtuelles
+	A: Si deux trajectoires $\r(t)$ et $(\r + δ\r)(t)$ sont séparées par des déplacements virtuels $δ\r$, on a en notant $\dd \r(t) = t(t+\dd t) - \r(t)$ les variations naturelles (différentielles le long des trajectoires),
+		math
+			\dd δ\r = δ \dd \r
+
+### Équations de Lagrange
+
+Q: Équations de Lagrange (sans Lagrangien)
+	A: Pour $α = 1, …, n$ indice des coordonnées généralisées,
+		math
+			\dv{}{t}\left(\pdv{T}{\dq_{α}}\right) - \pdv{T}{q_{α}} = Q_{α}
+		avec
+		math
+			T = ∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}
+		l’énergie cinétique et
+		math
+			Q_{α} = ∑_{i}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}}
+		la force généralisée.
+
+Q: Équations d’Euler-Lagrange avec Lagrangien
+	A: Pour $α = 1, …, n$ indice des coordonnées généraliséS,
+		math
+			\dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) - \pdv{\Lagr}{q_{α}} = Q_{α}'
+		Avec
+		math
+			\Lagr(q_{α}, \dq_{α}, t) = T(q_{α}, \dq_{α}, t) - U(q_{α}, t)
+		le lagrangien, faisant intervenir
+		- l’énergie cinétique
+			math
+				T = ∑_{i}\frac{1}{2}m_{i}\dr_{i}^{2}
+		- l’énergie potentielle $U(q_{α}, t)$ en coordonnées généralisées
+		- les forces ne dérivant pas d’un potentiel (note: les forces non conservatives peuvent dériver d’un potentiel variable dans le temps)
+			math
+				Q_{α}' = ∑_{i}\vec{F}_{i} · \pdv{\r_{i}}{q_{α}}
+
+Q: Lagrangien d’une particule chargée dans un champ électromagnétique
+	A: math
+			\Lagr(\r, \dr, t) = \frac{1}{2}m \dr^{2} - q \Big(V(\r, t) - \dr · \A(\r, t)\Big)
+
+Q: Covariance des équations de Lagrange
+	A: Les équations de Lagrange sont invariantes par changement de coordonnées.
+
+## Principe de moindre action
+
+### Fonctionenlle
+
+Q: Fonctionnelle
+	A: Soit $Y$ un ensemble de fonctions satisfaisant les mêmes propriétés (domaine de définition, classe de différentiabilité, …).
+		math
+			F: \applic{Y}{\R}{y}{F[y]}
+	est une fonctionnelle de $y ∈ Y$ que l’on note $F[y(x)]$. En physique, la très grande majorité des fonctionnelles sont de la forme
+	math
+		F[y] = ∫_{a}^{b}\dd x f \big(y(x), y'(x), …, x\big)
+
+Q: Interprétation intuitive des fonctionnelles
+	A: Une fonctionnelle $F[y]$ peut être vue comme le passage à la limite $N\to+∞$ de la fonction $F(y_{1}, …, y_{N})$ où $\set{x_{i}}_{i ∈ \icc{1,N}}$ est une discrétisation de l’axe $x$ en intervalles identiques donnant lieu à une discrétisation $\set{y_{i}}_{i ∈ \icc{1,N}}$ de la fonction $y$.
+
+Q: Définition de la dérivée fonctionnelle $\frac{δF}{δy(x)}$ d’une fonctionnelle sur des fonctions définies sur $\cc{a,b}$
+	A: On effectue une variation $y(x) + α η(x) ∈ Y$ autour de $y ∈ Y$ où $α$ est un réel qu’on fait tendre vers zéro et $η(x)$ une fonction telle que $η(a) = η(b) = 0$, et on définit (si possible) $\frac{δF}{δy(x)}$ par
+		math
+			F[y+α η] - F[y] = α ∫_{a}^{b}\dd x \frac{δF}{δ y(x)}η(x) + O(α^{2})
+		ou de façon compacte, en introduisant $δy(x) = αη(x)$ et $δF = F[y+α η] - F[y]$ :
+		math
+			\boxed{δF = ∫_{a}^{b}\dd x \frac{δF}{δy(x)}δy(x)}
+
+Q: Interprétation intuitive de la dérivée fonctionnelle
+	A: On considère un développement de Taylor au premier ordre en $α$ :
+		math
+			F(y_{1} + αη_{1}, …, y_{N} + αη_{N}) \simeq tf(y_{1}, …, y_{N}) + α ∑_{i=1}^{N}\pdv{F}{y_{i}}η_{i}
+		qui donne, après « passage à la limite »,
+		math
+			F[y+αη] \simeq F[y] + α ∫_{a}^{b}\dd x \frac{δF}{δy(x)}η(x)
+
+Q: Stationnarité de la fonctionnelle
+	math
+		F[y] = ∫_{a}^{b}\dd x f \big(y(x), y'(x), x\big)
+	A: Écrire $\frac{δF}{δy(x)} = 0$ donne l’_équation d’Euler_ :
+		math
+			\pdv{f}{y} - \dv{}{x} \left(\pdv{f}{y'}\right) = 0
+
+#### Principe de moindre action de Hamilton
+
+Q: Principe de moindre action de Hamilton
+	A: Soit un système décrit par un système de $n$ coordonnées généralisées $\set{q_{α}, \dq_{α}}_{α ∈ \icc{1,n}}$. La trajectoire réalisée physiquement est celle minimisant l’action $S[q_{α}(t)]$ définie par
+		math
+			S[q_{α}] = ∫_{t_{1}}^{t_{2}}\dd t \Lagr \big(q_{α}(t), \dq_{α}(t), t\big)
+		En effet, pour tout $α$,
+		math
+			\frac{δS}{δq_{α}(t)} = 0 ⟺ \pdv{\Lagr}{q_{α}} - \dv{}{t} \left(\pdv{\Lagr}{\dq_{α}}\right) = 0
+
+### Prise en compte des contraintes par des multiplicateurs de Lagrange
+
+Q: Théorème des extrêma liés pour une fonction de deux variables
+	A: Pour extrêmaliser une fonction $F(x_{1}, x_{2})$ sous une contrainte holonome $f(x_{1}, x_{2}) = 0$, on extrêmalise la fonction
+		math
+			\bar{F}(x_{1}, x_{2}, λ) = F(x_{1}, x_{2}) + λf(x_{1}, x_{2})
+		où $λ ∈ \R$ est appelé _multiplicateur de Lagrange_.
+
+Q: Théorème des extrêma liés pour une fonction $F(x_{1}, …, x_{n})$ sous les $K < n$ contraintes holonomes $f_{β}(x_{1}, …, x_{n})$
+	A: On introduit $K$ multiplicateurs de Lagrange $λ_{β}$ (un par contrainte) et on extrêmalise la fonction
+		math
+			\bar{F}(x_{1}, …, x_{n}, λ_{1}, …, λ_{K}) = tf(x_{1}, …, x_{n}) + ∑_{β=1}^{K}λ_{β}f_{β}(x_{1}, …, x_{n})
+
+Q: Principe de moindre action sous contrainte
+	A: La trajectoire doit minimiser l’action $\bar{S}$ définie par
+		math
+			\bar{S}[q_{α}, λ_{β}] = ∫_{t_{1}}^{t_{2}}\dd t \bar{\Lagr}(q_{α}, \dq_{α}, t, λ_{β})
+		avec
+		math
+			\bar{\Lagr}(q_{α}, \dq_{α}, t, λ_{β}) = \Lagr (q_{α}, \dq_{α}, t) + ∑_{β=1}^{K}λ_{β}(t)f_{β}(q_{α}, t)
+		ce qui donne lieu aux équations
+		math
+			\begin{gather*}
+				\dv{}{t} \left(\pdv{\bar{\Lagr}}{\dq_{α}}\right) = \pdv{\bar{\Lagr}}{q_{α}} \quad α = 1, …, n \\
+				f_{β}(q_{α}, t) = 0 \quad β = 1, …, K
+			\end{gather*}
+		De tels multiplicateurs de Lagrange $λ_{β}$ sont des coefficients de forces de réactions généralisées associées aux contraintes.
+
+## Grandeurs physiques
+
+### Moment généralisé
+
+Q: Moment généralisé associé à la coordonnée $q_{α}$
+	A: math
+			p_{α} = \pdv{\Lagr}{\dq_{α}}
+
+Q: Coordonnée cyclique et conséquence sur le moment généralisé associé
+	A: Une coordonnée $q_{α_{0}}$ est cyclique si
+		math
+			\pdv{\Lagr}{q_{α_{0}}} = 0
+		On déduit à l’aide des équations d’Euler-Lagrange que
+		math
+			\dot{p}_{α_{0}} = \dv{}{t}\left(\pdv{\Lagr}{\dq_{α_{0}}}\right) = 0
+		Le moment généralisé $p_{α_{0}}$ se conserve.
+			bold
+
+Q: Réécriture du Lagrangien avec une coordonnée cyclique
+	A: Si la coordonnée $q_{α_{0}}$ est cyclique ($\pdv{\Lagr}{q_{α_{0}}} = 0$ et donc $p_{α_{0}} = \pdv{\Lagr}{\dq_{α_{0}}} = \cte$), on peut utiliser un principe variationnel modifié et basé sur la fonction de Lagrange modifiée
+		math
+			\Lagr' = \Lagr - p_{n}\dq_{n}
+		qui est telle que $δ' S' = 0$.
+		Preuve : En raison de la relation de liaison $p_{α_{0}}(q_{α}, \dq_{α}, t) = \cte$, on ne peut imposer $δ' q_{α}(t_{1}) = δ' q_{α}(t_{2}) = 0$ que pour $α\ne α_{0}$ dans la formule de la variation de l’action :
+		math
+			δ' S = ∫_{t_{1}}^{t_{2}}∑_{α=1}^{n} \left(\pdv{\Lagr}{q_{α}} - \dv{}{t}\left(\pdv{\Lagr}{\dq_{α}}\right)\right) δ' q_{α}\dd t + ∑_{α=1}^{n} \left[\pdv{\Lagr}{\dq_{α}}δ' q_{α}\right]_{t_{1}}^{t_{2}} = δ' \Big[p_{α_{0}}q_{α_{0}}\Big]^{t_{2}}_{t_{1}} = δ' ∫_{t_{1}}^{t_{2}}p_{α_{0}} \dq_{α_{0}}
+		d’où
+		math
+			δ' \left(∫_{t_{1}}^{t_{2}}\Lagr - p_{α_{0}}\dq_{α_{0}}\right) = 0
+
+### Énergie
+
+Q: Théorème d’Euler sur les fonctions homogènes
+	A: Une fonction $F$ de $n$ variable est dite _homogène_ de degré $k$ si elle satisfait
+		math
+			∀ λ > 0, F(λ x_{1}, …, λ x_{n}) = λ^{k} F(x_{1}, …, x_{n})
+		En dérivant cette expression puis en prenant $λ=1$, on obtient
+		math
+			∑_{i=1}^{n}x_{i} \pdv{F}{x_{i}}(x_{1}, …, x_{n}) = kF(x_{1}, …, x_{n})
+
+Q: Énergie cinétique $T = ∑_{i} = \frac{1}{2}m..i \dr_{i}^{2}$ dans le cas d’une transformation $\r_{i} \to q_{α}$ indépendante du temps
+	A: On a $\r_{i} = \r_{i}(q_{α})$ d’où $\dr_{i}^{2} = \left(∑_{α} \pdv{\r_{i}}{q_{α}}\dq_{α}\right)^{2} = ∑_{α, β}\pdv{\r_{i}}{q_{α}}\pdv{\r_{i}}{q_{β}}\dq_{α}\dq_{β}$ d’o
+		math
+			T = ∑_{α, β}\frac{1}{2}M_{α, β}\dq_{α}\dq_{β}
+		avec
+		math
+			M_{α, β} = ∑_{i}m_{i} \pdv{\r_{i}}{q_{α}}\pdv{\r_{i}}{q_{β}}
+
+Q: Énergie Lagrangienne
+	A: math
+			E_L(q_{α}, \dq_{α}, t) = ∑_{α}\dq_{α} \pdv{\Lagr}{\dq_{α}} - \Lagr
+		Sa définition est motivée par le calcul suivant
+		math
+			\dv{\Lagr}{t} = ⋯ = \pdv{\Lagr}{t} + \dv{}{t}\left(∑_{α} \dq_{α}\pdv{\Lagr}{\dq_{α}}\right)
+		dont on tire
+		math
+			\dv{E_{L}}{t} = - \pdv{\Lagr}{t}
+		Ainsi, *l’énergie se conserve si la fonction de Lagrange ne dépend pas explicitement du temps*.
+
+Q: Énergie lagrangienne pour un système conservatif *indépendant du temps*
+	A: On a, d’après le théorème d’Euler sur les fonctions homogènes $∑_{α}\dq_{α} \pdv{T}{\dq_{α}} = 2T$, d’où
+		math
+			E_{L} = ∑_{α}\dq_{α}\pdv{\Lagr}{\dq_{α}} - \Lagr = 2T - (T-U) = T + U = E_{m}
+
+### Invariance de Jauge du Lagrangien
+
+Q: Invariance de jauge du Lagrangien
+	A: Le lagrangien défini par
+		math
+			\Lagr'(q_{α}, \dq_{α}, t) = \Lagr(q_{α}, \dq_{α}, t) + \dv{}{t}χ(q_{α}, t)
+		conduit aux mêmes équations du mouvement que $\Lagr$. En effet,
+		math
+			S'[q_{α}] = ∫_{t_{1}}^{t_{2}}\dd t \Lagr' = S[q_{α}] + ∫_{t_{1}}^{t_{2}}\dd t \dv{}{t}χ(q_{α}, t) = S[q_{α}] + χ(q_{α}(t_{2}), t_{2}) - χ(q_{α}(t_{1}), t_{1})
+		or $δq_{α}(t_{i})$ aux bords, si bien qu’aux bords, $δχ(q_{α}(t_{i})) = χ(q_{α}(t_{i}) + δ q_{α}(t_{i}), t_{i}) - χ(q_{α}(t_{i}), t_{i}) = 0$ d’où $δS' = δ S$.
+
