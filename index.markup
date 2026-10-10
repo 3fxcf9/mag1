@@ -33,6 +33,15 @@ css
 		text-decoration: none;
 		color: inherit;
 		border: 1px solid var(--subtext-color);
+		&.notes-only {
+			filter: brightness(0.6);
+			&::before {
+				content: "NOTES";
+				position: absolute;
+				padding: 0.5rem;
+				font-style: italic;
+			}
+		}
 	}
 
 	.cover {
@@ -91,13 +100,22 @@ parser subject
 		(meta.teacher or {""})[1])
 	list_wrap <div class="subject-grid">$elements</div>
 
+parser notes
+	markup
+		class notes-only
+
 subject math
-subject astrophysique
-subject electromagnetism
-subject meca_analytique
-subject meca_quantique
 subject cosmologie
+subject astrophysique
+	notes
+subject electromagnetism
+	notes
+subject meca_analytique
+	notes
+subject meca_quantique
+	notes
 subject conferences
 subject incertitudes
+	notes
 
 generate_project_flashcards_json
