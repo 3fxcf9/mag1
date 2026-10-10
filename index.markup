@@ -92,6 +92,7 @@ parser subject
 	list_wrap <div class="subject-grid">$elements</div>
 
 subject math
+subject astrophysique
 subject electromagnetism
 subject meca_analytique
 subject meca_quantique

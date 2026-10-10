@@ -32,14 +32,14 @@ proof
 		math
 			\abs{f(x)e^{\pm ikx}} ⩽ \abs{f(x)}
 		avec $f ∈ \L^{1}(\R)$.
-	Les fonctions $\F(f)$ et $\Fi(x)$ sont donc continues sur $\R$. De plus, pour tout $k ∈ \R$,
+	Les fonctions $\F(f)$ et $\Fi(f)$ sont donc continues sur $\R$. De plus, pour tout $k ∈ \R$,
 	math tf:l1:proof:1
 		\abs{\F(f)(k)} = \abs{∫_{\R} \frac{\dd x}{\sqrt{2 π}} f(x)e^{-ikx}} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}} < ∞
-	(on peut remplacer $\F$ par $\Fi$ et « $-$ » par « $+$ » dans la dernière expression). Les fonctions $\F(f)$ et $\Fi(f)$ sont continues car mesurables sur $\R$, d’où d’après [tf:l1:proof:1],
+	(on peut remplacer $\F$ par $\Fi$ et « $-$ » par « $+$ » dans la dernière expression). Les fonctions $\F(f)$ et $\Fi(f)$ sont continues donc mesurables sur $\R$, et on en déduit, d’après [tf:l1:proof:1],
 	math tf:l1:proof:2
 		\norm{\F(f)}_{∞} = \esssup \abs{\F(f)} = \sup \abs{\F(f)} ⩽ \frac{\norm{f}_{1}}{\sqrt{2 π}} < ∞
 	(relation aussi vraie avec $\Fi$) ce qui montre que $\F(f), \Fi(f) ∈ \L^{∞}(\R)$.
-	- $\F$ et $\Fi$ sont évidemment linéaires du fait de la linéarité de l’intégrale,
+	- $\F$ et $\Fi$ sont évidemment linéaires du fait de la linéarité de l’intégrale.
 	- Montrons la continuité de $\F$ et $\Fi$ : soit $(f_{n})_{n ∈ \N}$ une suite de fonctions Lebesgue-sommables sur $\R$ telle que $\lim_{n\to+∞}\norm{f_{n} - f}_{1} = 0$ pour $f ∈ \L^{1}(\R)$. Alors, d’après [tf:l1:proof:2] et par linéarité de $\F$, on a pour tout $n ∈ \N$
 		math
 			\norm{\F(f_{n}) - \F(f)}_{∞} = \norm{\F(f_{n} - f)}_{∞} ⩽ \frac{\norm{f_{n} - f}_{1}}{\sqrt{2 π}} \arrowlim{n\to+∞}0
@@ -47,7 +47,7 @@ proof
 
 rem
 	- Il existe différentes définitions de $\F$ et $\Fi$ et *certains résultats du cours dépendent explicitement de celle choisie ici*. On peut cependant toujours se ramener à une certaine définition par un changement de variable.
-	- Pour $n ∈ \N^{*}$, on définit $\F_{n}$ et $\Fi_{n}$ sur $\L^{1}(\R^{n})$ en posant pour $f ∈ \L^{1}(\R)$ et $\vec{k} ∈ \R^{n}$ :
+	- Pour $n ∈ \N^{*}$, on définit $\F_{n}$ et $\Fi_{n}$ sur $\L^{1}(\R^{n})$ en posant pour $f ∈ \L^{1}(\R^{n})$ et $\vec{k} ∈ \R^{n}$ :
 		math
 			\F_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{d^{n}x}{(2 π)^{n/2}}f(\vec{x})e^{-i \vec{k}· \vec{x}}
 		et
@@ -61,19 +61,44 @@ rem
 prop
 	Soit $f$ une fonction Lebesgue-sommable sur $\R$. Alors,
 	~ $∀ k ∈ \R, \F(f^{*})(k) = \big(\F(f)\big)^{*}(-k)$
+		Q: Transformation de Fourier et conjugaison
+			A: Si $f$ est une fonction Lebesgue-sommable sur $\R$, alors
+				math
+					∀ k ∈ \R, \F(f^{*})(k) = \big(\F(f)\big)^{*}(-k)
 	~ En notant $P: \L^{1}(\R) ⟶ \L^{1}(\R)$ l’opérateur parité défini par $∀ x ∈ \R, P(f)(x) = f(-x)$, on a
 		math
 			P \circ \F = \Fi = \F \circ P
 		Ainsi, si $f$ est paire (resp. impaire), il en est de même de $\F(f)$ et de $\Fi(f)$, et de surcroît $\Fi(f) = \F(f)$ (resp. $\Fi(f) = -\F(f)$).
-	~ Pour $λ ∈ \R^{*}$,
+		Q: Transformation de Fourier et parité
+			A: En notant $P: \L^{1}(\R) ⟶ \L^{1}(\R)$ l’opérateur parité défini par $∀ x ∈ \R, P(f)(x) = f(-x)$, on a
+				math
+					P \circ \F = \Fi = \F \circ P
+				Ainsi, si $f$ est paire (resp. impaire), il en est de même de $\F(f)$ et de $\Fi(f)$, et de surcroît $\Fi(f) = \F(f)$ (resp. $\Fi(f) = -\F(f)$).
+	~ _(dilatation)_ Pour $λ ∈ \R^{*}$,
 		math
 			\F \big(ξ_{λ}(f)\big) = \frac{1}{\abs{λ}}ξ_{1/λ} \circ \F(f)
-	~ Pour $x_{0}$ et $k$ réels,
+		Q: Transformation de Fourier et dilatation
+			A: En considérant l’opérateur dilatation défini par $ξ_{a}(f)(x) = f(ax)$, on a, pour $λ ∈ \R^{*}$ :
+				math
+					\F \big(ξ_{λ}(f)\big) = \frac{1}{\abs{λ}}ξ_{1/λ} \circ \F(f)
+	~ _(translation)_ Pour $x_{0}$ et $k$ réels,
 		math
 			\F \big(τ_{x_{0}}(f)\big)(k) = e^{-ikx_{0}} \F(f)(k)
-	~ Pour $k_{0}$ réel,
+	~ _(translation de la transformée)_ Pour $k_{0}$ réel,
 		math
 			τ_{k_{0}} \circ \F(f) = \F \big(x ⟼  e^{ik_{0}x} f(x)\big)
+		Q: Transformation de Fourier et translation
+			A: En considérant l’opérateur translation défini par $τ_{y}(f)(x) = f(x-y)$, on a, pour $x_{0}$ et $k$ réels :
+				math
+					\F \big(τ_{x_{0}}(f)\big)(k) = e^{-ikx_{0}} \F(f)(k)
+				et
+				math
+					τ_{k_{0}} \circ \F(f) = \F \big(x ⟼  e^{ik_{0}x} f(x)\big)
+
+recall
+	Les opérateurs de dilatation et de translation sont définis par
+	- $ξ_{a}(f)(x) = f(ax)$
+	- $τ_{y}(f)(x) = f(x-y)$
 
 proof
 	En exercice
@@ -84,6 +109,7 @@ lemma Riemann-Lebesgue
 	Pour toute fonction $f$ Lebesgue-sommable,
 	math
 		\lim_{k\to\pm ∞}\F(f)(k) = 0 \quad\text{et}\quad \lim_{k\to\pm ∞}\Fi(f)(k) = 0
+	as_flashcard
 
 proof
 	Soit $f$ Lebesgue-sommable. D’après la proposition précédente, on a
@@ -120,6 +146,7 @@ thm Théorème d’inversion de Fourier de $\L^1(\R)$
 	~ Si en outre $f$ est continue sur $\R$,
 		math
 			\Fi \circ \F(f) = \F \circ \Fi(f) = f \text{ partout dans } \R
+	as_flashcard
 
 proof
 	Soit $f ∈ \L^{1}(\R)$ telle que $\F(f) ∈ \L^{1}(\R)$. On considère, pour $n ∈ \N^{*}$,
@@ -150,10 +177,17 @@ proof
 			∫_{\R}f(y)\F \big(k ⟼ h_{n}(k)e^{ikx}\big) = ∫_{\R}\dd yf(y)\F(h_{n})(y-x)
 		En remarquant que $∀ n ∈ \N, h_{n} = ξ_{1/n}(h_{1})$,
 		math
-			∫_{\R}\dd yf(y)\F(h_{n})(y-x) = ∫_{\R}\dd y f(y)\F \big(ξ_{1/n}(h_{1})\big)(y-x) = ∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x)
-		si bien qu’en utilisant $\F(h_{1}) = h_{1}$ (v. TD) et la parité de $h_{1}$,
+			\begin{align*}
+				∫_{\R}\dd yf(y)\F(h_{n})(y-x) &= ∫_{\R}\dd y f(y)\F \big(ξ_{1/n}(h_{1})\big)(y-x) \\
+				&= ∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x)
+			\end{align*}
+		de plus, en utilisant $\F(h_{1}) = h_{1}$ (v. TD) et la parité de $h_{1}$,
 		math
-			∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x) = ∫_{\R}\dd y f(y)n ξ_{n} (h_{1})(y-x) = ∫_{\R}\dd y f(y)n ξ_{n}(h_{1})(x-y) = \big(n ξ_{n}(h_{1}) \conv f\big)(x)
+			\begin{align*}
+				∫_{\R}\dd yf(y)n ξ_{n} \circ \F(h_{1})(y-x) &= ∫_{\R}\dd y f(y)n ξ_{n} (h_{1})(y-x) \\
+				&= ∫_{\R}\dd y f(y)n ξ_{n}(h_{1})(x-y) \\
+				&= \big(n ξ_{n}(h_{1}) \conv f\big)(x)
+			\end{align*}
 		Ainsi, en mettant bout-à-bout les 4 dernières équations, on a
 		math
 			∀ n ∈ \N^{*}, g_{n} = n ξ_{n}(h_{1})\conv f
@@ -183,6 +217,7 @@ thm
 	Soit $p ∈ \N$ et $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p}f(x)$ soit Lebesgue-sommable. Alors, $\F(f)$ est continue sur $\R$ et pour tout $n ∈ \icc{0,p}$, on a
 	math
 		\F(f)^{(n)} = \F \big(x ⟼  (-ix)^{n}f(x)\big)
+	as_flashcard Dérvée $n$-ième de la transformée de Fourier
 
 proof
 	Par récurrence sur $p ∈ \N$, le cas $p=0$ étant déjà connu. Supposons la proposition démontrée pour tout $m ∈ \icc{0,p}$ avec $p ∈ \N$ et considérons $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p+1}f(x) ∈ \L^{1}(\R)$. On pose
@@ -193,7 +228,7 @@ proof
 		∫_{\R}\dd μ_{L} g = ∫_{\R}\dd μ_{L} \big(1 + \abs{x^{p+1}}\big)\abs{f(x)} = \underbrace{∫_{\R}\dd μ_{L} \abs{f}}_{< ∞} + \underbrace{∫_{\R}\dd x \abs{x^{p+1}} \abs{f}}_{< ∞} < ∞
 	Donc $g$ est Lebesgue-sommable. De plus, pour tout réel $x$,
 	math
-		\abs{x}^{p} ⩽ 1 + \abs{x}^{p+1}
+		\abs{x}^{p} ⩽ \max(1, \abs{x}^{p+1}) ⩽ 1 + \abs{x}^{p+1}
 	et donc $\abs{x}^{p} \abs{f(x)} ⩽ g$ si bien que $x ⟼  x^{p}f(x) ∈ \L^{1}(\R)$. D’après l’hypothèse de récurrence, $\F(f)$ est de classe $\Cont^{p}$ sur $\R$ et
 	math
 		∀ n ∈ \icc{0,p}, \F(f)^{(n)} = \F \big(x ⟼  (-ix)^{n} f(x)\big)
@@ -216,9 +251,10 @@ prop
 	Soit $f$ une fonction Lebesgue-sommable sur $\R$, continue sur $\R$, de classe $\Cont^{1}$ par morceaux et de dérivée par morceaux $f'$ Lebesgue-sommable. Alors,
 	math
 		∀ k ∈ \R, \F(f')(k) = ik \F(f)(k)
+	as_flashcard Transformée de Fourier d’une dérivée
 
 proof
-	Sous no hypothèses, $\lim_{n\to+∞}f(x) = 0$. En effet, si $x_{0} ∈ \R$, on peut écrire
+	Sous nos hypothèses, $\lim_{n\to+∞}f(x) = 0$. En effet, si $x_{0} ∈ \R$, on peut écrire
 	math
 		∀ x ∈ \R, f(x) = f(x_{0}) + ∫_{x_{0}}^{x}\dd y f'(y)
 	Or, $f'$ étant Lebesgue-sommable, l’intégrale $∫^{\pm ∞}\dd x f'(x)$ est absolument convergente. Il existe donc $λ_{\pm} ∈ \C$ tels que $\lim_{x\to\pm ∞}f(x) = λ_{\pm}$. L’hypothèse $f ∈ \L^{1}(\R)$ entraîne alors $λ_{\pm} = 0$. En intégrant par parties, on obtient finalement, pour $k ∈ \R$,
@@ -233,3 +269,4 @@ prop
 	Soit $p ∈ \N$. Si $f$ est Lebesgue-sommable sur $\R$, de classe $\Cont^{p}$ sur $\R$ et telle que $∀ n ∈ \icc{0,p}, f^{(n)} ∈ \L^{1}(\R)$, alors
 	math
 		∀ k ∈ \R, \F \big(f^{(n)}\big) (k) = (ik)^{n} \F(f)(k)
+	as_flashcard Transformée de Fourier d’une dérivée $n$-ième

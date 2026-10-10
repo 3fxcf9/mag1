@@ -1,19 +1,389 @@
 ../../common/course.lib.markup
 
-title Rayonnements et équilibres hydrostatiques
+title Rayonnement et équilibre stellaire
 date 14/09/2026
+description Corps noir, fond diffus cosmologique, pression de radiation, équilibre hydrostatique.
+author Mathieu Vincendon
 
-Q: Loi de déplacement de Wien en longueur d’onde
-	A: math
-			\lambda_{\max} T = 2.9\cdot 10^{-3}\u{m\cdot K}
+## Introduction
 
-Q: Loi de déplacement de Wien en fréquence
-	A: math
-			\frac{\nu_{\max}}{T} = 5.9\cdot 10^{10}\u{Hz\cdot K^{-1}}
+Le rayonnement électromagnétique constitue la principale source d'information sur l'Univers distant. Si le Système solaire se prête à l'analyse _in situ_ avec des mesures directes de composition atomique, champ magnétique ou ondes mécaniques, l'étude des objets extrasolaires repose en effet majoritairement sur la collecte de photons, l'usage des autres messagers de l'astrophysique (ondes gravitationnelles, neutrinos ou rayons cosmiques) restant encore limité. Mais le rayonnement n'est pas qu'un simple vecteur d'information : c'est un acteur thermodynamique et dynamique majeur en astrophysique. En introduisant la notion de corps noir et la loi de Planck, nous verrons ainsi comment le rayonnement traduit la température de la matière avec laquelle il interagit. Au cœur des structures massives, les photons exercent par ailleurs une pression de radiation capable de s'opposer à l'effondrement gravitationnel abordé lors des cours précédents. L'étude de cet équilibre hydrostatique stellaire posera alors les bases de la structure et de l'évolution des étoiles.
 
-Q: Dispositif expérimental immmitant un « corps noir »
-	A: Cavité régulée thermiquement dont l’intérieur est couvert de matériaux absorbants et percée d’un trou, ce dernier ayant un comportement proche de celui d’un corps noir.
+## La loi de Planck
 
-Q: Température au centre du soleil
-	A: math
-		T \simeq 1.5 \cdot 10^7 \u K
+### Le système exoplanétaire HIP 65426
+
+L'étoile « HIP 65426 » possède une exoplanète dont le rayonnement en fonction de la longueur d'onde a été isolé par plusieurs télescopes, depuis la Terre (VLT) ou l'espace (JWST). Une étude récente, {cite}`Carter2023ApJ...951L..20C`, discute ces mesures qui montrent que le rayonnement de la planète suit, au premier ordre, la tendance attendue d'un rayonnement thermique, modulé par des absorptions liées aux molécules présentes dans son atmosphère, comme H<sub>2</sub>O ([](#fig:rayfig1)).
+
+fig Image et spectre de l'exoplanète « HIP 65426 b », située à grande distance de son étoile (110 ua). En haut à gauche : image brute du JWST montrant le signal résiduel de l'étoile masquée par un système coronographique. En haut à droite : image isolée de la planète, après traitement. En bas : spectre en longueur d'onde de la planète, reconstruit par un modèle (en bleu), à partir de plusieurs mesures obtenues par le VLT et le JWST. Images extraites de la publication {cite}`Carter2023ApJ...951L..20C`.
+	id fig:rayfig1
+	./figures/rayonnement_hip-65426-b.png
+
+L'application de la loi du déplacement de Wien permet alors d'estimer la température de cette planète, à partir de la longueur d'onde du maximum d'émission thermique ($\lambda_{max}~\sim~2\,\mu m$) :
+
+math
+	\lambda_{max} T = 2,9 \times 10^{-3}~m \cdot K
+
+On obtient ainsi $T~\sim~1450~K$. Cette température élevée est liée à l'âge de ce système, estimé à 14&nbsp;Ma, soit un temps très court après sa formation. Les autres composantes du système (étoile, disque de poussières et d'astéroïdes) ont également un rayonnement dominé au premier ordre par la composante thermique ([](#fig:rayfig2)).
+
+fig Rayonnement modélisé pour l'étoile HIP 65426 et son disque (poussières, astéroïdes). Les températures associées sont respectivement $T~\sim~8600~K$ et $T~\sim~300~K$. Figure extraite de {cite}`Carter2023ApJ...951L..20C`.
+	id fig:rayfig2
+	./figures/modelisation_hip-65426-b.png
+
+### Mesures historiques
+
+Pour comprendre le rayonnement émis par un système comme HIP 65426, il faut remonter à la fin du XIX$^e$ siècle. Ce rayonnement thermique est alors étudié expérimentalement à l'aide d'un dispositif dédié : le « corps noir ». On réalise une cavité fermée percée d'un orifice. Avec une ouverture suffisamment petite, un rayon entrant subit de multiples réflexions sur les parois avant de pouvoir ressortir. En recouvrant les parois internes d'un matériau à fort pouvoir absorbant, la probabilité qu'un photon ressorte sans avoir été absorbé devient quasi nulle. Une fois les parois chauffées à une température donnée, on mesure le rayonnement qui s'en échappe par l'ouverture.
+
+fig Spectres du rayonnement émis par un corps noir à différentes températures, mesurés expérimentalement en 1899 par E. Lummer and E. Pringsheim ({cite}`Lummer1899`). Les mesures observées (« beobachtet ») sont comparées à un calcul théorique (« berechnet ») encore imparfait à l'époque.
+	id fig:rayfig3
+	./figures/spectre_corps_noir_historique.jpg
+		class width-50
+
+Comment rendre compte par la théorie de ces résultats expérimentaux ? Plusieurs physiciens (J. Stefan, L. Boltzmann, W. Wien, Lord Rayleigh, J. Jeans) établissent progressivement des lois décrivant certaines caractéristiques de ce rayonnement. Son comportement spectral ne sera toutefois décrit de manière exacte que par Max Planck. Ce dernier trouve d'abord une solution mathématique empirique, puis développe une interprétation physique reposant sur de nouveaux postulats. Il fait alors apparaître pour la première fois la relation fondamentale $E=h\nu$, associée à l'énergie d'un oscillateur matériel. Cette relation sera par la suite réinterprétée par Einstein (1905) comme l'énergie d'un quantum de lumière (ce que l'on appellera plus tard un « photon »), et deviendra l'une des pierres angulaires de la mécanique quantique. Plusieurs physiciens, dont P. Debye et P. Ehrenfest, formaliseront ensuite dans les années 1910 la démonstration que nous allons étudier ensemble.
+
+### Démonstration
+
+On cherche la densité spectrale d'énergie $u(\nu)$ du rayonnement à l'équilibre thermique dans une cavité à la température $T$. Il s'agit d'une énergie par unité de volume et par intervalle de fréquence, d'unité $J \cdot {m}^{-3} \cdot Hz^{-1}$. Le raisonnement comprend deux étapes principales :
+
+~ Compter combien de modes électromagnétiques existent par unité de volume et par intervalle de fréquence, en utilisant le formalisme de l'électrodynamique classique ;
+
+~ Calculer l'énergie moyenne portée par un mode de fréquence $\nu$ à l'équilibre thermique $T$, avec des outils de physique statistique classique et une hypothèse de quantification de l'énergie.
+
+On obtiendra alors la densité spectrale d'énergie en multipliant la densité de modes $g{_v}(\nu)$ (nombre de modes par unité de volume et de fréquence) par l'énergie moyenne d'un mode $\langle E(\nu) \rangle$ :
+
+math
+	u(\nu)\, d\nu = \langle E(\nu) \rangle \times g{_v}(\nu)\, d\nu
+
+Commençons par la première étape :
+
+proof Étape n°1 : Densité de modes
+	Dans une cavité cubique de côté L, les ondes stationnaires imposent dans chaque direction :
+	math
+		\frac{n \lambda}{2} = L
+
+	math
+		k_x = \frac{n_x \pi}{L}, \quad k_y = \frac{n_y \pi}{L}, \quad k_z = \frac{n_z \pi}{L}, \qquad n_x, n_y, n_z \in \mathbb{N}^*
+
+	Le nombre d'onde total associé à un mode est :
+
+	math
+		k = |\vec{k}| = \sqrt{k_x^2 + k_y^2 + k_z^2}
+
+	Une même fréquence peut être obtenue avec plusieurs triplets (plusieurs modes). On cherche le nombre de modes $g(\nu)$ associé à $[\nu, \nu+d\nu]$. Pour cela, on calcule dans un premier temps la fonction cumulative $N(\nu)$ donnant le nombre total de modes dont la fréquence est inférieure ou égale à $\nu$, puis on calculera $g(\nu)$ avec :
+
+	math
+		g(\nu) = \frac{dN}{d\nu}
+
+	Comme $k(\nu) = \frac{2\pi\nu}{c}$, calculer $N(\nu)$ revient à compter toutes les combinaisons $(n_x, n_y, n_z)$ telles que :
+
+	math
+		\frac{\pi}{L}\sqrt{n_x^2 + n_y^2 + n_z^2} \leq  k(\nu)
+
+	De manière générale, dans l'espace des $k$ à trois dimensions, les points sont répartis selon une maille d'espacement $\pi/L$. Chaque point est donc associé à une cellule de volume :
+
+	math
+		v_{\text{cellule}} = \left(\frac{\pi}{L}\right)^3
+
+	Les combinaisons $\leq k(\nu)$ sont celles contenues dans la portion de sphère de rayon $k(\nu)$ pour laquelle les trois dimensions sont positives, soit $1/8$ de la sphère totale :
+
+	math
+		v_{\text{total}} = \frac{1}{8} \times \frac{4}{3}\pi \left(\frac{2\pi\nu}{c}\right)^3
+
+	Le rapport de ces deux volumes permet alors de déterminer le nombre de modes. Il est nécessaire au préalable de multiplier par deux ce rapport pour tenir compte des deux directions orthogonales d'oscillation du champ électromagnétique dans le plan perpendiculaire au vecteur d'onde $\vec{k}$ (polarisation) :
+
+	math
+		N(\nu) = 2 \times \frac{v_{\text{total}}}{v_{\text{cellule}}}
+
+	math
+		N(\nu) = \frac{\pi}{3} \left(\frac{2\nu L}{c}\right)^3
+
+	On dérive alors $ N(\nu)$ par rapport à $\nu$, puis on le divise par le volume $V = L^3$ :
+
+	math
+		g{_v}(\nu)=\frac{1}{V}\frac{dN}{d\nu}
+
+On obtient ainsi la densité de modes recherchée :
+
+math
+	\boxed{g{_v}(\nu) = \frac{8\pi \nu^2}{c^3}}
+
+Concentrons nous maintenant sur un seul mode de fréquence $\nu$. On va introduire ici l'hypothèse de quantification : on postule que l'énergie de ce mode ne peut prendre que des valeurs discrètes, multiples entiers d'un quantum élémentaire $h \nu$ :
+
+math
+	E_n = n h \nu, \qquad n = 0, 1, 2, 3, \dots
+
+Avec une vision moderne, on peut interpréter $n$ comme le nombre de photons occupant ce mode, chaque photon apportant une énergie $h \nu$. Le mode est donc soit vide ($n = 0$), soit occupé par 1 photon, 2, ... n photons.
+
+proof Étape n°2 : Énergie moyenne d'un mode à l'équilibre thermique
+	Pour calculer l'énergie moyenne de ce mode de fréquence $\nu$, on considère qu'il s'agit d'un petit système en équilibre thermique avec les parois de la cavité à température $T$ (thermostat). La probabilité $P(n)$ qu'il se trouve dans l'état d'énergie $E_n$ suit la [loi de Boltzmann](https://fr.wikipedia.org/wiki/Ensemble_canonique) (facteur de Boltzmann pour ce niveau d'énergie, divisé par la somme pour l'ensemble des niveaux d'énergie) :
+	math
+		P(n) = \frac{e^{-\frac{E_n}{k T}}}{\sum_{j=0}^{\infty} e^{-\frac{E_{j}}{k T}}}
+	Or :
+	math
+		\sum_{j=0}^{\infty} e^{-\frac{jh\nu}{k T}} = \sum_{j=0}^{\infty} x^j
+	avec
+	math
+		\qquad x = e^{-\frac{h \nu}{k T}}
+	Comme $0 < x < 1$, c'est une série géométrique convergente :
+	math
+		\sum_{j=0}^{\infty} x^j=\frac{1}{1-x}
+	Donc
+	math
+		P(n) = (e^{-\frac{nh \nu}{k T}})(1-e^{-\frac{h \nu}{k T}})
+	On en déduit l'énergie moyenne en faisant la somme de tous les niveaux d'énergie possible :
+	math
+		\langle E(\nu) \rangle = \sum_n E_n P(n)
+	soit
+	math
+		\langle E(\nu) \rangle = h\nu(1-x)\sum_n n~x^n
+	Astuce de calcul : dérivons $\sum_n x^n=\frac{1}{1-x}$
+	math
+		\sum_{n=1}^{\infty} nx^{n-1}=\frac{1}{(1-x)^2}
+	On multiplie par $x$ et on ajoute $n=0$ dans la somme (terme nul) :
+	math
+		\sum_{n=0}^{\infty} nx^n=\frac{x}{(1-x)^2}
+	On obtient alors :
+	math
+		\langle E(\nu) \rangle = h\nu\frac{x}{1-x}=h\nu\frac{e^{-\frac{h \nu}{k T}}}{1-e^{-\frac{h \nu}{k T}}}
+
+On obtient ainsi l'expression recherchée de l'énergie moyenne d'un mode :
+
+math
+	\boxed{\langle E(\nu) \rangle = \frac{h\nu}{e^{\frac{h \nu}{k T}}-1}}
+
+En multipliant la densité de modes (Étape n°1) par cette énergie moyenne d'un mode (Étape n°2), on obtient la densité spectrale d'énergie (loi de Planck) :
+
+math
+	\boxed{u(\nu)\, d\nu = \frac{8\pi h \nu^3}{c^3} \frac{1}{e^{\frac{h \nu}{k T}} - 1}\, d\nu}
+
+On peut également exprimer cette loi sous la forme d'une luminance, soit la puissance rayonnée par une surface ($W m^{-2}   {Hz}^{-1} sr^{-1}$) :
+
+math
+	L(\lambda, T) =\frac{c}{4\pi}u(\nu, T)=\frac{2h\nu^3}{c^2} \frac{1}{e^{\frac{h \nu}{k T}} - 1}
+
+A noter également, la densité spectrale peut aussi s'exprimer selon la longueur d'onde ([](#fig:rayfig1), [](#fig:rayfig2)) :
+math
+	u^*(\lambda)\, d\lambda = \frac{8\pi h c}{\lambda^5} \cdot \frac{1}{e^{\frac{h \nu}{k T}} - 1}\, d\lambda
+
+### Le fond diffus cosmologique
+
+En 1965, deux physiciens, A. Penzias et R. Wilson, publient leur mesure d'un rayonnement résiduel présent dans tout l'espace, de manière isotrope, obtenu avec un radiotélescope observant à la fréquence de $4,1\,GHz$. Ils calculent la température associée à ce signal en utilisant la loi du corps noir : $T=3,5\,K$ ({cite}`Penzias1965ApJ...142..419P`). En 1990, ce rayonnement sera observé depuis l'espace par le satellite COBE ([](#fig:rayfig4)) : il s'agit d'un corps noir « parfait » !
+
+fig Spectre du rayonnement du fond diffus cosmologique mesuré par le satellite COBE, comparé à une loi de Planck pour $T = 2,73 K$. Figure extraite de {cite}`Mather1990ApJ...354L..37M`.
+	id fig:rayfig4
+	./figures/spectre_cmb.png
+
+Sur la [](#fig:rayfig4), le maximum de la densité spectrale par unité de fréquence $u(\nu)$ est obtenu pour $\nu_{max}$ correspondant à « $5,4 \, cm^{-1}$ », soit $\nu_{max} = c \times (\frac{1}{\lambda})_{max} = 1,6 \times 10^{11} Hz$.  Pour convertir cette valeur en température, il faut utiliser l'expression de la loi du déplacement de Wien adaptée à la distribution spectrale en fréquence :
+math
+	\frac{\nu_{max}}{T} = 5,9 \times 10^{10} \, Hz \cdot K^{-1}
+
+On obtient $T = 2,7 K$.
+
+callout Attention !
+	L'utilisation de $\lambda_{max} T = 2,9 \times 10^{-3}~m \cdot K$, adapté à la distribution en longueur d'onde, n'aurait pas fonctionné ici. Cette relation donne une valeur $\lambda_{max} = 1,1 \times 10^{-3}\,m$ qui n'est pas équivalente à $\frac{c}{\nu_{max}} = 1,9 \times 10^{-3}\,m$. Ceci est lié au fait que $d\nu = -\frac{c}{\lambda^2}d\lambda$.
+
+L'Univers actuel n'est cependant pas un corps noir en équilibre thermique au sein duquel les photons seraient continuellement absorbés et réémis. En 1965, le numéro de _The Astrophysical Journal_ qui annonce cette découverte contient également un article d'interprétation théorique intitulé « Cosmic Black-Body Radiation » attribuant l'origine de ce rayonnement à une époque primordiale où l'univers, extrêmement dense et chaud, était bien à équilibre thermique ({cite}`Dicke1965ApJ...142..414D`). La relativité générale et l'expansion de l'espace fournissent alors le cadre permettant d'expliquer comment ce gaz de photons, initialement émis par un corps noir chaud ($\sim3000\,K$), s'est transformé pour devenir la distribution de photons observée aujourd'hui, correspondant à un corps noir froid à $2,7\,K$.
+
+Un gaz de photon qui se contenterait de se diluer dans un espace en expansion, sans interagir avec la matière, verrait sa densité volumique de photons décroître simplement en $1/r^3$. Cela diminuerait l'amplitude de la distribution de Planck sans en modifier la forme spectrale : le rayonnement ne correspondrait alors pas à un corps noir à une température plus basse. Pour qu'un corps noir à $\sim\,3000\,K$ devienne un corps noir à $2,7\,K$ au cours de l'expansion, il faut que l'énergie des photons change elle aussi, bien qu'ils n'interagissent pas avec la matière. En mécanique quantique, un photon n'est pas un objet ponctuel : sa longueur d'onde $\lambda$ traduit son extension spatiale. Lorsque l'espace s'agrandit, la longueur d'onde de chaque photon s'étire dans les mêmes proportions. Son énergie $E=hc/\lambda$ diminue donc progressivement. Le fond diffus cosmologique constitue ainsi une confirmation observationnelle que l'expansion de l'Univers étire l'espace et les longueurs d'onde qui s'y propagent, conformément à la description qu'en donne la relativité générale.
+
+proof Évolution d'un corps noir lors de l'expansion de l'univers
+	On considère qu'à un instant de référence $t_0$ l'Univers est un corps noir, son énergie par unité de volume et de fréquence est donc donnée par la loi de Planck :
+	math
+		u_0(\nu_0)\, d\nu_0 = \frac{8\pi h \nu_0^3}{c^3} \frac{1}{e^{h\nu_0/kT_0} - 1}\, d\nu_0
+	Cette énergie est reliée au nombre de photons par unité de volume et de fréquence $n_0(\nu_0)$ par :
+	math
+		u_0(\nu_0)d\nu_0 = h\nu_0 \times n_0(\nu_0) d\nu_0
+	Soit $r(t)$ une distance de l'Univers en expansion et $r_0$ sa valeur à l'époque de référence. Les deux sont liés par le taux d'expansion, $r(t)=a(t) \times r_0$. La longueur d'onde de chaque photon augmente avec l'expansion selon le même taux : $\lambda(t) = a(t) \times \lambda_0$. Exprimé en fréquence, on obtient :  $\nu_0 = \nu \times a(t)$. L'intervalle spectral se dilate aussi : $d\nu_0 = a(t) \times d\nu$. La dilution géométrique d'un nombre de photons $dN$ donne alors $n(\nu)d\nu = dN/r(t)^3$ et $n_0(\nu_0)d\nu_0 = dN/r_0^3$ soit :
+	math
+		n(\nu)a(t)^2=n_0(\nu_0)
+	Calculons alors l'énergie par unité de volume et de fréquence à l'instant $t$ :
+	math
+		u(\nu)d\nu = h\nu \times n(\nu) d\nu=h \frac{v_0}{a(t)} \times \frac{n_0(\nu_0)}{a(t)^2} \frac{d\nu_0}{a(t)}=\frac{u_0(\nu_0)d\nu_0}{a(t)^4}
+	On injecte alors la loi de Planck :
+	math
+		u(\nu)d\nu = \frac{1}{a(t)^4} \times \frac{8\pi h \nu_0^3}{c^3} \frac{1}{e^{h\nu_0/kT_0} - 1}\, d\nu_0
+	On fait disparaître les grandeurs exprimées à l'instant $t_0$ :
+	math
+		u(\nu)d\nu = \frac{1}{a(t)^4} \times \frac{8\pi h \nu^3 a(t)^3}{c^3} \frac{1}{e^{h\nu a(t)/kT_0} - 1}\, a(t) d\nu
+	Soit
+	math
+		u(\nu)d\nu = \frac{8\pi h \nu^3}{c^3} \frac{1}{e^{h\nu /kT(t)} - 1}\, d\nu
+	On obtient donc simplement un corps noir de température :
+	math
+		T(t) = \frac{T_0}{a(t)}
+	Le rayonnement reste un corps noir parfait à tout instant, sans jamais avoir besoin d'être à l'équilibre thermique avec de la matière.
+
+## Équilibre stellaire
+
+Comme nous l’avons vu précédemment, le corps noir représente un cas emblématique de gaz de photons rencontré en astrophysique. Ce modèle, dans lequel les photons sont continuellement absorbés et réémis par la matière dense à une certaine température, est particulièrement adapté à la description de l'intérieur des étoiles. Au sein de ces dernières, les photons exercent une pression, dite pression de radiation (ou pression de rayonnement). Cette pression s’ajoute à la pression cinétique du gaz pour s’opposer à l’effondrement gravitationnel et contribuer à la stabilité hydrostatique de l’étoile.
+
+### La pression de radiation
+
+Soit un gaz de photons de densité spectrale d'énergie $u(\nu)$. D'après la relativité restreinte, l'énergie $E$, l'impulsion $p$ et la masse $m$ d'une particule sont reliées par :
+math
+	E^2 = c^2 p^2 + m^2 c^4
+Un photon possède donc une impulsion :
+math
+	p = \frac{E}{c} = \frac{h \nu}{c}
+
+Expérimentalement, la capacité des photons à transférer une partie de leur impulsion lors d'une collision avec la matière a notamment été mise en évidence par l'effet Compton. Nous allons calculer la force associée exercée par un gaz de photons par unité de surface, soit la pression de radiation.
+
+proof Calcul de la pression de radiation
+	On considère une surface élémentaire $dS$ dont la normale est orientée selon l'axe $z$. Un photon arrive sur cette surface avec un angle $\theta$ par rapport à la normale : sa composante de quantité de mouvement projetée sur $z$ est :
+	math
+		p_z = p \cos\theta = \frac{E}{c} \cos\theta
+	Si ce photon est réfléchi par la surface avec le même angle, il communique une quantité de mouvement :
+	math
+		\Delta p_z = 2 p_z = \frac{2E}{c} \cos\theta
+
+	Calculons la quantité de photons qui frappent cette surface pendant un temps $dt$. Il s'agit des photons contenus dans le cylindre oblique de base $dS$ et de hauteur $cdt \times cos(\theta$), soit dans un volume $dV = dS c dt \cos(\theta)$. Si $n_v$ est la quantité totale de photons par unité de volume, alors seule une fraction de ces photons vont dans la bonne direction $\theta$. Pour un rayonnement isotrope, la quantité de photons contenus dans l'angle solide élémentaire $d\Omega = sin(\theta) d \theta d \phi$ associé à une direction donnée est égale à :
+
+	math
+		dn_v = \frac{n_v}{4 \pi} d \Omega
+
+	La quantité de mouvement fournie à la surface par ces photons s'écrit alors :
+	math
+		dp_{\theta} = \frac{n_v}{4\pi} \frac{2E}{c} \cos^2(\theta) \, c dt \, d\Omega \, dS
+
+	Pour obtenir la quantité de mouvement totale transférée à l'élément de surface, on intègre sur toutes les directions d'arrivée de la demi-sphère :
+
+	math
+		dp  = \int_{\phi =0}^{2\pi} \int_{\theta =0}^{\pi/2} dp_{\theta} sin(\theta) d\theta d\phi
+
+	La pression étant définie comme la force par unité de surface, on obtient :
+	math
+		P = \frac{1}{dS} \frac{dp}{dt}
+
+	math
+		P  = 4\pi \frac{n_v}{4\pi}E \int_{\theta =0}^{\pi/2} \cos^2(\theta) sin(\theta) d\theta
+
+	math
+		P  = n_v E \int_{x=0}^{1} x^2 dx
+
+	math
+		P  = \frac{n_vE}{3}
+
+Or $n_vE = u_{tot}$, la densité totale d'énergie, associée à la pression totale exercée par toutes les fréquences ($u_{tot} = \int_0^\infty u(\nu)\,d\nu)$. On obtient alors l'expression suivante de la pression de radiation :
+
+math
+	\boxed{P_{rad}  = \frac{1}{3}u_{tot}}
+
+Dans le cas particulier du corps noir, on peut ensuite remplacer $u_{tot}$ par la loi de Planck intégrée en fréquence (loi de Stefan-Boltzmann) afin d'exprimer la pression associée :
+math
+	u_{\text{corps noir}} = \int_0^\infty u(\nu)\,d\nu =  \frac{8\pi^5 k^4}{15 h^3 c^3}\;T^4 = a\,T^4 \, (=\frac{4\sigma}{c}\,T^4)
+
+math
+	\boxed{P_{\text{corps noir}} = \frac{1}{3} a T^4}
+
+Avec $a = 7,6 \times 10^{-16} \, J \cdot m^{-3} \cdot K^{-4}$
+
+### L'équilibre hydrostatique
+
+Nous allons maintenant établir l'équation qui régit l'équilibre entre gravité et pression au sein des étoiles. Pour cela, nous appliquons le principe fondamental de la dynamique à un élément de fluide situé dans l'intérieur stellaire. En raison de la symétrie sphérique, les forces de pression s'exerçant latéralement se compensent deux à deux. Dans la direction radiale, la force de gravité, dirigée vers le centre, est compensée par la variation de la pression, orientée vers la surface.
+
+fig Volume élémentaire utilisé pour le calcul de l'équilibre hydrostatique (Figue adaptée de {cite}`Ostlie2006Livre`).
+	id fig:rayfig5
+	./figures/volume_elementaire.png
+		class width-30
+
+proof
+	On considère une étoile à symétrie sphérique de centre $0$, et on note $r$ la coordonnée radiale. Soit une colonne de fluide cylindrique d'axe parallèle à la direction radiale, de section $S$, de hauteur $dr$ et de masse $dm$ ([](#fig:rayfig5)).
+	On applique le principe fondamental de la dynamique à $dm$ :
+	math
+		dm \frac{d^2r}{dt^2} = F_g + F_p(r) + F_p(r+dr)
+	D'après le théorème de Gauss, la force de gravité s'exerçant sur l'élément de fluide dépend exclusivement de la masse $M(r)$ contenue à l'intérieur de la sphère de rayon $r$ (les contributions des couches supérieures se compensent, voir chapitre précédent). L'expression de la force de gravité est donc :
+	math
+		F_g = -\frac{G M(r) dm}{r^2}
+	Par ailleurs, la différence des forces de pression s'écrit :
+	math
+		F_p(r) + F_p(r+dr) = S(P(r)-P(r+dr)) = -SdP
+
+On exprime alors $dm$ en fonction de la masse volumique $\rho (r)$ : $dm = \rho (r) S dr$, puis on se place à l'équilibre ($\frac{d^2r}{dt^2}=0$). On obtient ainsi l'équation qui traduit l'équilibre hydrostatique :
+
+math
+	\boxed{  \frac{dP}{dr} = -\frac{G M(r) \rho (r)}{r^2} }
+
+Que l'on note également
+math
+	\frac{dP}{dr} = -\rho (r) g(r)
+
+Avec $ g(r) = \frac{G M(r)}{r^2} $ l'accélération locale de la pesanteur.
+
+L'équation de conservation de la masse fournit la seconde équation fondamentale de la structure stellaire :
+math
+	\boxed{\frac{dM}{dr} = 4\pi r^2 \rho(r)}
+
+avec $dM = 4\pi r^2 \rho(r) dr$ la masse contenue dans une coquille sphérique de rayon $r$ et d'épaisseur $dr$.
+
+Enfin, la pression, composée de la pression cinétique du gaz et de la pression de radiation :
+math
+	P(r) = P_{gaz}(r) + P_{rad}(r)
+peut être exprimée en fonction des équations d'état. Pour un gaz parfait, $P_{gaz} = (N k T)/ V$. Si on suppose l'étoile composée de particules de masse $\mu m_H$, avec $m_H$ la masse de l'hydrogène et $\mu$ un facteur sans dimension ($\mu = 0,6$ pour le Soleil), en utilisant $\frac{N \mu m_H}{V} = \rho $ on obtient :
+math
+	P_{gaz}(r) = \frac{k T(r)  \rho (r)}{\mu m_H}
+
+Soit, en supposant également un rayonnement de corps noir :
+
+math
+	P(r) = \frac{k T(r)  \rho (r)}{\mu m_H} + \frac{1}{3} a T(r)^4
+
+### Température et pression au centre du Soleil
+
+Nous allons considérer un premier modèle simple pour le Soleil, en supposant que $\rho(r)$ est une constante :
+math
+	\rho = \frac{M_{\odot}}{\frac{4}{3 }\pi {R_{\odot}}^3}
+
+math
+	\begin{gather*}
+		M(r)= \rho {\frac{4}{3 }\pi {r}^3}
+		\frac{dP}{dr} = -\frac{4 \pi G \rho^2 r}{3}\\
+		P(R_{\odot}) - P(0) = -\frac{2 \pi G \rho^2 R_{\odot}^2}{3}\\
+	\end{gather*}
+
+On utilise pour la surface l'approximation $P(R_{\odot}) = 0$ et on note $P_c = P(0)$ la pression au centre du Soleil. On obtient alors :
+math
+	P_c = \frac{3 G {M_{\odot}}^2 }{8 \pi R_{\odot}^4}
+
+L'application numérique avec $M_{\odot} = 2,0 \times 10^{30}\,kg$ et $R_{\odot} = 7,0 \times 10^8\,m$ donne : $P_c=1,3 \times 10^{14} \, Pa$. Ce résultat basé sur un modèle très simple peut être comparé aux estimations actuelles de la pression au centre du Soleil : $P_c \sim 2,5 \times 10^{16} Pa$.
+
+Pour calculer la température au centre d'une étoile de faible masse comme le Soleil, on suppose que la pression au centre est dominée par la pression cinétique du gaz (on vérifiera que la pression de radiation est bien négligeable à la fin du calcul). On obtient ainsi :
+math
+	T_c = \frac{\mu m_H P_c} {k \rho}
+
+Soit
+math
+	T_c = \frac{\mu m_H G M_{\odot}}{2 k R_{\odot}}
+
+L'application numérique donne $T_c = 6,9 \times 10^6 \, K $. La température au centre du Soleil estimée par des modèles plus élaborés est :
+math
+	\boxed{T_c = 1,5 \times 10^{7} \,K}
+
+Remarque : l'hypothèse d'une pression de radiation négligeable devant la pression cinétique est validée par la température calculée.
+
+Pour les étoiles très massives, la pression de radiation cesse d'être négligeable et peut même devenir dans certains cas le principal soutien s'opposant à l'effondrement (voir exercice ci-dessous).
+
+exercise
+	Calculer la masse stellaire pour laquelle la pression de radiation est égale à la pression cinétique.
+	solution
+		On repart des expressions précédentes. $P_{gaz} = P_{rad}$ permet d'exprimer $T_c$. On injecte ensuite $T_c$ dans $P_c = P_{gaz} + P_{rad} = 2 P_{gaz}$. On obtient :
+		math
+			\begin{gather*}
+				M_{lim} = 12 \sqrt{\frac{1}{\pi a G^{3}}} \, (\frac{k}{\mu m_H})^2\\
+				M_{lim} \approx 8{,}5 \times 10^{31} \text{ kg} \approx 42 \, M_\odot
+			\end{gather*}
+
+env Notions de ce chapitre
+	_Loi de Planck_
+	- Connaître la représentation graphique d'un corps noir à différentes températures.
+	- Connaître la loi du déplacement de Wien (expression pour une densité selon la longueur d'onde).
+	- Savoir identifier le rayonnement thermique d'un astre et l'interpréter (estimation de la température).
+	- Maîtriser les outils mathématiques pour manipuler la loi de Planck.
+	- Être sensibilisé au fait que les grandeurs spectrales peuvent s'exprimer selon la fréquence ou la longueur d'onde.
+	- Savoir décrire brièvement les propriétés du rayonnement du fond diffus cosmologique et son interprétation.
+
+	_Équilibre stellaire_
+	- Connaître l'expression de la pression de radiation en fonction de la température pour un corps noir.
+	- Savoir retrouver l'équation de l'équilibre hydrostatique.
+	- Connaître l'équation de conservation de la masse pour un objet sphérique.
+	- Savoir utiliser la loi des gaz parfaits dans un intérieur stellaire.
+	- Connaître l'ordre de grandeur de la température au centre du Soleil.

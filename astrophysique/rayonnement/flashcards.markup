@@ -1,0 +1,30 @@
+../../common/course.lib.markup
+
+title Rayonnements et équilibres hydrostatiques
+date 14/09/2026
+
+Q: Loi de déplacement de Wien en longueur d’onde
+	A: math
+			\lambda_{\max} T = 2.9\cdot 10^{-3}\u{m\cdot K}
+
+Q: Loi de déplacement de Wien en fréquence
+	A: math
+			\frac{\nu_{\max}}{T} = 5.9\cdot 10^{10}\u{Hz\cdot K^{-1}}
+
+Q: Loi de Stefan-Boltzmann
+	A: La densité de flux (émittance, en $\u{W · m^{2}}$) émise par un corps noir de température $T$ est
+		math
+			M = σ T^{4}
+
+Q: Dispositif expérimental immmitant un « corps noir »
+	A: Cavité régulée thermiquement dont l’intérieur est couvert de matériaux absorbants et percée d’un trou, ce dernier ayant un comportement proche de celui d’un corps noir.
+
+Q: Température au centre du soleil
+	A: math
+			T \simeq 1.5 \cdot 10^7 \u K
+
+Q: Origine du rayonnement du fond diffus cosmologique
+	A: Émis à un stade primordial où l’univers, extrêmement dense et chaud, était à équilibre thermique, il a été affecté par l’expansion de l’univers et donne aujourd’hui un rayonnement correspondant à celui d’un corps noir de température 2.7K.
+		En effet, l’expanison de l’univers a, en plus de « diluer » les photons, dilaté leur longueur d’onde, et en prenant cet effet en compte, on retrouve bien le rayonnement d’un corps noir.
+
+
