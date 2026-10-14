@@ -21,7 +21,8 @@ html {
 
 @media screen and (max-width: 700px) {
   html {
-    font-size: 115%;
+    /* font-size: 115%; */
+    font-size: 100%;
     text-size-adjust: none;
   }
 }
@@ -182,12 +183,8 @@ body {
 
 .right {
   font-family: "Computer Modern Serif";
-
-  /* Font size */
-  p,
-  .environment {
-    font-size: 1rem;
-  }
+  font-size-adjust: 0.47;
+  font-size: 90%;
 
   @media print {
     body {
@@ -612,6 +609,11 @@ body {
     :last-child {
       margin-block-end: 0;
     }
+
+    /* Avoid tailing equation too close to the next item */
+    .equation:last-child {
+      margin-bottom: 1rem !important;
+    }
   }
 
   /* Compact lists */
@@ -734,7 +736,7 @@ body {
   .environment-proof,
   .environment-example {
     border: 2px solid var(--subtext-color);
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   @media print {
@@ -831,7 +833,7 @@ body {
   .environment-definition-proposition > .environment-title,
   .environment-notation > .environment-title,
   .environment-method > .environment-title {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     position: absolute;
     left: 1rem;
     top: -1px;
@@ -840,18 +842,6 @@ body {
     font-family: "Inter Variable";
     color: var(--subtext-color);
     background-color: var(--bg-color);
-  }
-
-  @media print {
-    .environment-theorem > .environment-title,
-    .environment-corollary > .environment-title,
-    .environment-lemma > .environment-title,
-    .environment-generic > .environment-title,
-    .environment-property > .environment-title,
-    .environment-definition > .environment-title,
-    .environment-definition-proposition > .environment-title {
-      font-size: 0.7rem;
-    }
   }
 
   .environment-theorem > .environment-title {
@@ -865,7 +855,7 @@ body {
   .environment-example::before,
   .environment-recall::before,
   .environment-exercise::before {
-    font-size: 20px;
+    font-size: 1.1em;
     font-family: "Inter Variable";
     font-weight: bold;
     color: var(--subtext-color);
@@ -1005,7 +995,7 @@ body {
 
   /*************** Sidenotes ***************/
   .sidenote {
-    font-size: 0.8rem;
+    font-size: 0.8em;
     position: relative;
     font-weight: initial;
     text-decoration: initial;
@@ -1219,21 +1209,26 @@ body {
 /* Flashcards */
 .flashcard {
   display: none;
-  margin: 0.5rem 0;
-  background-color: var(--bg-greyed);
-  border: 2px solid var(--subtext-color);
-  border-radius: 0.5rem;
+  font-family: "Inter Variable";
+  margin: 1rem 0;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--subtext-color);
   .flashcard-front,
   .flashcard-back {
-    padding: 0.5rem 1rem;
-    & :first-child {
-      margin-top: 0;
+    & > :first-child {
+      margin-top: 0.5rem;
     }
-    & :last-child {
-      margin-bottom: 0;
+    & > :last-child {
+      margin-bottom: 0.5rem;
     }
   }
   .flashcard-front {
-    border-bottom: 2px solid var(--subtext-color);
+    font-weight: bold;
+  }
+  .flashcard-back {
+    opacity: 0.7;
+  }
+  & p {
+    line-height: 140%;
   }
 }

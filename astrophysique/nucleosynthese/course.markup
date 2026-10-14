@@ -3,6 +3,79 @@
 title Nucléosynthèse et évolution stellaire
 date 05/10/2026
 
-Barrière: deux $α$ donnent un noyau de $\ce{^8Be}$, or celui-ci se dissocie en deux $α$. Il faut attendre une troisième particule $α$ pendant la courte durée de vie du $^8Be$ pour former du carbone.
+Q: Âge du soleil
+	A: On estime que le soleil s’est formé il y a environ 4.6 milliards d’années, et qu’il est environ à la moitié de sa durée de vie.
 
-Origine des noms (O,B,A,F,G,K,M -> mnémotechnique) : Classement alphabétique réalisé par les femmes travaillant à Harvard sur la classification de spectres.
+Q: Désintégration $β^{-}$
+	A: Transformation d'un *quark down* en *quark up* sous l'effet de l'interaction faible :
+		math
+			n → p + e^- + \bar ν_e
+		Elle est énergétiquement favorisée par rapport à la désintégration $β^{-}$ car $(m_n - m_p - m_e)c^2 \approx 0,8\ \text{MeV}$.
+
+Q: Désintégration $β^{+}$ (formule et mécanisme)
+	A: Transformation d'un proton en neutron par l'interaction faible :
+		math
+			p → n + e^+ + ν_e
+		Elle nécessite un apport d'énergie externe et intervient notamment lors du processus de neutronisation au cœur des supernovas.
+
+Q: Rendement énergétique de la fusion
+	A: Fraction de l'énergie de masse au repos convertie lors de la fusion de l'hydrogène :
+		math
+			ϵ_\text{nucl} = \frac{Q}{4m_{p}c^2} \approx 0,7\%
+
+Q: Barrière coulombienne
+	A: Barrière d'énergie potentielle créée par la répulsion électromagnétique entre deux noyaux de charges $Z_1$ et $Z_2$. À la température du cœur du Soleil, elle est infranchissable de manière classique : la fusion requiert l'effet tunnel lequel a une probabilité d’environ $10^{-10}$ de se produire.
+
+Q: Pic de Gamow
+	A: Plage d'énergie optimale où le taux d'interaction thermonucléaire est maximal.
+		Elle est déterminée par le produit du facteur thermique de Maxwell-Boltzmann $\exp(-E/kT)$ (fortement décroissant) et de la probabilité d'effet tunnel $\exp(-\sqrt{E_c/E})$ (fortement croissante), et forme un pic autour de quelques $\u{keV}$.
+
+Q: Énergie de liaison d’un noyau
+	A: Différence entre son énergie de masse et la somme des énergies de masse de ses constituants :
+		math
+			E_{\text{liaison}} = m(\ce{_Z^{A}X})c^{2} - Zm_{p}c^{2} - (A-Z)m_{n}c^{2}
+		avec $m_{p}$ et $m_{n}$ les masses respectives d’un proton et d’un neutron.
+
+
+Q: Cycle PP-I
+	A: Chaîne thermonucléaire majoritaire au cœur du Soleil
+		math
+			4p → \ce{^4He} + 2\ce{e^+} + 2\nu_e + \text{énergie}
+		Les positrons s'annihilent avec les électrons environnants en photons $\gamma$. Les neutrinos emportent environ 2% de l'énergie totale.
+
+Q: Cycle CNO-I
+	A: Cycle catalytique de fusion de l'hydrogène utilisant du carbone, de l'azote et de l'oxygène :
+		math
+			4p → \ce{^4He} + 2\ce{e^+} + 2\nu_e + \text{énergie}
+		(même bilan que la chaîne PP-I). Il domine sur la chaîne PP-I à haute température (étoiles massives).
+
+Q: Réaction triple-alpha
+	A: Processus de fusion de l'hélium au cœur des géantes rouges :
+		math
+			3 \ce{^4He} →  \ce{^{12}C} + \text{énergie}
+		Elle passe par l'intermédiaire extrêmement instable du $\ce{^8Be}$ et permet de franchir le blocage des éléments légers pour poursuivre la nucléosynthèse.
+
+Q: Équations de la structure stellaire (équilibre)
+	A: Équation décrivant l'équilibre hydrostatique et la conservation de la masse :
+		math
+			\frac{dP}{dr} = ρ(r)g(r) = -\frac{G M(r)ρ(r)}{r^2}
+		et
+		math
+			\frac{dM}{dr} = 4 π r^2 ρ(r)
+
+Q: Critère de Schwarzschild
+	A: Condition nécessaire pour le développement de mouvements convectifs au sein du plasma :
+		math
+			\left|\frac{\dd T}{\dd r}\right| > \frac{\gamma-1}{\gamma} \frac{\mu m_p}{k}g(r)
+		Les instabilités se développent lorsque le gradient de température est plus fort que le gradient de pression dû au champ gravitationnel. C’est par exemple le cas
+		- d’un milieu opaque (milieu faiblement ionisé limitant le transfert radiatif) qui cause une rapide chute de température,
+		- d’une production d’énergie dépendant fortement de la température (par exemple par cycle CNO-I).
+
+Q: Diagramme de Hertzsprung-Russell (HR)
+	A: Graphique représentant la luminosité stellaire $L$ en fonction de la température de surface $T_\text{eff}$ (axe horizontal décroissant car la température est mesurée en couleur). Les étoiles passent la majeure partie de leur vie dans la séquence principale (diagonale majeure) où elles brûlent leur hydrogène.
+
+Q: Nature des vestiges stellaires en fonction de la masse initiale
+	A:
+		- $M < 8\,M_\odot$ : Naine blanche (maintenue par la pression de dégénérescence des électrons)
+		- $8 \le M \le 20\,M_\odot$ : Étoile à neutrons (maintenue par la force forte résiduelle; la gravité ayant vaincue la pression de dégénerescence)
+		- $M > 20\,M_\odot$ : Trou noir (la gravité l'emporte)
