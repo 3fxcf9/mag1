@@ -7,6 +7,8 @@ show_flashcards
 
 Q: Intuitive approach of the field created by a moving charge
 	A: When a charge moves, its field get offset by a certain amount inside a sphere of radius $ct$. At the border of this sphere, the inner field meets the outer one, and the connection of the field lines generates a transverse field over the sphere. The filed lines in the direction of the motion of the charge remain unchanged – no radiation in that direction.
+		fig
+			./figures/intuitive_approach.png
 
 ## Green’s functions – retarded potentials and fields
 
@@ -65,6 +67,14 @@ Q: Current density of a point dipole
 	A: $\j(\r, t) = q\dot{\r_{+}}δ(\r - \r_{+}) - q\dot{\r_{-}}δ(\r-\r_{-})$ with $\r_{\pm} = \pm \vec{d}/2$ and $d \to 0$ gives
 		math
 			\j(\r, t) = +\dot{\p}(t)δ(\r)
+
+Q: Potentials radiated by an oscillating point dipole
+	A: Given the current density $\j(\r, t) = \dp(t)δ(\r)$,
+		math
+			\A(\r, t) = \frac{μ_{0}}{4 π \abs{\r}}\dp \left(t - \frac{\abs{\r}}{c}\right)
+		and integrating the Lorenz gauge $\div \A + \frac{1}{c^{2}}\pdv{ϕ}{t}$,
+		math
+			ϕ(\r, t) = \frac{1}{4 π ε_{0}} \left[\p \left(t - \frac{\abs{\r}}{c}\right)· \frac{\r}{\abs{\r}^{3}} + \dp \left(t- \frac{\abs{\r}}{c}\right) · \frac{\r}{c \abs{\r}^{2}}\right]
 
 Q: Three regions of space for an oscillating dipole
 	A: Let $τ$ be a characteristic time of the source (for example $τ = 1/f$).
@@ -137,12 +147,12 @@ Q: Potentials of the radiated (approximations)
 			\end{align*}
 		and thus,
 		math
-			φ_{\text{ray}}(\r, t) = \frac{1}{4 π ε_{0}r}\iiint ρ\left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
+			ϕ_{\text{ray}}(\r, t) = \frac{1}{4 π ε_{0}r}\iiint ρ\left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
 		and
 		math
 			\A_{\text{ray}}(\r, t) = \frac{μ_{0}}{4 π r}\iiint \j\left(\r', t - \frac{r}{c} + \frac{\r' · \ur}{c}\right)\dd^{3}\r'
 
-Q: Radiated field (with approximations)
+Q: Radiated field (with approximations) corresponding to the radiated potentials $\A_{\text{ray}}$ and $ϕ_{\text{ray}}$
 	A: By using
 		math
 			\nabla_{r}\left(t - \frac{r}{c} + \frac{\r' · \ur}{c}\right) = -\frac{\ur}{c} - \frac{\ur}{c}∧  \left(\ur ∧ \frac{\r'}{r}\right) \simeq - \frac{\ur}{c}
@@ -218,3 +228,50 @@ Q: Yagi antenna
 		- directors (passive elements of length $L < λ/2$) are induced with current in *advance*
 
 ## Radiation from a moving charge
+
+Q: Compression factor for an emitting moving charge
+	A: During successive emitions at the retarded time $t_{1}'$ and $t_{1}' + \dd t'$, the charge is approaching :
+		math
+			R_{2} = R_{1} - \v · \vec{n}
+		(with $\vec{n}$ the unit vector pointing from the charge towards the observer). The signals are received in the time window
+		math
+			\dd t = \dd t' \left(1 - \frac{\v · \vec{n}}{c}\right)
+		(divide the above by $c$ noting $R_{i}/c = t_{i} - t_{i}'$).
+		and a given arrival window $\dd t$ corresponds to an emission time interval
+		math
+			\dd t' = \frac{\dd t}{1 - \frac{\vec{n}· \v}{c}}
+		(larger if the charges approaches).
+		We can obtain this coefficient by integrating $ρ$ at retarded time for a point charge, and by introducing a time integral to create one more freedom inside the delta dirac that will now act on the space integral.
+
+Q: Liénard-Wiechert potentials (remember only the general form) for a point charge at $\r_{0}$
+	A: Using $\vec{R} = \r - \r_{0}(t)$, at time $t_{\text{ret}}$,
+		math
+			V(\r, t) = \frac{1}{4 π ε_{0}}\frac{q}{R_{\text{ret}} \left(1 - \frac{\vec{n}_{\text{ret}} · \v_{\text{ret}}}{c}\right)}
+		and
+		math
+			\A(\r, t) = \frac{\v_{\text{ret}}}{c^{2}}V(\r, t)
+
+Q: $\A$ field radiated by an accelerated non-relativistic particle
+	A: It is the same as the potential of a dipole with $\dp(t) = q\v(t)$ :
+		math
+			\A_{\text{ray}} (\r, t) \simeq \frac{μ_{0}}{4 π} \frac{q\v(t_{\text{ret}})}{\abs{r}}
+
+Q: Radiation pattern for an accelerated non-relativistic particle
+	A: Its angular distribution ($θ$ is the angle between $\a$ and $\r$)
+		math
+			\moy{\dv{P}{Ω}} = \frac{μ_{0}q^{2} \abs{a(t-r/c)}^{2}}{16 π^{2}c}\sin^{2}θ
+		- proportional to $\sin^{2} θ$, as in the dipole case
+		- *proportional to the square of the acceleration*
+		fig
+			./figures/radiation_accelerated_charge.png
+
+Q: Relativistic headlight effect
+	A: The radiation of a linearly accelerated charge ($\a_{\text{ret}} ∥ \v_{\text{ret}}$) concentrates forward as $β = v_{\text{ret}}/c$ grows.
+		fig
+			./figures/headlight_effect.png
+
+Q: Synchrotron radiation
+	A: As a circularly-constrained particle accelerate, the forward lobe grows and the rear lobe fades away.
+		fig
+			./figures/synchrotron_effect.png
+		This radiation is highly directional as $β \to 1$.

@@ -209,6 +209,11 @@ Q: Homogeneity of $δ(x)$
 
 Q: $δ(α x)$ A: $\frac{1}{\abs{α}}δ(x)$ and in particular, $δ(-x) = δ(x)$.
 
+Q: $δ(g(τ))$ for a function $g(τ)$ with a single zero at $τ = τ_{0}$
+	A:
+		math
+			δ(g(τ)) = \frac{1}{\abs{g'(τ_{0})}}δ(τ - τ_{0})
+
 Q: Heaviside distribution
 	A: math
 			H(x) = \begin{cases}0 \if x < 0 \\ \frac{1}{2} \if x=0 \\ 1 \if x > 0\end{cases}

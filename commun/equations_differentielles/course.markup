@@ -1,0 +1,12 @@
+../../common/course.lib.markup
+
+title Équations différentielles
+date 29/09/2026
+
+TODO
+
+Q: Solutions de l’équations différentielle
+	math
+		y''(x) = x^{2}y(x)
+	A: math
+			y(x) = A e^{- \frac{x^{2}}{2}} + B e^{\frac{x^{2}}{2}}

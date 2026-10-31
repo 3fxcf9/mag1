@@ -11,7 +11,7 @@ show_flashcards
 
 Q: Schrodinger equation
 	A: math
-			i\hbar \pdv{Ψ}{t} = -\frac{\hbar^{2}}{2m}\pdvN{}{x}{2} + V Ψ
+			i\hbar \pdv{Ψ}{t} = -\frac{\hbar^{2}}{2m}\pdvN{Ψ}{x}{2} + V Ψ
 
 Q: Born’s statistical interpretation of the wave function
 	A: The probability of finding the particle between $a$ and $b$ at time $t$ is
@@ -63,9 +63,9 @@ Q: Expectation value of a classical dynamical variable from the wave function. P
 		math
 			\moy p = -i\hbar ∫ \left(Ψ^{*} \pdv{Ψ}{x}\right)\dd x
 
-## Time-Independant Schrödinger Equation
+## Time-Independent Schrödinger Equation
 
-Q: Time-independant Schrödinger equation
+Q: Time-independent Schrödinger equation
 	A: Using the separation of variables $Ψ(x,t) = ψ(x)φ(t)$ in the Schrödinger equation, we get
 		math
 			- \frac{\hbar^{2}}{2m} \dvN{ψ}{x}{2} + V ψ = Eψ
@@ -87,7 +87,7 @@ Q: Hamiltonian in quantum mechanics
 		math
 			\hat H ψ = E ψ
 
-Q: Time-independant Schrödinger equation written with the Hamiltonian
+Q: Time-independent Schrödinger equation written with the Hamiltonian
 	A:
 		math
 			\hat H = - \frac{\hbar^{2}}{2m}\pdvN{}{x}{2} + V(x)
@@ -96,7 +96,7 @@ Q: Time-independant Schrödinger equation written with the Hamiltonian
 			\hat H ψ = E ψ
 
 Q: Expectation value of the Hamiltonian in stationnary regime
-	A: The time-independant Schrödinger equation is
+	A: The time-independent Schrödinger equation is
 		math
 			\hat H ψ = E ψ
 		and the expectation value of the total energy is
@@ -104,7 +104,7 @@ Q: Expectation value of the Hamiltonian in stationnary regime
 			\moy H = ∫ ψ^{*}\hat H ψ\dd x = E ∫ \abs{ψ}^{2} \dd x = E ∫ \abs{Ψ}^{2} \dd x = E
 
 Q: Variance of the Hamiltonian in stationnary regime
-	A: The time-independant Schrödinger equation is
+	A: The time-independent Schrödinger equation is
 		math
 			\hat H ψ = E ψ
 		and the expectation value of the total energy is
@@ -117,8 +117,8 @@ Q: Variance of the Hamiltonian in stationnary regime
 		math
 			σ_{H}^{2} = \moy{H^{2}} - \moy{H}^{2} = E^{2} - E^{2} = 0
 
-Q: General solution to the Schrödinger equation for a time-independant potential
-	A: It is the linear conbination of the solutions $\set{ψ_{n}(x)}}$ of the time-independant Schrödinger equation :
+Q: General solution to the Schrödinger equation for a time-independent potential
+	A: It is the linear combination of the solutions $\set{ψ_{n}(x)}$ of the time-independent Schrödinger equation :
 		math
 			Ψ(x,t) = ∑_{n=1}^{+∞}c_{n}ψ_{n}(x)e^{-i \frac{E_{n}}{\hbar}t} = ∑_{n=1}^{+∞}c_{n}Ψ_{n}(x, t)
 		(by matching the initial state $Ψ(x, 0)$). *$\abs{c_{n}}^{2}$ is the probability that a measurement of the energy would return the value $E_{n}$*, hence
@@ -133,18 +133,267 @@ Q: Orthonormality condition
 			∫ ψ_{m}(x)^{*} ψ_{n}(x)\dd x = δ_{mn}
 
 Q: Completeness of the states $\set{ψ_{n}(x)}$ of the infinite square well + coefficients
-	A: Every function $f(x)$ can be expressed as a linear conbination of them :
+	A: Every function $f(x)$ can be expressed as a linear combination of them :
 		math
 			f(x) = ∑_{n=1}^{∞}c_{n}ψ_{n}(x) = \sqrt{\frac{2}{a}}∑_{n=1}^{∞}c_{n}\sin \left(\frac{n π}{a}x\right)
 		Multiplying both sides by $ψ_{m}(x)^{*}$ and integrating yields
 		math
-			\int ,…m(x)^{*} f(x)\dd x = ∑_{n=1}^{∞}c_{n}\int ψ_{m}^{*} ψ_{n}(x)\dd x = ∑_{n=1}^{∞}c_{n}δ_{mn} = c_{m}
+			\int ψ_{m}(x)^{*} f(x)\dd x = ∑_{n=1}^{∞}c_{n}\int ψ_{m}^{*} ψ_{n}(x)\dd x = ∑_{n=1}^{∞}c_{n}δ_{mn} = c_{m}
 		Thus,
 		math
 			c_{n} = \int ψ_{n}(x)^{*}f(x)\dd x
 
-p35
+### The Harmonic oscillator
+
+Q: Canonical commutation relation
+	A: math
+			[x, \hat p] = x\hat p - \hat p x = i\hbar
+
+Q: How to solve the Schrödinger equation for an harmonic potential :
+	math
+		V(x) = \frac{1}{2}m ω^{2}x^{2}
+	A: Two methods :
+		- *Algebraïc* : we want to solve
+			math
+				\frac{1}{2m}\Big[\hat{p}^{2} + (m ωx)^{2}\Big]ψ = E ψ
+			This method attemps to factor the Hamiltonian (like $u^{2} + v^{2} = (iu+v)(-iu+v)$). Let
+			math
+				\hat{a}_{\pm} = \frac{1}{\sqrt{2 \hbar m ω}}(\mp i\hat p + m ωx)
+			and compute $\hat{a}_{\pm}\hat{a}_{\mp}$, use the canonical commutation relation $[x, \hat p] = i\hbar$ and find
+			math
+				\hat H = \hbar ω \left(\hat{a}_{\pm}\hat{a}_{\mp} \pm \frac{1}{2}\right)
+			Then, prove that *if $ψ$ satisfies the Schrödinger equation with energy $E$, then $\hat{a}_{+}$ satisfies it with energy $E + \hbar ω$*. Find the lowest rung (such that $\hat{a}_{-}ψ_{0} = 0$). Finally,
+			math
+				ψ_{n}(x) = A_{n}(\hat{a}_{+})^{n}ψ_{0}(x)
+			and
+			math
+				E_{n} = \left(n+\frac{1}{2}\right)\hbar ω
+		- *Analytic* : let
+			math
+				ξ = \sqrt{\frac{m ω}{\hbar}}x \quad\text{and}\quad K = \frac{2E}{\hbar ω}
+			The Sohrödinger equation reads
+			math
+				\dvN{ψ}{ξ}{2} = \big(ξ^{2} - K\big)ψ
+			The solution bor large $ξ$ is proportional to $e^{-ξ^{2}/2}$. Find it in the general case as the form
+			math
+				ψ(ξ) = h(ξ)e^{-ξ^{2}/2}
+			by developping $h$ in power series. Find a recursion formula and prove that it must end (the power series must terminate). Definite values for $K$ follow.
+
+### The free particle
+
+Q: Wave packet of a free particle
+	A: The solution to the time dependent Schrödinger equation is a linear combination of the (non-normalizable) separable solutions of the time-independent equation :
+		math
+			Ψ(x,t) = \frac{1}{\sqrt{2 π}}∫_{-∞}^{+∞}ϕ(k)e^{i \left(kx- \frac{\hbar k^{2}}{2m}t\right)}\dd k
+
+Q: Plancherel’s theorem
+	A: math
+			f(x) = \frac{1}{\sqrt{2 π}}∫_{-∞}^{+∞}F(k)e^{ikx}\dd k ⟺ F(k) = \frac{1}{\sqrt{2 π}}∫_{-∞}^{+∞}f(x)e^{-ikx}\dd x
+
+Q: Phase velocity and group velocity for an arbitrary wave packet (narrowly peaked about some $k_{0}$ to give a sense to the group velocity)
+	A: Phase velocity :
+		math
+			v_{\text{phase}} = \frac{ω}{k}
+		Group velocity :
+		math
+			v_{\text{group}} = \dv{ω}{k}
+
+Q: Boundary conditions for $ψ$
+	A:
+		- $ψ$ is always continuous;
+		- $\dv{ψ}{x}$ is continuous except at points where the potential is infinite.
+
+### The finite square well
+
+Q: Useful result when dealing with an even potential
+	A: Any solution of the Schrödinger equation can be expressed as a linear combination of even and odd solutions.
+		*Proof :* if $V$ is even, then $Ψ(-x)$ is also a solution of the Schrödinger equation. Therefore, $Ψ(x) \pm Ψ(-x)$ are even and odd solutions. The result follows as $Ψ(x)$ is the half-sum of these two functions and $Ψ(-x)$ their half-difference.
 
 
+## Formalism
 
+### Hilbert space
 
+Q: Hilbert space and inner product
+	A: Complete inner product space. Usually, it refers to a vector space of square-integrable functions ($L^{2}$). We define the inner product of two functions $f$ and $g$ by
+		math
+			\scalar{f}{g} = ∫_{a}^{b} f(x)^{*}g(x)\dd x
+
+Q: $\scalar{f}{g}^{*}$ A: $\scalar{g}{f}$
+
+### Observables
+
+Q: Expectation value of an observable $Q(x, p)$ expressed in inner-product notation
+	A: If $\hat Q$ is the operator representing $Q$ (constructed from $Q$ by the replacement $p \to -i\hbar \dd /\dd x$), then
+		math
+			\moy{Q} = ∫Ψ^{*}Q Ψ\dd x = \scalar{Ψ}{\hat{Q}Ψ} = \scalar{\hat{Q}Ψ}{Ψ}
+		(*such operators are hermitian operators*, i.e. $\scalar{f}{\hat Qg} = \scalar{\hat Q f}{g}$ for every function $f$ and $g$).
+
+Q: Determinate states of an observable $Q$
+	A: These are states in which the standard deviation of $Q$ is zero, i.e.
+		math
+			σ^{2} = \moy{(Q-\moy Q)^{2}} = \scalar{Ψ}{(\hat Q - q)^{2}Ψ} = \scalar{(\hat Q - Q)Ψ}{(\hat Q - q)Ψ} = 0
+		Necessarily, the term in the inner product is zero or in other words,
+		math
+			\hat Q Ψ = q Ψ
+		++*Determinate states of $Q$ are eigerfunctions of $\hat Q$.*++
+		Taking the hamiltonian, we find the time-independent Schrödinger equation :
+		math
+			\hat H ψ = E ψ
+		(the wiggle factor $e^{-i \frac{E}{\hbar}t}$ is time-independent).
+
+### Eigenfunctions of a hermitian operator
+
+Q: Categories of determinate states of observables (eigenfunctions of hermitian oprators)
+	A:
+		- ++discrete spectrum++ : eigenfunctions lie in Hilbert space (physically realizable states)
+		- ++continuous spectrum++ : eigenfunctions are not normalizable (do not represent possible wave functions). Linear combinations of them may be.
+
+Q: Two properties of the normalizable eigenfunctions of a hermitian operator
+	A:
+		- *their eigenvalues are real* (in fact $q \scalar{f}{f} = \scalar{f}{\hat Q f} = \scalar{\hat Qf}{f} = q^{*}\scalar{f}{f}$ and $f\ne 0$ as an eigenfunction)
+		- *eigenfunctions belonging to distinct eigenvalues are orthogonal* (in fact $q' \scalar{f}{g} = \scalar{f}{\hat Qg} = \scalar{\hat Q f}{g} = q^{*}\scalar{f}{g} = q \scalar{f}{g}$ so $\scalar{f}{g} = 0$)
+
+Q: Axiom about eigenfunctions of an observable operator
+	A: The eigenfunctions of an observable operator are complete : any function (in Hilbert space) can be expressed as a linear combination of them.
+		This is proven to be true in finite-dimensional vector spaces but does not generalize to infinite-dimensional ones.
+
+Q: Eigenfunctions of a hermitian operator which spectrum is continuous
+	A: They are not square-integrable, but the one associated with real eigenvalues are Dirac orthonormalizable, i.e.
+		math
+			\scalar{f_{z}}{f_{z'}} = δ(p-p')
+		with $δ$ the Dirac delta (and not the Kronecker delta) and complete, i.e.
+		math
+			f(x) = ∫\scalar{f_{z}}{f}f_{z}(x)\dd z
+
+Q: Eigenfunctions on the momentum operator ($\oo{-∞,+∞}$)
+	A: These are the solutions $f_{p}(x)$ of the equation
+		math
+			-i \hbar \dv{}{x}f_{p}(x) = pf_{p}(x)
+		By restricting ourselves to the real eigenvalues $p$ and normalize the solutions to get
+		math
+			\scalar{f_{p'}}{p_{p}} = δ(p-p')
+		(Dirac orthonormality) we obtain
+		math
+			f_{p}(x) = \frac{1}{\sqrt{2 π \hbar}}e^{ip x/\hbar}
+
+### Generalized statistical interpretation
+
+Q: Generalized statistical interpretation
+	A: A measurement of an observable $Q(x,t)$ on a particle in the state $Ψ(x,t)$ centainly yields one of the eigenvalues of the hermitian operator $\hat Q(x, -i\hbar \dd /\dd x)$.
+		- If the spectrum of $\hat Q$ is discrete, the probability of getting the particular eigenvalue $q_{n}$ associated with the (orthonormalized) eigenfunction $f_{n}(x)$ is
+			math
+				\abs{\scalar{f_{n}}{Ψ}}^{2}
+		- If the spectrum is continuous, with real eigenvalues $q(z)$ and associated (Dirac-orthonormalized) eigenfunctions $f_{z}(x)$, the probability of getting a result in the range $\cc{z, z+\dd z}$ is
+			math
+				\abs{\scalar{f_{z}}{Ψ}}^{2}\dd z
+		Upon measuement, the wave function "collapses" to the corresponding eigenstate.
+
+Q: Expectation value of an observable $Q(x,p)$ in the generalized statistical interpretation
+	A: It is the sum over all possible outcomes (eigenvalues of $\hat Q$) ponderated by the probability of getting that outcome :
+		math
+			\moy Q = ∑_{n}q_{n} \abs{\scalar{f_{z}}{Ψ}}^{2}
+Q: Momentum space wave function
+	A: Fourier transform of the (position space) wave function :
+		math
+			ϕ(p,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{-ipx/\hbar}Ψ(x,t)\dd x
+		and by Plancherel’s theorem,
+		math
+			Ψ(x,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{i p x/\hbar}ϕ(p,t)\dd p
+		According the generalized statistical interpretation, the probability that a measurement of momentum would yield a result in the range $\dd p$ is
+		math
+			\abs{ϕ(p,t)}^{2}\dd p
+
+Q: Expectation value of an observable $Q(x,p)$ in *momentum space*
+	A: In momentum space, the position operator is $i\hbar ∂/∂p$. Therefore,
+		math
+			\moy{Q(x,p,t)} = ∫ Φ^{*}\hat Q \left(i\hbar \pdv{}{}, p, t\right)Ψ \dd p
+
+### The uncertainty principle
+
+Q: Generalized uncertainty principle
+	A: For any observables $A$ and $B$, we have
+		math
+			σ_{A}^{2} σ_{B}^{2} ⩾ \left(\frac{1}{2 i} \moy{\left[\hat A, \hat B\right]}\right)^{2}
+		For example, $\left[\hat x, \hat p\right] = i\hbar$ so
+		math
+			σ_{x}σ_{p} ⩾ \frac{\hbar}{2}
+
+Q: Original Heisenberg uncertainty principle
+	A: math
+			σ_{x}σ_{p} ⩾ \frac{\hbar}{2}
+
+Q: Minimum-uncertainty wave packet
+	A: Exploiting the equality conditions of the Schwarz inequality and of the real part/modulus one, we get
+		math
+			Ψ(x) = A e^{-\frac{(x- \moy x)^{2}}{2\hbar}}e^{i \frac{\moy p x}{\hbar}}
+		which is a gaussian packet.
+
+Q: Energy-Time uncertainty principle
+	A: Expressing the time derivative of $\moy Q$ and using it in the generalized uncertainty principle (between $H$ and $Q$), we found
+		math
+			ΔE Δt ⩾ \frac{\hbar}{2}
+		with
+		math
+			ΔE = σ_{H}
+		and
+		math
+			Δt = \frac{σ_{Q}}{\abs{\dv{\moy Q}{t}}}
+		The later term is the amount of time it takes the expectation value of $Q$ to change by one standard deviation ($σ_{Q} = \abs{\dv{\moy Q}{t}}Δt$).
+		_If any observable changes rapidly, the "uncertainty" in the energy must be large_.
+
+Q: Bases in Hilbert space
+	A: A state is repesented by a vector $\ket{S(t)}$ in Hilbert space.
+		- The position-space wave function is the $x$ "component" (of the eigenfunction associated with eigenvalue $x$) in the expansion of $\ket{S(t)}$ in the basis of position eigenfunctions :
+			math
+				Ψ(x,t) = \scalar{x}{S(t)}
+			with $\ket x$ stnading for the eigenfunction of $\hat x$ with the eigenvalue $x$.
+		- The momentum-space wave function is the $p$ component in the expansion of $\ket{S(t)}$ in the basis of momentum eigenfunctions :
+			math
+				Φ(p,t) = \scalar{p}{S(t)}
+			with $\ket p$ standing for the eigenfunction of $\hat p$ with eigenvalue $p$.
+		- In the basis of energy eigenfunctions, the coordinates are
+			math
+				c_{n}(t) = \scalar{n}{S(t)}
+			with $\ket n$ standing for the $n$th eigenfunction of $\hat H$.
+		These are three different ways of identifying the same vector $\ket{S(t)}$ :
+		math
+			\begin{gather}
+				∫ Ψ(y,t)δ(x-y)\dd y\\
+				∫Φ(p,t) \frac{1}{\sqrt{2 π \hbar}}e^{i \frac{p x}{\hbar}}\dd p \\
+				∑ c_{n}e^{-i \frac{E_{n}}{\hbar}t}ψ_{n}(x)
+			\end{gather}
+
+Q: Matrix elements of an operator
+	A: In an orthonormal basis $\set{\ket{e_{n}}}$,
+		math
+			Q_{mn} = \braket{e_{m} | \hat Q | e_{n}}
+
+Q: Position and momentum operators in position and momentum spaces
+	A: table
+			;position space; momentum space
+			$\hat x$; $x$; $i\hbar \dfrac{∂}{∂p}$
+			$\hat p$; $-i\hbar \dfrac{∂}{∂x}$; $p$
+
+Q: Bra
+	A: Linear function of vectors : when it hits a vector (to its right) it yields a (complex) number – the inner product.
+		In a function space, it can be thought as an instruction to integrate :
+		math
+			\bra f f ∫ f^{*}[…] \dd x
+		In a finite-dimensional space, the bras are row vectors.
+
+Q: Projection operator
+	A: Operator picking out the portion of any vector that lies along a vector $\ket{α}$ :
+		math
+			\hat P = \ket α\bra α
+		In fact,
+		math
+			\hat P\ket β = (\scalar{α}{β})\ket α
+
+Q: Completeness relation (identity relation)
+	A: For a discrete orthonormal basis $\set{\ket{e_{n}}}$,
+		math
+			∑_{n}\ket{e_{n}}\bra{e_{n}} = 1
+		Similarly, if $\set{\ket{e_{z}}}$ is a Dirac-orthonormalized continuous basis,
+		math
+			∫\ket{e_{z}}\bra{e_{z}}\dd z = 1
