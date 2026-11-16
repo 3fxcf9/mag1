@@ -1,0 +1,83 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2cm]{geometry}
+
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[tiny]{titlesec}% Change sections font size
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{tkz-tab}
+\usepackage{stmaryrd} % To use \llbracket and \rrbracket
+\allowdisplaybreaks[4]
+
+% Document setup
+\newcommand{\assignmentauthor}{RONDEAU Felix}
+\newcommand{\assignmentdate}{Lundi 17 octobre 2026}
+\newcommand{\assignmenttitle}{Corrigé du partiel de mathématiques}
+
+% Header and Footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhf[lh]{\assignmentauthor}
+\fancyhf[ch]{\itshape\assignmenttitle}
+\fancyhf[rh]{\assignmentdate}
+\fancyhf[rf]{\thepage}
+
+% Line spacing
+\renewcommand{\baselinestretch}{1.3}
+
+% Custom enum
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+
+\newlist{subquestions}{enumerate}{3}
+\setlist[subquestions]{label=(\alph*),leftmargin=12pt}
+\newcommand{\subquestion}{\item}
+
+\newlist{subsubquestions}{enumerate}{3}
+\setlist[subsubquestions]{label=\roman*.,leftmargin=12pt}
+\newcommand{\subsubquestion}{\item}
+
+\newenvironment{exercise}[1][Exercice]{\section*{#1}\begin{questions}}{\end{questions}}
+
+% macros
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\let\leq\leqslant
+\let\geq\geqslant
+
+\begin{document}
+\thispagestyle{empty}
+\vspace*{-1cm}
+\noindent\assignmentauthor \hfill \assignmentdate
+
+\begin{center}
+	\rule[2ex]{\textwidth}{1pt}\\
+	{\Large{\assignmenttitle}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}\\
+\title{}
+\author{}
+\date{}
+
+\begin{exercise}[Conditions de Cauchy-Riemann]
+	\question Soit $n$ un entier naturel non nul fixé quelconque,
+	\begin{align*}
+	\xi\zeta
+	\end{align*}
+
+\end{exercise}
+
+\end{document}
+

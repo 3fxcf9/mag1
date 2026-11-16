@@ -296,18 +296,18 @@ Q: Expectation value of an observable $Q(x,p)$ in the generalized statistical in
 Q: Momentum space wave function
 	A: Fourier transform of the (position space) wave function :
 		math
-			ϕ(p,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{-ipx/\hbar}Ψ(x,t)\dd x
+			Φ(p,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{-ipx/\hbar}Ψ(x,t)\dd x
 		and by Plancherel’s theorem,
 		math
-			Ψ(x,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{i p x/\hbar}ϕ(p,t)\dd p
+			Ψ(x,t) = \frac{1}{\sqrt{2 π \hbar}} ∫ e^{i p x/\hbar}Φ(p,t)\dd p
 		According the generalized statistical interpretation, the probability that a measurement of momentum would yield a result in the range $\dd p$ is
 		math
-			\abs{ϕ(p,t)}^{2}\dd p
+			\abs{Φ(p,t)}^{2}\dd p
 
 Q: Expectation value of an observable $Q(x,p)$ in *momentum space*
 	A: In momentum space, the position operator is $i\hbar ∂/∂p$. Therefore,
 		math
-			\moy{Q(x,p,t)} = ∫ Φ^{*}\hat Q \left(i\hbar \pdv{}{}, p, t\right)Ψ \dd p
+			\moy{Q(x,p,t)} = ∫ Φ^{*}\hat Q \left(i\hbar \pdv{}{}, p, t\right)Φ \dd p
 
 ### The uncertainty principle
 
@@ -341,6 +341,11 @@ Q: Energy-Time uncertainty principle
 			Δt = \frac{σ_{Q}}{\abs{\dv{\moy Q}{t}}}
 		The later term is the amount of time it takes the expectation value of $Q$ to change by one standard deviation ($σ_{Q} = \abs{\dv{\moy Q}{t}}Δt$).
 		_If any observable changes rapidly, the "uncertainty" in the energy must be large_.
+
+Q: Generalized Ehrenfest theorem
+	A: For an observable $Q(x,p,t)$,
+		math
+			\dv{}{t}\moy  Q = \frac{i}{\hbar} \moy{\Big[\hat H, \hat Q\Big]} + \moy{\dv{\hat Q}{t}}
 
 Q: Bases in Hilbert space
 	A: A state is repesented by a vector $\ket{S(t)}$ in Hilbert space.
@@ -379,7 +384,7 @@ Q: Bra
 	A: Linear function of vectors : when it hits a vector (to its right) it yields a (complex) number – the inner product.
 		In a function space, it can be thought as an instruction to integrate :
 		math
-			\bra f f ∫ f^{*}[…] \dd x
+			\bra f = ∫ f^{*}[…] \dd x
 		In a finite-dimensional space, the bras are row vectors.
 
 Q: Projection operator
@@ -397,3 +402,21 @@ Q: Completeness relation (identity relation)
 		Similarly, if $\set{\ket{e_{z}}}$ is a Dirac-orthonormalized continuous basis,
 		math
 			∫\ket{e_{z}}\bra{e_{z}}\dd z = 1
+
+## Quantum mechanics in three dimensions
+
+Q: Schrödinger equation in three dimensions, and stationary states
+	A: math
+			i\hbar \pdv{Ψ}{t} = -\frac{\hbar^{2}}{2m}\lapl Ψ + V Ψ
+		If $V$ is indepentent of time, a complete set of stationary states is
+		math
+			Ψ_{n}(\r, t) = ψ_{n}(\r)e^{-i \frac{E_{n}}{\hbar}t}
+		where the spatial wave function $ψ$ satisfies the time-indepentent Schrödinger equation
+		math
+			- \frac{\hbar^{2}}{2m}\lapl ψ + V ψ = E ψ
+		The general solution is then
+		math
+			Ψ(\r, t) = ∑c_{n} ψ_{n}(\r)e^{-i \frac{E_{n}}{\hbar}t}
+		(or its integral form if the potential admits continuum states).
+
+

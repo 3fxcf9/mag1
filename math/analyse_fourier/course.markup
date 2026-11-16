@@ -53,6 +53,14 @@ rem
 		et
 		math
 			\Fi_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{d^{n}x}{(2 π)^{n/2}}f(\vec{x}) e^{i \vec{k}· \vec{x}}
+		Q: Transformation de Fourier en $n$ dimensions
+			A: Pour $f ∈ \L^{1}(\R^{n})$ et $\vec{k} ∈ \R^{n}$, on définit
+				math
+					\F_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{\dd^{n}x}{(2 π)^{n/2}}f(\vec{x}) e^{-i \vec{k}· x}
+				et
+				math
+					\Fi_{n}(f)(\vec{k}) = ∫_{\R^{n}}\frac{\dd^{n}x}{(2 π)^{n/2}}f(\vec{x}) e^{i \vec{k}· x}
+
 	- On a évidemment $\F_{n} = \F$ et $\Fi_{n} = \Fi$ (évident pour $n=1$, voir TD pour $n > 1$).
 	- $\Fi$ est un « inverse conditionnel » de $\F$, noté $\Fi$ et non $\F^{-1}$ pour cette raison. En effet, $\F$ et $\Fi$ sont toutes deux des fonctions de $\L^{1}(\R)$ dans $\L^{∞}(\R) ∩ \Cont^{0}(\R) ∩ \Cont^{0}(\R)$.
 
@@ -74,14 +82,14 @@ prop
 				math
 					P \circ \F = \Fi = \F \circ P
 				Ainsi, si $f$ est paire (resp. impaire), il en est de même de $\F(f)$ et de $\Fi(f)$, et de surcroît $\Fi(f) = \F(f)$ (resp. $\Fi(f) = -\F(f)$).
-	~ _(dilatation)_ Pour $λ ∈ \R^{*}$,
+	~ _(dilatation)_ En considérant l’opérateur dilatation défini par $ξ_{a}(f)(x) = f(ax)$, on a, pour $λ ∈ \R^{*}$ :
 		math
 			\F \big(ξ_{λ}(f)\big) = \frac{1}{\abs{λ}}ξ_{1/λ} \circ \F(f)
 		Q: Transformation de Fourier et dilatation
 			A: En considérant l’opérateur dilatation défini par $ξ_{a}(f)(x) = f(ax)$, on a, pour $λ ∈ \R^{*}$ :
 				math
 					\F \big(ξ_{λ}(f)\big) = \frac{1}{\abs{λ}}ξ_{1/λ} \circ \F(f)
-	~ _(translation)_ Pour $x_{0}$ et $k$ réels,
+	~ _(translation)_ En considérant l’opérateur translation défini par $τ_{y}(f)(x) = f(x-y)$, on a, pour $x_{0}$ et $k$ réels,
 		math
 			\F \big(τ_{x_{0}}(f)\big)(k) = e^{-ikx_{0}} \F(f)(k)
 	~ _(translation de la transformée)_ Pour $k_{0}$ réel,
@@ -214,7 +222,7 @@ rem
 ### Échange opérateur différentiel / opérateur algébrique sous $\F$
 
 thm
-	Soit $p ∈ \N$ et $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p}f(x)$ soit Lebesgue-sommable. Alors, $\F(f)$ est continue sur $\R$ et pour tout $n ∈ \icc{0,p}$, on a
+	Soit $p ∈ \N$ et $f ∈ \L^{1}(\R)$ telle que $x ⟼  x^{p}f(x)$ soit Lebesgue-sommable. Alors, $\F(f)$ est de classe $\Cont^{p}$ sur $\R$ et pour tout $n ∈ \icc{0,p}$, on a
 	math
 		\F(f)^{(n)} = \F \big(x ⟼  (-ix)^{n}f(x)\big)
 	as_flashcard Dérvée $n$-ième de la transformée de Fourier
@@ -242,7 +250,7 @@ proof
 		math
 			\abs{(-ix)^{p+1} f(x)e^{-ikx}} ⩽ \abs{x}^{p+1}f(x)
 		avec $x ⟼  x^{p+1}f(x)$ Lebesgue-sommable sur $\R$.
-	Les corollaires du théorème de convergence dominée donnent $\F(f)^{p} ∈ \Cont^{1}(\R)$ et
+	Les corollaires du théorème de convergence dominée donnent $\F(f)^{(p)} ∈ \Cont^{1}(\R)$ et
 	math
 		\F(f)^{(p+1)} = \F \big(x ⟼  (-ix)^{p+1}f(x)\big)
 	ce qui complète la récurrence.
@@ -270,3 +278,209 @@ prop
 	math
 		∀ k ∈ \R, \F \big(f^{(n)}\big) (k) = (ik)^{n} \F(f)(k)
 	as_flashcard Transformée de Fourier d’une dérivée $n$-ième
+
+rem
+	En combinant la dernière proposition avec le lemme de Riemann-Lebesgue, on obtient
+	math
+		\lim_{n\to+∞}(ik)^{n} \F(f)(k) = 0
+	donc la transformée d’une fonction de classe $\Cont^{p}$ tend vers zéro plus vite que $\frac{1}{k^{p}}$ à l’infini.
+	Physiquement, plus une fonction est régulière, moins son spectre contient de hautes fréquences.
+
+rem
+	L’avant-dernière proposition permet d’avancer que plus une fonction décroit vite à l’infini, plus sa transformée de Fourier est régulière.
+
+Ces remarques permettent de répondre à la question « Existe-t-il des sous-espaces de $\L^{1}$ stables par $\F$ ? ». En effet,
+- les fonctions de classe $\C^{∞}$ ont des transformées de Fourier qui tendent plus rapidement vers zéro que $\frac{1}{k^{p}}$ (quelque soit $p ∈ \N$) à l’infini,
+- les fonctions qui tendent à l’infini vers zéro plus rapidement que $\frac{1}{k^{p}}$ (pour $p ∈ \N$ quelconque) ont une transformée de Fourier de classe $\Cont^{∞}$.
+Ceci motive l’étude des espaces de Schwartz.
+
+
+## Analyse de Fourier sur l’espace de Schwartz
+
+### Définition
+
+def $m,n$-norme
+	On définit, pour tous entiers naturels $m$ et $n$, l’application
+	math
+		\norm{\cdot}_{m,n} : \Cont^{∞}(\R)⟶ \bar{\R}_{+}
+	en posant pour tout $f ∈ \Cont^{∞}(\R)$
+	math
+		\norm{f}_{m,n} = \sup_{x ∈ \R} \abs{x^{m}f^{(n)}(x)}
+	as_flashcard
+
+defprop Espace de Schwrtz
+	On appelle _espace de Schwartz_ l’ensemble
+	math
+		\S(\R) = \big\{f ∈ \Cont^{∞}(\R) \where ∀ m,n ∈ \N, \norm{f}_{m,n} < ∞\big\}
+	On a alors également
+	math
+		\S(\R) = \big\{f ∈ \Cont^{∞}(\R) \where ∀ m,n ∈ \N, \lim_{n\to\pm ∞} \abs{x^{m} f^{(n)}(x)} = 0\big\}
+	as_flashcard
+
+proof
+	- Soit $f ∈ \Cont^{∞}(\R)$ telle que pour tous $m,n ∈ \N$, $\norm{f}_{m,n} < c_{m,n} < ∞$ avec $c_{m,n}$ une constante positive. Alors par définition de la $m,n$-norme, on a
+		math
+			∀ m ∈ \N^{*}, ∀ n ∈ \N, ∀ x ∈ \R, \abs{x^{m-1} f^{(n)}(x)} < \frac{c_{m,n}}{\abs{x}} \arrowlim{x\to\pm ∞} 0
+	- Soit $f ∈ \Cont^{∞}(\R)$ telle que
+		math
+			∀ m,n ∈ \N, \lim_{x\to\pm ∞} \abs{x^{m} f^{(m)}(x)} = 0
+		La fonction $x ⟼ x^{m}f^{(m)}(x)$ est alors clairement de classe $\Cont^{∞}$ et donc bornée sur tout intervalle compact. D’autre part, d’après l’équation précédente, $f$ est bornée sur des voisinages de $+∞$ et $-∞$. Par conséquent, $f$ est bornée sur $\R$ d’où $\norm{f}_{m,n} < ∞$.
+
+example
+	La gaussienne $x ⟼ e^{-x^{2}}$ est dans l’espace de Schwartz. On le vérifiera en exercice.
+
+### Propriétés
+
+prop
+	~ L’espace de Schwartz muni de l’addition, de la multiplication par un scalaire et de la multiplication forme une $\C$-algèbre. Cette algèbre n’est *pas unitaire*.
+	~ Pour tous entiers naturels $m$ et $n$, l’application $\norm{\cdot}_{m,n}$ est une norme sur $\S(\R)$.
+	~ On munit $\S(\R)$ de la topologie induite par la famille dénombrable de normes $\big(\norm{\cdot}_{m,n}\big)_{m,n ∈ \N}$, c’est-à-dire qu’on dira qu’une suite $\big(f_{p}\big)_{p ∈ \N}$ de fonctions de $\S(\R)$ converge vers $f ∈ \S(\R)$ pour cette topologie si et seulement si
+		math
+			∀ m,n ∈ \N, \lim_{p\to+∞}\norm{f_{p} - f}_{m,n} = 0
+		On écrira dans ce cas
+		math
+			\slim_{p\to+∞} f_{p} = f \quad\text{ou}\quad f_{p} \sarrowlim{p\to+∞}f
+	~ Muni de cette topologie, $(\S(\R), +, · )$ est un espace vectoriel multi-normé complet; c’est un _espace de Fréchet_.
+	as_flashcard Structure de l’espace de Schwartz
+
+proof
+	~ Ce point découle du suivant et du fait que la $m,n$-norme d’un produit de fonctions de $\S(\R)$ est majorée par une combinaison linéaire de produits de $(m', n')$-normes de $f$ et de $g$.((Utiliser Leibniz puis la sous-multiplicativité de $\norm{\cdot}_{∞}$))
+	~ - L’inégalité triangulaire et l’homogénéité positive sont claires.
+		- Soient $m,n ∈ \N$. Soit $f$ une fonction de l’espace de Schwartz de $m,n$-norme nulle. Au vu de la définition de $\norm{\cdot}_{m,n}$, on a $f^{(n)} = 0$ sur $\R^{*}$. Cette égalité s’étent à $\R$ par continuité. Il en découle que $f$ est une fonction polynomiale de degré $n-1$ de limite nulle en $\pm ∞$; $f$ est nécessairement nulle. La $m,n$-norme est donc définie positive.
+	~ Soit $(f_{p})_{p ∈ \N}$ une suite de Cauchy de fonctions de l’espace de Schwartz. Alors
+		math
+			∀ ε > 0, ∃ N ∈ \N:∀ m,n ∈ \N, ∀ p,p' ⩾ N, \norm{f_{p'} - f_{p}}_{m,n} < ε
+		En particulier, si $m=0$ :
+		math
+			∀ p,p' ⩾ N, ∀ n ∈ \N, \norm{f_{p'} - f_{p}}_{0,n} = \sup_{x ∈ \R} \abs{f_{p'}^{(n)}(x) - f_{p}^{(n)}(x)} < ε
+		Alors,
+		math
+			∀ p,p' ⩾ N, ∀ n ∈ \N, ∀ x ∈ \R, \abs{f_{p'}^{(n)}(x) - f_{p}^{(n)}(x)} < ε
+		et donc $\big(f_{p}^{(n)}(x)\big)_{p ∈ \N}$ est une suite de Cauchy pour tous $n ∈ \N$ et $x ∈ \R$. Ces suites convergent par complétude de $\R$. Par convergence uniforme pour toutes les dérivées, il existe finalement $f ∈ \Cont^{∞}(\R)$ telle que
+		math
+			\lim_{p\to+∞} f_{p}^{(n)}(x) = f^{(n)}(x)
+		Finalement, pour tous $m,n ∈ \N$ et $p ∈ \N$,
+		math
+			\norm{f}_{m,n} = \norm{f - f_{p} + f_{p}}_{m,n} ⩽ \underbrace{\norm{f - f_{p}}_{m,n}}_{< ∞} + \underbrace{\norm{f_{p}}_{m,n}}_{< ∞} < ∞
+
+Peut-on trouver des multiplicateurs de l’espace de Schwartz (fonctions $\Cont^{∞}$ par multiplication desquelles $\S(\R)$ est stable) ? La réponse est oui et c’est ce que nous allons étudier à présent
+
+def Fonctions lentement croissantes
+	On dira qu’une fonction $f ∈ \Cont^{∞}(\R)$ est _lentement croissante_ ou _à croissance lente_ si pour tout entier $n ∈ \N$ il existe $c_{n} ∈ \R_{+}$ et $N_{n} ∈ \N$ tels que
+	math
+		∀ x ∈ \R, \abs{f^{(n)}(x)} < c_{n}(1+ \abs{x})^{N_{n}}
+	On notera $\Contlent^{∞}(\R)$ l’espaces des fonctions de classe $\Cont^{∞}$ à croissance lente.
+	as_flashcard
+
+prop
+	L’espace de Schwrtz est stable par
+	- translation, dilatation, parité
+	- dérivation
+	- multiplication par des fonctions de $\Contlent^{∞}(\R)$
+	as_flashcard Stabilité de l’espace de Schwartz
+
+proof
+	Les deux premiers points sont immédiats; le troisième est à faire en exercice (Leibniz et définition des fonctions à croissance lente).
+
+prop
+	~ $\S(\R) ⊂ \L^{1}(\R)$
+	~ Les restrictions $\F_{|\S(\R)}$ et $\Fi_{|\S(\R)}$ de $\F$ et $\Fi$ de $\L^{1}(\R)$ à $\S(\R)$ constituent des automorphismes linéaires et continus de $\S(\R)$ tels que
+		math
+			\F_{|\S(\R)} \circ \Fi_{|\S(\R)} = \Fi_{|\S(\R)} \circ \F_{|\S(\R)} = \id_{\S(\R)}
+	as_flashcard Restrictions des transformations de Fourier
+
+proof
+	~ $\S(\R) ⊂ \Cont^{∞}(\R) ⊂ \Cont^{0}(\R)$ donc toute fonction de l’espace de Schwartz est localement Riemann-intégrable sur $\R$. D’autre part, toute fonction $f ∈ \S(\R)$ vérifie $\abs{f(x)} \ueq{\pm ∞} o \left(\frac{1}{x^{2}}\right)$ donc d’après le critère de Riemann, $∫_{-∞}^{+∞}\dd xf(x)$ est une intégrale impropre absolument convergente et donc $f ∈ \L^{1}(\R)$.
+		On peut par conséquent restreindre $\F$ et $\Fi$ à $\S(\R)$. Pour simplifier, on notera simplement $\F$ (resp. $\Fi$) la restriction $\F_{|\S(\R)}$ (resp. $\Fi_{|\S(\R)}$).
+	~ Il suffit de montrer
+		math
+			\F \left(\S(\R)\right) ⊂ \S(\R) \quad\text{et}\quad \Fi \left(\S(\R)\right) ⊂ \S(\R)
+		pour garantir que $\F$ et $\Fi$ constituent des automorphismes linéaires de $\S(\R)$ mutuellement inverse l’un de l’autre sur $\S(\R)$. En effet, cette condition nous place sous les hypothèses du théorème d’inversion de Fourier de $\L^{1}(\R)$ dans sa version forte.
+		---
+		Soit $f ∈ \S(\R)$. Pour tout $p ∈ \N$, la fonction $x ⟼  x^{p}f(x)$ est dans l’espace de Schwartz donc (premier point) dans $\L^{1}(\R)$. D’après le premier théorème d’échange opérateur différentiel/algébrique, $\F(f)$ est de classe $\Cont^{p}$ sur $\R$, et ce pour tout $p ∈ \N$, i.e. $\F(f) ∈ \Cont^{∞}(\R)$.
+		D’autre part, pour tous $m,n ∈ \N$, d’après les deux propositions d’échange opérateurs différentiels/algébriques,
+		math
+			\begin{align*}
+				\norm{\F(f)}_{m,n} &= \norm{k ⟼ k^{m}\F(f)^{(n)}(k)}_{∞}\\
+				&= \norm{(k ⟼ k^{m})\F(f)^{(n)}}_{∞} \\
+				&= \norm{(k ⟼ k^{m})\F \big(x ⟼  x^{n}f(x)\big)}_{∞}\\
+				&= \norm{\F \big((x ⟼ x^{m})f\big)^{(m)}}_{∞}
+			\end{align*}
+		D’après la loi de Leibniz et l’inégalité triangulaire pour $\norm{·}_{∞}$, on peut majorer $\norm{\F(f)}_{m,n}$ par une combinaison linéaire de termes de la forme
+		math
+			\norm{\F\big(x ⟼  x^{r}f^{(s)}(x)\big)}_{∞}
+		avec $r ∈ \icc{0,n}$ et $s ∈ \icc{0,m}$. Il suffit donc de démontrer que tous ces termes sont finis. Pour $r ∈ \icc{0,n}$ et $s ∈ \icc{0,m}$,
+		math
+			\begin{align*}
+				\norm{\F \big(x ⟼  x^{r}f^{(s)}(x)\big)}_{∞} &⩽ \frac{1}{\sqrt{2 π}}\norm{x ⟼  x^{r} f^{(s)}(x)}_{1} \\
+				&= ∫_{\R}\frac{dx}{\sqrt{2 π}}\abs{x^{r} f^{(s)}(x)} \\
+				&= ∫_{\R}\frac{\dd x}{\sqrt{2 π}(1+x^{2})}(1+x^{2}) \abs{x^{r}f^{(s)}(x)} \\
+				&⩽ \sup_{x ∈ \R} \abs{(1+x^{2}) x^{r}f^{(s)}(x)} ∫_{\R}\frac{\dd x}{\sqrt{2 π}(1+x^{2})} \\
+				&⩽ \sqrt{\frac{π}{2}} \Big(\underbrace{\norm{f}_{r,s}}_{< ∞} + \underbrace{\norm{f}_{r+2,s}}_{< ∞}\Big)
+			\end{align*}
+		Ainsi $\norm{\F(f)}_{m,n} < ∞$ et $\F(f) ∈ \S(\R)$. La même preuve montre que $\norm{\Fi(f)}_{m,n} < ∞$ et donc $\Fi(f) ∈ \S(\R)$.
+		Il nous reste à montrer que $\F$ est continue (la preuve pour $\Fi$ est similaire). Soit $(f_{p})_{p ∈ \N}$ une suite de fonctions de Schwartz telles que $f_{p} \sarrowlim{p\to+∞} 0$. Il suffit de montrer que $\F(f_{p}) \sarrowlim{p\to+∞}0$. Or pour tous $m,n ∈ \N$ et tout $p ∈ \N$, la $m,n$-norme $\norm{\F(f_{p})}_{m,n}$ est majorée par une combinaison linéaire de termes de la forme
+		math
+			\sqrt{\frac{π}{2}}\Big(\norm{f_{p}}_{r,s} + \norm{f_{p}}_{r+2,s}\Big)
+		avec $r ∈ \icc{0,n}$, $s ∈ \icc{0,m}$ et, par hypothèse,
+		math
+			∀ m,n ∈ \N, \norm{f_{p}}_{m,n} \arrowlim{p\to+∞}0
+		Ainsi, $\slim_{p\to+∞}\F(f_{p}) = 0$.
+
+rem
+	Pourquoi se restreindre à un espace aussi particlier ? Le fait d’avoir construit cette restriction à un sous-espace de $\L^{1}$ stable par transformée de Fourier permetra paradoxialement d’étendre considérablement celle-ci hors de $\L^{1}$ (v. théorème des distributions tempérées, chap 4).
+
+## Analyse de Fourier et convolution
+
+### Sur $\L^{1}(\R)$
+
+prop
+	Si $f$ et $g$ sont deux fonctions Lebesgue-sommables, alors
+	math
+		\F(f\star g) = \sqrt{2 π}\F(f)\F(g)
+	et
+	math
+		\Fi(f\star g) = \sqrt{2 π}\Fi(f) \Fi(g)
+
+proof
+	Soient $f$ et $g$ deux fonctions Lebesgue-sommables. Le produit de convolution $f\star g$ est Lebesgue-sommable donc les deux membres des égalités ont un sens. Considérons, pour $k ∈ \R$, la fonction
+	math
+		h_{k}: (x,y) ⟼ f(x-y)g(y)e^{-ikx}
+	Soit $k ∈ \R$. Clairement, d’après Fubini-Tonelli,
+	math
+		\begin{align*}
+			∫_{\R^{2}}\dd x \dd y \abs{h_{k}(x,y)} &= ∫_{\R^{2}}\dd x \dd y \abs{f(x-y)}\abs{g(y)} \\
+			&= ∫_{\R}\dd y \left(∫_{\R}\dd x \abs{f(x-y)}\right) \abs{g(y)} \\
+			&=\norm{f}_{1} \norm{g}_{1} < ∞
+		\end{align*}
+	Et donc $h_{k}$ est Lebesgue-sommable sur $\R^{2}$. D’après Fubini, on a
+	math
+		\begin{align*}
+			∫_{\R}\frac{\dd x}{\sqrt{2 π}} \left(∫_{\R}\dd y f(x-y)g(y)\right)e^{-ikx} &= ∫_{\R}\dd y \left(∫_{\R} \frac{\dd x}{\sqrt{2 π}}f(x-y)e^{-ik(x-y)}\right)g(y)e^{-iky}\\
+			&= \sqrt{2 π}\F(f)(k) \F(g)(k)
+		\end{align*}
+	Le même argument s’applique à $\Fi$.
+
+rem
+	En analyse de la réponse linéaire, pour une fonction de transfert $H(ω)$, on a
+	- dans l’espace de Fourier,
+		math
+			\underline{s}(ω) = H(ω) \underline{e}(ω)
+	- dans l’espace réel,
+		math
+			s(t) = (H \star e)(t)
+
+cor
+	L’algèbre de Banach $(\R^{1}(\R), +, · , \star, \norm{·}_{1})$ n’est pas unitaire.
+
+proof
+	_Par l’absurde._ Supposons qu’il existe $u ∈ \L^{1}(\R)$ tel que
+	math
+		∀ f ∈ \L^{1}(\R), u\star f = f \quad (= f\star u)
+	D’après la proposition précédente, on a
+	math
+		\F(f) = \F(u\star f) = \sqrt{2 π} \F(u) \F(f)
+	Or, pour $f: x ⟼  \frac{1}{\sqrt{2 π}} e^{- \frac{x^{2}}{2}}$, on a $\F(f) = f > 0$ donc
+	math
+		\F(u) = \frac{1}{\sqrt{2 π}}
+	ce qui contredit le lemme de Riemann-Lebesgue.

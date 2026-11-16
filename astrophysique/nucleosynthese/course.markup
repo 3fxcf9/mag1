@@ -1,81 +1,393 @@
 ../../common/course.lib.markup
 
 title Nucléosynthèse et évolution stellaire
-date 05/10/2026
+date 07/10/2026
+description Processus thermonucléaires au cœur des étoiles, structure d’une étoile, diagramme HR.
+author Jonathan Biteau
 
-Q: Âge du soleil
-	A: On estime que le soleil s’est formé il y a environ 4.6 milliards d’années, et qu’il est environ à la moitié de sa durée de vie.
+## Luminosité et temps de vie des étoiles
 
-Q: Désintégration $β^{-}$
-	A: Transformation d'un *quark down* en *quark up* sous l'effet de l'interaction faible :
+Nous pouvons estimer l'âge du Système solaire grâce à la datation radiométrique des roches les plus anciennes trouvées dans notre environnement. En mesurant l'abondance d'isotopes à longue durée de vie dans des [météorites](wiki:Canyon_Diablo_(meteorite)) trouvées dans des cratères sur Terre, ou en examinant des échantillons prélevés sur des astéroïdes proches, on estime que le Soleil s'est formé il y a environ $t_\odot = 4.6\,$Gyr.
+
+De plus, nous pouvons déterminer la luminosité du Soleil, i.e. sa puissance rayonnée $L_\odot$ en W, à partir de la mesure de son flux (en W/m$^2$), $F_\odot = \frac{L_\odot}{4\pi r_\odot^2}$ où $r_\odot = 1\ \text{au}$ est la distance Terre - Soleil. La luminosité (W) se déduit simplement de la luminance (W m$^{-2}$ Hz$^{-1}$ sr$^{-1}$) introduite dans la leçon précédente par intégration sur la surface de l'étoile, dans toutes les directions et sur toutes les fréquences. La luminosité actuelle du Soleil est $L_\odot = 3.84 \times 10^{26}\ \text{W}$.
+
+Nous pouvons estimer de façon grossière l'énergie rayonnée par le Soleil depuis sa formation ($E_\odot$ en J) en supposant, à l'ordre 0, que le Soleil ait gardé une luminosité constante :
+
+math
+	\begin{align*}
+		E_\odot &\approx L_\odot t_\odot\\
+		&\approx 5.5\times 10^{43}\,\text{J} \left(\frac{L_\odot}{3.84 \times 10^{26}\, \text{W}}\right)\left(\frac{t_\odot}
+		{4.6\, \text{Gyr}}\right).
+	\end{align*}
+
+La source de cette énergie est restée une question ouverte jusqu'aux années 1930.
+
+### Énergie chimique ?
+
+Examinons pour commencer l'énergie libérée par réactions chimiques. L'énergie libérée lors de la formation d'une molécule $H_2$ à partir deux atomes d'hydrogène est l'ordre de $e_\text{chimie} \approx 5\ \text{eV}$. En supposant que le Soleil, de masse $M_\odot \approx 2 \times 10^{30}\ \text{kg}$ est essentiellement formé d'hydrogène, de masse $m_\text{p} \approx 1.67 \times \times 10^{-27}\ \text{kg}$, on obtient un nombre de molécules $N_{H_2} \approx \frac{M_\odot}{2m_p}$ et une énergie totale libérée par réactions chimiques :
+
+math
+	\begin{align*}
+		E_\text{chimie} &= N_{H_2} e_\text{chimie}\\
+		&\approx 5\times 10^{38}\,\text{J}.
+	\end{align*}
+
+L'énergie libérée par ces réactions chimiques hypothétiques est donc trop faible de cinq ordres de grandeur par rapport à l'énergie rayonnée par le Soleil. Notons au passage que nous avons évalué la température au centre du Soleil à la leçon précédente, soit $T_c \approx 1.5 \times 10^7\ \text{K}$, correspondant à une énergie $kT \approx 1.3\ \text{keV}$, où $k \approx 8.6 \times 10^{-5}\ \text{eV}/\text{K}$. La température du Soleil est donc de toute façon trop élevée pour que des molécules se forment.
+
+### Énergie gravitationnelle ?
+
+L'équilibre hydrostatique entre pression du gaz et attraction gravitationnelle est précisément l'argument nous ayant permis de détermine la température au centre du Soleil. Supposons un instant, quitte à enfreindre la loi de Gay-Lussac (!), que la pression disparaisse et qu'on puisse extraire toute l'énergie associée à la contraction gravitationnelle :
+
+math
+	\begin{align*}
+		|E_\text{pot}| &= \frac{3}{5} \frac{GM_\odot^2}{R_\odot}\\
+		&\approx 2 \times 10^{41}\, \text{J},
+	\end{align*}
+
+où $M_\odot \approx 2 \times 10^{30}\, \text{kg}$, $R_\odot \approx 7 \times 10^{8}\, \text{m}$ et $G \approx  6.7 \times 10^{-11}\, \text{N}\, \text{m}^2\, \text{kg}^{-2}$.
+
+L'énergie gravitationnelle est donc trop faible de deux ordres de grandeur par rapport à l'énergie rayonnée par le Soleil.
+
+rem
+	Nous verrons dans une leçon ultérieure qu'on pourrait récupérer au maximum la moitié de l'énergie gravitationnelle ci dessus (théorème du Viriel). Ce mécanisme, dit de Kelvin - Helmoltz, est intéressant pour comprendre l'autorégulation de la température d'une étoile :  baisse de température $\Rightarrow$  baisse de pression $\Rightarrow$  contraction $\Rightarrow$ augmentation de $|E_\text{pot}|$ $\Rightarrow$ augmentation de la température.
+
+### Énergie nucléaire
+
+L'expérience de [Rutherford](wiki:Rutherford_scattering_experiments) démontre en 1911 que les atomes sont principalement constitués d'espace vide et que leur charge positive est concentré dans un noyau. Au cours des années 1920 et 1930, on met en évidence que ces noyaux sont constitués de protons et neutrons et on réalise que les réactions entre noyaux peuvent libérer de l'énergie. Le principal cycle de réactions nucléaires au coeur des étoiles est la fusion de quatre noyaux d'hydrogène (i.e. quatre protons) en un noyau d'hélium : $4p \rightarrow \ ^{4}\text{He} + \text{énergie}$. Connaissant la masse du noyau d'hélium, $m_{^{4}\text{He}} = 3727.4\ \text{MeV}/c^2$, et celle de quatre protons, $4m_{p} = 3753.1\ \text{MeV}/c^2$, on peut aisément calculer l'énergie libérée, dite chaleur de réaction ($Q=\sum_i m_ic^2- \sum_f m_fc^2$), soit $Q = (4m_{p}-m_{^{4}\text{He}})c^2 \approx 25.7\ \text {MeV}$. L'énergie libérée par les réactions nucléaires est donc six ordres de grandeur supérieure à celle libérée par les réactions chimiques.
+
+La fraction d'énergie extraite lors des réactions nucléaires est alors :
+
+math
+	\begin{align*}
+		\epsilon_\text{nucl} &= \frac{Q}{4m_{p}c^2}\\
+		&\approx 0.7\%.
+	\end{align*}
+
+Grâce à cette efficacité de conversion d'énergie nucléaire en énergie thermique, on peut déterminer l'énergie disponible pour alimenter la luminosité du Soleil, dont l'énergie de masse est $M_\odot c^2$ :
+
+math
+	\begin{align*}
+		E_\text{nucl} &= \epsilon_\text{nucl} M_\odot c^2\\
+		&\approx 1.2 \times 10^{45}\ \text{J}.
+	\end{align*}
+
+Cette valeur est 20 fois supérieure à l'énergie totale $E_\odot$ rayonnée par le Soleil depuis sa formation. Les modèles d'évolution stellaire indiquent que le Soleil a atteint environ la moitié de sa durée vie. On peut donc en conclure que la fusion d'environ 10\% des protons du Soleil suffit à alimenter son rayonnement tout au long de ses $\approx 10\,\text {Gyr}$ de vie.
+
+## Réactions nucléaires
+
+Pour comprendre les processus microscopiques impliqués dans la production d'énergie au sein des étoiles, il faut tout d'abord introduire les protagonistes : les constituants fondamentaux de la matière. L'élaboration du Modèle standard de la physique des particules, dans les années 1960-1970, a permis d'expliquer la grande diversité des particules produites dans les accélérateurs à l'aide d'un nombre limité de constituants : trois familles de quarks et trois familles de leptons, comme illustré sur la figure suivante.
+	https://fr.wikipedia.org/wiki/Quark quarks
+	https://fr.wikipedia.org/wiki/Lepton leptons
+
+fig Constituants de la matière du Modèle standard de la physique des particules. _Adapté de Wikimedia Commons._
+	id fig:SM_matter
+	./figures/SM_matter.png
+
+Le lepton le plus connu est l'électron, $e^-$, de charge -1. Il est associé à une particule neutre de faible masse, le neutrino électronique, $\nu_e$. À l'instar des particules répertoriées sur la figure précédente, l'électron possède une antiparticule : le positron $e^+$, de charge +1. Comme il est difficile (mais pas impossible !) de les détecter, nous ne pouvons pas dire, en l'état actuel des connaissances, si un neutrino et son anti-neutrino sont une seule et même particule ou deux particules distinctes.
+	link #fig:SM_matter la figure précédente
+
+Les quarks les plus courants sont appelés $u$ et $d$, pour "up" et "down". Ils possèdent des charges fractionnaires respectivement égales à 2/3 et -1/3. Leurs anti-quarks sont notés $\bar u$ et $\bar d$. Un proton est ainsi une particule composite $uud$, là où un neutron est composé de $udd$. L'interaction forte est responsable de la liaison, la ["glue"](wiki:Gluon), entre les quarks.
+
+Pour comprendre la production d'énergie nucléaire au sein des étoiles, il faut comprendre ce qui favorise la liaison des nucléons (neutrons et protons) au sein des noyaux et comment transformer un neutron en proton, ou vice-versa.
+
+L'appariemment de nucléons, un neutron et un proton, au sein d'un noyau a commencé a être expliqué au milieu des années 1930 par [Yukawa](wiki:Hideki_Yukawa). Il a introduit la force forte résiduelle sous la forme d'un échange de particules appelées pions neutres ($\pi^0$ soit un mélange de $u \bar u$ et $d \bar d$). La force forte résiduelle est aujourd'hui comprise comme la manifestation, à l'échelle des nucléons, de l'interaction forte qui "glue" les quarks entre eux. Le mécanisme d'échange de pions est illustré en [](#fig:strong_force). La force forte résiduelle est écrantée au-delà du femtomètre.
+
+fig Échange de pion virtuel expliquant la cohésion d'une paire neutron - proton dans un noyau. _Issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nuclear_Force_anim_smaller.gif)._
+	id fig:strong_force
+	./figures/Nuclear_Force_anim.gif
+
+La deuxième force pertinente en physique nucléaire est l'interaction faible, qui agit sur les quarks et les leptons. Cette interaction explique comment un quark down se transforme en quark up, ce qui s'accompagne de l'émission d'un électron et d'un anti-neutrino électronique. Transcrite à l'échelle des nucléons, cette transformation correspond à la [désintégration $\beta^-$](wiki:Beta_decay#β−_decay):
+
+math
+	n \rightarrow p + e^- + \bar \nu_e.
+
+En raison de la différence d'énergie de masse entre les état initial et final ($\Delta m \approx m_n-m_p-m_e \approx 0.8\, \text{MeV/c}^2$), la désintégration $\beta^-$ est favorisée par rapport à la désintégration $\beta^+$ ($p \rightarrow n + e^+ \nu_e$) si aucune énergie externe n'est fournie.
+
+### Barrière coulombienne et taux de fusion
+
+La figure suivante illustre le potentiel d'un noyau de charge positive $Z_1$ vu par un second noyau de charge positive $Z_2$. Pour qu'une réaction de fusion nucléaire ait lieu, le second noyau doit s'approcher suffisamment du premier pour la force forte résiduelle domine la répulsion électromagnétique. Cette distance minimale d'approche correspond à la taille typique du noyau, soit $r_\text{nucl} \approx 1\,\text{fm}$.
+	link #fig:potential_well figure suivante
+
+fig Potentiel d'un noyau en fonction de la distance. Au-delà de l'échelle du femtomètre, la répulsion coulombienne prédomine. En deça, l'attraction dûe à la force forte résiduelle prédomine. _Issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Potential-barrier-for-alpha-particle_(simple).svg)._
+	id fig:potential_well
+	./figures/potential_well.png
+
+On peut estimer la hauteur de la barrière à franchir en déterminant l'énergie potentielle coulombienne à la distance $r_\text{nucl}$:
+
+math
+	\begin{align*}
+		E_\text{Coulomb} &= \frac{1}{4\pi\epsilon_0} \frac{Z_1 Z_2 e^2}{r_\text{nucl}}\\
+		&\approx 1.4\,\text{MeV} \left(\frac{r_\text{nucl}}{1\,\text{fm}}\right)\left(\frac{Z_1}{1}\right)\left(\frac{Z_2}{1}
+		\right).
+	\end{align*}
+
+Avec une énergie cinétique de l'ordre de $kT \approx 1.3\ \text{keV}$, le second noyau ne donc pas franchir la barrière dans un cadre classique. La situation est différente dans un cadre quantique. En 1928, [Gamow](wiki:Gamow) a calculé la probabilité de franchissement de la barrière par effet tunnel :
+math
+	P(E) \approx \sqrt{\frac{E}{E_\text{Coulomb}}} \exp\left(-(E/E_c)^{-1/2}\right),
+où $E$ est l'énergie cinétique dans le centre de masse et $E_c$ est une énergie critique donnée par
+math
+	\begin{align}
+		E_c &= \frac{2\pi^2 m}{\hbar^2} \left(\frac{Z_1 Z_2 e^2}{4\pi\epsilon_0}\right)^2\\
+		&\approx 0.5\,\text{MeV} \left(\frac{m}{m_p/2}\right)\left(\frac{Z_1}{1}\right)^2\left(\frac{Z_2}{1}\right)^2,
+	\end{align}
+avec $m = m_1m_2/(m_1+m_2)$ masse réduite du système à deux noyaux ($m= m_p/2$ pour deux protons).
+
+Pour une énergie $E$ de l'ordre de $kT$, la probabilité de franchir la barrière est de l'ordre de $10^{-10}$. Il faut donc environ $10^{10}$ collisions pour qu'une fusion ait lieu. Notons que les noyaux n'ont pas une énergie cinétique fixe : la vitesse relative entre noyaux suit une distribution maxwellienne. À mesure que la vitesse relative augmente, la densité de particules dans l'espace des phases diminue, mais la probabilité d'effet tunnel augmente. Le point optimal se trouve autour d'une énergie de référence dite pic de Gamow.
+
+exercise Pic de Gamow
+	id exo:gamow
+
+	Le taux d'interaction, $R_2$ en Hz, des projectiles indexés par 2 avec des cibles indexées par 1 est déterminé par le produit de la densité de particules cibles ($n_1$ en m$^{-3}$), de leur vitesse relative ($v$ en m s$^{-1}$) et de la section efficace de réaction ($\sigma_{12}(v)$ en m$^{2}$, homogène à une surface) :
+	math
+		R_2(v) = n_1 \sigma_{12}(v) v.
+
+	Le taux d'interaction par unité de volume, $r_{12}$ en m$^{-3}$ s$^{-1}$ est alors:
+	math
+		r_{12}(v) = \int_0^{+\infty} n_2 R_2(v) p(v) \dd v,
+	où $p$ est la densité de probabilité de $v$, vérifiant $\int p(v) \dd v = 1$.
+
+	Dans un gaz à l'équilibre thermodynamique local, la norme de la vitesse relative $\vec{v} = \vec{v}_2-\vec{v}_1$ entre particules de masses $m_1$ et $m_2$ admet la densité de probabilité suivante :
+	math
+		p(v) = \left(\frac{m}{2\pi k T} \right)^{3/2}4\pi v^2\exp\left(-\frac{mv^2/2}{kT} \right),
+	où $m=\frac{m_1 m_2}{m_1 + m_2}$ est la masse réduite.
+
+	1. Montrer que $r_{12} = n_1 n_2 \langle \sigma_{12}(v) v\rangle$, où $\langle \cdot \rangle$ est l'opérateur moyenne.
+
+	La section efficace de réaction s'exprime en fonction de l'énergie cinétique dans le centre de masse, $E=\frac{1}{2}mv^2$, sous la forme $ \sigma_{12}(E) = S(E)P(E)/E$. Dans cette équation, $S(E)$ est le "facteur nucléaire", qui est déterminé par la comparaison entre modèles et données nucléaires. $S(E)$ varie lentement avec l'énergie (en dehors des résonances). $P(E)$ est la probabilité de franchissement de la barrière déterminée par Gamow.
+
+	2. Montrer que $\langle \sigma_{12}(v) v\rangle \approx \sqrt{\frac{8}{\pi m}} \frac{1}{(kT)^{3/2}} \int_0^{+\infty} S (E)\sqrt{\frac{E}{E_\text{Coulomb}}}\exp\left(-\frac{E}{kT} - \sqrt{\frac{E_c}{E}}\right)\dd E$.
+
+	3. Tracer qualitativement le taux différentiel d'interaction par unité de volume, $\frac{\dd r_{12}}{\dd E}$ à l'aide de l'intégrande.  Que peut-on dire de la gamme d'énergie contribuant au taux d'interaction ?
+
+	4. Déterminer l'expression et la valeur de énergie pour laquelle le facteur exponentielle dans l'intégrale est maximum. Comparer cette énergie, dite pic de Gamow, à l'énergie thermique du système.
+
+	solution
+		1.
+			math
+				\begin{align}
+				r_{12}(v) &= \int n_2 R_2(v) p(v) \dd v\\
+				 &= n_2 n_1 \int \sigma_{12}(v) v p(v) \dd v\\
+				 &= n_2 n_1 \langle \sigma_{12}(v) v \rangle
+				\end{align}
+
+		2.
+			math
+				\begin{align}
+				\langle \sigma_{12}(v) v\rangle &= \int_0^{+\infty} p(v) \sigma(v) v \dd v\\
+				 &=  \int_0^{+\infty} \left(\frac{m}{2\pi k T} \right)^{3/2}4\pi v^2\exp\left(-\frac{mv^2/2}{kT} \right) \sigma_{12}(v) v \dd v\\
+				 &=  \sqrt{\frac{2}{\pi}} \left(\frac{m}{k T} \right)^{3/2} \int_0^{+\infty} v^2\exp\left(-\frac{mv^2/2}{kT} \right) \sigma_{12}(v) v \dd v\\
+				 &=  \sqrt{\frac{2}{\pi}} \left(\frac{m}{k T} \right)^{3/2} \frac{2}{m^2} \int_0^{+\infty} \frac{1}{2}mv^2\exp\left
+					 (-\frac{mv^2/2}{kT} \right) \sigma_{12}(v) mv \dd v\\
+				 &=  \sqrt{\frac{8}{\pi m}} \frac{1}{(k T)^{3/2}} \int_0^{+\infty} E\exp\left
+					 (-\frac{E}{kT} \right) \sigma_{12}(E) \dd E\\
+				&=  \sqrt{\frac{8}{\pi m}} \frac{1}{(k T)^{3/2}} \int_0^{+\infty} S(E)P(E)\exp\left
+					 (-\frac{E}{kT} \right) \dd E\\
+				&=  \sqrt{\frac{8}{\pi m}} \frac{1}{(k T)^{3/2}} \int_0^{+\infty} S(E)\sqrt{\frac{E}{E_\text{Coulomb}}}\exp\left
+					 (-\frac{E}{kT}- \sqrt{\frac{E_c}{E}} \right) \dd E\\
+				\end{align}
+
+		3. $\frac{\dd r_{12}}{\dd E} \propto S(E)\sqrt{\frac{E}{E_\text{Coulomb}}}\exp\left (-\frac{E}{kT}- \sqrt{\frac{E_c}{E}} \right).$ Le facteur nucléaire variant lentement, on suppose $S(E) = \text {cte}.$ La variation de la fonction est déterminée principalement par le produit du facteur thermique, $\exp (-E/kT)$, fortement décroissant et du facteur exponentiel de l'effet tunnel, $\exp(- \sqrt{E_c/E})$, fortement croissant. L'intégrande est donc une fonction relativement piquée autour de quelques keV.
+
+		fig
+			id fig:gamow_peak
+			./figures/gamow_peak.png
+
+		4. Les variations du taux différentiel d'interaction sont principalement déterminées par le facteur exponentielle, les autres facteurs variant lentement avec l'énergie. Le facteur exponentielle, $\exp(f(E))$ est maximum quand $f (E)$ est maximum. Or $\dd f/\dd E|_{E_\text{pic}} = 0 \Rightarrow -1/kT + \frac{1}{2}\sqrt{E_c}E_\text{pic}^{-3/2} = 0 \Rightarrow E_\text{pic}^{3/2} = \frac{kT}{2}\sqrt{E_c}$. On en déduit
 		math
-			n → p + e^- + \bar ν_e
-		Elle est énergétiquement favorisée par rapport à la désintégration $β^{-}$ car $(m_n - m_p - m_e)c^2 \approx 0,8\ \text{MeV}$.
+			\begin{align} E_\text{pic} &= \left[\frac{1}{4}(kT)^2 E_c\right]^{1/3}\\
+			 &\approx 6\,\text{keV} \left(\frac{T}{1.3\,\text{keV}}\right)^{2/3}\left(\frac{m}{m_p/2}\right)^{1/3}\left(\frac
+				 {Z_1}{1}
+				 \right)^{2/3}\left(\frac{Z_2}{1}\right)^{2/3}
+			\end{align}
 
-Q: Désintégration $β^{+}$ (formule et mécanisme)
-	A: Transformation d'un proton en neutron par l'interaction faible :
+		Les noyaux qui contribuent le plus à la fusion sont donc supra-thermiques, avec une énergie seulement 4 à 5 fois supérieure à l'énergie thermique moyenne.
+
+### De l'hydrogène jusqu'au fer et au nickel
+
+Le processus de fusion au coeur d'une étoile est favorisé si le système de nucléons est plus fortement lié dans l'état final que dans l'état initial. Une grandeur pertinente pour déterminer, en première approximation, quels états finaux peuvent être favorisés est ainsi l'énergie de liaison par nucléon, $E_\text{liaison}/A$, où $A$ est le nombre de masse. L'énergie de liaison d'un noyau d'un noyau est définie comme la différence entre son énergie de masse et la somme des énergies de masse de ses constituants :
+math
+	E_\text{liaison} = m(^{A}_{Z}X)c^2-Zm_pc^2-(A-Z)m_nc^2,
+où $m_p$ et $m_n$ sont respectivement la masse du proton et celle du neutron.
+
+L'énergie de liaison par nucléon des isotopes les plus courants est représentée en [](#fig:bindingE). On observe des pics d'énergie de liaison pour les isotopes stables de l'hélium, du carbon et de l'oxygène. Bien qu'un pic soit aussi présent pour le $^{8}$Be, cet isotope est très instable puisqu'il peut facilement se désintégrer and deux noyaux de $^{4}$He plus stables. C'est d'ailleurs cette étape qui empêche une étoile de synthétiser des éléments plus lourds que l'hélium pendant la majeure partie de son existence (jusqu'à ce que la température deviennent suffisante).
+
+fig Énergie de liaison par nucléon des isotopes les plus courants.
+	id fig:bindingE
+	./figures/bindingE.png
+
+L'énergie de liaison par nucléon est insuffisante pour expliquer la nucléosynthèse stellaire jusqu'aux éléments les plus liés et stables comme le $^{56}$Fe. Pour aller plus loin, nous devons examiner les réactions nucléaires qui se produisent au coeur des étoiles. Penchons-nous sur les deux chaînes qui occupent la majeure partie de la vie d'une étoile : les chaînes [PP I](wiki:Proton–proton_chain) et le cycle [CNO I](wiki:CNO_cycle) illustrées en [](#fig:pp-cno).
+
+fig Chaîne PP I et cycle CNO I
+	id fig:pp-cno
+	row
+		./figures/PP_chain.svg
+		./figures/CNO_Cycle.svg
+
+La chaîne PP I produit un noyau de $^{4}$He à partir de quatre protons. Elle  libère des photons (rayons gamma), deux neutrinos et deux positrons, chacun s'annihilant avec un électron en deux photons. Les neutrinos emportent environ 2% de l'énergie. Dans le cycle CNO I, les noyaux de carbone, oxygène et azote issus du milieu interstellaire jouent le rôle de catalyseurs, avec un bilan similaire à celui de la chaîne PP I. Le taux de production d'énergie dans ces deux canaux dépend de la température comme illustré en [](#fig:EprodRate). La production d'énergie dans une étoile comme le Soleil, avec une température $T_c \approx 15 \times 10^6\ \text{K}$, est ainsi dominé par la chaîne PP I.
+
+fig Taux de production d'énergie des canaux PP I et CNO I en fonction de la température.
+	id fig:EprodRate
+	./figures/PPvsCNO.png
+
+## Physique stellaire
+
+La phase de fusion de l'hydrogène au coeur d'une étoile de masse $>0.1\,M_\odot$ représente la majeure partie de sa vie, au sein de ce qu'on appelle *la séquence principale*. Cette période dure appoximativement $\approx 10\,$Gyr pour une étoile de $1\,M_\odot$ et correspond donc à l'état dans lequel une étoile choisie au hasard dans la Voie Lactée est la plus susceptible de se trouver. La séquence principale représente ainsi la région la plus densément peuplée d'un diagramme représentant la température de surface (décroissante) en fonction de la luminosité (croissante), connu sous le nom de diagramme de Hertzsprung-Russell ou diagramme HR (voir [](#fig:HR)). Il convient de noter que les étoiles de la séquence principale couvrent une plage de températures de surface d'environ un ordre de grandeur et une plage de près de huit ordres de grandeurs en luminosité.
+
+fig Diagramme de Hertzsprung-Russell (HR) représentant la température de surface en fonction de la luminosité de près de 4 millions d'étoiles observées par le satellite Gaia. _Issu de [ESA/Gaia/DPAC, CC BY-SA 3.0 IGO](https://sci.esa.int/web/gaia/-/60198-gaia-hertzsprung-russell-diagram)._
+	./figures/HR_Gaia.png
+
+Les températures de surface des étoiles en [](#fig:HR) sont déduites de leurs spectres. La [](#fig:Spectra) fournit des exemples représentatifs allant des étoiles chaudes (de type O) à froides (de type M). Ces spectres contiennent une composante variant lentement avec la longueur d'onde : le continuum, dont le maximum indique la température de surface via la [loi du déplacement de Wien](wiki:Wien's_displacement_law). Les spectres contiennent aussi des raies d'absorption, notamment celles de l'hydrogène, qui fournissent des informations sur la composition de la photosphère et le degré d'ionisation de ses éléments constitutifs.
+
+fig Spectres dans le domaine visible d'étoiles dont le type va de O (chaudes) à M (froides). Les spectres ont été normalisés et décalés les uns par rapport aux autres pour mettre en évidence les différences entre les divers types spectraux. _Issu de [IAU OAE/SDSS/Niall Deacon](https://astro4edu.org/resources/diagram/Tt35DR10iI63/)._
+	id fig:Spectra
+	./figures/spectra-lines.png
+
+### Équation de la structure stellaire
+
+Pour comprendre la structure des étoiles de la séquence principale et leur évolution, il faut tirer parti :
+- des équations gouvernant leur équilibre:
+	- équilibre hydrostatique :
 		math
-			p → n + e^+ + ν_e
-		Elle nécessite un apport d'énergie externe et intervient notamment lors du processus de neutronisation au cœur des supernovas.
-
-Q: Rendement énergétique de la fusion
-	A: Fraction de l'énergie de masse au repos convertie lors de la fusion de l'hydrogène :
+			\boxed{ \frac{dP}{dr} = \rho (r) g(r)}
+		avec $g(r) = -\frac{G M(r)}{r^2}$.
+	- conservation de la masse :
 		math
-			ϵ_\text{nucl} = \frac{Q}{4m_{p}c^2} \approx 0,7\%
+			\boxed{\frac{dM}{dr} = 4\pi r^2 \rho(r)}
+- des équations de physique constitutive :
+	- équation d'état, $P=f(\rho, T, \text{composition chimique})$ ;
+	- réactions thermonucléaires et pertes neutrinos, gouvernant la luminosité de l'étoile ;
+	- opacité au rayonnement, déterminant l'échappement des photons pour une composition et un degré d'ionisation donnés ;
+- des équations de transport d'énergie, dictant le transfert de chaleur du coeur vers les couches externes de l'étoile.
 
-Q: Barrière coulombienne
-	A: Barrière d'énergie potentielle créée par la répulsion électromagnétique entre deux noyaux de charges $Z_1$ et $Z_2$. À la température du cœur du Soleil, elle est infranchissable de manière classique : la fusion requiert l'effet tunnel lequel a une probabilité d’environ $10^{-10}$ de se produire.
+Ce système d'équations de la structure stellaire n'a pas de solution analytique simple et générale. Cependant, il est possible de le résoudre de façon numérique afin de simuler les divers type d'étoiles et leur évolution.
 
-Q: Pic de Gamow
-	A: Plage d'énergie optimale où le taux d'interaction thermonucléaire est maximal.
-		Elle est déterminée par le produit du facteur thermique de Maxwell-Boltzmann $\exp(-E/kT)$ (fortement décroissant) et de la probabilité d'effet tunnel $\exp(-\sqrt{E_c/E})$ (fortement croissante), et forme un pic autour de quelques $\u{keV}$.
+Les mécanismes de transport d'énergie méritent une attention particulière, car ils établissent un lien entre le moteur de production d'énergie (les réactions thermonucléaires) et les grandeurs observables externes (les spectres photosphériques) ou internes (via l'[astérosismologie](wiki:Asteroseismology), soit l'étude des modes vibrationnels de l'étoile). Trois modes de transport doivent être pris en compte :
+- la radiation, soit le transport par l'émission et l'absorption successives de photons dans un milieu opaque, ou par transport libre en milieu transparent.
+- la conduction, soit le transport d'énergie thermique induit par des collisions ou des vibrations, qui est le plus efficace dans les solides (seuls les objets compacts comme les naines blanches sont concernés) ;
+- la convection, soit le mouvement de cellules macroscopiques de plasma au sein de l'étoile, régie par le principe d'Archimède.
 
-Q: Énergie de liaison d’un noyau
-	A: Différence entre son énergie de masse et la somme des énergies de masse de ses constituants :
+Une condition nécessaire au développement d'instabilités convectives peut être déduite assez simplement en considérant une cellule de plasma, de variables d'états $(P_\text{cell}, \rho_\text{cell}, T_\text{cell})$, plongée dans un milieu (l'atmosphère stellaire) de variables d'états $(P, \rho, T)$. Supposons que la cellule de plasma se déplace suffisamment vite pour empêcher tout transfert de chaleur avec le milieu extérieur (transformation adiabatique) mais suffisamment lentement par rapport à la vitesse du son dans le milieu pour que la transformation de la cellule soit considérée comme réversible et que les pressions externe et interne soient égales ($P_\text {cell}= P$). La transformation adiabatique réversible de la cellule donne $P_\text{cell}V_\text{cell}^\gamma=\text{cte}$ (loi de Laplace), soit $P_\text{cell}\propto \rho_\text{cell}^\gamma$ ou encore $\delta \ln P_\text{cell} = \gamma \delta \ln \rho_\text {cell}$. D'après le principe d'Archimède, la cellule se déplace de $r$ à $r + \dd r$ si $\rho_\text{cell}(r +\dd r)<\rho(r + \dd r)$, soit $\delta \rho_\text{cell}< \delta \rho(r)$ pour $\rho_\text{cell} (r)=\rho(r)$, ou encore $\delta \ln \rho_\text {cell}< \delta \ln \rho(r)$.  En notant que $\delta \ln \rho_\text{cell}  = \gamma^{-1} \delta \ln P_\text{cell} = \gamma^{-1} \delta \ln P$, et que $\delta \ln \rho = \delta \ln P - \delta \ln T$ (loi des gaz parfaits, *démontrez le*), la condition d'Archimède devient :
+
+math
+	\begin{align}
+	\delta \ln \rho(r) &> \delta \ln \rho_\text{cell}\\
+	\delta \ln P - \delta \ln T & > \gamma^{-1} \delta \ln P  \\
+	- \frac{1}{T}\frac{\dd T}{\dd r} & > - \frac{\gamma-1}{\gamma} \frac{1}{P}\frac{\dd P}{\dd r} \\
+	\left|\frac{\dd T}{\dd r}\right| & > \frac{\gamma-1}{\gamma} \frac{T}{P}\left|\frac{\dd P}{\dd r}\right|.
+	\end{align}
+
+En utilisant la loi de l'équilibre hydrostatique et la loi des gaz parfaits, $P = \rho kT/(\mu m_p) $, on déduit une condition nécessaire au développement d'instabilités convectives (le critère de Schwarzschild):
+
+math
+	\boxed{\left|\frac{\dd T}{\dd r}\right| > \frac{\gamma-1}{\gamma} \frac{\mu m_p}{k}g(r).}
+
+La convection se développe donc si le gradient de température est suffisamment important par rapport au gradient de pression induit par le champ gravitationnel.
+
+Les zones de convection pour différentes classes spectrales d'étoiles sont représentées en [](#fig:structure). On peut distinguer deux situations conduisant à un fort gradient de température :
+- une forte opacité du milieu : un milieu faiblement ionisé (hydrogène neutre noté HI, hélium neutre HeI ou simplement ionisé HeII, éléments du groupe du fer) joue le rôle de tampon thermique en limitant le transfert radiatif des photons et cause une rapide chute de température. Les étoiles les plus froides sont ainsi entièrement dominées par le transport convectif d'énergie ;
+- une forte production d'énergie : les étoiles plus massives que le Soleil sont dominées par le cycle CNO (voir [](#fig:EprodRate)), dont le taux de production d'énergie varie rapidement avec la température de coeur. Le fort gradient de température en résultant implique un transport convectif d'énergie au centre de l'étoile.
+
+fig Localisation des zones de convection (CZ, "convection zone") pour différentes masses initiales et températures effectives d'étoiles. _Issu de {cite}`2022ApJS..262...19J`._
+	./figures/stars_structure_teff.png
+
+On note que la nature convective du transport d'énergie à la surface du Soleil est attestée par l'observation de [granules solaires](wiki:Solar_granule).
+
+### Évolution stellaire
+
+Après la séquence principale, le coeur de l'étoile est essentiellement constitué d'hélium inerte et l'étoile se contracte. La température des couches externe de l'étoile augmente, déclenchant la fusion de l'hydrogène périphérique. Cette phase, appelée phase de *géante rouge*, dure $\approx 1\,$Gyr pour une étoile de $1\,M_\odot$. À mesure que la température au coeur de l'étoile augmente, l'hélium situé en son centre, puis en sa périphérie, subit la réaction "triple-alpha" indiquée en [](#fig:EprodRate), où alpha désigne un noyau de $^{4}$He. Ces phases, la *branche horizontale* puis la *branche asymptotique des géantes*, ne durent respectivement que $\approx 100\,$Myr et $\approx 10\,$Myr pour une étoile de $1\,M_\odot$. Elles conduisent à la production de carbone et d'oxygène. La production d'énergie est telle que les couches extérieures de l'étoiles peuvent être éjectées par des vents stellaires, créant ce qu'on appelle (avec une terminologie historique prêtant à confusion) des *nébuleuses planétaires*. Ce qui reste au coeur de l'étoile est un objet compact, une *naine blanche*,  principalement composé de carbone et d'oxygène pour une étoile de $1\,M_\odot$, voire d'hélium pour les étoiles les moins massives ou de néon pour celles plus massives que le Soleil. Ces étapes sont résumées en [](#fig:evolution) pour une étoile de masse comparable à celle du Soleil.
+
+fig Évolution d'une étoile comme le Soleil depuis la séquence principale jusqu'à une naine blanche. _Issu de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Evolution_of_the_Sun_2_EN.svg#/media/File:Evolution_of_the_Sun_2_EN.svg)._
+	id fig:evolution
+	./figures/Evolution_of_the_Sun.svg
+
+Mais alors comment les éléments plus lourds que l'oxygène présents sur Terre sont-ils synthétisés ? La description ci dessus ne s'applique qu'aux étoiles dont la masse initiale est inférieure à $8\,M_\odot$. Pour les étoiles plus massives, la température de coeur est suffisamment élevée pour déclencher la production de $^{20}$Ne ($^{16}\text{O}+\alpha$), de $^ {24}$Mg ($^{12}\text{C}+^{12}\text{C}$) ou de $^{32}$S ($^{16}\text{O}+^{16}\text{O}$), et ainsi de suite par ajouts successifs de particules alpha jusqu'au $^{56}$Ni qui décroit en $^{56}$Fe. Comme indiqué en [](#fig:bindingE), le fer se trouve proche du maximum d'énergie de liaison par nucléon. La fusion et la fission du fer sont donc des processus endothermiques : l'évolution chimique du coeur de l'étoile est bloquée.
+
+Pour une étoile de masse initiale de $25\,M_\odot$, les étapes de combustion du coeur durent approximativement comme suit : $\approx 5\,$Myr pour l'hydrogène, $\approx 0.5\,$Myr pour l'hélium, $\approx 500\,$yr pour le carbone et l'oxygène, et seulement environ un jour pour les dernières étapes de combustion du silicium ! À ce stade, le coeur de fer ne libère plus d'énergie, il n'est donc plus soutenu par la pression de radiation. Il implose jusqu'à ce qu'à atteindre une densité comparable à celle de la matière nucléaire, par un processus dit de neutronisation (désintégrations $\beta^+$). Les conversions de protons en neutrons par désintégrations $\beta^+$ génèrent un flux important de neutrinos qui contribuent, avec le choc de rebond se propageant dans les couches externes, à former une supernova à effondrement de coeur. En éjectant les couches externes, cette supernova contribue à enrichir le milieu interstellaire en noyaux plus lourds que l'hélium (dits métaux en astrophysique), qui eux même pourront contribuer au cycle CNO des étoiles plus légères.
+
+### Vestiges stellaires
+
+Comme nous avons pu le voir, les étoiles de masse inférieure à $8\,M_\odot$ finissent leur vie en naines blanches. Dans ces objets, la gravité est compensée par la pression de dégénerescence des électrons, i.e. par le fait que le principe de Pauli empêche deux électrons d'occuper une même case de l'espace des phases.
+
+Si la masse initiale de l'étoile est plus importante ($8$ à $\approx 20\,M_\odot$), la gravité peut vaincre cette pression de dégénerescence au sein du noyau de fer et conduire à la formation d'une étoile à neutrons, dont la stabilité est assurée la force forte résiduelle.
+
+Pour une masse initale au delà de  $20-25\,M_\odot$, les forces nucléaires ne suffisent plus à compenser la gravité : un trou noir de masse stellaire se forme par effondrement gravitationnel.
+
+## Exercice de synthèse : de l'énergie nucléaire à la température de surface
+
+exercise Pente du diagramme HR
+	id exo:hr
+	Dans cet exercice, on s'attache à décrire la pente du diagramme HR, soit l'indice $A$ de la loi de puissance $L \propto T_\text{eff}^A$, où $L$ est la luminosité de l'étoile et $T_\text{eff}$ sa température de surface. D'après la loi de Stefan-Boltzman, $L \propto R^2 T_\text{eff}^4$. Déterminer $A$ implique donc de comprendre la relation entre luminosité et rayon de l'étoile.
+
+	On note $L_\text{nucl}$ la luminosité dûe aux processus thermonucléaires au coeur de l'étoile et $T_c$ sa température de coeur. On rappelle la dépendance de la température de coeur à la masse et au rayon de l'étoile, $T_c \propto M/R$, qui a été établie lors la séance sur l'équilibre stellaire.
+
+	1. Sachant que $L_\text{nucl} \propto M\epsilon$, où $\epsilon \propto \rho T_c^\eta$ est le taux de production d'énergie nucléaire ($\eta \approx 4$ pour la chaîne PP I, $\eta \approx 16$ pour la chaîne CNO I), montrer que
 		math
-			E_{\text{liaison}} = m(\ce{_Z^{A}X})c^{2} - Zm_{p}c^{2} - (A-Z)m_{n}c^{2}
-		avec $m_{p}$ et $m_{n}$ les masses respectives d’un proton et d’un neutron.
+			L_\text{nucl} \propto M^{2+\eta}R^{-3-\eta}.
 
 
-Q: Cycle PP-I
-	A: Chaîne thermonucléaire majoritaire au cœur du Soleil
-		math
-			4p → \ce{^4He} + 2\ce{e^+} + 2\nu_e + \text{énergie}
-		Les positrons s'annihilent avec les électrons environnants en photons $\gamma$. Les neutrinos emportent environ 2% de l'énergie totale.
+	2. On suppose que le transfert d'énergie est dominé par le transport radiatif, soit $\frac{\dd T}{\dd r} \propto - \frac {\kappa \rho L}{r^2 T^3}$, où $\kappa$ décrit l'opacité du milieu. À l'aide d'une approximation appropriée du gradient de température, montrer que $L \propto M^3/\kappa$.
 
-Q: Cycle CNO-I
-	A: Cycle catalytique de fusion de l'hydrogène utilisant du carbone, de l'azote et de l'oxygène :
-		math
-			4p → \ce{^4He} + 2\ce{e^+} + 2\nu_e + \text{énergie}
-		(même bilan que la chaîne PP-I). Il domine sur la chaîne PP-I à haute température (étoiles massives).
+	3. Pour une étoile massive dominée par la convection, on peut considérer $\kappa = \text{cte}$. À l'aide des deux premières questions, déterminer la relation entre masse et rayon puis celle entre rayon et luminosité. En déduire la pente du diagramme HR pour les étoiles massives.
 
-Q: Réaction triple-alpha
-	A: Processus de fusion de l'hélium au cœur des géantes rouges :
-		math
-			3 \ce{^4He} →  \ce{^{12}C} + \text{énergie}
-		Elle passe par l'intermédiaire extrêmement instable du $\ce{^8Be}$ et permet de franchir le blocage des éléments légers pour poursuivre la nucléosynthèse.
+	4. Pour une étoile comme le Soleil, dont le coeur est dominé par le transport radiatif, $\kappa \propto \rho T_c^ {-s}$, avec $s \approx 3.5$. En déduire la pente du diagramme HR pour les étoiles de masse solaire.
 
-Q: Équations de la structure stellaire (équilibre)
-	A: Équation décrivant l'équilibre hydrostatique et la conservation de la masse :
-		math
-			\frac{dP}{dr} = ρ(r)g(r) = -\frac{G M(r)ρ(r)}{r^2}
-		et
-		math
-			\frac{dM}{dr} = 4 π r^2 ρ(r)
+	solution
+		1.
+			math
+			\begin{align}
+				L_\text{nucl} &\propto M \rho T_c^\eta\\
+				L_\text{nucl} &\propto M M R^{-3} M^\eta R^{-\eta}\\
+				L_\text{nucl} &\propto M^{2+\eta} R^{-3-\eta}.
+			\end{align}
 
-Q: Critère de Schwarzschild
-	A: Condition nécessaire pour le développement de mouvements convectifs au sein du plasma :
-		math
-			\left|\frac{\dd T}{\dd r}\right| > \frac{\gamma-1}{\gamma} \frac{\mu m_p}{k}g(r)
-		Les instabilités se développent lorsque le gradient de température est plus fort que le gradient de pression dû au champ gravitationnel. C’est par exemple le cas
-		- d’un milieu opaque (milieu faiblement ionisé limitant le transfert radiatif) qui cause une rapide chute de température,
-		- d’une production d’énergie dépendant fortement de la température (par exemple par cycle CNO-I).
+		2. Pour $\frac{\dd T}{\dd r} \approx \frac{\Delta T}{\Delta r} \approx -\frac{T_c}{R}$, l'équation de transport radiatif donne
+			math
+				\begin{align}
+					\frac{\kappa \rho L}{R^2 T_c^3} &\propto \frac{T_c}{R}\\
+					L \kappa \frac{M}{R^3} &\propto T_c^4 R\\
+					L  &\propto \frac{(M/R)^4}{M}\frac{R^4}{\kappa}\\
+					L  &\propto \frac{M^3}{\kappa}.
+				\end{align}
 
-Q: Diagramme de Hertzsprung-Russell (HR)
-	A: Graphique représentant la luminosité stellaire $L$ en fonction de la température de surface $T_\text{eff}$ (axe horizontal décroissant car la température est mesurée en couleur). Les étoiles passent la majeure partie de leur vie dans la séquence principale (diagonale majeure) où elles brûlent leur hydrogène.
+		3. La luminosité de l'étoile est dominée par la production d'énergie thermonucléaire, d'où $L = L_\text{nucl}$. En utilisant les solutions des deux premières questions, on obtient
+			math
+				\begin{align}
+					M^{2+\eta} R^{-3-\eta} &\propto M^3\\
+					M^{\eta-1} &\propto R^{3+\eta}\\
+					M &\propto R^\frac{3+\eta}{\eta-1}\\
+				\end{align}
 
-Q: Nature des vestiges stellaires en fonction de la masse initiale
-	A:
-		- $M < 8\,M_\odot$ : Naine blanche (maintenue par la pression de dégénérescence des électrons)
-		- $8 \le M \le 20\,M_\odot$ : Étoile à neutrons (maintenue par la force forte résiduelle; la gravité ayant vaincue la pression de dégénerescence)
-		- $M > 20\,M_\odot$ : Trou noir (la gravité l'emporte)
+		En injectant cette relation dans $L \propto M^3$, on obtient $L \propto R^{3\frac{3+\eta}{\eta-1}}$ soit $R\propto L^a$, avec $a = \frac{1}{3}\frac{\eta-1}{\eta+3} \approx 0.263$ pour une étoile massive dominée par le cycle CNO ($\eta = 16$).
+
+		En injectant cette relation dans la loi de Stefan-Boltzman, on obtient $L \propto L^{2a} T_\text{eff}^4$, soit $L \propto T_\text{eff}^\frac{4}{1-2a}$, i.e. un indice $A = \frac{4}{1-2a} \approx 8.44$ pour la branche de la séquence principale occupée par les étoiles les plus massives.
+
+		4. Comme en question précédente, on obtient :
+			math
+				\begin{align}
+					M^{2+\eta} R^{-3-\eta} &\propto M^3 T_c^{s} M^{-1} R^3\\
+					M^{2+\eta} R^{-3-\eta} &\propto M^2 (M/R)^{s}  R^3\\
+					M^{2+\eta} R^{-3-\eta} &\propto M^{2+s} R^{3-s}\\
+					M^{\eta-s} &\propto R^{6+\eta-s}\\
+					M &\propto R^\frac{6+\eta-s}{\eta-s}\\
+				\end{align}
+
+		En injectant cette relation dans $L \propto M^{2+s} R^{3-s}$, on obtient $R\propto L^a$, avec $a = \frac{\eta-s}{12+5\eta+s} \approx 0.0141$ pour une étoile de masse intermédiaire dominée par la chaîne PP ($\eta = 4$).
+
+		En injectant cette relation dans la loi de Stefan-Boltzman, on obtient un indice $A = \frac{4}{1-2a} \approx 4.12$ pour la branche de la séquence principale occupée par les étoiles de masse intermédiaire.
+
+		Les fortes pentes trouvées en questions 3 et 4 expliquent pourquoi la séquence principale couvre une gamme en luminosité de sept à huit ordres de grandeur dans le diagramme HR pour une variation de température de surface de seulement un ordre de grandeur.
+
+callout Notions de ce chapitre
+	_Les processus thermonucléaires au cœur des étoiles_
+	- Comment expliquer la cohésion du noyau ? Qu'est-ce que la désintégration beta ? Quelles interactions fondamentales sont associées à ces deux phénomènes ?
+	- Quel est l'ordre de grandeur du rendement énergétique du processus de fusion ?
+	- Quels sont les forces antagonistes présents dans le processus de fusion ? Qu'est-ce que le pic de Gamow ?
+	- Comment l'énergie de liaison des noyaux varie-t-elle dans le tableau périodique ?
+	_Structure et évolution stellaires_
+	- Quelles grandeurs physiques peut-on déduire d’un spectre stellaire ?
+	- Que représente un diagramme HR ? Quelles phases sont associées aux branches principales, et pourquoi apparaissent-elles lorsqu’on observe un grand ensemble d’étoiles ?
+	- Quelles sont les principales phases de la vie d’une étoile de masse solaire ? Quelle est la durée de vie typique du Soleil ?
+	- Quelles sont les équations clés qui régissent la structure et l’évolution d’une étoile ?
+	- Comment la température du coeur d’une étoile varie-t-elle en fonction de sa masse et de son rayon ? Puis-je utiliser des lois d’échelle ($X \propto Y^\alpha$) pour évaluer les relations entre la masse, le rayon, la température de cœur ou de surface, et la luminosité ?
+	- Quels mécanismes de transport d’énergie interviennent au sein des étoiles ? Dans quelles conditions des instabilités convectives peuvent-elles se développer ?
+	- En fonction de sa masse initiale, quels types de vestiges stellaires résultent de l’évolution d’une étoile ?

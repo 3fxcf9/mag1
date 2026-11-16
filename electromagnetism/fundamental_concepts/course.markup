@@ -9,27 +9,27 @@ show_flashcards
 
 Q: Helmholtz’s theorem
 	A: Any vector field $\vec{F}(\r)$ with continuous derivatives and decaying faster than $1/r$ at infinity can be decomposed as tre sum of a _solenoidal field_ (zero divergence) $\vec{F}_{\perp}$ and an irrotational field (whose curl is zero), $\vec{F}_{∥}$ :
-	math
-		\vec{F} = \vec{F}_{∥} + \vec{F}_{\perp}
-	More precisely, when the integrals converge, we have
-	math
-		\vec{F}(\r) = \rot \vec{C}(\r) - \grad \vec{ψ}(\r)
-	where
-	math
-		\vec{C}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\rot_{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
-	and
-	math
-		\vec{ψ}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\div{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
-	When this decomposition exists, it is unique.
+		math
+			\vec{F} = \vec{F}_{∥} + \vec{F}_{\perp}
+		More precisely, when the integrals converge, we have
+		math
+			\vec{F}(\r) = \rot \vec{C}(\r) - \grad \vec{ψ}(\r)
+		where
+		math
+			\vec{C}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\rot_{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
+		and
+		math
+			\vec{ψ}(\r) = \frac{1}{4 π} \iiint_{\R^{3}} \frac{\div{\r'}\vec{F}(\r')}{\abs{\r - \r'}}\dd^{3} \r'
+		When this decomposition exists, it is unique.
 
-Q: According to Helmholz’s theorem, what is sufficient de fully characterize a vector field ?
+Q: According to Helmholz’s theorem, what is sufficient to fully characterize a vector field ?
 	A: The knowledge of its curl and divergence. Therefore, the Maxwell equations are sufficient to characterize the fields $\vec{E}$ and $\vec{B}$.
 
 Q: Helmholtz’s theorem applied to an electrostatic field
 	A: math
 			\vec{E}(\r) = \frac{1}{4 π ε_{0}}\iiint_{\R^{3}}ρ(\r') \frac{\r - \r'}{\abs{\r - \r'}^{3}}\dd^{3}\r'
 
-Q: Helmholtz’s theorem applied to an electrostatic field
+Q: Helmholtz’s theorem applied to an magnetostatic field
 	A: We find the Biot-Savart law :
 		math
 			\vec{B}(\r) = \frac{μ_{0}}{4 π}\iiint_{\R^{3}}\j(\r') ∧ \frac{\r - \r'}{\abs{\r - \r'}^{3}}\dd^{3}\r'
@@ -54,7 +54,7 @@ Q: Flux across a surface in function of $\A$
 
 Q: Continuity of the $\A$ vector field
 	A: The tangential component on the vector potential $\A$ is continuous across an interface, even if current flows through it.
-	If in addition we have $\div \A = 0$, then all components of $\A$ are continuous.
+		If in addition we have $\div \A = 0$, then all components of $\A$ are continuous.
 
 Q: Maxwell equations relating to potentials
 	A: By taking the divergence of $\E = -\grad V - \pdv{\A}{t}$, we get
@@ -156,8 +156,8 @@ Q: Local conservation law of energy (Poynting’s theorem)
 		where
 		- $u_{EM}(\r, t) = \frac{1}{2} ε_{0}\E^{2} + \frac{\B^{2}}{2 μ_{0}}$ is the electromagnetic energy density
 		- $\poynting = \frac{\E ∧ \B}{μ_{0}}$ is the Poynting vector
-		- $\j · \E$ la densité de puissance fournie aux chaarges
-		On peut aussi l’écrire
+		- $-\j · \E$ the volumetric power density created by the change
+		Another form is
 		math
 			\dv{u_{\text{tot}}}{t} = \dv{(u_{\text{mech}} + u_{EM})}{t} = -\div \poynting
 

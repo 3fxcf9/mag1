@@ -1,0 +1,27 @@
+../../common/course.lib.markup
+
+title Sphères polytropiques et limites d’équilibre : des étoiles aux planètes
+date 06/11/2026
+
+Q: Désert des Neptune chauds
+	A: Nom donné à la zone du diagramme de distribution (rayon/période) illustrant la quasi absence de détections de planètes de la taille de Neptune ($\sim 4R_{\oplus}$) à proximité des étoiles.
+		fig
+			./figures/distribution_planetes.png
+
+## Modèle des sphères polytropiques
+
+Q: Équation d’état polytropique
+	A: math
+			P(ρ) = K ρ^{γ} = K ρ^{\frac{n+1}{n}}
+
+Q: Équation de Lane-Emden
+	A:
+		math
+			\frac{1}{ξ^{2}}\dv{}{ξ}\left(ξ^{2} \dv{θ}{ξ}\right) = -θ^{n}
+		avec
+			- $θ = \left(\frac{ρ}{ρ_{c}}\right)^{1/n}$ le rapport sans dimension de la masse volumique avec la masse volumique au centre de l’étoile,
+			- $ξ = \frac{r}{a}$ où $a$ est une constante telle que
+				math
+					\frac{1}{a^{2}} = \frac{4 π G ρ_{c}^{1-1/n}}{(n+1)K}
+
+

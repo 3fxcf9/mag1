@@ -10,7 +10,7 @@ show_flashcards
 ### Contraintes et principe de d’Alembert
 
 Q: Déplacement virtuel
-	A: Déplacement infinitésimal satisfaisant les contraintes d système. Il ne correspond pas forcément à une trajectoire réelle.
+	A: Déplacement infinitésimal satisfaisant les contraintes du système. Il ne correspond pas forcément à une trajectoire réelle.
 
 Q: Contrainte holonome
 	reversed
@@ -95,9 +95,9 @@ Q: Fonctionnelle
 	A: Soit $Y$ un ensemble de fonctions satisfaisant les mêmes propriétés (domaine de définition, classe de différentiabilité, …).
 		math
 			F: \applic{Y}{\R}{y}{F[y]}
-	est une fonctionnelle de $y ∈ Y$ que l’on note $F[y(x)]$. En physique, la très grande majorité des fonctionnelles sont de la forme
-	math
-		F[y] = ∫_{a}^{b}\dd x f \big(y(x), y'(x), …, x\big)
+		est une fonctionnelle de $y ∈ Y$ que l’on note $F[y(x)]$. En physique, la très grande majorité des fonctionnelles sont de la forme
+		math
+			F[y] = ∫_{a}^{b}\dd x f \big(y(x), y'(x), …, x\big)
 
 Q: Interprétation intuitive des fonctionnelles
 	A: Une fonctionnelle $F[y]$ peut être vue comme le passage à la limite $N\to+∞$ de la fonction $F(y_{1}, …, y_{N})$ où $\set{x_{i}}_{i ∈ \icc{1,N}}$ est une discrétisation de l’axe $x$ en intervalles identiques donnant lieu à une discrétisation $\set{y_{i}}_{i ∈ \icc{1,N}}$ de la fonction $y$.
@@ -113,7 +113,7 @@ Q: Définition de la dérivée fonctionnelle $\frac{δF}{δy(x)}$ d’une foncti
 Q: Interprétation intuitive de la dérivée fonctionnelle
 	A: On considère un développement de Taylor au premier ordre en $α$ :
 		math
-			F(y_{1} + αη_{1}, …, y_{N} + αη_{N}) \simeq tf(y_{1}, …, y_{N}) + α ∑_{i=1}^{N}\pdv{F}{y_{i}}η_{i}
+			F(y_{1} + αη_{1}, …, y_{N} + αη_{N}) \simeq F(y_{1}, …, y_{N}) + α ∑_{i=1}^{N}\pdv{F}{y_{i}}η_{i}
 		qui donne, après « passage à la limite »,
 		math
 			F[y+αη] \simeq F[y] + α ∫_{a}^{b}\dd x \frac{δF}{δy(x)}η(x)
@@ -146,7 +146,7 @@ Q: Théorème des extrêma liés pour une fonction de deux variables
 Q: Théorème des extrêma liés pour une fonction $F(x_{1}, …, x_{n})$ sous les $K < n$ contraintes holonomes $f_{β}(x_{1}, …, x_{n})$
 	A: On introduit $K$ multiplicateurs de Lagrange $λ_{β}$ (un par contrainte) et on extrêmalise la fonction
 		math
-			\bar{F}(x_{1}, …, x_{n}, λ_{1}, …, λ_{K}) = tf(x_{1}, …, x_{n}) + ∑_{β=1}^{K}λ_{β}f_{β}(x_{1}, …, x_{n})
+			\bar{F}(x_{1}, …, x_{n}, λ_{1}, …, λ_{K}) = F(x_{1}, …, x_{n}) + ∑_{β=1}^{K}λ_{β}f_{β}(x_{1}, …, x_{n})
 
 Q: Principe de moindre action sous contrainte
 	A: La trajectoire doit minimiser l’action $\bar{S}$ définie par
