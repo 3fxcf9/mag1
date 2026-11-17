@@ -4,6 +4,7 @@ const local_macros = {
   "\\esssup": "\\operatorname{ess\\,sup}",
   "\\conv": "\\star",
 
+  "\\L": "\\mathscr{L}",
   "\\S": "\\mathcal S",
   "\\sarrowlim": "\\ \\xrightarrow[\\;#1\\;]{\\S(\\R)}\\ ",
   "\\slim": "\\lim^{\\S(\\R)}",

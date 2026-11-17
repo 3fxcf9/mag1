@@ -1,0 +1,190 @@
+../../common/course.lib.markup
+
+title Théorie des distributions
+date 17/11/2026
+
+La _théorie des distributions_ est une généralisation de l’analyse fonctionnelle dans laquelle les fonctions sont remplacées par une classe d’objets plus généraux appelés _distributions_.
+
+++Historique :++
+- Vers 1830, le mathématicien anglais Green construit la fonction de Green du Laplacien (qu’on appelle aujourd’hui « solution élémentaire de $Δ$).
+- Dans les années 1860-1870, Heaviside formule des règles de calcul ad-hoc
+- En 1920, introduit $δ$, la « fonction » de Dirac.
+- En 1930, Sobolev invente la notion de dérivation faible permettant de dériver des fonctions non dérivables.
+- La même année, Bourbaki construisent l’intégrale de Lebesgue comme une forme linéaire sur l’espace des fonctions.
+- En 1950, Laurent Schwartz remporte la médaille Fields pour sa théorie des distributions.
+- À partir de 1950 apparaît la théorie moderne des équations aux dérivées partielles.
+- Après 1970, cette théorie est utilisée en analyse microlocale et analyse en front d’onde (Hörmander).
+
+example Pertinence de cette théorie
+	L’équation de Poisson (électrostatique)
+	math
+		\lapl Φ = - \frac{ρ}{ε_{0}}
+	a pour corollaire
+	math
+		Q = ∫_{\R^{3}} \dd^{3}x ρ = -ε_{0} ∫_{\R^{3}}\dd^{3}x \lapl Φ
+	Considérons le potentiel
+	math
+		Φ: \vec{x} ⟼ \frac{q}{4 π ε_{0} \norm{\vec{x}}}
+	avec $q ∈ \R$. Alors,
+	math
+		\lapl Φ = 0 \sur \R^{3}∖ \{\vec{0}\}
+	et donc
+	math
+		\lapl Φ = - \frac{ρ}{ε_{0}} = 0 \quad μ_{L}-\pp \R^{3}
+	ce qui mène à $Q=0$, quelque soit $q ∈ \R$.
+	? Quelle est l’erreur ?
+	$Φ$ et $ρ$ ne sont pas des fonctions et doivent être considérés comme des distributions ce qui change le calcul de $\lapl Φ$.
+
+## Théorie des distributions
+
+### Espaces vectoriels topologiques et dualité topologique
+
+def Espace vectoriel topologiqe
+	On appelle _$\K$-espace vectoriel topologique_ tout $(E,+, · , τ)$ tel que
+	- $(E, +, · )$ est un $\K$-espace vectoriel,
+	- $(E, τ)$ est un espace topologique,
+	- $(+, · )$ sont continues pour la topologie $τ$.
+
+example
+	- Tout $\K$-espace vectoriel normé avec la topologie induite par sa norme est topologiqe, et en particulier les espaces $(\L^{p}(\R), +, · , \norm{·}_{p})$ pour $p ∈ \cc{1,+∞}$.
+	- Les espaces de Fréchet comme l’espace de Schwartz $\S(\R)$ sont des espaces vectoriels topologiques.
+
+def
+	Soit $(E,+, ,.)$ un $\K$-espace vectoriel. On appelle _forme linéaire sur $E$_ toute application linéaire $θ: E ⟶ \K$. L’ensemble $E^{*}$ des formes linéaires sur $E$ est lui-même un $\K$-espace vectoriel, appelé _dual (algébrique)_ de $E$.
+	Si $E$ est un $\K$-espace vectoriel topologique, on définit son _dual topologique_ $E'$ comme le $\K$-espace vectoriel des formes linéaires **continues** sur $E$. Une forme linéaire $θ$ sur $E$ est dans le dual topologique de $E$ si et seulement si $θ$ est continue, i.e. pour toute suite $(e_{n})_{n ∈ \N}$ d’éléments de $E$,
+	math
+		\Big(e_{n} \xrightarrow[n\to+∞]{E} 0\Big) ⟹ \lim_{n\to+∞} θ(e_{n}) = 0
+
+rem
+	- Si $E$ est de dimension finie, on montre aisément que le dual $E^{*}$ est isomorphe à $E$ et que $E' = E^{*}$.
+	- En dimension infinie, on a à priori $E \subsetneq E^{*}$ mais surtout, dans les cas qui nous intéressent, l’isomorphisme $E\isom E'$ devient une injection linéaire $E \hookrightarrow E'$.
+
+### L’espace des fonctions test
+
+def Support d’une fonction
+	On définit le support de toute fonction $f:\R ⟶ \C$ (ou $f: \R ⟶ \R$) par
+	math
+		\supp f = \R ∖ \bigcup_{\substack{Ω \text{ ouvert de } \R \\ f = 0 \text{ sur } Ω}}Ω
+	Par définition, le support d’une fonction est fermé.
+
+def Fonctions test
+	On définit l’ensemble des _fonctions test_ ou _$\Cont^{∞}(\R)$ à support compact_ :
+	math
+		\begin{align*}
+			\D(\R) &= \set{f ∈ \Cont^{∞}(\R) \where \supp f \text{ compact}} \\
+			&= \set{f ∈ \Cont^{∞}(\R) \where \supp f \text{ borné}}
+		\end{align*}
+
+example
+	La fonction suivante est une fonction test :
+	math
+		Φ: \applic{\R}{\R}{x}{\begin{cases}\exp \left(\frac{1}{x^{2} - 1}\right) \if x ∈ \oo{-1,1} \\ 0 \else\end{cases}}
+	==GRAPH==
+	Le caractère $\Cont^{∞}$ de cette fonction se montre par récurrence, en montrant que $∀ n ∈ \N, Φ^{(n)} = Q_{n}Φ(x)$ avec $Q_{n}$ une fonction rationnelle.
+
+Le but de la définition suivante est de garantir à la fois une convergence uniforme des p-ièmes dérivées et d’empêcher un étalement (ou dérive) du support lors d’un passage à la limite.
+
+def
+	On munit $\D(\R)$ de la topologie dans laquelle une suite $(f_{n})_{n ∈ \N}$ de fonctions test converge vers la fonction test $f$ si et seulement si (i) il existe un compact $K ⊂ \R$ tel que
+		math
+			∀ n ∈ \N, \supp(f_{n}) ⊂ K
+	et que (ii) pour tout $n ∈ \N$,
+	math
+		\norm{f_{n}^{(p)} - f^{(p)}}_{∞} \arrowlim{n\to+∞}0
+	On écrit dans ce cas
+	math
+		\testlim_{n \to+∞} f_{n} = f \quad\text{ou}\quad f_{n} \testarrowlim{n\to+∞} f
+
+prop
+	- $(\D(\R), +, · , × )$ est une $\C$-algèbre commutative non-unitaire,
+	- $\D(\R)$ est stable par
+		+ translation, dilatation, parité
+		+ dérivation (fonction constante en dehors d’un compact donc de dérivée nulle sur ce domaine)
+		+ multiplication par des fonctions $\Cont^{∞}(\R)$.
+	- $\D(\R) \subsetneq \S(\R)$ et la topologie de $\D(\R)$ est plus fine que celle héritée de $\S(\R)$. En d’autres termes, la convergence dans $\D(\R)$ implique la convergence dans $\S(\R)$.
+
+proof Dernier point
+	Une fonction $f ∈ \D(\R)$ est continue et de support borné, donc bornée. Il en va de même des dérivées de $f$ (stabilité par dérivation) et donc pour tous entiers $m$ et $n$,
+	math
+		\begin{align*}
+			\norm{f}_{m,n} &= \sup_{x ∈ \R}\abs{x^{m} f^{(n)}(x)} \\
+			&= \sup_{x ∈ \supp f ⊂ K} \abs{x^{m} f^{(n)}(x)} \\
+			&⩽ \underbrace{\sup_{x ∈ K} \abs{x^{m}}}_{<∞} \underbrace{\norm{f^{(n)}}_{∞}}_{< ∞} < ∞
+		\end{align*}
+	donc $f ∈ \S(\R)$. Comme la fonction de Schwartz $x ⟼  e^{-x^{2}}$ n’est pas une fonction tSt, on a bien $\D(\R) \subsetneq \S(\R)$.
+	Soit $(f_{p})_{p ∈ \N}$ une suite de fonctions test convergeant au sens de $\D(\R)$ vers la fonction nulle. On a alors par définition
+	math
+		∀ n ∈ \N, \norm{f_{p}^{n}}_{∞} \arrowlim{n\to+∞} 0
+	et l’existence d’un compact $K ⊂ \R$ contenant les supports de toutes les fonctions $f_{p}$. Par conséqent, pour tous $m,n ∈ \N$ et $p ∈ \N$,
+	math
+		\begin{align*}
+			\norm{f_{p}}_{m,n} &= \sup_{x ∈ \R}\abs{x^{m} f_{p}^{(n)}(x)} \\
+			&= \sup_{x ∈ K} \abs{x^{m} f_{p}^{(n)}(x)} \\
+			&⩽ \underbrace{\sup_{x ∈ K} \abs{x^{m}}}_{< ∞} \norm{f_{p}^{(n)}}_{∞} \arrowlim{p\to+∞}0
+		\end{align*}
+
+rem
+	La seule fonction test dont la transformée de Fourier est une fonction test est la fonction nulle.
+
+### L’espace des distributions
+
+def Espace des distributions
+	On appelle _espace des distributions_  le dual topologique $\D'(\R)$ de $\D(\R)$. On notera, pour tout $T ∈ \D'(\R)$ et toute fonction test $f$
+	math
+		T(f) = \scalar{T}{f}
+
+def Fonction localement sommable
+	On dira qu’une fonction mesurable $f: \R ⟶ \C$ (ou $f: \R ⟶ \R$) est localement sommable si pour tout compact $K ⊂ \R$, la fonction $f\1_{\K}$ est Lebesgue-sommable sur $\R$. On note $\Lloc^{1}(\R)$ l’ensemble de ces fonctions et $L^{1}_{\text{loc}} (\R) = \Lloc^{1}(\R) / \sim$.
+
+prop
+	L’application
+	math
+		i: \applic{L^{1}_{\text{loc}}}{\D'(\R)}{f}{i(f)}
+	définie en posant pour $f ∈ L^{1}_{\text{loc}}(\R)$ et $g ∈ \D(\R)$
+	math
+		\scalar{i(f)}{g} = ∫_{\R}\dd μ_{L} fg
+	est une injection linéaire.
+
+proof
+	- Pour toute fonction $f ∈ \Lloc^{1}(\R)$ et toute fonction test $g$, la fonction $fg$ est mesurable et
+		math
+			\begin{align*}
+				∫_{\R}\dd μ_{L} \abs{fg} &= ∫_{\R}\dd μ_{L} \abs{f\1_{\supp g}} \abs{g} \\
+				&⩽ \underbrace{\norm{f \1_{\supp g}}_{1}}_{ < ∞} \underbrace{\norm{g}_{∞}}_{ < ∞} < ∞ \\
+			\end{align*}
+		car $f\1_{\supp g} ∈ \L^{1}(\R)$ et que $g ∈ \D(\R)$ est bornée.
+	- $i(f)$ est bien une forme – ses valeuurs sont les intégrales de fonctions sommables.
+	- $i(f)$ est ébidemment linéaire; c’est donc une forme linéaire les intégrales de fonctions sommables.
+	- Soit $(g_{p})_{p ∈ \N}$ une suite de fonctions test qui converge, au sens de $\D(\R)$, vers la fonction nulle. Par définition, pour tout $n ∈ \N$, $\norm{g_{p}^{(n)}}_{∞} \arrowlim{p\to+∞}0$ et il existe un compact $K ⊂ \R$ contenant le support de toutes les fonctions $g_{p}$. Mais alors, pour tout $p ∈ \N$, on a
+		math
+			\begin{align*}
+				\abs{\scalar{i(f)}{g_{p}}} &= \abs{∫_{\R}\dd μ_{L} f g_{p}} \\
+				&⩽ ∫_{\R}\dd μ_{L} \abs{fg_{p}} \\
+				&⩽ ∫_{\R}\dd μ_{L} \abs{f \1_{K}}\abs{g_{p}} \\
+				&⩽ \underbrace{\norm{f \1_{K}}_{1}}_{< ∞} \norm{g_{p}}_{∞} \arrowlim{p\to+∞}0
+			\end{align*}
+		$i(f)$ est donc bien continue.
+	- $i$ est clairement un morphisme linéaire.
+	- Soit $f ∈ \Lloc^{1}(\R)$ telle que $i(f) = 0$. Soit $g$ une fonction test (et donc Lebesgue-sommable) d’intégrale $1$ sur $\R$. La suite $\big(g_{n} = n ξ_{n}(g)\big)_{n ∈ \N}$ est une approximation de l’unité de $(\L^{1}(\R), +, · , \conv, \norm{\cdot}_{1})$.
+	- Soit $K ⊂ \R$ un compact. Soit $h_{K}$ une fonction test constante égale à 1 sur $K$. On peut vérifier que $h_{K}$ existe. Alors, $fh_{K}$ est Lebesgue-sommable et donc,
+		math
+			\norm{g_{n} \conv fh_{K} - f h_{K}}_{1} \arrowlim{n\to+∞}0
+		Or, pour $n ∈ \N$,
+		math
+			\abs{\norm{g_{n}\conv fh_{K}}_{1} - \norm{fh_{K}}_{1}} ⩽ \norm{g_{n} \conv fh_{K} - fh_{K}}_{1} \arrowlim{n\to+∞}0
+		Ainsi,
+		math
+			\lim_{n\to+∞} \norm{g_{n} \conv fh_{K}}_{1} = \norm{fh_{K}}_{1}
+		D’autre part, pour $n ∈ \N$ et $x ∈ \R$,
+		math
+			\begin{align*}
+				g_{n} \conv fh_{K}(x) &= ∫_{\R}\dd y g_{n}(x-y)f(y)h_{K}(y) \\
+				&= \scalar{i(f)}{h_{K} τ_{-x} \circ P(y_{n})} \\
+				&= 0
+			\end{align*}
+		Finalement,
+		math
+			∫_{\R}\dd μ_{L}\abs{fh_{K}} = \norm{f h_{K}}_{1} = 0
+		d’où $f = 0$ $μ_{L}$-presque partout sur $K$ pour tout compact $K$, soit $f = 0$ $μ_{L}$-presque partout sur $\R$.
+
+

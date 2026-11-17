@@ -437,13 +437,13 @@ rem
 prop
 	Si $f$ et $g$ sont deux fonctions Lebesgue-sommables, alors
 	math
-		\F(f\star g) = \sqrt{2 π}\F(f)\F(g)
+		\F(f\conv g) = \sqrt{2 π}\F(f)\F(g)
 	et
 	math
-		\Fi(f\star g) = \sqrt{2 π}\Fi(f) \Fi(g)
+		\Fi(f\conv g) = \sqrt{2 π}\Fi(f) \Fi(g)
 
 proof
-	Soient $f$ et $g$ deux fonctions Lebesgue-sommables. Le produit de convolution $f\star g$ est Lebesgue-sommable donc les deux membres des égalités ont un sens. Considérons, pour $k ∈ \R$, la fonction
+	Soient $f$ et $g$ deux fonctions Lebesgue-sommables. Le produit de convolution $f\conv g$ est Lebesgue-sommable donc les deux membres des égalités ont un sens. Considérons, pour $k ∈ \R$, la fonction
 	math
 		h_{k}: (x,y) ⟼ f(x-y)g(y)e^{-ikx}
 	Soit $k ∈ \R$. Clairement, d’après Fubini-Tonelli,
@@ -468,19 +468,44 @@ rem
 			\underline{s}(ω) = H(ω) \underline{e}(ω)
 	- dans l’espace réel,
 		math
-			s(t) = (H \star e)(t)
+			s(t) = (H \conv e)(t)
 
 cor
-	L’algèbre de Banach $(\R^{1}(\R), +, · , \star, \norm{·}_{1})$ n’est pas unitaire.
+	L’algèbre de Banach $(\R^{1}(\R), +, · , \conv, \norm{·}_{1})$ n’est pas unitaire.
 
 proof
 	_Par l’absurde._ Supposons qu’il existe $u ∈ \L^{1}(\R)$ tel que
 	math
-		∀ f ∈ \L^{1}(\R), u\star f = f \quad (= f\star u)
+		∀ f ∈ \L^{1}(\R), u\conv f = f \quad (= f\conv u)
 	D’après la proposition précédente, on a
 	math
-		\F(f) = \F(u\star f) = \sqrt{2 π} \F(u) \F(f)
+		\F(f) = \F(u\conv f) = \sqrt{2 π} \F(u) \F(f)
 	Or, pour $f: x ⟼  \frac{1}{\sqrt{2 π}} e^{- \frac{x^{2}}{2}}$, on a $\F(f) = f > 0$ donc
 	math
 		\F(u) = \frac{1}{\sqrt{2 π}}
 	ce qui contredit le lemme de Riemann-Lebesgue.
+
+### Convolution et Analyse de Fourier sur $\S(\R)$
+
+prop
+	Pour toutes fonctions $f$ et $g$ de l’espace de Schwartz, on a
+	~ $\F(f\conv g) = \sqrt{2 π}\F(f)\F(g)$
+	~ $f\conv g ∈ \S(\R)$
+	~ $\F(fg) = \frac{\F(f) \conv \F(g)}{\sqrt{2 π}}$
+
+proof
+	~ Comme $\S(\R) ⊂ \L^{1}(\R)$, ce point découle de la proprosition précédente.
+	~ Si $f$ et $g$ sont des fonctions de Schwartz, alors $\F(f)$ et $\F(g)$ le sont également et donc le produit $\F(f)\F(g) = \F(f\conv g)$ est aussi une fonction de Schwrtz. Il suffit alors d’appliquer $\Fi$.
+	~ D’après le premier point, si $f$ et $g$ sont des fonctions de Schwartz,
+		math
+			\begin{align*}
+				\Fi \Big(\F(f) \conv \F(g)\Big) &= \sqrt{2 π}\Fi \circ \F(f) \Fi \circ \F(g) \\
+				&= \sqrt{2 π} fg
+			\end{align*}
+		Il suffit d’appliquer $\F$ à l’égalité ci-dessous pour obtenir
+		math
+			\F(f) \conv \F(g) = \F\circ \Fi \Big(\F(f) \conv \F(g)\Big) = \sqrt{2 π}\F(fg)
+
+rem
+	- L’espace de Schwartz $\S(\R)$ est stable par $+$, $· $, $\times$ (produit ponctuel), $\conv$ (produit de convolution) et par $\F$ qui échange les produits $\times$ et $\conv$.
+	- On verra dans le prochain chapitre comment toutes ces propriétés de $\S(\R) ⊂ \L^{1}(\R)$ vont permettre d’étendre $\F$ et $\Fi$ au-delà de $\L^{1}(\R)$.

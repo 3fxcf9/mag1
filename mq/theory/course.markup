@@ -419,4 +419,34 @@ Q: Schrödinger equation in three dimensions, and stationary states
 			Ψ(\r, t) = ∑c_{n} ψ_{n}(\r)e^{-i \frac{E_{n}}{\hbar}t}
 		(or its integral form if the potential admits continuum states).
 
+Q: Solutions to the spherical time-independent Schrödinger equation in the case of a central potential
+	A: By separation of variables $ψ(r, θ, ϕ) = R(r)Y(θ, ϕ)$, we find
+		- For the angular equation, the *spherical harmonics* (independent from the potential) :
+			math
+				Y_{\ell}^{m}(θ, ϕ) = \sqrt{\frac{(2\ell + 1)}{4 π} \frac{(\ell - m)!}{(\ell+m)!}} e^{im ϕ}P_{\ell}^{m}(\cos θ)
+			with $P_{\ell}^{m}$ the associated Legendre function, defined by
+			math
+				P_{\ell}^{m}(x) = (-1)^{m}(1-x^{2})^{m/2}\left(\dv{}{x}\right)^{m}P_{\ell}(x)
+			where
+			math
+				P_{\ell}(x) = \frac{1}{2^{\ell}\ell!}\left(\dv{}{x}\right)^{\ell}(x^{2}-1)^{\ell}
+			with $\ell$ and $m$ integers satisfying
+			math
+				\begin{align*}
+					\ell &= 0,1,2…\\
+					m &= -\ell, -\ell+1, ⋯, \ell-1, \ell
+				\end{align*}
+		- For the radial equation, letting $u(r) = rR(r)$ we get the *radial equation* :
+			math
+				- \frac{\hbar^{2}}{2m}\dvN{u}{r}{2} + \left[V + \frac{\hbar^{2}}{2m} \frac{\ell(\ell+1)}{r^{2}}\right]u = Eu
+			It is identical in form to the one-dimensional Schrödinger equation with the *effective potential*
+			math
+				V_{\text{eff}} = V + \frac{\hbar^{2}}{2m} \frac{\ell(\ell + 1)}{r^{2}}
+			The normalization condition is
+			math
+				∫_{0}^{∞}\abs{u}^{2} \dd r = 1
+			(the $1/r^{2}$ is cancelled by the $r$-dependence of the elementary surface).
+
+### The Hydrogen Atom
+
 
